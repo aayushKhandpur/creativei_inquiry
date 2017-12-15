@@ -10,5 +10,5 @@ import java.util.List;
 public interface BranchManager {
     List<Branch> getAll();
     Branch create(Branch branch);
-    Branch findBranch(Long id);
+    Branch findBranch(Long id) ;
 }

@@ -2,6 +2,7 @@ package creativei.controller;
 
 import creativei.entity.Branch;
 import creativei.manager.BranchManager;
+import creativei.vo.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,7 @@ public class MainController {
     @RequestMapping(value = "/branch/save", produces = "application/json", method = RequestMethod.POST)
     public
     @ResponseBody
-    Branch createBranch(){
+    ResponseObject createBranch(){
         Branch branch = new Branch("Malviya Nagar");
         return branchManager.create(branch);
     }

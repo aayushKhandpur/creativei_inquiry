@@ -10,6 +10,10 @@ import java.util.List;
 public interface BranchService {
     List<Branch> getAll();
     Branch create(Branch branch);
-    Branch findBranch(Long id);
+    Branch getById(Long id);
+    Branch getByName(String name);
+    Branch createAll(List<Branch> branches);
+    Branch update(Branch branch);
+    Branch updateAll(List<Branch> branches);
 
 }

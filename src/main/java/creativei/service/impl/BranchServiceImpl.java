@@ -26,7 +26,28 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
-    public Branch findBranch(Long id) {
+    public Branch getById(Long id) {
         return null;
     }
+
+    @Override
+    public Branch getByName(String name) {
+        return null;
+    }
+
+    @Override
+    public Branch createAll(List<Branch> branches) {
+        return null;
+    }
+
+    @Override
+    public Branch update(Branch branch) {
+        return null;
+    }
+
+    @Override
+    public Branch updateAll(List<Branch> branches) {
+        return null;
+    }
+
 }

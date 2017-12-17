@@ -4,6 +4,7 @@ import creativei.entity.Inquiry;
 import creativei.manager.InquiryManager;
 import creativei.service.BranchService;
 import creativei.service.InquiryService;
+import creativei.vo.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -14,18 +15,39 @@ import java.util.List;
 public class InquiryManagerImpl implements InquiryManager {
     @Autowired
     InquiryService inquiryService;
+
     @Override
-    public List<Inquiry> getAll() {
+    public ResponseObject getAll() {
         return null;
     }
 
     @Override
-    public Inquiry create(Inquiry inquiry) {
-        return inquiryService.create(inquiry);
+    public ResponseObject create(Inquiry inquiry) {
+        return null;
     }
 
     @Override
-    public Inquiry findInquiry(Long id) {
+    public ResponseObject getById(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseObject getByName(String name) {
+        return null;
+    }
+
+    @Override
+    public ResponseObject createAll(List<Inquiry> inquiries) {
+        return null;
+    }
+
+    @Override
+    public ResponseObject update(Inquiry inquiry) {
+        return null;
+    }
+
+    @Override
+    public ResponseObject updateAll(List<Inquiry> inquiries) {
         return null;
     }
 }

@@ -8,65 +8,71 @@ import java.util.Date;
  * Created by user on 12/16/2017.
  */
 @Entity
-@Table(name="Inquiry")
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "ph_num"),
+        @UniqueConstraint(columnNames = "alt_num")
+})
 
 public class Inquiry extends BaseEntity implements Serializable {
 
-    @Column
-    private String f_name;
-    @Column
-    private String l_name;
-    @Column
-    private Date date;
-    @Column
+    @Column(nullable = false,name="f_name")
+    private String fName;
+    @Column(name = "l_name")
+    private String lName;
+    @Column(name="inq_date")
+    private Date inqDate;
     private String gender;
-    @Column
-    private String ph_num;
-    @Column
+    @Column(nullable = false,name="ph_num")
+    private String phNum;
+    @Column(nullable = false)
     private String email;
-    @Column
-    private String h_qual;
-    @Column
+    @Column(nullable=false,name = "h_qual")
+    private String hQual;
     private String occ;
-    @Column
-    private String alt_num;
-    @Column
-    private String comp_knw;
-    @Column
-    private Branch branch_id;
+    @Column(name="alt_num")
+    private String altNum;
+    @Column(nullable = false,name="comp_knw")
+    private String compKnw;
+    @ManyToOne
+    private Branch branch;
 
-    public Branch getBranch_id() {
-        return branch_id;
+
+    @OneToOne
+    private InquiryAddress inquiryAddress;
+
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setBranch_id(Branch branch_id) {
-        this.branch_id = branch_id;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
 
 
-    public String getF_name() {
-        return f_name;
+    public String getfName() {
+        return fName;
     }
 
-    public void setF_name(String f_name) {
-        this.f_name = f_name;
+    public void setfName(String fName) {
+        this.fName = fName;
     }
 
-    public String getL_name() {
-        return l_name;
+    public String getlName() {
+        return lName;
     }
 
-    public void setL_name(String l_name) {
-        this.l_name = l_name;
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getInqDate() {
+        return inqDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setInqDate(Date inqDate) {
+        this.inqDate = inqDate;
     }
 
     public String getGender() {
@@ -77,12 +83,12 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.gender = gender;
     }
 
-    public String getPh_num() {
-        return ph_num;
+    public String getPhNum() {
+        return phNum;
     }
 
-    public void setPh_num(String ph_num) {
-        this.ph_num = ph_num;
+    public void setPhNum(String phNum) {
+        this.phNum = phNum;
     }
 
     public String getEmail() {
@@ -93,12 +99,12 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.email = email;
     }
 
-    public String getH_qual() {
-        return h_qual;
+    public String gethQual() {
+        return hQual;
     }
 
-    public void setH_qual(String h_qual) {
-        this.h_qual = h_qual;
+    public void sethQual(String hQual) {
+        this.hQual = hQual;
     }
 
     public String getOcc() {
@@ -109,20 +115,20 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.occ = occ;
     }
 
-    public String getAlt_num() {
-        return alt_num;
+    public String getAltNum() {
+        return altNum;
     }
 
-    public void setAlt_num(String alt_num) {
-        this.alt_num = alt_num;
+    public void setAltNum(String altNum) {
+        this.altNum = altNum;
     }
 
-    public String getComp_knw() {
-        return comp_knw;
+    public String getCompKnw() {
+        return compKnw;
     }
 
-    public void setComp_knw(String comp_knw) {
-        this.comp_knw = comp_knw;
+    public void setCompKnw(String compKnw) {
+        this.compKnw = compKnw;
     }
 
 

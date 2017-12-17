@@ -25,12 +25,32 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry findInquery(Long id) {
+    public Inquiry getById(Long id) {
+        return null;
+    }
+
+    @Override
+    public Inquiry getByName(String name) {
         return null;
     }
 
     @Override
     public Inquiry create(Inquiry inquiry) {
-        return inquiryDao.save(inquiry);
+        return null;
+    }
+
+    @Override
+    public Inquiry createAll(List<Inquiry> inquiries) {
+        return null;
+    }
+
+    @Override
+    public Inquiry update(Inquiry inquiry) {
+        return null;
+    }
+
+    @Override
+    public Inquiry updateAll(List<Inquiry> inquiries) {
+        return null;
     }
 }

@@ -1,10 +1,8 @@
 package creativei.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints ={
@@ -12,6 +10,7 @@ import java.io.Serializable;
         @UniqueConstraint(columnNames = "mobile")
         })
 public class Branch extends BaseEntity implements Serializable {
+
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

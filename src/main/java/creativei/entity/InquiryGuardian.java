@@ -16,23 +16,20 @@ import java.io.Serializable;
 @Table(name="inquiry_guardian")
 public class InquiryGuardian extends BaseEntity implements Serializable {
 
-
     @OneToOne
     private Inquiry inquiry;
     @Column(nullable = false)
     private String name;
     @Column(nullable=false)
     private Relation relation;
-    @Column(name="phone_num",nullable = false)
-    private String phoneNum;
-    @Column(name="alternate_num")
-    private String altNum;
+    @Column(name="phone_number",nullable = false)
+    private String phoneNumber;
+    @Column(name="alternate_phone")
+    private String alternatePhone;
     private String email;
-    private Occupation occ;
+    private Occupation occupation;
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public void setName(String name) {
         this.name = name;
@@ -46,20 +43,20 @@ public class InquiryGuardian extends BaseEntity implements Serializable {
         this.relation = relation;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getAltNum() {
-        return altNum;
+    public String getAlternatePhone() {
+        return alternatePhone;
     }
 
-    public void setAltNum(String altNum) {
-        this.altNum = altNum;
+    public void setAlternatePhone(String alternatePhone) {
+        this.alternatePhone = alternatePhone;
     }
 
     public String getEmail() {
@@ -70,11 +67,11 @@ public class InquiryGuardian extends BaseEntity implements Serializable {
         this.email = email;
     }
 
-    public Occupation getOcc() {
-        return occ;
+    public Occupation getOccupation() {
+        return occupation;
     }
 
-    public void setOcc(Occupation occ) {
-        this.occ = occ;
+    public void setOccupation(Occupation occupation) {
+        this.occupation = occupation;
     }
 }

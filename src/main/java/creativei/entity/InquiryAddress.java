@@ -47,9 +47,7 @@ public class InquiryAddress extends BaseEntity implements Serializable {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+    public void setCity(String city) {this.city = city; }
 
     public String getArea() {
         return area;

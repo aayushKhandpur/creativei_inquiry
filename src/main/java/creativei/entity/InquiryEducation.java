@@ -14,27 +14,23 @@ import java.io.Serializable;
  * Created by user on 12/19/2017.
  */
 @Entity
-@Table(name="inquiry_education")
+@Table(name="Inquiry_Education")
 public class InquiryEducation extends BaseEntity implements Serializable {
 
-
-
-
-
-@OneToOne
+    @OneToOne
     private Inquiry inquiry;
-@Column(name="education_qualificaton",nullable = false)
+    @Column(name="education_qualificaton",nullable = false)
     private EducationQualification educationQualification;
-
-@Column(name="institue_name")
+    @Column(name="institue_name")
     private String instituteName;
     private Stream stream;
     private Status status;
     private int year;
     @Column(name="aggregate_marks")
     private int aggregateMarks;
-@Column(name="mark_scheme")
+    @Column(name="mark_scheme")
     private int markScheme;
+
     public EducationQualification getEducationQualification() {
         return educationQualification;
     }

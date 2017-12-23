@@ -10,6 +10,7 @@ import java.util.List;
         @UniqueConstraint(columnNames = "mobile")
         })
 public class Branch extends BaseEntity implements Serializable {
+
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -21,7 +22,6 @@ public class Branch extends BaseEntity implements Serializable {
     private String mobile;
     @Column(nullable = false)
     private String email;
-
 
     public String getName() {
         return name;

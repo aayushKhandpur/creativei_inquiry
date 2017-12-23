@@ -12,7 +12,7 @@ import java.io.Serializable;
  * Created by user on 12/19/2017.
  */
 @Entity
-@Table(name = "inquiry_marketing")
+@Table(name = "Inquiry_Marketing")
 public class InquiryMarketing extends BaseEntity implements Serializable {
 
     @OneToOne

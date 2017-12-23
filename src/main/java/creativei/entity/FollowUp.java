@@ -12,8 +12,9 @@ import java.util.Date;
  * Created by user on 12/22/2017.
  */
 @Entity
-@Table(name="follow_up")
+@Table(name="Follow_Up")
 public class FollowUp extends BaseEntity implements Serializable {
+
     @ManyToOne
     private Inquiry inquiry;
     @Column(nullable = false,name="follow_up_date")

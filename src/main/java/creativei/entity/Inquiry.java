@@ -15,41 +15,36 @@ import java.util.Date;
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "email"),
-        @UniqueConstraint(columnNames = "ph_num"),
-        @UniqueConstraint(columnNames = "alt_num")
+        @UniqueConstraint(columnNames = "phone_number"),
+        @UniqueConstraint(columnNames = "alternate_phone")
 })
 
 public class Inquiry extends BaseEntity implements Serializable {
 
-
-
-
     @Column(nullable = false,name="name")
     private String name;
-    @Column(name="inq_date",nullable = false)
-    private Date inqDate;
+    @Column(name="inquiry_date",nullable = false)
+    private Date inquiryDate;
     private Gender gender;
-    @Column(nullable = false,name="ph_num")
-    private String phNum;
+    @Column(nullable = false,name="phone_number")
+    private String phoneNumber;
     @Column(nullable = false)
     private String email;
-    @Column(nullable=false,name = "h_qual")
-    private EducationQualification hEdu;
-    private Occupation occ;
-    @Column(name="alt_num")
-    private String altNum;
-    @Column(name="comp_knw")
-    private ComputerKnowledge compKnw;
+    @Column(nullable=false,name = "highest_education")
+    private EducationQualification highestEducation;
+    private Occupation occupation;
+    @Column(name="alternate_phone")
+    private String alternatePhone;
+    @Column(name="computer_knowledge")
+    private ComputerKnowledge computerKnowledge;
     @ManyToOne
-     private Branch branch;
-       public Branch getBranch() {
-        return branch;
-    }
+    private Branch branch;
+
+    public Branch getBranch() { return branch; }
 
     public void setBranch(Branch branch) {
         this.branch = branch;
     }
-
 
     public String getName() {
         return name;
@@ -59,12 +54,12 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public Date getInqDate() {
-        return inqDate;
+    public Date getInquiryDate() {
+        return inquiryDate;
     }
 
-    public void setInqDate(Date inqDate) {
-        this.inqDate = inqDate;
+    public void setInquiryDate(Date inquiryDate) {
+        this.inquiryDate = inquiryDate;
     }
 
     public Gender getGender() {
@@ -75,12 +70,12 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.gender = gender;
     }
 
-    public String getPhNum() {
-        return phNum;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhNum(String phNum) {
-        this.phNum = phNum;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -91,37 +86,35 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.email = email;
     }
 
-    public EducationQualification gethEdu() {
-        return hEdu;
+    public EducationQualification getHighestEducation() {
+        return highestEducation;
     }
 
-    public void sethEdu(EducationQualification hEdu) {
-        this.hEdu = hEdu;
+    public void setHighestEducation(EducationQualification highestEducation) {
+        this.highestEducation = highestEducation;
     }
 
-    public Occupation getOcc() {
-        return occ;
+    public Occupation getOccupation() {
+        return occupation;
     }
 
-    public void setOcc(Occupation occ) {
-        this.occ = occ;
+    public void setOccupation(Occupation occupation) {
+        this.occupation = occupation;
     }
 
-    public String getAltNum() {
-        return altNum;
+    public String getAlternatePhone() {
+        return alternatePhone;
     }
 
-    public void setAltNum(String altNum) {
-        this.altNum = altNum;
+    public void setAlternatePhone(String alternatePhone) {
+        this.alternatePhone = alternatePhone;
     }
 
-    public ComputerKnowledge getCompKnw() {
-        return compKnw;
+    public ComputerKnowledge getComputerKnowledge() {
+        return computerKnowledge;
     }
 
-    public void setCompKnw(ComputerKnowledge compKnw) {
-        this.compKnw = compKnw;
+    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {
+        this.computerKnowledge = computerKnowledge;
     }
-
-
 }

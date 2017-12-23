@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface InquiryAddressService {
     List<InquiryAddress> getAll();
-    InquiryAddress getById(Inquiry id);
+    InquiryAddress getById(Inquiry inquiry);
     InquiryAddress create(InquiryAddress inquiryAddress);
     InquiryAddress createAll(List<InquiryAddress> inquiryAddresses);
     InquiryAddress update(InquiryAddress inquiryAddress);

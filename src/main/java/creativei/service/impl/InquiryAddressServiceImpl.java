@@ -16,7 +16,7 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
     }
 
     @Override
-    public InquiryAddress getById(Inquiry id) {
+    public InquiryAddress getById(Inquiry inquiry) {
         return null;
     }
 

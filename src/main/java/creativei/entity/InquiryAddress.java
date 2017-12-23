@@ -9,20 +9,23 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Inquiry_Address")
 public class InquiryAddress extends BaseEntity implements Serializable {
+
     @OneToOne
     private Inquiry inquiry;
     @Column(nullable = false, unique = true)
     private String pincode;
     @Column(nullable = false)
-    private String country;
+    private String country="INDIA";
     @Column(nullable = false)
-    private String city;
+    private String city="JAIPUR";
     @Column(nullable = false)
     private String area;
-    @Column(name = "address_line_1")
+    @Column(name = "address_line_1",nullable = false)
     private String addressLine1;
-    @Column(name="address_line_2")
+    @Column(name="address_line_2",nullable = false)
     private String addressLine2;
+    @Column(nullable = false)
+    private boolean is_current = true;
 
     public String getPincode() {
         return pincode;
@@ -80,6 +83,6 @@ public class InquiryAddress extends BaseEntity implements Serializable {
         this.is_current = is_current;
     }
 
-    private boolean is_current = true;
+
 
 }

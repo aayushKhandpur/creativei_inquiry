@@ -1,5 +1,10 @@
 package creativei.entity;
 
+import creativei.enums.ComputerKnowledge;
+import creativei.enums.EducationQualification;
+import creativei.enums.Gender;
+import creativei.enums.Occupation;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,32 +21,28 @@ import java.util.Date;
 
 public class Inquiry extends BaseEntity implements Serializable {
 
-    @Column(nullable = false,name="f_name")
-    private String fName;
-    @Column(name = "l_name")
-    private String lName;
-    @Column(name="inq_date")
+
+
+
+    @Column(nullable = false,name="name")
+    private String name;
+    @Column(name="inq_date",nullable = false)
     private Date inqDate;
-    private String gender;
+    private Gender gender;
     @Column(nullable = false,name="ph_num")
     private String phNum;
     @Column(nullable = false)
     private String email;
     @Column(nullable=false,name = "h_qual")
-    private String hQual;
-    private String occ;
+    private EducationQualification hEdu;
+    private Occupation occ;
     @Column(name="alt_num")
     private String altNum;
-    @Column(nullable = false,name="comp_knw")
-    private String compKnw;
+    @Column(name="comp_knw")
+    private ComputerKnowledge compKnw;
     @ManyToOne
-    private Branch branch;
-
-
-    @OneToOne
-    private InquiryAddress inquiryAddress;
-
-    public Branch getBranch() {
+     private Branch branch;
+       public Branch getBranch() {
         return branch;
     }
 
@@ -50,21 +51,12 @@ public class Inquiry extends BaseEntity implements Serializable {
     }
 
 
-
-    public String getfName() {
-        return fName;
+    public String getName() {
+        return name;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getInqDate() {
@@ -75,11 +67,11 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.inqDate = inqDate;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -99,19 +91,19 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.email = email;
     }
 
-    public String gethQual() {
-        return hQual;
+    public EducationQualification gethEdu() {
+        return hEdu;
     }
 
-    public void sethQual(String hQual) {
-        this.hQual = hQual;
+    public void sethEdu(EducationQualification hEdu) {
+        this.hEdu = hEdu;
     }
 
-    public String getOcc() {
+    public Occupation getOcc() {
         return occ;
     }
 
-    public void setOcc(String occ) {
+    public void setOcc(Occupation occ) {
         this.occ = occ;
     }
 
@@ -123,11 +115,11 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.altNum = altNum;
     }
 
-    public String getCompKnw() {
+    public ComputerKnowledge getCompKnw() {
         return compKnw;
     }
 
-    public void setCompKnw(String compKnw) {
+    public void setCompKnw(ComputerKnowledge compKnw) {
         this.compKnw = compKnw;
     }
 

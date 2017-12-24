@@ -21,40 +21,32 @@ public class ResponseObject {
         this.status = status;
     }
 
-    public ResponseObject(Object data){
-        this.data = data;
-    }
-    public ResponseObject(Object data, ResponseStatus status){
+    private ResponseObject(Object data, ResponseStatus status){
         this.data = data;
         this.status = status;
     }
-
-    public ResponseObject(Error exception){
-        this.exception = exception;
-    }
-    public ResponseObject(String exceptionMessage, String errorCode){
-        this.exception.setMessage(exceptionMessage);
-        this.exception.setErrorCode(errorCode);
+    private ResponseObject(String exceptionMessage, int errorCode, ResponseStatus status){
+        this.exception = new Error(errorCode, exceptionMessage);
+        this.status = status;
     }
 
-    public ResponseObject(Object data, Error exception){
-        this.data = data;
-        this.exception = exception;
+    public static ResponseObject getResponse(Object data){
+        return new ResponseObject(data, ResponseStatus.SUCCESS);
     }
 
-    public Object getData() {
-        return data;
+    public static ResponseObject getResponse(String message, int errorCode){
+        return new ResponseObject(message, errorCode, ResponseStatus.ERROR);
     }
 
-    public void setData(Object data) {
-        this.data = data;
-    }
 
-    public Error getException() {
-        return exception;
-    }
+    private class Error {
+        private int errorCode;
+        private String message;
+        private String stackTrace;
 
-    public void setException(Error exception) {
-        this.exception = exception;
+        Error(int code, String message){
+            this.errorCode = code;
+            this.message = message;
+        }
     }
 }

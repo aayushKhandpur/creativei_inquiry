@@ -1,6 +1,7 @@
 package creativei.manager;
 
 import creativei.entity.Branch;
+import creativei.vo.BranchVo;
 import creativei.vo.ResponseObject;
 
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface BranchManager {
     ResponseObject getAll();
-    ResponseObject create(Branch branch);
+    ResponseObject create(BranchVo branchVo);
     ResponseObject getById(Long id);
     ResponseObject getByName(String name);
     ResponseObject createAll(List<Branch> branches);

@@ -1,5 +1,7 @@
 package creativei.entity;
 
+import creativei.vo.BranchVo;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -15,9 +17,12 @@ public class Branch extends BaseEntity implements Serializable {
     private String name;
     @Column(nullable = false)
     private String address;
-    private String alternate_name;
-    @Column(nullable = false)
-    private String contact_number;
+
+    @Column(name = "alternate_name" )
+    private String alternateName;
+
+    @Column(name = "fixedline_number", nullable = false )
+    private String fixedLineNumber;
     @Column(nullable = false)
     private String mobile;
     @Column(nullable = false)
@@ -39,22 +44,6 @@ public class Branch extends BaseEntity implements Serializable {
         this.address = address;
     }
 
-    public String getAlternate_name() {
-        return alternate_name;
-    }
-
-    public void setAlternate_name(String alternate_name) {
-        this.alternate_name = alternate_name;
-    }
-
-    public String getContact_number() {
-        return contact_number;
-    }
-
-    public void setContact_number(String contact_number) {
-        this.contact_number = contact_number;
-    }
-
     public String getMobile() {
         return mobile;
     }
@@ -73,5 +62,30 @@ public class Branch extends BaseEntity implements Serializable {
 
     public Branch(String name) {
         this.name = name;
+    }
+
+    public String getAlternateName() {
+        return alternateName;
+    }
+
+    public void setAlternateName(String alternateName) {
+        this.alternateName = alternateName;
+    }
+
+    public String getFixedLineNumber() {
+        return fixedLineNumber;
+    }
+
+    public void setFixedLineNumber(String fixedLineNumber) {
+        this.fixedLineNumber = fixedLineNumber;
+    }
+
+    public Branch(BranchVo branchVo){
+        this.name = branchVo.getName();
+        this.address = branchVo.getAddress();
+        this.email = branchVo.getEmail();
+        this.fixedLineNumber = branchVo.getFixedLineNumber();
+        this.mobile = branchVo.getMobile();
+        this.alternateName = branchVo.getAlternateName();
     }
 }

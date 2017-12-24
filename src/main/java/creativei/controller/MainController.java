@@ -23,11 +23,4 @@ public class MainController {
         return "Greetings from Spring Boot!";
     }
 
-    @RequestMapping(value = "/branch/save", produces = "application/json", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ResponseObject createBranch(){
-        Branch branch = new Branch("Malviya Nagar");
-        return branchManager.create(branch);
-    }
 }

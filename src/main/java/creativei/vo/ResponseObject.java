@@ -21,10 +21,26 @@ public class ResponseObject {
         this.status = status;
     }
 
+<<<<<<< .mine
+    public Object getData(){return data;}
+
+
+
+=======
+<<<<<<< HEAD
+    public Object getData() {
+        return data;
+    }
+>>>>>>> .theirs
+
+    public void setData(Object data) {
+        this.data = data;
+=======
     public Object getData(){return data;}
 
     public void setData(Object data) {
         this.data = data;
+>>>>>>> inquiry_register
     }
 
     private ResponseObject(Object data, ResponseStatus status){

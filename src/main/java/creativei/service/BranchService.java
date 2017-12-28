@@ -1,6 +1,8 @@
 package creativei.service;
 
 import creativei.entity.Branch;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  */
 public interface BranchService {
     List<Branch> getAll();
-    Branch create(Branch branch);
+    Branch create(Branch branch) throws UniqueConstraintViolationException, DataIntegrityException;
     Branch getById(Long id);
     Branch getByName(String name);
     Branch createAll(List<Branch> branches);

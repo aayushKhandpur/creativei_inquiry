@@ -2,17 +2,22 @@ package creativei.service.impl;
 
 import creativei.dao.BranchDao;
 import creativei.entity.Branch;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.BranchService;
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by Aayush on 12/15/2017.
- */
+
 @Service("BranchService")
 public class BranchServiceImpl implements BranchService {
+    private static final Logger logger = LoggerFactory.getLogger(BranchService.class);
     @Autowired
     private BranchDao branchDao;
     @Override
@@ -21,8 +26,18 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
-    public Branch create(Branch branch) {
-        return branchDao.save(branch);
+    public Branch create(Branch branch) throws UniqueConstraintViolationException, DataIntegrityException {
+        try {
+            return branchDao.save(branch);
+        }catch (DataIntegrityViolationException de){
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            }
+            throw new DataIntegrityException(de.getMessage());
+        }
+
     }
 
     @Override

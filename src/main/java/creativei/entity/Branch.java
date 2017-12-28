@@ -1,5 +1,6 @@
 package creativei.entity;
 
+import creativei.helper.constant.DbConstraints;
 import creativei.vo.BranchVo;
 
 import javax.persistence.*;
@@ -8,10 +9,11 @@ import java.util.List;
 
 @Entity
 @Table(uniqueConstraints ={
-        @UniqueConstraint(columnNames="name"),
-        @UniqueConstraint(columnNames = "mobile")
+        @UniqueConstraint(columnNames="name", name = DbConstraints.BRANCH_NAME_UNIQUE),
+        @UniqueConstraint(columnNames = "mobile", name= DbConstraints.BRANCH_MOBILE_UNIQUE)
         })
 public class Branch extends BaseEntity implements Serializable {
+    public static final String BRANCH_NAME_UNIQUE = "BRANCH_NAME_UNIQUE";
 
     @Column(nullable = false)
     private String name;
@@ -26,6 +28,7 @@ public class Branch extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String mobile;
     @Column(nullable = false)
+    @org.hibernate.validator.constraints.Email(message = "Invalid Email")
     private String email;
 
     public String getName() {
@@ -79,6 +82,8 @@ public class Branch extends BaseEntity implements Serializable {
     public void setFixedLineNumber(String fixedLineNumber) {
         this.fixedLineNumber = fixedLineNumber;
     }
+
+    public Branch(){}
 
     public Branch(BranchVo branchVo){
         this.name = branchVo.getName();

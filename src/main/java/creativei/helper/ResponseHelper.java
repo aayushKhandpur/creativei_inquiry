@@ -14,7 +14,7 @@ public class ResponseHelper {
         branchVo.setAlternateName(branch.getAlternateName());
         branchVo.setFixedLineNumber(branch.getFixedLineNumber());
         branchVo.setMobile(branch.getMobile());
-
+        branchVo.setId(branch.getId());
         return branchVo;
     }
 }

@@ -1,15 +1,22 @@
 package creativei.service.impl;
 
+import creativei.dao.InquiryAddressDao;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 import creativei.service.InquiryAddressService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by user on 12/17/2017.
  */
+@Service("InquiryAddressService")
 public class InquiryAddressServiceImpl implements InquiryAddressService {
+    @Autowired
+    InquiryAddressDao inquiryAddressDao;
+
     @Override
     public List<InquiryAddress> getAll() {
         return null;
@@ -22,7 +29,7 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
 
     @Override
     public InquiryAddress create(InquiryAddress inquiryAddress) {
-        return null;
+        return inquiryAddressDao.save(inquiryAddress);
     }
 
     @Override

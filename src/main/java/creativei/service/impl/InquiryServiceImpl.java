@@ -1,5 +1,6 @@
 package creativei.service.impl;
 
+import creativei.dao.BranchDao;
 import creativei.dao.InquiryDao;
 import creativei.entity.Branch;
 import creativei.entity.Inquiry;
@@ -21,7 +22,7 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public List<Inquiry> getAll() {
-        return null;
+        return inquiryDao.findAll();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public Inquiry create(Inquiry inquiry) {
-        return null;
+        return inquiryDao.save(inquiry);
     }
 
     @Override

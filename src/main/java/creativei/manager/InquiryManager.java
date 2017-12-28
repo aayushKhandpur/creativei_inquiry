@@ -2,6 +2,8 @@ package creativei.manager;
 
 
 import creativei.entity.Inquiry;
+import creativei.vo.AddressVo;
+import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  */
 public interface InquiryManager {
     ResponseObject getAll();
-    ResponseObject create(Inquiry inquiry);
+    ResponseObject create(InquiryVo inquiryVo);
     ResponseObject getById(Long id);
     ResponseObject getByName(String name);
     ResponseObject createAll(List<Inquiry> inquiries);

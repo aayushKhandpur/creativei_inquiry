@@ -1,12 +1,16 @@
 package creativei.entity;
 
-import creativei.enums.ComputerKnowledge;
-import creativei.enums.EducationQualification;
-import creativei.enums.Gender;
-import creativei.enums.Occupation;
+import creativei.enums.*;
+import creativei.vo.AddressVo;
+import creativei.vo.InquiryVo;
+import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,12 +23,22 @@ import java.util.Date;
         @UniqueConstraint(columnNames = "alternate_phone")
 })
 
-public class Inquiry extends BaseEntity implements Serializable {
+public class Inquiry  extends BaseEntity implements Serializable  {
+
+    public Inquiry(InquiryVo inquiryVo) throws Exception {
+        this.name=inquiryVo.getName();
+        this.areaOfInterest=inquiryVo.getAreaOfInterest();
+        this.phoneNumber=inquiryVo.getMobile();
+        this.email=inquiryVo.getEmail();
+        this.highestEducation=inquiryVo.gethQualification();
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
+        this.gender=inquiryVo.getGender();
+    }
 
     @Column(nullable = false,name="name")
     private String name;
-    @Column(name="inquiry_date",nullable = false)
-    private Date inquiryDate;
+    @Column(name = "inquiry_date", nullable = false)
+    private Date inquiryDate=new Date();
     private Gender gender;
     @Column(nullable = false,name="phone_number")
     private String phoneNumber;
@@ -39,6 +53,20 @@ public class Inquiry extends BaseEntity implements Serializable {
     private ComputerKnowledge computerKnowledge;
     @ManyToOne
     private Branch branch;
+    @Column(nullable = false)
+    private Date dob;
+    @Column(name = "area_of_interest")
+    private AreaOfInterest areaOfInterest;
+    @OneToOne
+    private InquiryAddress inquiryAddress;
+
+    public InquiryAddress getInquiryAddress() {
+        return inquiryAddress;
+    }
+
+    public void setInquiryAddress(InquiryAddress inquiryAddress) {
+        this.inquiryAddress = inquiryAddress;
+    }
 
     public Branch getBranch() { return branch; }
 
@@ -52,14 +80,6 @@ public class Inquiry extends BaseEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getInquiryDate() {
-        return inquiryDate;
-    }
-
-    public void setInquiryDate(Date inquiryDate) {
-        this.inquiryDate = inquiryDate;
     }
 
     public Gender getGender() {
@@ -117,4 +137,21 @@ public class Inquiry extends BaseEntity implements Serializable {
     public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {
         this.computerKnowledge = computerKnowledge;
     }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public AreaOfInterest getAreaOfInterest() {
+        return areaOfInterest;
+    }
+
+    public void setAreaOfInterest(AreaOfInterest areaOfInterest) {
+        this.areaOfInterest = areaOfInterest;
+    }
+
 }

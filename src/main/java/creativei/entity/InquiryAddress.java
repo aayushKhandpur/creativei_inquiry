@@ -1,5 +1,7 @@
 package creativei.entity;
 
+import creativei.vo.AddressVo;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,10 +11,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Inquiry_Address")
 public class InquiryAddress extends BaseEntity implements Serializable {
-
+    public InquiryAddress(AddressVo addressVo){
+        this.area=addressVo.getArea();
+        this.city=addressVo.getCity();
+        this.pincode=addressVo.getPin();
+        this.addressLine1=addressVo.getAddressLine1();
+    }
     @OneToOne
     private Inquiry inquiry;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String pincode;
     @Column(nullable = false)
     private String country="INDIA";
@@ -22,7 +29,7 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String area;
     @Column(name = "address_line_1",nullable = false)
     private String addressLine1;
-    @Column(name="address_line_2",nullable = false)
+    @Column(name="address_line_2")
     private String addressLine2;
     @Column(nullable = false)
     private boolean is_current = true;

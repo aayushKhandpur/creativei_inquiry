@@ -1,8 +1,11 @@
 package creativei.entity;
 
 import creativei.enums.*;
+import creativei.helper.constant.*;
+import creativei.helper.constant.DbConstraints;
 import creativei.vo.AddressVo;
 import creativei.vo.InquiryVo;
+import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
 
 import javax.persistence.*;
@@ -18,24 +21,26 @@ import java.util.Date;
  */
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email"),
-        @UniqueConstraint(columnNames = "phone_number"),
-        @UniqueConstraint(columnNames = "alternate_phone")
-})
+        @UniqueConstraint(columnNames = "email",name= DbConstraints.INQUIRY_EMAIL_UNIQUE),
+        @UniqueConstraint(columnNames = "phone_number",name =DbConstraints.INQUIRY_PHONE_UNIQUE),
+    })
 
 public class Inquiry  extends BaseEntity implements Serializable  {
+    public Inquiry(){}
 
     public Inquiry(InquiryVo inquiryVo) throws Exception {
         this.name=inquiryVo.getName();
-        this.areaOfInterest=inquiryVo.getAreaOfInterest();
+        this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
         this.phoneNumber=inquiryVo.getMobile();
         this.email=inquiryVo.getEmail();
-        this.highestEducation=inquiryVo.gethQualification();
+        this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
         this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
-        this.gender=inquiryVo.getGender();
+        this.gender=Gender.stringToEnum(inquiryVo.getGender());
+        this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
+        this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
     }
 
-    @Column(nullable = false,name="name")
+    @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
     private Date inquiryDate=new Date();
@@ -43,6 +48,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     @Column(nullable = false,name="phone_number")
     private String phoneNumber;
     @Column(nullable = false)
+    @Email
     private String email;
     @Column(nullable=false,name = "highest_education")
     private EducationQualification highestEducation;
@@ -53,12 +59,19 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private ComputerKnowledge computerKnowledge;
     @ManyToOne
     private Branch branch;
-    @Column(nullable = false)
     private Date dob;
     @Column(name = "area_of_interest")
     private AreaOfInterest areaOfInterest;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private InquiryAddress inquiryAddress;
+
+    public Date getInquiryDate() {
+        return inquiryDate;
+    }
+
+    public void setInquiryDate(Date inquiryDate) {
+        this.inquiryDate = inquiryDate;
+    }
 
     public InquiryAddress getInquiryAddress() {
         return inquiryAddress;

@@ -2,6 +2,9 @@ package creativei.manager.impl;
 
 import creativei.controller.BranchController;
 import creativei.entity.Branch;
+import creativei.enums.ExceptionType;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 import creativei.helper.ResponseHelper;
 import creativei.manager.BranchManager;
 import creativei.service.BranchService;
@@ -36,10 +39,18 @@ public class BranchManagerImpl implements BranchManager {
             branch = branchService.create(branch);//branchService().create saves and returns the saved branch in dao
             branchVo = ResponseHelper.getCreateBranchResponseData(branch, branchVo);//?
             return ResponseObject.getResponse(branchVo);
-        }catch (Exception e){
-            logger.error(e.getMessage(), e);
+        }catch (UniqueConstraintViolationException ue){
+            logger.error(ue.getMessage(),ue);
             //using temp error code and message. To be updated after implementing exception handling module.
-            return ResponseObject.getResponse(e.getMessage(), 1001);
+            return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
+        } catch (DataIntegrityException de) {
+            logger.error(de.getMessage(), de);
+            //using temp error code and message. To be updated after implementing exception handling module.
+            return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
+        } catch (Exception e){
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+
         }
     }
 

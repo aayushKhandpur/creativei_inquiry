@@ -3,9 +3,7 @@ package creativei.vo;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 
-/**
- * Created by user on 12/26/2017.
- */
+
 public class AddressVo {
     private String area;
     private String city;

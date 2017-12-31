@@ -1,5 +1,11 @@
 package creativei.vo;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
+
 /**
  * Created by Aayush on 12/16/2017.
  */
@@ -21,28 +27,17 @@ public class ResponseObject {
         this.status = status;
     }
 
-<<<<<<< .mine
-    public Object getData(){return data;}
-
-
-
-=======
-<<<<<<< HEAD
     public Object getData() {
         return data;
     }
->>>>>>> .theirs
 
-    public void setData(Object data) {
-        this.data = data;
-=======
-    public Object getData(){return data;}
-
-    public void setData(Object data) {
-        this.data = data;
->>>>>>> inquiry_register
+    public Error getException() {
+        return exception;
     }
 
+    public ResponseObject(){
+
+    }
     private ResponseObject(Object data, ResponseStatus status){
         this.data = data;
         this.status = status;
@@ -62,13 +57,21 @@ public class ResponseObject {
 
 
     private class Error {
-        private int errorCode;
-        private String message;
-        private String stackTrace;
+        @JsonProperty("code") private int errorCode;
+        @JsonProperty("message") private String message;
 
-        Error(int code, String message){
+        @JsonCreator
+        public Error(int code, String message){
             this.errorCode = code;
             this.message = message;
+        }
+
+        @Override
+        public String toString() {
+            return "Error{" +
+                    "errorCode=" + errorCode +
+                    ", message='" + message + '\'' +
+                    '}';
         }
     }
 }

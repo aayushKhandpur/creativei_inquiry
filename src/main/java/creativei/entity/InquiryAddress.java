@@ -5,12 +5,11 @@ import creativei.vo.AddressVo;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by user on 12/17/2017.
- */
 @Entity
 @Table(name = "Inquiry_Address")
 public class InquiryAddress extends BaseEntity implements Serializable {
+    public InquiryAddress(){}
+
     public InquiryAddress(AddressVo addressVo){
         this.area=addressVo.getArea();
         this.city=addressVo.getCity();

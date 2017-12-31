@@ -1,11 +1,9 @@
 package util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by user on 12/28/2017.
- */
 public class LocalizationUtil {
 
     static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -13,7 +11,7 @@ public class LocalizationUtil {
         if(date == null) return null;
         return dateFormat.format(date);
     }
-    public static final Date stringToDateConverter(String string) throws Exception{
+    public static final Date stringToDateConverter(String string) throws ParseException{
         return dateFormat.parse(string);
     }
 }

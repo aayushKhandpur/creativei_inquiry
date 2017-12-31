@@ -9,25 +9,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.lang.*;
-/**
- * Created by user on 12/24/2017.
- */
+
 public class InquiryVo {
     private String name;
     private String mobile;
     private String email;
     private String dob;
-    private EducationQualification hQualification;
-    private AreaOfInterest areaOfInterest;;
+    private String inquiryDate;
+    private String hQualification;
+    private String areaOfInterest;;
+   // private String occupation;
+    private String computerKnowledge;
     private AddressVo address;
-    private Gender gender;
+    private String gender;
     private Long id;
 
-    public Gender getGender() {
+    public String getComputerKnowledge() {return computerKnowledge;    }
+
+    public void setComputerKnowledge(String computerKnowledge) {this.computerKnowledge = computerKnowledge;}
+
+    public String getInquiryDate() { return inquiryDate;    }
+
+    public void setInquiryDate(String inquiryDate) {
+        this.inquiryDate = inquiryDate;
+    }
+
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -63,19 +74,17 @@ public class InquiryVo {
         this.dob = dob;
     }
 
-    public EducationQualification gethQualification() {
-        return hQualification;
-    }
+    public String gethQualification() { return hQualification;   }
 
-    public void sethQualification(EducationQualification hQualification) {
+    public void sethQualification(String hQualification) {
         this.hQualification = hQualification;
     }
 
-    public AreaOfInterest getAreaOfInterest() {
+    public String getAreaOfInterest() {
         return areaOfInterest;
     }
 
-    public void setAreaOfInterest(AreaOfInterest areaOfInterest) {
+    public void setAreaOfInterest(String areaOfInterest) {
         this.areaOfInterest = areaOfInterest;
     }
 

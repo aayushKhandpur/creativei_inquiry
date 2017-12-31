@@ -2,6 +2,9 @@ package creativei.manager.impl;
 
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
+import creativei.enums.ExceptionType;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 import creativei.helper.ResponseHelper;
 import creativei.manager.InquiryManager;
 import creativei.service.BranchService;
@@ -38,20 +41,21 @@ public class InquiryManagerImpl implements InquiryManager {
     @Override
     public ResponseObject create(InquiryVo inquiryVo) {
      try{
-
             Inquiry inquiry=new Inquiry(inquiryVo);
             inquiry= inquiryService.create(inquiry);
-            inquiryVo= ResponseHelper.getCreateInquiryResponseData(inquiry,inquiryVo);
-            InquiryAddress inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
-            AddressVo addressVo=inquiryVo.getAddress();
-            inquiryAddress=inquiryAddressService.create(inquiryAddress);
-            addressVo=ResponseHelper.getCreateAddressResponseData(inquiryAddress,addressVo);
+            inquiryVo=ResponseHelper.getCreateInquiryResponseData(inquiry,inquiryVo);
             return ResponseObject.getResponse(inquiryVo);
-     }catch(Exception e){
-         logger.error(e.getMessage(),e);
-         return ResponseObject.getResponse(e.getMessage(), 1001);
-     }
+     }catch (UniqueConstraintViolationException ue){
+         logger.error(ue.getMessage(),ue);
+         return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
+     } catch (DataIntegrityException de) {
+         logger.error(de.getMessage(), de);
+         return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
+     } catch (Exception e){
+         logger.error(e.getMessage(), e);
+         return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
 
+     }
     }
 
     @Override

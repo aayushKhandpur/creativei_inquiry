@@ -3,6 +3,7 @@ package creativei.helper;
 import creativei.entity.Branch;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
+import creativei.enums.*;
 import creativei.vo.AddressVo;
 import creativei.vo.BranchVo;
 import creativei.vo.InquiryVo;
@@ -29,16 +30,20 @@ public class ResponseHelper {
     }
 
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry,InquiryVo inquiryVo){
-        inquiryVo.setAreaOfInterest(inquiry.getAreaOfInterest());
+        inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
         String dateStr = inquiry.getDob() == null ? "" : LocalizationUtil.getFormattedDate(inquiry.getDob());
-        inquiryVo.sethQualification(inquiry.getHighestEducation());
+        inquiryVo.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
         inquiryVo.setEmail(inquiry.getEmail());
         inquiryVo.setMobile(inquiry.getPhoneNumber());
         inquiryVo.setId(inquiry.getId());
+        inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
+        inquiryVo.setGender(Gender.enumToString(inquiry.getGender()));
+        inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
+        getCreateAddressResponseData(inquiry.getInquiryAddress(),inquiryVo.getAddress());
         return inquiryVo;
     }
-   public static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress,AddressVo addressVo){
+private static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress,AddressVo addressVo){
         addressVo.setId(inquiryAddress.getId());
         addressVo.setPin(inquiryAddress.getPincode());
         addressVo.setCity(inquiryAddress.getCity());

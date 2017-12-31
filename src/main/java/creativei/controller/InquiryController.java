@@ -2,11 +2,11 @@ package creativei.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import creativei.entity.Inquiry;
+import creativei.enums.ExceptionType;
 import creativei.manager.InquiryManager;
-import creativei.vo.BranchVo;
 import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by user on 12/24/2017.
- */
 @RestController
 public class InquiryController {
     private static final Logger logger =LoggerFactory.getLogger(InquiryController.class);
@@ -28,14 +25,19 @@ public class InquiryController {
     @RequestMapping(value = "/inquiry/register" ,produces = "application/json",method = RequestMethod.POST)
     public
     @ResponseBody
-    ResponseObject createInquiry(@RequestBody String inquiryStr, HttpServletRequest request){
-        try{
-            InquiryVo inquiryVo=mapper.readValue(inquiryStr,InquiryVo.class);
-             ResponseObject responseObject=inquiryManager.create(inquiryVo);
+    ResponseObject createInquiry(@RequestBody String inquiryStr, HttpServletRequest request) {
+        logger.info("CreateInquiry method");
+        try {
+            if (StringUtils.isBlank(inquiryStr)){
+                logger.error("Request data is null or empty.");
+                return (ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode()));
+            }
+            InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
+            ResponseObject responseObject = inquiryManager.create(inquiryVo);
             return responseObject;
         }catch(Exception e){
             logger.error(e.getMessage(),e);
-            return ResponseObject.getResponse(e.getMessage(), 1001);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
     }
 

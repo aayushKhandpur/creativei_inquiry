@@ -1,6 +1,2 @@
-echo deploy client........
-call cd client
-call client_run.bat
-call cd ..
-echo deploy server.......
-call mvn clean spring-boot:run
+call mvn clean
+call mvn spring-boot:run

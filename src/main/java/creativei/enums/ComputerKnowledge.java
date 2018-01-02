@@ -1,22 +1,33 @@
 package creativei.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum ComputerKnowledge {
         BASIC("Basic"),
         PRIOR("Prior"),
         ADVANCE("Advance"),
         NONE("None");
 
-        private String computerKnowledgeValue;
-        private ComputerKnowledge(String computerKnowledgeValue){
-                this.computerKnowledgeValue=computerKnowledgeValue;
-        }
-        public static String enumToString(ComputerKnowledge computerKnowledge){
-              return   computerKnowledge.computerKnowledgeValue;
-        }
-        public static ComputerKnowledge stringToEnum(String s){
-                for(ComputerKnowledge x:ComputerKnowledge.values())
-                        if(x.computerKnowledgeValue.equalsIgnoreCase(s)) return x;
-                return null;
+        private String value;
 
+        private ComputerKnowledge(String value) {
+                this.value =value;
+        }
+
+        private static final Map<String, ComputerKnowledge> lookup = new HashMap<String, ComputerKnowledge>();
+
+        static {
+                for ( ComputerKnowledge computerKnowledge : ComputerKnowledge.values()) {
+                        lookup.put(computerKnowledge.enumToString(computerKnowledge),computerKnowledge );
+                }
+        }
+
+        public static String enumToString(ComputerKnowledge computerKnowledge) {
+                return computerKnowledge.value;
+        }
+
+        public static ComputerKnowledge stringToEnum(String value) {
+                return lookup.get(value);
         }
 }

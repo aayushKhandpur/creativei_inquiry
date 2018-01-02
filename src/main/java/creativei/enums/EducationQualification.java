@@ -1,8 +1,8 @@
 package creativei.enums;
 
-/**
- * Created by user on 12/20/2017.
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public enum EducationQualification {
         SSC("SSC"),
         HSC("HSC"),
@@ -11,21 +11,27 @@ public enum EducationQualification {
         POSTGRADUATE("Post Graduate"),
         ENGINEER("Engineer"),
         DIPLOMA("Diploma");
-        private String val;
 
-        private EducationQualification(String educationQualification) {
-                this.val=educationQualification;
+    private String value;
+
+    private EducationQualification(String value) {
+        this.value = value;
+    }
+
+    private static final Map<String, EducationQualification> lookup = new HashMap<String, EducationQualification>();
+
+    static {
+        for ( EducationQualification educationQualification: EducationQualification.values()) {
+            lookup.put(educationQualification.enumToString(educationQualification),educationQualification );
         }
+    }
 
-        public static String enumToString(EducationQualification educationQualification){
-                return educationQualification.val;
-        }
+    public static String enumToString(EducationQualification educationQualification) {
+        return educationQualification.value;
+    }
 
-        public static EducationQualification stringToEnum(String s){
-          for(EducationQualification x:EducationQualification.values()){
-                if(x.val.equalsIgnoreCase(s)) return x;
-            }
-            return null;
+    public static EducationQualification stringToEnum(String value) {
+        return lookup.get(value);
     }
 
 }

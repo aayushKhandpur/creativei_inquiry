@@ -6,7 +6,8 @@ package creativei.enums;
 public enum ExceptionType {
     GENERAL_ERROR(1001, "Server error"),
     DUPLICATE_VALUE(1002, "Value already exists"),
-    DATABASE_EXCEPTION(1003, "Exception occured while adding values to database");
+    DATABASE_EXCEPTION(1003, "Exception occured while adding values to database"),
+    NULLVALUE_EXCEPTION(1004,"All or some of the Required Fields are null ");
     private final int code;
     private final String message;
     private ExceptionType(int code, String message) {

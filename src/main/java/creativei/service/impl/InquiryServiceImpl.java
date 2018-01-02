@@ -5,6 +5,7 @@ import creativei.dao.InquiryDao;
 import creativei.entity.Branch;
 import creativei.entity.Inquiry;
 import creativei.exception.DataIntegrityException;
+import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.BranchService;
 import creativei.service.InquiryService;
@@ -41,18 +42,20 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry create(Inquiry inquiry) throws UniqueConstraintViolationException, DataIntegrityException {
+    public Inquiry create(Inquiry inquiry) throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest {
         try{
             return inquiryDao.save(inquiry);
-        }catch (DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de){
             logger.error(de.getMessage(), de);
             if(de.getCause() instanceof ConstraintViolationException){
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if(ce.getConstraintName()==null)
+                    throw new InvalidParamRequest("Required Field Can not be Empty");
+                else
+                    throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }
-
     }
 
     @Override

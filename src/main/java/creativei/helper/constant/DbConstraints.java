@@ -19,4 +19,4 @@ public class DbConstraints {
     public static final String BRANCH_MOBILE_UNIQUE_MSG = "Branch Mobile already exist.";
     public static final String INQUIRY_EMAIL_UNIQUE_MSG="Email already exist";
     public static final String INQUIRY_PHONE_UNIQUE_MSG="Phone Number already exist";
-}
+ }

@@ -1,5 +1,8 @@
 package creativei.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by user on 12/20/2017.
  */
@@ -11,17 +14,26 @@ public enum Occupation {
         PROFESSIONAL("Professional"),
         HOUSEWIFE("House Wife");
 
-        private String occupationValue;
-        private Occupation(String occupationValue){
-                this.occupationValue=occupationValue;
+        private String value;
+
+        private Occupation(String value) {
+                this.value = value;
         }
-        public static String enumToString(Occupation occupation){
-                return occupation.occupationValue;
+
+        private static final Map<String, Occupation> lookup = new HashMap<String, Occupation>();
+
+        static {
+                for ( Occupation occupation : Occupation.values()) {
+                        lookup.put(occupation.enumToString(occupation),occupation );
+                }
         }
-        public static  Occupation stringToEnum(String s){
-                for(Occupation x:Occupation.values())
-                        if(x.occupationValue.equalsIgnoreCase(s)) return x;
-                return null;
+
+        public static String enumToString(Occupation occupation) {
+                return occupation.value;
+        }
+
+        public static Occupation stringToEnum(String value) {
+                return lookup.get(value);
         }
     }
 

@@ -1,26 +1,35 @@
 package creativei.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by user on 12/20/2017.
  */
 public enum Gender {
 
         MALE("Male"),
-        FEMALE("Female"),
-        OTHER("Other");
+        FEMALE("Female");
 
-        private String genderValue;
+        private String value;
 
-        private Gender(String genderValue){
-                this.genderValue=genderValue;
+        private Gender(String value) {
+                this.value=value;
         }
-        public static String enumToString(Gender gender){
-                return gender.genderValue;
-        }
-        public static Gender stringToEnum(String s){
-                for(Gender x:Gender.values())
-                        if(x.genderValue.equalsIgnoreCase(s)) return x;
 
-                return null;
+        private static final Map<String, Gender> lookup = new HashMap<String, Gender>();
+
+        static {
+                for ( Gender gender :Gender.values()) {
+                        lookup.put(gender.enumToString(gender),gender );
+                }
+        }
+
+        public static String enumToString(Gender gender) {
+                return gender.value;
+        }
+
+        public static Gender stringToEnum(String value) {
+                return lookup.get(value);
         }
 }

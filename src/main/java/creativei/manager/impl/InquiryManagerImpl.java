@@ -4,6 +4,7 @@ import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 import creativei.enums.ExceptionType;
 import creativei.exception.DataIntegrityException;
+import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.helper.ResponseHelper;
 import creativei.manager.InquiryManager;
@@ -48,7 +49,10 @@ public class InquiryManagerImpl implements InquiryManager {
      }catch (UniqueConstraintViolationException ue){
          logger.error(ue.getMessage(),ue);
          return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
-     } catch (DataIntegrityException de) {
+     }catch(InvalidParamRequest ipr) {
+         logger.error(ipr.getMessage(),ipr);
+         return ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(),ExceptionType.NULLVALUE_EXCEPTION.getCode());
+     }catch (DataIntegrityException de) {
          logger.error(de.getMessage(), de);
          return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
      } catch (Exception e){

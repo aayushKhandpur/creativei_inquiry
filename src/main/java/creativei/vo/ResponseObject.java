@@ -35,10 +35,7 @@ public class ResponseObject {
         return exception;
     }
 
-    public ResponseObject(){
-
-    }
-    private ResponseObject(Object data, ResponseStatus status){
+       private ResponseObject(Object data, ResponseStatus status){
         this.data = data;
         this.status = status;
     }

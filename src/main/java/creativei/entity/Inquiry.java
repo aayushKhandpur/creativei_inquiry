@@ -39,8 +39,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
     }
-
-    @Column(nullable = false)
+   @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
     private Date inquiryDate=new Date();

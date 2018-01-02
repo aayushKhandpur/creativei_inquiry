@@ -36,8 +36,8 @@ public class BranchManagerImpl implements BranchManager {
     public ResponseObject create(BranchVo branchVo) {
         try {
             Branch branch = new Branch(branchVo);
-            branch = branchService.create(branch);
-            branchVo = ResponseHelper.getCreateBranchResponseData(branch, branchVo);
+            branch = branchService.create(branch);//branchService().create saves and returns the saved branch in dao
+            branchVo = ResponseHelper.getCreateBranchResponseData(branch, branchVo);//?
             return ResponseObject.getResponse(branchVo);
         }catch (UniqueConstraintViolationException ue){
             logger.error(ue.getMessage(),ue);

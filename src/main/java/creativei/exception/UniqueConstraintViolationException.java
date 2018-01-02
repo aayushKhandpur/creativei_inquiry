@@ -21,8 +21,14 @@ public class UniqueConstraintViolationException extends DataIntegrityException {
             case DbConstraints.BRANCH_MOBILE_UNIQUE: {
                 return new UniqueConstraintViolationException(DbConstraints.BRANCH_MOBILE_UNIQUE_MSG, DbConstraints.BRANCH_MOBILE);
             }
+            case DbConstraints.INQUIRY_EMAIL_UNIQUE:{
+                return new UniqueConstraintViolationException(DbConstraints.INQUIRY_EMAIL_UNIQUE_MSG,DbConstraints.INQUIRY_EMAIL);
+            }
+            case DbConstraints.INQUIRY_PHONE_UNIQUE:{
+                return new UniqueConstraintViolationException(DbConstraints.INQUIRY_PHONE_UNIQUE_MSG,DbConstraints.INQUIRY_PHONE);
+            }
             default: {
-                return new UniqueConstraintViolationException(constraint, message);
+                return new UniqueConstraintViolationException(message, constraint);
             }
         }
     }

@@ -2,6 +2,8 @@ package creativei.service;
 
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
 public interface InquiryAddressService {
     List<InquiryAddress> getAll();
     InquiryAddress getById(Inquiry inquiry);
-    InquiryAddress create(InquiryAddress inquiryAddress);
+    InquiryAddress create(InquiryAddress inquiryAddress) throws UniqueConstraintViolationException, DataIntegrityException;
     InquiryAddress createAll(List<InquiryAddress> inquiryAddresses);
     InquiryAddress update(InquiryAddress inquiryAddress);
     InquiryAddress updateAll(List<InquiryAddress> inquiryAddresses);

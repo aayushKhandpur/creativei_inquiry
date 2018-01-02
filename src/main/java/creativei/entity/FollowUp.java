@@ -1,5 +1,6 @@
 package creativei.entity;
 
+import com.mysql.jdbc.StringUtils;
 import creativei.enums.CaseIndex;
 import creativei.enums.Status;
 import creativei.enums.Type;
@@ -14,7 +15,6 @@ import java.util.Date;
 @Entity
 @Table(name="Follow_Up")
 public class FollowUp extends BaseEntity implements Serializable {
-
     @ManyToOne
     private Inquiry inquiry;
     @Column(nullable = false,name="follow_up_date")

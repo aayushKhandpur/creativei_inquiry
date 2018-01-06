@@ -1,5 +1,6 @@
 package creativei.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 import creativei.enums.AreaOfInterest;
@@ -18,10 +19,10 @@ public class InquiryVo {
     private String inquiryDate;
     private String hQualification;
     private String areaOfInterest;;
-   // private String occupation;
     private String computerKnowledge;
     private AddressVo address;
     private String gender;
+    private EducationVo educationVo;
     private Long id;
 
     public String getComputerKnowledge() {return computerKnowledge;    }
@@ -104,6 +105,7 @@ public class InquiryVo {
         this.id = id;
     }
 
+    public EducationVo getEducationVo() {    return educationVo;    }
 
-
+    public void setEducationVo(EducationVo educationVo) {  this.educationVo = educationVo;}
 }

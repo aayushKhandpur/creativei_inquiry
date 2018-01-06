@@ -41,4 +41,21 @@ public class InquiryController {
         }
     }
 
+    @RequestMapping(value="/inquiry/update",produces = "application/json",method =RequestMethod.POST)
+    public @ResponseBody
+    ResponseObject updateInquiry(@RequestBody String inquiryStr, HttpServletRequest request){
+        logger.info("UpdateInquiry method");
+        try {
+            if (StringUtils.isBlank(inquiryStr)){
+                logger.error("Request data is null or empty.");
+                return (ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode()));
+            }
+            InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
+            ResponseObject responseObject = inquiryManager.update(inquiryVo);
+            return responseObject;
+        }catch(Exception e){
+            logger.error(e.getMessage(),e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+        }
+    }
 }

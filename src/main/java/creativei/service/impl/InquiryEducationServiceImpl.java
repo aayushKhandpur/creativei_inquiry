@@ -1,15 +1,25 @@
 package creativei.service.impl;
 
+import creativei.dao.InquiryEducationDao;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryEducation;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.InquiryEducationService;
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by user on 12/19/2017.
- */
+@Service("InquiryEducationService")
 public class InquiryEducationServiceImpl implements InquiryEducationService {
+    public static final Logger logger= LoggerFactory.getLogger(InquiryEducation.class);
+    @Autowired
+    InquiryEducationDao inquiryEducationDao;
     @Override
     public List<InquiryEducation> getAll() {
         return null;
@@ -21,8 +31,17 @@ public class InquiryEducationServiceImpl implements InquiryEducationService {
     }
 
     @Override
-    public InquiryEducation create(InquiryEducation inquiryEducation) {
-        return null;
+    public InquiryEducation create(InquiryEducation inquiryEducation) throws UniqueConstraintViolationException,DataIntegrityException {
+        try{
+           return inquiryEducationDao.save(inquiryEducation);
+        }catch(DataIntegrityViolationException de){
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            }
+            throw new DataIntegrityException(de.getMessage());
+        }
     }
 
     @Override
@@ -31,8 +50,17 @@ public class InquiryEducationServiceImpl implements InquiryEducationService {
     }
 
     @Override
-    public InquiryEducation update(InquiryEducation inquiryEducation) {
-        return null;
+    public InquiryEducation update(InquiryEducation inquiryEducation) throws UniqueConstraintViolationException,DataIntegrityException {
+        try{
+            return inquiryEducationDao.save(inquiryEducation);
+        }catch(DataIntegrityViolationException de){
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            }
+            throw new DataIntegrityException(de.getMessage());
+        }
     }
 
     @Override

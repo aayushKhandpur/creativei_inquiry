@@ -17,6 +17,6 @@ public interface InquiryService {
     Inquiry getByName(String name);
     Inquiry create (Inquiry inquiry)throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest;
     Inquiry createAll(List<Inquiry> inquiries);
-    Inquiry update(Inquiry inquiry);
+    Inquiry update(Inquiry inquiry )throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest;
     Inquiry updateAll(List<Inquiry> inquiries);
 }

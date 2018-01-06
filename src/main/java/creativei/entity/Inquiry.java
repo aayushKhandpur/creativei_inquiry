@@ -28,16 +28,20 @@ import java.util.Date;
 public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(){}
 
-    public Inquiry(InquiryVo inquiryVo) throws Exception {
+    public Inquiry(InquiryVo inquiryVo) throws ParseException {
+        this.setId(inquiryVo.getId());
         this.name=inquiryVo.getName();
         this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
         this.phoneNumber=inquiryVo.getMobile();
         this.email=inquiryVo.getEmail();
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"31/10/1996":inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
-        this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
+        if(inquiryVo.getAddress()!=null)
+            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
+        if(inquiryVo.getEducationVo()!=null)
+            this.inquiryEducation=new InquiryEducation(inquiryVo.getEducationVo());
     }
    @Column(nullable = false)
     private String name;
@@ -63,6 +67,16 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private AreaOfInterest areaOfInterest;
     @OneToOne(cascade=CascadeType.ALL)
     private InquiryAddress inquiryAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    private InquiryEducation inquiryEducation;
+
+    public InquiryEducation getInquiryEducation() {
+        return inquiryEducation;
+    }
+
+    public void setInquiryEducation(InquiryEducation inquiryEducation) {
+        this.inquiryEducation = inquiryEducation;
+    }
 
     public Date getInquiryDate() {
         return inquiryDate;

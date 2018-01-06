@@ -1,9 +1,7 @@
 package creativei.entity;
 
-import com.mysql.jdbc.StringUtils;
 import creativei.enums.CaseIndex;
 import creativei.enums.Status;
-import creativei.enums.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +18,7 @@ public class FollowUp extends BaseEntity implements Serializable {
     @Column(nullable = false,name="follow_up_date")
     private Date followUpDate;
     @Column(nullable = false)
-    private Type type;
+    private String type;
     @Column(nullable = false,name = "status_id")
     private Status statusId;
     private String remark;
@@ -36,11 +34,9 @@ public class FollowUp extends BaseEntity implements Serializable {
         this.followUpDate = followUpDate;
     }
 
-    public Type getType() {
-        return type;
-    }
+    public String getType() {return type;}
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 

@@ -1,8 +1,7 @@
 package creativei.entity;
 
-import creativei.enums.EducationQualification;
-import creativei.enums.Status;
-import creativei.enums.Stream;
+import creativei.enums.*;
+import creativei.vo.EducationVo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,13 +22,29 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     private EducationQualification educationQualification;
     @Column(name="institue_name")
     private String instituteName;
-    private Stream stream;
+    private String stream;
     private Status status;
     private int year;
     @Column(name="aggregate_marks")
     private int aggregateMarks;
     @Column(name="mark_scheme")
-    private int markScheme;
+    private MarkScheme markScheme;
+    private String type;
+
+    public InquiryEducation(EducationVo educationVo) {
+        this.educationQualification=EducationQualification.stringToEnum(educationVo.getEducationQualification());
+        this.instituteName=educationVo.getInstituteName();
+        this.stream=educationVo.getStream();
+        this.status=Status.stringToEnum(educationVo.getStatus());
+        this.year=educationVo.getYear();
+        this.aggregateMarks=educationVo.getAggregateMarks();
+        this.markScheme=MarkScheme.stringToEnum(educationVo.getMarkScheme());
+        this.type=educationVo.getType();
+    }
+
+    public String getType() {return type;}
+
+    public void setType(String type) { this.type = type;}
 
     public EducationQualification getEducationQualification() {
         return educationQualification;
@@ -47,11 +62,11 @@ public class InquiryEducation extends BaseEntity implements Serializable {
         this.instituteName = instituteName;
     }
 
-    public Stream getStream() {
+    public String getStream() {
         return stream;
     }
 
-    public void setStream(Stream stream) {
+    public void setStream(String stream) {
         this.stream = stream;
     }
 
@@ -79,11 +94,11 @@ public class InquiryEducation extends BaseEntity implements Serializable {
         this.aggregateMarks = aggregateMarks;
     }
 
-    public int getMarkScheme() {
+    public MarkScheme getMarkScheme() {
         return markScheme;
     }
 
-    public void setMarkScheme(int markScheme) {
+    public void setMarkScheme(MarkScheme markScheme) {
         this.markScheme = markScheme;
     }
 }

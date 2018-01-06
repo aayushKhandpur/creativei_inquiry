@@ -42,9 +42,9 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
         if(de.getCause() instanceof ConstraintViolationException){
             ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
             throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
-        }
+            }
         throw new DataIntegrityException(de.getMessage());
-    }
+        }
     }
 
     @Override
@@ -53,8 +53,17 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
     }
 
     @Override
-    public InquiryAddress update(InquiryAddress inquiryAddress) {
-        return null;
+    public InquiryAddress update(InquiryAddress inquiryAddress) throws UniqueConstraintViolationException, DataIntegrityException  {
+        try {
+            return inquiryAddressDao.save(inquiryAddress);
+        }catch (DataIntegrityViolationException de){
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            }
+            throw new DataIntegrityException(de.getMessage());
+        }
     }
 
     @Override

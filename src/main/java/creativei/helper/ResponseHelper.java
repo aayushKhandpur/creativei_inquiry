@@ -9,13 +9,10 @@ import creativei.vo.AddressVo;
 import creativei.vo.BranchVo;
 import creativei.vo.EducationVo;
 import creativei.vo.InquiryVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import util.LocalizationUtil;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -35,9 +32,9 @@ public class ResponseHelper {
     }
 
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry,InquiryVo inquiryVo){
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("mm/dd/yyyy");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
         Date defaultDate=null;
-        String date="31/10/1996";
+        String date="1996/10/31";
         try {
             defaultDate=simpleDateFormat.parse(date);
         }catch(ParseException e) {
@@ -45,7 +42,7 @@ public class ResponseHelper {
         }
         inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
-        String dateStr =inquiry.getDob().compareTo(defaultDate)==0 ? "" : LocalizationUtil.getFormattedDate(inquiry.getDob());
+        String dateStr =inquiry.getDob().compareTo(defaultDate)==0 ?" ": LocalizationUtil.getFormattedDate(inquiry.getDob());
         inquiryVo.setDob(dateStr);
         inquiryVo.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
         inquiryVo.setEmail(inquiry.getEmail());
@@ -56,8 +53,8 @@ public class ResponseHelper {
         inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
         if(inquiryVo.getAddress()!=null)
             getCreateAddressResponseData(inquiry.getInquiryAddress(),inquiryVo.getAddress());
-        if(inquiryVo.getEducationVo()!=null)
-            getCreateEducationResponseData(inquiry.getInquiryEducation(),inquiryVo.getEducationVo());
+        if(inquiryVo.getEducation()!=null)
+            getCreateEducationResponseData(inquiry.getInquiryEducation(),inquiryVo.getEducation());
         return inquiryVo;
     }
     private static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress,AddressVo addressVo){
@@ -71,14 +68,14 @@ public class ResponseHelper {
         return addressVo;
    }
    private static EducationVo getCreateEducationResponseData(InquiryEducation inquiryEducation,EducationVo educationVo){
-        educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks());
+        educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks()==null?null:inquiryEducation.getAggregateMarks());
         educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
-        educationVo.setInstituteName(inquiryEducation.getInstituteName());
-        educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
-        educationVo.setStatus(Status.enumToString(inquiryEducation.getStatus()));
-        educationVo.setStream(inquiryEducation.getStream());
-        educationVo.setYear(inquiryEducation.getYear());
-        educationVo.setType(inquiryEducation.getType());
+        educationVo.setInstituteName(inquiryEducation.getInstituteName()==null?null:inquiryEducation.getInstituteName());
+        educationVo.setMarkScheme(inquiryEducation.getMarkScheme()==null?null:MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
+        educationVo.setStatus(inquiryEducation.getStatus()==null?null:Status.enumToString(inquiryEducation.getStatus()));
+        educationVo.setStream(inquiryEducation.getStream()==null?null:inquiryEducation.getStream());
+        educationVo.setYear(inquiryEducation.getYear()==null?null:inquiryEducation.getYear());
+        educationVo.setType(inquiryEducation.getType()==null?null:inquiryEducation.getType());
         return educationVo;
     }
 

@@ -9,9 +9,9 @@ public class EducationVo {
     private String instituteName;
     private String stream;
     private String status;
-    private int year;
+    private Integer year;
     private String type;
-    private int aggregateMarks;
+    private Integer aggregateMarks;
     private String markScheme;
 
     public Long getId() {
@@ -54,11 +54,11 @@ public class EducationVo {
         this.status = status;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -70,11 +70,11 @@ public class EducationVo {
         this.type = type;
     }
 
-    public int getAggregateMarks() {
+    public Integer getAggregateMarks() {
         return aggregateMarks;
     }
 
-    public void setAggregateMarks(int aggregateMarks) {
+    public void setAggregateMarks(Integer aggregateMarks) {
         this.aggregateMarks = aggregateMarks;
     }
 

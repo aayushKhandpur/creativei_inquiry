@@ -9,9 +9,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by user on 12/19/2017.
- */
 @Entity
 @Table(name="Inquiry_Education")
 public class InquiryEducation extends BaseEntity implements Serializable {
@@ -24,22 +21,22 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     private String instituteName;
     private String stream;
     private Status status;
-    private int year;
+    private Integer year;
     @Column(name="aggregate_marks")
-    private int aggregateMarks;
+    private Integer aggregateMarks;
     @Column(name="mark_scheme")
     private MarkScheme markScheme;
     private String type;
 
     public InquiryEducation(EducationVo educationVo) {
         this.educationQualification=EducationQualification.stringToEnum(educationVo.getEducationQualification());
-        this.instituteName=educationVo.getInstituteName();
-        this.stream=educationVo.getStream();
-        this.status=Status.stringToEnum(educationVo.getStatus());
-        this.year=educationVo.getYear();
-        this.aggregateMarks=educationVo.getAggregateMarks();
-        this.markScheme=MarkScheme.stringToEnum(educationVo.getMarkScheme());
-        this.type=educationVo.getType();
+        this.instituteName=educationVo.getInstituteName()==null?null:educationVo.getInstituteName();
+        this.stream=educationVo.getStream()==null?null:educationVo.getStream();
+        this.status=educationVo.getStatus()==null?null:Status.stringToEnum(educationVo.getStatus());
+        this.year=educationVo.getYear()==null?null:educationVo.getYear();
+        this.aggregateMarks=educationVo.getAggregateMarks()==null?null:educationVo.getAggregateMarks();
+        this.markScheme=educationVo.getMarkScheme()==null?null:MarkScheme.stringToEnum(educationVo.getMarkScheme());
+        this.type=educationVo.getType()==null?null:educationVo.getType();
     }
 
     public String getType() {return type;}
@@ -78,19 +75,19 @@ public class InquiryEducation extends BaseEntity implements Serializable {
         this.status = status;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getAggregateMarks() {
+    public Integer getAggregateMarks() {
         return aggregateMarks;
     }
 
-    public void setAggregateMarks(int aggregateMarks) {
+    public void setAggregateMarks(Integer aggregateMarks) {
         this.aggregateMarks = aggregateMarks;
     }
 

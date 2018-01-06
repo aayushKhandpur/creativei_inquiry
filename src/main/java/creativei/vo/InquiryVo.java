@@ -1,14 +1,5 @@
 package creativei.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import creativei.entity.Inquiry;
-import creativei.entity.InquiryAddress;
-import creativei.enums.AreaOfInterest;
-import creativei.enums.EducationQualification;
-import creativei.enums.Gender;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 import java.lang.*;
 
 public class InquiryVo {
@@ -22,7 +13,7 @@ public class InquiryVo {
     private String computerKnowledge;
     private AddressVo address;
     private String gender;
-    private EducationVo educationVo;
+    private EducationVo education;
     private Long id;
 
     public String getComputerKnowledge() {return computerKnowledge;    }
@@ -105,7 +96,7 @@ public class InquiryVo {
         this.id = id;
     }
 
-    public EducationVo getEducationVo() {    return educationVo;    }
+    public EducationVo getEducation() {    return education;    }
 
-    public void setEducationVo(EducationVo educationVo) {  this.educationVo = educationVo;}
+    public void setEducation(EducationVo education) {  this.education = education;}
 }

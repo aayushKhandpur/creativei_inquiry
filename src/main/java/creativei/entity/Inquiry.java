@@ -1,19 +1,14 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.helper.constant.*;
 import creativei.helper.constant.DbConstraints;
-import creativei.vo.AddressVo;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -35,13 +30,13 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.phoneNumber=inquiryVo.getMobile();
         this.email=inquiryVo.getEmail();
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"31/10/1996":inquiryVo.getDob());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"1996/10/31":inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
-        if(inquiryVo.getEducationVo()!=null)
-            this.inquiryEducation=new InquiryEducation(inquiryVo.getEducationVo());
+        if(inquiryVo.getEducation()!=null)
+            this.inquiryEducation=new InquiryEducation(inquiryVo.getEducation());
     }
    @Column(nullable = false)
     private String name;

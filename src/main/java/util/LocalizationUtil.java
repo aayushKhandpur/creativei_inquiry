@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class LocalizationUtil {
 
-    static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     public static final String getFormattedDate(Date date){
         if(date == null) return null;
         return dateFormat.format(date);

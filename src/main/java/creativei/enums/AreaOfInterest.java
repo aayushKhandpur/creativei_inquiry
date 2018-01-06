@@ -23,6 +23,8 @@ public enum  AreaOfInterest {
     }
 
     public static String enumToString(AreaOfInterest areaOfInterest) {
+        if(areaOfInterest==null)
+            return null;
         return areaOfInterest.value;
     }
 

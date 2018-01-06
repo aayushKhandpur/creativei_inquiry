@@ -32,9 +32,9 @@ public class ResponseHelper {
     }
 
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry,InquiryVo inquiryVo){
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date defaultDate=null;
-        String date="1996/10/31";
+        String date="1996-10-31";
         try {
             defaultDate=simpleDateFormat.parse(date);
         }catch(ParseException e) {

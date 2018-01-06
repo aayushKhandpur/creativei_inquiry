@@ -11,9 +11,6 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
-/**
- * Created by user on 12/16/2017.
- */
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "email",name= DbConstraints.INQUIRY_EMAIL_UNIQUE),
@@ -30,7 +27,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.phoneNumber=inquiryVo.getMobile();
         this.email=inquiryVo.getEmail();
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"1996/10/31":inquiryVo.getDob());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"1996-10-31":inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)

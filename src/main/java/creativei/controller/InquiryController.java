@@ -30,7 +30,7 @@ public class InquiryController {
         try {
             if (StringUtils.isBlank(inquiryStr)){
                 logger.error("Request data is null or empty.");
-                return (ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode()));
+                return (ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(), ExceptionType.NULLVALUE_EXCEPTION.getCode()));
             }
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.create(inquiryVo);
@@ -48,7 +48,7 @@ public class InquiryController {
         try {
             if (StringUtils.isBlank(inquiryStr)){
                 logger.error("Request data is null or empty.");
-                return (ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode()));
+                return (ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(), ExceptionType.GENERAL_ERROR.getCode()));
             }
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.update(inquiryVo);

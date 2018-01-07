@@ -2,6 +2,7 @@ package creativei.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by user on 12/20/2017.
@@ -20,7 +21,7 @@ public enum Occupation {
                 this.value = value;
         }
 
-        private static final Map<String, Occupation> lookup = new HashMap<String, Occupation>();
+        private static final Map<String, Occupation> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         static {
                 for ( Occupation occupation : Occupation.values()) {
@@ -29,10 +30,12 @@ public enum Occupation {
         }
 
         public static String enumToString(Occupation occupation) {
+                if(occupation==null){return  null;}
                 return occupation.value;
         }
 
         public static Occupation stringToEnum(String value) {
+                if(value==null){return  null;}
                 return lookup.get(value);
         }
     }

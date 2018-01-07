@@ -34,7 +34,7 @@ public class ResponseHelper {
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry,InquiryVo inquiryVo){
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date defaultDate=null;
-        String date="1996-10-31";
+        String date="1970-1-1";
         try {
             defaultDate=simpleDateFormat.parse(date);
         }catch(ParseException e) {
@@ -68,14 +68,14 @@ public class ResponseHelper {
         return addressVo;
    }
    private static EducationVo getCreateEducationResponseData(InquiryEducation inquiryEducation,EducationVo educationVo){
-        educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks()==null?null:inquiryEducation.getAggregateMarks());
+        educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks());
         educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
-        educationVo.setInstituteName(inquiryEducation.getInstituteName()==null?null:inquiryEducation.getInstituteName());
-        educationVo.setMarkScheme(inquiryEducation.getMarkScheme()==null?null:MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
-        educationVo.setStatus(inquiryEducation.getStatus()==null?null:Status.enumToString(inquiryEducation.getStatus()));
-        educationVo.setStream(inquiryEducation.getStream()==null?null:inquiryEducation.getStream());
-        educationVo.setYear(inquiryEducation.getYear()==null?null:inquiryEducation.getYear());
-        educationVo.setType(inquiryEducation.getType()==null?null:inquiryEducation.getType());
+        educationVo.setInstituteName(inquiryEducation.getInstituteName());
+        educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
+        educationVo.setStatus(Status.enumToString(inquiryEducation.getStatus()));
+        educationVo.setStream(inquiryEducation.getStream());
+        educationVo.setYear(inquiryEducation.getYear());
+        educationVo.setType(inquiryEducation.getType());
         return educationVo;
     }
 

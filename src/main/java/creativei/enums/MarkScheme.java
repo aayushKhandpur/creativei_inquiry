@@ -2,6 +2,7 @@ package creativei.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public enum MarkScheme {
     CGPA("CGPA"),
@@ -14,7 +15,7 @@ public enum MarkScheme {
         this.value=value;
     }
 
-    private static final Map<String, MarkScheme> lookup = new HashMap<String, MarkScheme>();
+    private static final Map<String, MarkScheme> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
     static {
         for ( MarkScheme markScheme :MarkScheme.values()) {
@@ -22,9 +23,12 @@ public enum MarkScheme {
         }
     }
 
-    public static String enumToString(MarkScheme markScheme) { return markScheme.value;}
+    public static String enumToString(MarkScheme markScheme) {
+        if(markScheme==null){return  null;}
+        return markScheme.value;}
 
     public static MarkScheme stringToEnum(String value) {
+        if(value==null){return  null;}
         return lookup.get(value);
     }
 }

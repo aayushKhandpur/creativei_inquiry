@@ -22,7 +22,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
 
     public Inquiry(InquiryVo inquiryVo) throws ParseException {
         this.setId(inquiryVo.getId());
-        this.name=inquiryVo.getName();
+        this.name=inquiryVo.getName()==null||inquiryVo.getName().isEmpty()?null:inquiryVo.getName();
         this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
         this.phoneNumber=inquiryVo.getMobile();
         this.email=inquiryVo.getEmail();

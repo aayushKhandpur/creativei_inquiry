@@ -2,6 +2,7 @@ package creativei.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public enum Stream {
 
@@ -14,7 +15,7 @@ public enum Stream {
                 this.value=value;
         }
 
-        private static final Map<String, Stream> lookup = new HashMap<String, Stream>();
+        private static final Map<String, Stream> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         static {
                 for ( Stream stream: Stream.values()) {
@@ -22,11 +23,13 @@ public enum Stream {
                 }
         }
 
-        public static String enumToString(Stream stream) {
+        public static String enumToString(Stream stream)
+        {  if(stream==null){return  null;}
                 return stream.value;
         }
 
         public static Stream stringToEnum(String value) {
+                if(value==null){return  null;}
                 return lookup.get(value);
         }
 

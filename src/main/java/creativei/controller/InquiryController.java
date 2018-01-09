@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-@CrossOrigin(origins = "localhost:8100")
+@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 public class InquiryController {
     private static final Logger logger =LoggerFactory.getLogger(InquiryController.class);

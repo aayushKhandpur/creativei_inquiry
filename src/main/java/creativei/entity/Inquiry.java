@@ -24,8 +24,8 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.setId(inquiryVo.getId());
         this.name=inquiryVo.getName()==null||inquiryVo.getName().isEmpty()?null:inquiryVo.getName();
         this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber=inquiryVo.getMobile();
-        this.email=inquiryVo.getEmail();
+        this.phoneNumber=inquiryVo.getMobile()==null||inquiryVo.getMobile().isEmpty()?null:inquiryVo.getMobile();
+        this.email=inquiryVo.getEmail()==null||inquiryVo.getEmail().isEmpty()?null:inquiryVo.getEmail();
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
         this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"1996-10-31":inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
@@ -34,6 +34,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
         if(inquiryVo.getEducation()!=null)
             this.inquiryEducation=new InquiryEducation(inquiryVo.getEducation());
+        if(inquiryVo.getGuardian()!=null)
+            this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian());
+        if(inquiryVo.getMarketing()!=null)
+            this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing());
     }
    @Column(nullable = false)
     private String name;
@@ -61,6 +65,14 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private InquiryAddress inquiryAddress;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryEducation inquiryEducation;
+    @OneToOne(cascade = CascadeType.ALL)
+    private InquiryGuardian inquiryGuardian;
+    @OneToOne(cascade = CascadeType.ALL)
+    private InquiryMarketing inquiryMarketing;
+
+    public InquiryGuardian getInquiryGuardian() {  return inquiryGuardian;    }
+
+    public void setInquiryGuardian(InquiryGuardian inquiryGuardian) { this.inquiryGuardian = inquiryGuardian; }
 
     public InquiryEducation getInquiryEducation() {
         return inquiryEducation;

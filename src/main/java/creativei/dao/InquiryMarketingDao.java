@@ -3,8 +3,8 @@ package creativei.dao;
 import creativei.entity.InquiryMarketing;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- * Created by user on 12/19/2017.
- */
+import javax.transaction.Transactional;
+
+@Transactional
 public interface InquiryMarketingDao extends JpaRepository<InquiryMarketing,Long> {
 }

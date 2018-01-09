@@ -2,6 +2,7 @@ package creativei.entity;
 
 import creativei.enums.Occupation;
 import creativei.enums.Relation;
+import creativei.vo.GuardianVo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,15 @@ import java.io.Serializable;
 @Entity
 @Table(name="inquiry_guardian")
 public class InquiryGuardian extends BaseEntity implements Serializable {
+    public InquiryGuardian(){}
+
+    public InquiryGuardian(GuardianVo guardianVo){
+        this.name=guardianVo.getName()==null||guardianVo.getName().isEmpty()?null:guardianVo.getName();
+        this.relation=Relation.stringToEnum(guardianVo.getRelation());
+        this.phoneNumber=guardianVo.getPhoneNumber().equals(null)||guardianVo.getPhoneNumber().isEmpty()?null:guardianVo.getPhoneNumber();
+        this.email=guardianVo.getEmail()==null||guardianVo.getEmail().isEmpty()?null:guardianVo.getEmail();
+        this.occupation=Occupation.stringToEnum(guardianVo.getOccupation());
+    }
 
     @OneToOne
     private Inquiry inquiry;

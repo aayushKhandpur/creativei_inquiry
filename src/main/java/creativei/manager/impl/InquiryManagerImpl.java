@@ -59,6 +59,8 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject getById(Long id) {
+
+
         return null;
     }
 
@@ -74,8 +76,11 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject update(InquiryVo inquiryVo) {
-     try{
-         Inquiry inquiry=new Inquiry(inquiryVo);
+    Inquiry inquiry;
+
+    try{
+
+         inquiry=new Inquiry(inquiryVo);
          inquiry=inquiryService.update(inquiry);
          inquiryVo=ResponseHelper.getCreateInquiryResponseData(inquiry,inquiryVo);
          return ResponseObject.getResponse(inquiryVo);

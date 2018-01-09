@@ -1,14 +1,8 @@
 package creativei.helper;
 
-import creativei.entity.Branch;
-import creativei.entity.Inquiry;
-import creativei.entity.InquiryAddress;
-import creativei.entity.InquiryEducation;
+import creativei.entity.*;
 import creativei.enums.*;
-import creativei.vo.AddressVo;
-import creativei.vo.BranchVo;
-import creativei.vo.EducationVo;
-import creativei.vo.InquiryVo;
+import creativei.vo.*;
 import util.LocalizationUtil;
 
 import java.text.ParseException;
@@ -51,10 +45,12 @@ public class ResponseHelper {
         inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
         inquiryVo.setGender(Gender.enumToString(inquiry.getGender()));
         inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
-        if(inquiryVo.getAddress()!=null)
+        if(inquiry.getInquiryAddress()!=null)
             getCreateAddressResponseData(inquiry.getInquiryAddress(),inquiryVo.getAddress());
         if(inquiryVo.getEducation()!=null)
             getCreateEducationResponseData(inquiry.getInquiryEducation(),inquiryVo.getEducation());
+        if(inquiryVo.getGuardian()!=null)
+            getCreateGuardianResponseData(inquiry.getInquiryGuardian(),inquiryVo.getGuardian());
         return inquiryVo;
     }
     private static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress,AddressVo addressVo){
@@ -68,15 +64,30 @@ public class ResponseHelper {
         return addressVo;
    }
    private static EducationVo getCreateEducationResponseData(InquiryEducation inquiryEducation,EducationVo educationVo){
-        educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks());
+        educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks()==null?null:inquiryEducation.getAggregateMarks());
         educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
-        educationVo.setInstituteName(inquiryEducation.getInstituteName());
+        educationVo.setInstituteName(inquiryEducation.getInstituteName()==null?null:inquiryEducation.getInstituteName());
         educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
         educationVo.setStatus(Status.enumToString(inquiryEducation.getStatus()));
-        educationVo.setStream(inquiryEducation.getStream());
-        educationVo.setYear(inquiryEducation.getYear());
-        educationVo.setType(inquiryEducation.getType());
+        educationVo.setStream(inquiryEducation.getStream()==null?null:inquiryEducation.getStream());
+        educationVo.setYear(inquiryEducation.getYear()==null?null:inquiryEducation.getYear());
+        educationVo.setType(inquiryEducation.getType()==null?null:inquiryEducation.getType());
         return educationVo;
+    }
+
+    private static GuardianVo getCreateGuardianResponseData(InquiryGuardian inquiryGuardian,GuardianVo guardianVo){
+       guardianVo.setName(inquiryGuardian.getName());
+       guardianVo.setRelation(Relation.enumToString(inquiryGuardian.getRelation()));
+       guardianVo.setEmail(inquiryGuardian.getEmail());
+       guardianVo.setPhoneNumber(inquiryGuardian.getPhoneNumber());
+       guardianVo.setOccupation(Occupation.enumToString(inquiryGuardian.getOccupation()));
+       return guardianVo;
+    }
+    private static MarketingVo getCreateMarketingResponseData(InquiryMarketing inquiryMarketing,MarketingVo marketingVo){
+        marketingVo.setSource(Source.enumToString(inquiryMarketing.getSource()));
+        marketingVo.setReferant(inquiryMarketing.getReferant());
+        marketingVo.setReferred(inquiryMarketing.getIsReferred());
+        return marketingVo;
     }
 
 }

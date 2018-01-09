@@ -4,6 +4,7 @@ import creativei.dao.InquiryAddressDao;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 import creativei.exception.DataIntegrityException;
+import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.BranchService;
 import creativei.service.InquiryAddressService;
@@ -34,16 +35,17 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
     }
 
     @Override
-    public InquiryAddress create(InquiryAddress inquiryAddress)throws UniqueConstraintViolationException, DataIntegrityException  {
+    public InquiryAddress create(InquiryAddress inquiryAddress)throws  DataIntegrityException ,InvalidParamRequest {
         try {
             return inquiryAddressDao.save(inquiryAddress);
         }catch (DataIntegrityViolationException de){
-        logger.error(de.getMessage(), de);
-        if(de.getCause() instanceof ConstraintViolationException){
-            ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-            throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                if(ce.getConstraintName()==null)
+                    throw new InvalidParamRequest("Required Field Can not be Empty");
             }
-        throw new DataIntegrityException(de.getMessage());
+            throw new DataIntegrityException(de.getMessage());
         }
     }
 
@@ -53,14 +55,15 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
     }
 
     @Override
-    public InquiryAddress update(InquiryAddress inquiryAddress) throws UniqueConstraintViolationException, DataIntegrityException  {
+    public InquiryAddress update(InquiryAddress inquiryAddress) throws  DataIntegrityException,InvalidParamRequest  {
         try {
             return inquiryAddressDao.save(inquiryAddress);
         }catch (DataIntegrityViolationException de){
             logger.error(de.getMessage(), de);
             if(de.getCause() instanceof ConstraintViolationException){
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if(ce.getConstraintName()==null)
+                    throw new InvalidParamRequest("Required Field Can not be Empty");
             }
             throw new DataIntegrityException(de.getMessage());
         }

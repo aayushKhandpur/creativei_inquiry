@@ -34,7 +34,7 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public Inquiry getById(Long id) {
-        return null;
+        return inquiryDao.findOne(id);
     }
 
     @Override

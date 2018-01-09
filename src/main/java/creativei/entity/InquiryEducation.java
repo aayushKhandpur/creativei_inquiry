@@ -27,16 +27,17 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     @Column(name="mark_scheme")
     private MarkScheme markScheme;
     private String type;
+    public InquiryEducation(){}
 
     public InquiryEducation(EducationVo educationVo) {
         this.educationQualification=EducationQualification.stringToEnum(educationVo.getEducationQualification());
-        this.instituteName=educationVo.getInstituteName()==null?null:educationVo.getInstituteName();
-        this.stream=educationVo.getStream()==null?null:educationVo.getStream();
-        this.status=educationVo.getStatus()==null?null:Status.stringToEnum(educationVo.getStatus());
+        this.instituteName=educationVo.getInstituteName()==null||educationVo.getInstituteName().isEmpty()?null:educationVo.getInstituteName();
+        this.stream=educationVo.getStream()==null||educationVo.getStream().isEmpty()?null:educationVo.getStream();
+        this.status=Status.stringToEnum(educationVo.getStatus());
         this.year=educationVo.getYear()==null?null:educationVo.getYear();
         this.aggregateMarks=educationVo.getAggregateMarks()==null?null:educationVo.getAggregateMarks();
-        this.markScheme=educationVo.getMarkScheme()==null?null:MarkScheme.stringToEnum(educationVo.getMarkScheme());
-        this.type=educationVo.getType()==null?null:educationVo.getType();
+        this.markScheme=MarkScheme.stringToEnum(educationVo.getMarkScheme());
+        this.type=educationVo.getType()==null||educationVo.getType().isEmpty()?null:educationVo.getType();
     }
 
     public String getType() {return type;}

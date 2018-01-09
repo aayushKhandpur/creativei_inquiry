@@ -6,6 +6,15 @@ public class GuardianVo {
     private String phoneNumber;
     private String email;
     private String occupation;
+    private String relation;
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
 
     public Long getId() {
         return id;

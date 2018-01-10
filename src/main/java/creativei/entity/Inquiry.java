@@ -15,27 +15,10 @@ import java.util.Date;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "email",name= DbConstraints.INQUIRY_EMAIL_UNIQUE),
         @UniqueConstraint(columnNames = "phone_number",name =DbConstraints.INQUIRY_PHONE_UNIQUE),
-    })
+})
 
 public class Inquiry  extends BaseEntity implements Serializable  {
-    public Inquiry(){}
-
-    public Inquiry(InquiryVo inquiryVo) throws ParseException {
-        this.setId(inquiryVo.getId());
-        this.name=inquiryVo.getName()==null||inquiryVo.getName().isEmpty()?null:inquiryVo.getName();
-        this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber=inquiryVo.getMobile();
-        this.email=inquiryVo.getEmail();
-        this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"1996-10-31":inquiryVo.getDob());
-        this.gender=Gender.stringToEnum(inquiryVo.getGender());
-        this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
-        if(inquiryVo.getAddress()!=null)
-            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
-        if(inquiryVo.getEducation()!=null)
-            this.inquiryEducation=new InquiryEducation(inquiryVo.getEducation());
-    }
-   @Column(nullable = false)
+    @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
     private Date inquiryDate=new Date();
@@ -59,8 +42,24 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private AreaOfInterest areaOfInterest;
     @OneToOne(cascade=CascadeType.ALL)
     private InquiryAddress inquiryAddress;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private InquiryEducation inquiryEducation;
+    public Inquiry(){}
+    public Inquiry(InquiryVo inquiryVo) throws ParseException {
+        this.setId(inquiryVo.getId());
+        this.name=inquiryVo.getName()==null||inquiryVo.getName().isEmpty()?null:inquiryVo.getName();
+        this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
+        this.phoneNumber=inquiryVo.getMobile();
+        this.email=inquiryVo.getEmail();
+        this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
+        this.gender=Gender.stringToEnum(inquiryVo.getGender());
+        this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
+        if(inquiryVo.getAddress()!=null)
+            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
+        if(inquiryVo.getEducation()!=null)
+            this.inquiryEducation=new InquiryEducation(inquiryVo.getEducation());
+    }
 
     public InquiryEducation getInquiryEducation() {
         return inquiryEducation;
@@ -128,9 +127,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         return highestEducation;
     }
 
-    public void setHighestEducation(EducationQualification highestEducation) {
-        this.highestEducation = highestEducation;
-    }
+    public void setHighestEducation(EducationQualification highestEducation) { this.highestEducation = highestEducation;}
 
     public Occupation getOccupation() {
         return occupation;
@@ -152,9 +149,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         return computerKnowledge;
     }
 
-    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {
-        this.computerKnowledge = computerKnowledge;
-    }
+    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {this.computerKnowledge = computerKnowledge;}
 
     public Date getDob() {
         return dob;

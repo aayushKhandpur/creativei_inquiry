@@ -46,7 +46,7 @@ public class InquiryManagerImpl implements InquiryManager {
          return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
      }catch(InvalidParamRequest ipr) {
          logger.error(ipr.getMessage(),ipr);
-         return ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(),ExceptionType.NULLVALUE_EXCEPTION.getCode());
+         return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
      }catch (DataIntegrityException de) {
          logger.error(de.getMessage(), de);
          return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
@@ -84,7 +84,7 @@ public class InquiryManagerImpl implements InquiryManager {
          return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
      }catch(InvalidParamRequest ipr) {
          logger.error(ipr.getMessage(),ipr);
-         return ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(),ExceptionType.NULLVALUE_EXCEPTION.getCode());
+         return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
      }catch (DataIntegrityException de) {
          logger.error(de.getMessage(), de);
          return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());

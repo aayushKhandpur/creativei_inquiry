@@ -32,17 +32,9 @@ public class ResponseHelper {
     }
 
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry,InquiryVo inquiryVo){
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date defaultDate=null;
-        String date="1970-1-1";
-        try {
-            defaultDate=simpleDateFormat.parse(date);
-        }catch(ParseException e) {
-            e.printStackTrace();
-        }
         inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
-        String dateStr =inquiry.getDob().compareTo(defaultDate)==0 ?" ": LocalizationUtil.getFormattedDate(inquiry.getDob());
+        String dateStr =inquiry.getDob().equals(null) ?null: LocalizationUtil.getFormattedDate(inquiry.getDob());
         inquiryVo.setDob(dateStr);
         inquiryVo.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
         inquiryVo.setEmail(inquiry.getEmail());

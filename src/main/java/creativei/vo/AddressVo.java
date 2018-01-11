@@ -1,15 +1,34 @@
 package creativei.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 
 
 public class AddressVo {
+    private String country;
+    private String state;
     private String area;
     private String city;
     private String pin;
     private String addressLine1;
     private Long id;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public String getArea() {
         return area;

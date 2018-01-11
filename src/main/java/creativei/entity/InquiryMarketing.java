@@ -8,9 +8,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by user on 12/19/2017.
- */
 @Entity
 @Table(name = "Inquiry_Marketing")
 public class InquiryMarketing extends BaseEntity implements Serializable {

@@ -15,6 +15,6 @@ public interface InquiryAddressService {
     InquiryAddress getById(Inquiry inquiry);
     InquiryAddress create(InquiryAddress inquiryAddress) throws UniqueConstraintViolationException, DataIntegrityException;
     InquiryAddress createAll(List<InquiryAddress> inquiryAddresses);
-    InquiryAddress update(InquiryAddress inquiryAddress);
+    InquiryAddress update(InquiryAddress inquiryAddress) throws UniqueConstraintViolationException, DataIntegrityException;
     InquiryAddress updateAll(List<InquiryAddress> inquiryAddresses);
 }

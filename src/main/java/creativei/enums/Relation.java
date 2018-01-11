@@ -1,7 +1,10 @@
 package creativei.enums;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by user on 12/20/2017.
@@ -18,19 +21,21 @@ public enum Relation {
 
     private Relation(String value) {this.value = value; }
 
-    private static final Map<String, Relation> lookup = new HashMap<String, Relation>();
+    private static final Map<String, Relation> lookup = new HashMap<String,Relation>();
 
     static {
         for ( Relation relation : Relation.values()) {
-            lookup.put(Relation.enumToString(relation),relation );
+            lookup.put(Relation.enumToString(relation).toLowerCase(),relation );
         }
     }
 
     public static String enumToString(Relation relation) {
+        if(relation==null){return  null;}
         return relation.value;
     }
 
     public static Relation stringToEnum(String value) {
-        return lookup.get(value);
+        if(value==null){return  null;}
+        return lookup.get(value.toLowerCase());
     }
 }

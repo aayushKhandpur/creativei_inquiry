@@ -2,6 +2,7 @@ package creativei.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public enum EducationQualification {
         SSC("SSC"),
@@ -18,20 +19,22 @@ public enum EducationQualification {
         this.value = value;
     }
 
-    private static final Map<String, EducationQualification> lookup = new HashMap<String, EducationQualification>();
+    private static final Map<String, EducationQualification> lookup = new HashMap<String,EducationQualification>();
 
     static {
         for ( EducationQualification educationQualification: EducationQualification.values()) {
-            lookup.put(educationQualification.enumToString(educationQualification),educationQualification );
+            lookup.put(educationQualification.enumToString(educationQualification).toLowerCase(),educationQualification );
         }
     }
 
     public static String enumToString(EducationQualification educationQualification) {
+        if(educationQualification==null){return  null;}
         return educationQualification.value;
     }
 
     public static EducationQualification stringToEnum(String value) {
-        return lookup.get(value);
+        if(value==null){return  null;}
+        return lookup.get(value.toLowerCase());
     }
 
 }

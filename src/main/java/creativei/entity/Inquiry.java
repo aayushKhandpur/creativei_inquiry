@@ -1,45 +1,24 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.helper.constant.*;
 import creativei.helper.constant.DbConstraints;
-import creativei.vo.AddressVo;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by user on 12/16/2017.
- */
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "email",name= DbConstraints.INQUIRY_EMAIL_UNIQUE),
         @UniqueConstraint(columnNames = "phone_number",name =DbConstraints.INQUIRY_PHONE_UNIQUE),
-    })
+})
 
 public class Inquiry  extends BaseEntity implements Serializable  {
-    public Inquiry(){}
-
-    public Inquiry(InquiryVo inquiryVo) throws Exception {
-        this.name=inquiryVo.getName();
-        this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber=inquiryVo.getMobile();
-        this.email=inquiryVo.getEmail();
-        this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
-        this.gender=Gender.stringToEnum(inquiryVo.getGender());
-        this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
-        this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
-    }
-   @Column(nullable = false)
+    @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
     private Date inquiryDate=new Date();
@@ -63,6 +42,32 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private AreaOfInterest areaOfInterest;
     @OneToOne(cascade=CascadeType.ALL)
     private InquiryAddress inquiryAddress;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private InquiryEducation inquiryEducation;
+    public Inquiry(){}
+    public Inquiry(InquiryVo inquiryVo) throws ParseException {
+        this.setId(inquiryVo.getId());
+        this.name=inquiryVo.getName()==null||inquiryVo.getName().isEmpty()?null:inquiryVo.getName();
+        this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
+        this.phoneNumber=inquiryVo.getMobile();
+        this.email=inquiryVo.getEmail();
+        this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
+        this.gender=Gender.stringToEnum(inquiryVo.getGender());
+        this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
+        if(inquiryVo.getAddress()!=null)
+            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
+        if(inquiryVo.getEducation()!=null)
+            this.inquiryEducation=new InquiryEducation(inquiryVo.getEducation());
+    }
+
+    public InquiryEducation getInquiryEducation() {
+        return inquiryEducation;
+    }
+
+    public void setInquiryEducation(InquiryEducation inquiryEducation) {
+        this.inquiryEducation = inquiryEducation;
+    }
 
     public Date getInquiryDate() {
         return inquiryDate;
@@ -122,9 +127,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         return highestEducation;
     }
 
-    public void setHighestEducation(EducationQualification highestEducation) {
-        this.highestEducation = highestEducation;
-    }
+    public void setHighestEducation(EducationQualification highestEducation) { this.highestEducation = highestEducation;}
 
     public Occupation getOccupation() {
         return occupation;
@@ -146,9 +149,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         return computerKnowledge;
     }
 
-    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {
-        this.computerKnowledge = computerKnowledge;
-    }
+    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {this.computerKnowledge = computerKnowledge;}
 
     public Date getDob() {
         return dob;

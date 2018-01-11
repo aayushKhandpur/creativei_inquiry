@@ -23,16 +23,11 @@ import org.springframework.stereotype.Service;
 import java.io.PrintWriter;
 import java.util.List;
 
-/**
- * Created by user on 12/16/2017.
- */
 @Service
 public class InquiryManagerImpl implements InquiryManager {
    private static final Logger logger= LoggerFactory.getLogger(InquiryManagerImpl.class);
     @Autowired
     InquiryService inquiryService;
-    @Autowired
-    InquiryAddressService inquiryAddressService;
 
     @Override
     public ResponseObject getAll() {
@@ -51,7 +46,7 @@ public class InquiryManagerImpl implements InquiryManager {
          return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
      }catch(InvalidParamRequest ipr) {
          logger.error(ipr.getMessage(),ipr);
-         return ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(),ExceptionType.NULLVALUE_EXCEPTION.getCode());
+         return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
      }catch (DataIntegrityException de) {
          logger.error(de.getMessage(), de);
          return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
@@ -78,8 +73,26 @@ public class InquiryManagerImpl implements InquiryManager {
     }
 
     @Override
-    public ResponseObject update(Inquiry inquiry) {
-        return null;
+    public ResponseObject update(InquiryVo inquiryVo) {
+     try{
+         Inquiry inquiry=new Inquiry(inquiryVo);
+         inquiry=inquiryService.update(inquiry);
+         inquiryVo=ResponseHelper.getCreateInquiryResponseData(inquiry,inquiryVo);
+         return ResponseObject.getResponse(inquiryVo);
+     }catch (UniqueConstraintViolationException ue){
+         logger.error(ue.getMessage(),ue);
+         return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
+     }catch(InvalidParamRequest ipr) {
+         logger.error(ipr.getMessage(),ipr);
+         return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
+     }catch (DataIntegrityException de) {
+         logger.error(de.getMessage(), de);
+         return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
+     } catch (Exception e){
+         logger.error(e.getMessage(), e);
+         return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+
+     }
     }
 
     @Override

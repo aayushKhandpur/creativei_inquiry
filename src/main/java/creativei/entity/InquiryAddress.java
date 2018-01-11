@@ -8,20 +8,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Inquiry_Address")
 public class InquiryAddress extends BaseEntity implements Serializable {
-    public InquiryAddress(){}
-
-    public InquiryAddress(AddressVo addressVo){
-        this.area=addressVo.getArea();
-        this.city=addressVo.getCity();
-        this.pincode=addressVo.getPin();
-        this.addressLine1=addressVo.getAddressLine1();
-    }
     @OneToOne
     private Inquiry inquiry;
     @Column(nullable = false)
     private String pincode;
     @Column(nullable = false)
     private String country="INDIA";
+    @Column(nullable = false)
+    private String state;
     @Column(nullable = false)
     private String city="JAIPUR";
     @Column(nullable = false)
@@ -32,6 +26,24 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String addressLine2;
     @Column(nullable = false)
     private boolean is_current = true;
+    public InquiryAddress(){}
+    public InquiryAddress(AddressVo addressVo){
+        this.setId(addressVo.getId());
+        this.area=addressVo.getArea();
+        this.city=addressVo.getCity();
+        this.pincode=addressVo.getPin();
+        this.addressLine1=addressVo.getAddressLine1();
+        this.country=addressVo.getCountry();
+        this.state=addressVo.getState();
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public String getPincode() {
         return pincode;

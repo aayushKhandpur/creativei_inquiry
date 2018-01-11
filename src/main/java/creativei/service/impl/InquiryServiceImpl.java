@@ -18,13 +18,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 
 @Service("InquiryService")
 public class InquiryServiceImpl implements InquiryService {
     private static final Logger logger = LoggerFactory.getLogger(BranchService.class);
     @Autowired
     private InquiryDao inquiryDao;
-
 
     @Override
     public List<Inquiry> getAll() {
@@ -64,8 +65,20 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry update(Inquiry inquiry) {
-        return null;
+    public Inquiry update(Inquiry inquiry)throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest  {
+        try{
+            return inquiryDao.save(inquiry);
+        }catch (DataIntegrityViolationException de){
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                if(ce.getConstraintName()==null)
+                    throw new InvalidParamRequest("Required Field Can not be Empty");
+                else
+                    throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            }
+            throw new DataIntegrityException(de.getMessage());
+        }
     }
 
     @Override

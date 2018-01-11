@@ -17,6 +17,6 @@ public interface InquiryManager {
     ResponseObject getById(Long id);
     ResponseObject getByName(String name);
     ResponseObject createAll(List<Inquiry> inquiries);
-    ResponseObject update(Inquiry inquiry);
+    ResponseObject update(InquiryVo inquiryVo);
     ResponseObject updateAll(List<Inquiry> inquiries);
 }

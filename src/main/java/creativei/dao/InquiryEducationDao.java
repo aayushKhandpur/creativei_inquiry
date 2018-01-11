@@ -2,9 +2,9 @@ package creativei.dao;
 
 import creativei.entity.InquiryEducation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import javax.transaction.Transactional;
 
-/**
- * Created by user on 12/19/2017.
- */
+@Transactional
 public interface InquiryEducationDao extends JpaRepository<InquiryEducation,Long> {
 }
+

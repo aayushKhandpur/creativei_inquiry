@@ -1,5 +1,7 @@
 package creativei.enums;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -19,11 +21,11 @@ public enum Relation {
 
     private Relation(String value) {this.value = value; }
 
-    private static final Map<String, Relation> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static final Map<String, Relation> lookup = new HashMap<String,Relation>();
 
     static {
         for ( Relation relation : Relation.values()) {
-            lookup.put(Relation.enumToString(relation),relation );
+            lookup.put(Relation.enumToString(relation).toLowerCase(),relation );
         }
     }
 
@@ -34,6 +36,6 @@ public enum Relation {
 
     public static Relation stringToEnum(String value) {
         if(value==null){return  null;}
-        return lookup.get(value);
+        return lookup.get(value.toLowerCase());
     }
 }

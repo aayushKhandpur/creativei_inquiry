@@ -16,11 +16,11 @@ public enum Status {
         this.value=value;
     }
 
-    private static final Map<String, Status> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static final Map<String, Status> lookup = new HashMap<String,Status>();
 
     static {
         for ( Status status: Status.values()) {
-            lookup.put(status.enumToString(status),status );
+            lookup.put(status.enumToString(status).toLowerCase(),status );
         }
     }
 
@@ -30,6 +30,6 @@ public enum Status {
 
     public static Status stringToEnum(String value) {
         if(value==null){return  null;}
-        return lookup.get(value);
+        return lookup.get(value.toLowerCase());
     }
 }

@@ -15,11 +15,11 @@ public enum Stream {
                 this.value=value;
         }
 
-        private static final Map<String, Stream> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        private static final Map<String, Stream> lookup = new HashMap<String,Stream>();
 
         static {
                 for ( Stream stream: Stream.values()) {
-                        lookup.put(stream.enumToString(stream),stream );
+                        lookup.put(stream.enumToString(stream).toLowerCase(),stream );
                 }
         }
 
@@ -30,7 +30,7 @@ public enum Stream {
 
         public static Stream stringToEnum(String value) {
                 if(value==null){return  null;}
-                return lookup.get(value);
+                return lookup.get(value.toLowerCase());
         }
 
 }

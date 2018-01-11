@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name="inquiry_guardian")
+@Table(name="Inquiry_Guardian")
 public class InquiryGuardian extends BaseEntity implements Serializable {
 
     @OneToOne

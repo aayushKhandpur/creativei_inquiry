@@ -16,11 +16,11 @@ public enum ComputerKnowledge {
                 this.value =value;
         }
 
-        private static final Map<String, ComputerKnowledge> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        private static final Map<String, ComputerKnowledge> lookup = new HashMap<String,ComputerKnowledge>();
 
         static {
                 for ( ComputerKnowledge computerKnowledge : ComputerKnowledge.values()) {
-                        lookup.put(computerKnowledge.enumToString(computerKnowledge),computerKnowledge );
+                        lookup.put(computerKnowledge.enumToString(computerKnowledge).toLowerCase(),computerKnowledge );
                 }
         }
 
@@ -31,6 +31,6 @@ public enum ComputerKnowledge {
 
         public static ComputerKnowledge stringToEnum(String value) {
                 if(value==null){return  null;}
-                return lookup.get(value);
+                return lookup.get(value.toLowerCase());
         }
 }

@@ -34,8 +34,7 @@ public class ResponseHelper {
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry,InquiryVo inquiryVo){
         inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
-        String dateStr =inquiry.getDob().equals(null) ?null: LocalizationUtil.getFormattedDate(inquiry.getDob());
-        inquiryVo.setDob(dateStr);
+        inquiryVo.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
         inquiryVo.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
         inquiryVo.setEmail(inquiry.getEmail());
         inquiryVo.setMobile(inquiry.getPhoneNumber());
@@ -65,7 +64,7 @@ public class ResponseHelper {
         educationVo.setInstituteName(inquiryEducation.getInstituteName());
         educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
         educationVo.setStatus(Status.enumToString(inquiryEducation.getStatus()));
-        educationVo.setStream(inquiryEducation.getStream());
+        educationVo.setStream(Stream.enumToString(inquiryEducation.getStream()));
         educationVo.setYear(inquiryEducation.getYear());
         educationVo.setType(inquiryEducation.getType());
         return educationVo;

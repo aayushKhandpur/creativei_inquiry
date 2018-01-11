@@ -26,18 +26,9 @@ public class ResponseHelper {
     }
 
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry,InquiryVo inquiryVo){
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date defaultDate=null;
-        String date="1970-1-1";
-        try {
-            defaultDate=simpleDateFormat.parse(date);
-        }catch(ParseException e) {
-            e.printStackTrace();
-        }
         inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
-        String dateStr =inquiry.getDob().compareTo(defaultDate)==0 ?" ": LocalizationUtil.getFormattedDate(inquiry.getDob());
-        inquiryVo.setDob(dateStr);
+        inquiryVo.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
         inquiryVo.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
         inquiryVo.setEmail(inquiry.getEmail());
         inquiryVo.setMobile(inquiry.getPhoneNumber());
@@ -69,7 +60,7 @@ public class ResponseHelper {
         educationVo.setInstituteName(inquiryEducation.getInstituteName()==null?null:inquiryEducation.getInstituteName());
         educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
         educationVo.setStatus(Status.enumToString(inquiryEducation.getStatus()));
-        educationVo.setStream(inquiryEducation.getStream()==null?null:inquiryEducation.getStream());
+        educationVo.setStream(Stream.enumToString(inquiryEducation.getStream()));
         educationVo.setYear(inquiryEducation.getYear()==null?null:inquiryEducation.getYear());
         educationVo.setType(inquiryEducation.getType()==null?null:inquiryEducation.getType());
         return educationVo;

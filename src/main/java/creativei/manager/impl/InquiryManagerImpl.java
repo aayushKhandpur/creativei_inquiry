@@ -46,7 +46,7 @@ public class InquiryManagerImpl implements InquiryManager {
          return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
      }catch(InvalidParamRequest ipr) {
          logger.error(ipr.getMessage(),ipr);
-         return ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(),ExceptionType.NULLVALUE_EXCEPTION.getCode());
+         return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
      }catch (DataIntegrityException de) {
          logger.error(de.getMessage(), de);
          return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
@@ -58,11 +58,7 @@ public class InquiryManagerImpl implements InquiryManager {
     }
 
     @Override
-    public ResponseObject getById(Long id) {
-
-
-        return null;
-    }
+    public ResponseObject getById(Long id) {return null;}
 
     @Override
     public ResponseObject getByName(String name) {
@@ -77,9 +73,7 @@ public class InquiryManagerImpl implements InquiryManager {
     @Override
     public ResponseObject update(InquiryVo inquiryVo) {
     Inquiry inquiry;
-
     try{
-
          inquiry=new Inquiry(inquiryVo);
          inquiry=inquiryService.update(inquiry);
          inquiryVo=ResponseHelper.getCreateInquiryResponseData(inquiry,inquiryVo);
@@ -89,15 +83,14 @@ public class InquiryManagerImpl implements InquiryManager {
          return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
      }catch(InvalidParamRequest ipr) {
          logger.error(ipr.getMessage(),ipr);
-         return ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(),ExceptionType.NULLVALUE_EXCEPTION.getCode());
+         return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
      }catch (DataIntegrityException de) {
          logger.error(de.getMessage(), de);
          return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
      } catch (Exception e){
          logger.error(e.getMessage(), e);
          return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
-
-     }
+      }
     }
 
     @Override

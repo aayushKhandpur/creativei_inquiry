@@ -19,12 +19,11 @@ public enum EducationQualification {
         this.value = value;
     }
 
-    private static final Map<String, EducationQualification> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER
-    );
+    private static final Map<String, EducationQualification> lookup = new HashMap<String,EducationQualification>();
 
     static {
         for ( EducationQualification educationQualification: EducationQualification.values()) {
-            lookup.put(educationQualification.enumToString(educationQualification),educationQualification );
+            lookup.put(educationQualification.enumToString(educationQualification).toLowerCase(),educationQualification );
         }
     }
 
@@ -35,7 +34,7 @@ public enum EducationQualification {
 
     public static EducationQualification stringToEnum(String value) {
         if(value==null){return  null;}
-        return lookup.get(value);
+        return lookup.get(value.toLowerCase());
     }
 
 }

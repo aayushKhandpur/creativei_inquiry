@@ -16,20 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-@CrossOrigin(origins = "localhost:8100")
+@CrossOrigin(origins = "http://localhost:8100")
 @ControllerAdvice
 @RestController
 public class InquiryController {
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseObject handleConflict(InvalidParamRequest e, HttpServletResponse response)
-            throws IOException {
-
-        return  ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(), ExceptionType.NULLVALUE_EXCEPTION.getCode());
-    }
     private static final Logger logger =LoggerFactory.getLogger(InquiryController.class);
     private final ObjectMapper mapper=new ObjectMapper();
 
@@ -41,10 +31,8 @@ public class InquiryController {
     ResponseObject createInquiry(@RequestBody String inquiryStr, HttpServletRequest request) {
         logger.info("CreateInquiry method");
         try {
-            if (StringUtils.isBlank(inquiryStr)){
-                logger.error("Request data is null or empty.");
-                return (ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(), ExceptionType.NULLVALUE_EXCEPTION.getCode()));
-            }
+            if(nullStringValidation(inquiryStr))
+                return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.create(inquiryVo);
             return responseObject;
@@ -59,10 +47,8 @@ public class InquiryController {
     ResponseObject updateInquiry(@RequestBody String inquiryStr, HttpServletRequest request){
         logger.info("UpdateInquiry method");
         try {
-            if (StringUtils.isBlank(inquiryStr)){
-                logger.error("Request data is null or empty.");
-                return (ResponseObject.getResponse(ExceptionType.NULLVALUE_EXCEPTION.getMessage(), ExceptionType.GENERAL_ERROR.getCode()));
-            }
+            if(nullStringValidation(inquiryStr))
+                return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.update(inquiryVo);
             return responseObject;
@@ -71,4 +57,13 @@ public class InquiryController {
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
     }
+
+    private Boolean nullStringValidation(String inquiryStr){
+        if (StringUtils.isBlank(inquiryStr)){
+            logger.error("Request data is null or empty.");
+            return  true;
+        }
+        return false;
+    }
 }
+

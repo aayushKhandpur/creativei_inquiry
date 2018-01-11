@@ -10,11 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by user on 12/19/2017.
- */
 @Entity
-@Table(name="inquiry_guardian")
+@Table(name="Inquiry_Guardian")
 public class InquiryGuardian extends BaseEntity implements Serializable {
     public InquiryGuardian(){}
 

@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * Created by user on 12/20/2017.
- */
 public enum Gender {
 
         MALE("Male"),
@@ -18,11 +15,11 @@ public enum Gender {
                 this.value=value;
         }
 
-        private static final Map<String, Gender> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        private static final Map<String, Gender> lookup = new HashMap<String,Gender>();
 
         static {
                 for ( Gender gender :Gender.values()) {
-                        lookup.put(gender.enumToString(gender),gender );
+                        lookup.put(gender.enumToString(gender).toLowerCase(),gender );
                 }
         }
 
@@ -33,6 +30,6 @@ public enum Gender {
 
         public static Gender stringToEnum(String value) {
                 if(value==null){return  null;}
-                return lookup.get(value);
+                return lookup.get(value.toLowerCase());
         }
 }

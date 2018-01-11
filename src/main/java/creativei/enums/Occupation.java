@@ -21,11 +21,11 @@ public enum Occupation {
                 this.value = value;
         }
 
-        private static final Map<String, Occupation> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        private static final Map<String, Occupation> lookup = new HashMap<String,Occupation>();
 
         static {
                 for ( Occupation occupation : Occupation.values()) {
-                        lookup.put(occupation.enumToString(occupation),occupation );
+                        lookup.put(occupation.enumToString(occupation).toLowerCase(),occupation );
                 }
         }
 
@@ -36,7 +36,7 @@ public enum Occupation {
 
         public static Occupation stringToEnum(String value) {
                 if(value==null){return  null;}
-                return lookup.get(value);
+                return lookup.get(value.toLowerCase());
         }
     }
 

@@ -15,11 +15,11 @@ public enum MarkScheme {
         this.value=value;
     }
 
-    private static final Map<String, MarkScheme> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static final Map<String, MarkScheme> lookup = new HashMap<String,MarkScheme>();
 
     static {
         for ( MarkScheme markScheme :MarkScheme.values()) {
-            lookup.put(markScheme.enumToString(markScheme),markScheme );
+            lookup.put(markScheme.enumToString(markScheme).toLowerCase(),markScheme );
         }
     }
 
@@ -29,6 +29,6 @@ public enum MarkScheme {
 
     public static MarkScheme stringToEnum(String value) {
         if(value==null){return  null;}
-        return lookup.get(value);
+        return lookup.get(value.toLowerCase());
     }
 }

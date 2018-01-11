@@ -1,5 +1,6 @@
 package creativei.enums;
 
+import java.awt.geom.Area;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,11 +16,11 @@ public enum  AreaOfInterest {
         this.value =value;
     }
 
-    private static final Map<String, AreaOfInterest> lookup = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static final Map<String, AreaOfInterest> lookup = new HashMap<String, AreaOfInterest>();
 
     static {
         for ( AreaOfInterest areaOfInterest : AreaOfInterest.values()) {
-            lookup.put(areaOfInterest.enumToString(areaOfInterest),areaOfInterest );
+            lookup.put(areaOfInterest.enumToString(areaOfInterest).toLowerCase(),areaOfInterest );
         }
     }
 
@@ -29,6 +30,6 @@ public enum  AreaOfInterest {
     }
     public static AreaOfInterest stringToEnum(String value) {
         if(value==null){return  null;}
-        return lookup.get(value);
+        return lookup.get(value.toLowerCase());
     }
 }

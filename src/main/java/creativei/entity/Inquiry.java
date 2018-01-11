@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "email",name= DbConstraints.INQUIRY_EMAIL_UNIQUE),
         @UniqueConstraint(columnNames = "phone_number",name =DbConstraints.INQUIRY_PHONE_UNIQUE),
-    })
+})
 
 public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(){}
@@ -27,7 +27,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.phoneNumber=inquiryVo.getMobile()==null||inquiryVo.getMobile().isEmpty()?null:inquiryVo.getMobile();
         this.email=inquiryVo.getEmail()==null||inquiryVo.getEmail().isEmpty()?null:inquiryVo.getEmail();
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob()==null?"1996-10-31":inquiryVo.getDob());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
@@ -63,7 +63,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private AreaOfInterest areaOfInterest;
     @OneToOne(cascade=CascadeType.ALL)
     private InquiryAddress inquiryAddress;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private InquiryEducation inquiryEducation;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;
@@ -140,9 +140,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         return highestEducation;
     }
 
-    public void setHighestEducation(EducationQualification highestEducation) {
-        this.highestEducation = highestEducation;
-    }
+    public void setHighestEducation(EducationQualification highestEducation) { this.highestEducation = highestEducation;}
 
     public Occupation getOccupation() {
         return occupation;
@@ -164,9 +162,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         return computerKnowledge;
     }
 
-    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {
-        this.computerKnowledge = computerKnowledge;
-    }
+    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {this.computerKnowledge = computerKnowledge;}
 
     public Date getDob() {
         return dob;

@@ -19,11 +19,11 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     private EducationQualification educationQualification;
     @Column(name="institue_name")
     private String instituteName;
-    private String stream;
+    private Stream stream;
     private Status status;
     private Integer year;
     @Column(name="aggregate_marks")
-    private Integer aggregateMarks;
+    private Double aggregateMarks;
     @Column(name="mark_scheme")
     private MarkScheme markScheme;
     private String type;
@@ -32,7 +32,7 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     public InquiryEducation(EducationVo educationVo) {
         this.educationQualification=EducationQualification.stringToEnum(educationVo.getEducationQualification());
         this.instituteName=educationVo.getInstituteName()==null||educationVo.getInstituteName().isEmpty()?null:educationVo.getInstituteName();
-        this.stream=educationVo.getStream()==null||educationVo.getStream().isEmpty()?null:educationVo.getStream();
+        this.stream=Stream.stringToEnum(educationVo.getStream());
         this.status=Status.stringToEnum(educationVo.getStatus());
         this.year=educationVo.getYear()==null?null:educationVo.getYear();
         this.aggregateMarks=educationVo.getAggregateMarks()==null?null:educationVo.getAggregateMarks();
@@ -60,11 +60,11 @@ public class InquiryEducation extends BaseEntity implements Serializable {
         this.instituteName = instituteName;
     }
 
-    public String getStream() {
+    public Stream getStream() {
         return stream;
     }
 
-    public void setStream(String stream) {
+    public void setStream(Stream stream) {
         this.stream = stream;
     }
 
@@ -84,11 +84,11 @@ public class InquiryEducation extends BaseEntity implements Serializable {
         this.year = year;
     }
 
-    public Integer getAggregateMarks() {
+    public Double getAggregateMarks() {
         return aggregateMarks;
     }
 
-    public void setAggregateMarks(Integer aggregateMarks) {
+    public void setAggregateMarks(Double aggregateMarks) {
         this.aggregateMarks = aggregateMarks;
     }
 

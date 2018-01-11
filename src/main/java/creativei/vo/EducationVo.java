@@ -11,7 +11,7 @@ public class EducationVo {
     private String status;
     private Integer year;
     private String type;
-    private Integer aggregateMarks;
+    private Double aggregateMarks;
     private String markScheme;
 
     public Long getId() {
@@ -26,9 +26,7 @@ public class EducationVo {
         return educationQualification;
     }
 
-    public void setEducationQualification(String educationQualification) {
-        this.educationQualification = educationQualification;
-    }
+    public void setEducationQualification(String educationQualification) {this.educationQualification = educationQualification;}
 
     public String getInstituteName() {
         return instituteName;
@@ -70,13 +68,11 @@ public class EducationVo {
         this.type = type;
     }
 
-    public Integer getAggregateMarks() {
+    public Double getAggregateMarks() {
         return aggregateMarks;
     }
 
-    public void setAggregateMarks(Integer aggregateMarks) {
-        this.aggregateMarks = aggregateMarks;
-    }
+    public void setAggregateMarks(Double aggregateMarks) { this.aggregateMarks = aggregateMarks;}
 
     public String getMarkScheme() {
         return markScheme;

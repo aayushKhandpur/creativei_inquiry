@@ -26,12 +26,10 @@ public enum  AreaOfInterest {
 
     public static String enumToString(AreaOfInterest areaOfInterest) {
         if (areaOfInterest == null) {return null;}
-
         return areaOfInterest.value;
     }
     public static AreaOfInterest stringToEnum(String value) {
         if(value==null){return  null;}
-
         return lookup.get(value.toLowerCase());
     }
 }

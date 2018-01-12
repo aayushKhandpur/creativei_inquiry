@@ -2,6 +2,8 @@ package creativei.service;
 
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryMarketing;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.InvalidParamRequest;
 
 import java.util.List;
 
@@ -11,9 +13,9 @@ import java.util.List;
 public interface InquiryMarketingService {
     List<InquiryMarketing> getAll();
     InquiryMarketing getById(Inquiry inquiry);
-    InquiryMarketing create(InquiryMarketing inquiryMarketing);
+    InquiryMarketing create(InquiryMarketing inquiryMarketing) throws InvalidParamRequest,DataIntegrityException;
     InquiryMarketing createAll(List<InquiryMarketing> inquiryMarketings);
-    InquiryMarketing update(InquiryMarketing inquiryMarketing);
+    InquiryMarketing update(InquiryMarketing inquiryMarketing) throws InvalidParamRequest,DataIntegrityException;
     InquiryMarketing updateAll(List<InquiryMarketing> inquiryMarketings);
 
 }

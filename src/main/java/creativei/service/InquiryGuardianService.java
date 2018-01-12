@@ -2,6 +2,8 @@ package creativei.service;
 
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryGuardian;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 
 import java.util.List;
 
@@ -11,9 +13,9 @@ import java.util.List;
 public interface InquiryGuardianService {
     List<InquiryGuardian> getAll();
     InquiryGuardian getById(Inquiry inquiry);
-    InquiryGuardian create(InquiryGuardian inquiryGuardian);
+    InquiryGuardian create(InquiryGuardian inquiryGuardian) throws UniqueConstraintViolationException,DataIntegrityException;
     InquiryGuardian createAll(List<InquiryGuardian> inquiryGuardians);
-    InquiryGuardian upadate(InquiryGuardian inquiryGuardian);
+    InquiryGuardian upadate(InquiryGuardian inquiryGuardian)throws UniqueConstraintViolationException,DataIntegrityException;
     InquiryGuardian updateAll(List<InquiryGuardian> inquiryGuardians);
 }
 

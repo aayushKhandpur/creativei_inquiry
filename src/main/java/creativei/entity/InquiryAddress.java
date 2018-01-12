@@ -8,6 +8,17 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Inquiry_Address")
 public class InquiryAddress extends BaseEntity implements Serializable {
+    public InquiryAddress(){}
+
+    public InquiryAddress(AddressVo addressVo){
+        this.setId(addressVo.getId());
+        this.area=addressVo.getArea()==null||addressVo.getArea().isEmpty()?null:addressVo.getArea();
+        this.city=addressVo.getCity()==null||addressVo.getCity().isEmpty()?null:addressVo.getCity();
+        this.pincode=addressVo.getPin()==null||addressVo.getPin().isEmpty()?null:addressVo.getPin();
+        this.addressLine1=addressVo.getAddressLine1()==null||addressVo.getAddressLine1().isEmpty()?null:addressVo.getAddressLine1();
+        this.country=addressVo.getCountry()==null||addressVo.getCountry().isEmpty()?null:addressVo.getCountry();
+        this.state=addressVo.getState()==null||addressVo.getState().isEmpty()?null:addressVo.getState();
+    }
     @OneToOne
     private Inquiry inquiry;
     @Column(nullable = false)
@@ -24,19 +35,8 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String addressLine1;
     @Column(name="address_line_2")
     private String addressLine2;
-    @Column(nullable = false)
-    private boolean is_current = true;
-    public InquiryAddress(){}
-    public InquiryAddress(AddressVo addressVo){
-        this.setId(addressVo.getId());
-        this.area=addressVo.getArea();
-        this.city=addressVo.getCity();
-        this.pincode=addressVo.getPin();
-        this.addressLine1=addressVo.getAddressLine1();
-        this.country=addressVo.getCountry();
-        this.state=addressVo.getState();
-    }
-
+    @Column(name = "is_current")
+    private boolean isCurrent = true;
     public String getState() {
         return state;
     }
@@ -92,13 +92,10 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     }
 
     public boolean is_current() {
-        return is_current;
+        return isCurrent;
     }
 
-    public void setIs_current(boolean is_current) {
-        this.is_current = is_current;
+    public void setCurrent(boolean current) {
+        this.isCurrent = current;
     }
-
-
-
 }

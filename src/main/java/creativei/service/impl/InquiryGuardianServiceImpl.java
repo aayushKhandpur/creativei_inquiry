@@ -1,15 +1,26 @@
 package creativei.service.impl;
 
+import creativei.dao.InquiryGuardianDao;
 import creativei.entity.Inquiry;
+import creativei.entity.InquiryEducation;
 import creativei.entity.InquiryGuardian;
+import creativei.exception.DataIntegrityException;
+import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.InquiryGuardianService;
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by user on 12/19/2017.
- */
+@Service("InquiryGuardianService")
 public class InquiryGuardianServiceImpl implements InquiryGuardianService {
+    public static final Logger logger= LoggerFactory.getLogger(InquiryGuardian.class);
+    @Autowired
+    InquiryGuardianDao inquiryGuardianDao;
     @Override
     public List<InquiryGuardian> getAll() {
         return null;
@@ -21,8 +32,17 @@ public class InquiryGuardianServiceImpl implements InquiryGuardianService {
     }
 
     @Override
-    public InquiryGuardian create(InquiryGuardian inquiryGuardian) {
-        return null;
+    public InquiryGuardian create(InquiryGuardian inquiryGuardian) throws UniqueConstraintViolationException,DataIntegrityException {
+        try{
+            return inquiryGuardianDao.save(inquiryGuardian);
+        }catch(DataIntegrityViolationException de){
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            }
+            throw new DataIntegrityException(de.getMessage());
+        }
     }
 
     @Override
@@ -31,8 +51,17 @@ public class InquiryGuardianServiceImpl implements InquiryGuardianService {
     }
 
     @Override
-    public InquiryGuardian upadate(InquiryGuardian inquiryGuardian) {
-        return null;
+    public InquiryGuardian upadate(InquiryGuardian inquiryGuardian)throws UniqueConstraintViolationException,DataIntegrityException {
+        try{
+            return inquiryGuardianDao.save(inquiryGuardian);
+        }catch(DataIntegrityViolationException de){
+            logger.error(de.getMessage(), de);
+            if(de.getCause() instanceof ConstraintViolationException){
+                ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
+                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+            }
+            throw new DataIntegrityException(de.getMessage());
+        }
     }
 
     @Override

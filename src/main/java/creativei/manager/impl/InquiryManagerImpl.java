@@ -58,9 +58,7 @@ public class InquiryManagerImpl implements InquiryManager {
     }
 
     @Override
-    public ResponseObject getById(Long id) {
-        return null;
-    }
+    public ResponseObject getById(Long id) {return null;}
 
     @Override
     public ResponseObject getByName(String name) {
@@ -74,8 +72,9 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject update(InquiryVo inquiryVo) {
-     try{
-         Inquiry inquiry=new Inquiry(inquiryVo);
+    Inquiry inquiry;
+    try{
+         inquiry=new Inquiry(inquiryVo);
          inquiry=inquiryService.update(inquiry);
          inquiryVo=ResponseHelper.getCreateInquiryResponseData(inquiry,inquiryVo);
          return ResponseObject.getResponse(inquiryVo);
@@ -91,8 +90,7 @@ public class InquiryManagerImpl implements InquiryManager {
      } catch (Exception e){
          logger.error(e.getMessage(), e);
          return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
-
-     }
+      }
     }
 
     @Override

@@ -14,7 +14,25 @@ public class InquiryVo {
     private AddressVo address;
     private String gender;
     private EducationVo education;
+    private GuardianVo guardian;
+    private MarketingVo marketing;
     private Long id;
+
+    public MarketingVo getMarketing() {
+        return marketing;
+    }
+
+    public void setMarketing(MarketingVo marketing) {
+        this.marketing = marketing;
+    }
+
+    public GuardianVo getGuardian() {
+        return guardian;
+    }
+
+    public void setGuardian(GuardianVo guardian) {
+        this.guardian = guardian;
+    }
 
     public String getComputerKnowledge() {return computerKnowledge;    }
 

@@ -35,8 +35,8 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String addressLine1;
     @Column(name="address_line_2")
     private String addressLine2;
-    @Column(nullable = false)
-    private boolean is_current = true;
+    @Column(name = "is_current")
+    private boolean isCurrent = true;
     public String getState() {
         return state;
     }
@@ -92,10 +92,10 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     }
 
     public boolean is_current() {
-        return is_current;
+        return isCurrent;
     }
 
-    public void setIs_current(boolean is_current) {
-        this.is_current = is_current;
+    public void setCurrent(boolean current) {
+        this.isCurrent = current;
     }
 }

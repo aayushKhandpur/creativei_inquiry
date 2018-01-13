@@ -1,8 +1,10 @@
 package creativei.enums;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public enum EducationQualification {
         SSC("SSC"),
@@ -19,6 +21,10 @@ public enum EducationQualification {
         this.value = value;
     }
 
+    public static List<String> getEnumValue(){
+        List<String> s= java.util.stream.Stream.of(EducationQualification.values()).map(EducationQualification::name).collect(Collectors.toList());
+        return s;
+    }
     private static final Map<String, EducationQualification> lookup = new HashMap<String,EducationQualification>();
 
     static {

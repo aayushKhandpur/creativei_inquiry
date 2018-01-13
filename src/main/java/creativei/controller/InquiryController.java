@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:8100")
 @ControllerAdvice
 @RestController
@@ -56,6 +58,12 @@ public class InquiryController {
             logger.error(e.getMessage(),e);
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
+    }
+    @RequestMapping(value = "/inquiry/server-info",produces = "application/json",method = RequestMethod.GET)
+    public @ResponseBody
+     ResponseObject getEnum(){
+         ResponseObject responseObject=inquiryManager.getAllEnum();
+         return responseObject;
     }
 
     private Boolean nullStringValidation(String inquiryStr){

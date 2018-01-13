@@ -13,6 +13,7 @@ import creativei.service.InquiryAddressService;
 import creativei.service.InquiryService;
 import creativei.service.impl.InquiryAddressServiceImpl;
 import creativei.vo.AddressVo;
+import creativei.vo.InquiryServerInfoVo;
 import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -96,5 +98,13 @@ public class InquiryManagerImpl implements InquiryManager {
     @Override
     public ResponseObject updateAll(List<Inquiry> inquiries) {
         return null;
+    }
+
+    @Override
+    public ResponseObject getAllEnum() {
+       // List<InquiryServerInfoVo> inquiryServerInfoVoList=new ArrayList<>();
+       InquiryServerInfoVo inquiryServerInfoVo=new InquiryServerInfoVo();
+       // inquiryServerInfoVoList.add(inquiryServerInfoVo);
+        return ResponseObject.getResponse(inquiryServerInfoVo);
     }
 }

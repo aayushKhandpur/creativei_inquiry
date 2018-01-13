@@ -1,8 +1,10 @@
 package creativei.enums;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public enum Stream {
 
@@ -16,6 +18,11 @@ public enum Stream {
         }
 
         private static final Map<String, Stream> lookup = new HashMap<String,Stream>();
+        public static List<String> getEnumValue(){
+                List<String> s= java.util.stream.Stream.of(MarkScheme.values()).map(MarkScheme::name).collect(Collectors.toList());
+                return s;
+        }
+
 
         static {
                 for ( Stream stream: Stream.values()) {

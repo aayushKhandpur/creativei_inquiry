@@ -1,6 +1,6 @@
 package creativei.entity;
 
-import creativei.enums.Source;
+import creativei.enums.MarketingSource;
 import creativei.vo.MarketingVo;
 
 import javax.persistence.Column;
@@ -23,17 +23,17 @@ public class InquiryMarketing extends BaseEntity implements Serializable {
     @OneToOne
     private Inquiry inquiry;
     @Column(nullable = false)
-    private Source source;
+    private MarketingSource marketingSource;
     @Column(name = "is_referred")
     private boolean isReferred;
     private String referant;
 
-    public Source getSource() {
-        return source;
+    public MarketingSource getMarketingSource() {
+        return marketingSource;
     }
 
-    public void setSource(Source source) {
-        this.source = source;
+    public void setMarketingSource(MarketingSource marketingSource) {
+        this.marketingSource = marketingSource;
     }
 
     public boolean getIsReferred() {

@@ -3,8 +3,10 @@ package creativei.enums;
 import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * Created by user on 12/20/2017.
@@ -22,6 +24,11 @@ public enum Relation {
     private Relation(String value) {this.value = value; }
 
     private static final Map<String, Relation> lookup = new HashMap<String,Relation>();
+
+    public static List<String> getEnumValue(){
+        List<String> s= java.util.stream.Stream.of(Relation.values()).map(Relation::name).collect(Collectors.toList());
+        return s;
+    }
 
     static {
         for ( Relation relation : Relation.values()) {

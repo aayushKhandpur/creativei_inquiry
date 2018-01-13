@@ -20,7 +20,7 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     @Column(name="institue_name")
     private String instituteName;
     private Stream stream;
-    private Status status;
+    private EducationStatus status;
     private Integer year;
     @Column(name="aggregate_marks")
     private Double aggregateMarks;
@@ -68,11 +68,11 @@ public class InquiryEducation extends BaseEntity implements Serializable {
         this.stream = stream;
     }
 
-    public Status getStatus() {
+    public EducationStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(EducationStatus status) {
         this.status = status;
     }
 

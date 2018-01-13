@@ -5,10 +5,6 @@ import creativei.enums.*;
 import creativei.vo.*;
 import util.LocalizationUtil;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Created by Aayush on 12/24/2017.
  */
@@ -59,7 +55,7 @@ public class ResponseHelper {
         educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
         educationVo.setInstituteName(inquiryEducation.getInstituteName()==null?null:inquiryEducation.getInstituteName());
         educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
-        educationVo.setStatus(Status.enumToString(inquiryEducation.getStatus()));
+        educationVo.setStatus(EducationStatus.enumToString(inquiryEducation.getStatus()));
         educationVo.setStream(Stream.enumToString(inquiryEducation.getStream()));
         educationVo.setYear(inquiryEducation.getYear()==null?null:inquiryEducation.getYear());
         educationVo.setType(inquiryEducation.getType()==null?null:inquiryEducation.getType());

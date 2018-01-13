@@ -1,8 +1,10 @@
 package creativei.enums;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public enum MarkScheme {
     CGPA("CGPA"),
@@ -16,6 +18,11 @@ public enum MarkScheme {
     }
 
     private static final Map<String, MarkScheme> lookup = new HashMap<String,MarkScheme>();
+
+    public static List<String> getEnumValue(){
+        List<String> s= java.util.stream.Stream.of(MarkScheme.values()).map(MarkScheme::name).collect(Collectors.toList());
+        return s;
+    }
 
     static {
         for ( MarkScheme markScheme :MarkScheme.values()) {

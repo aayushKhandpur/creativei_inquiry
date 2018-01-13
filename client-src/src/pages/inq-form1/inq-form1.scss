@@ -1,0 +1,30 @@
+page-inq-form1 {
+
+    .changeState{
+        color: #a5a5a5;
+        cursor: pointer;
+    }
+    
+}
+
+form{
+    background-color: #fff;
+}
+
+ion-content{
+    background-image: url(../assets/imgs/bg-6.jpg);
+    // background-repeat-y: no-repeat;
+    background-position: bottom;
+}
+
+.error-notification{
+    .toast-wrapper{
+        background-color: #f53d3d;
+    }
+}
+
+.info-notification{
+    .toast-wrapper{
+        background-color: #488aff;
+    }
+}

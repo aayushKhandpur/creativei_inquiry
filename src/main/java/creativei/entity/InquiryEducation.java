@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
 
 @Entity
 @Table(name="Inquiry_Education")
@@ -29,15 +31,22 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     private String type;
     public InquiryEducation(){}
 
-    public InquiryEducation(EducationVo educationVo) {
-        this.educationQualification=EducationQualification.stringToEnum(educationVo.getEducationQualification());
-        this.instituteName=educationVo.getInstituteName()==null||educationVo.getInstituteName().isEmpty()?null:educationVo.getInstituteName();
-        this.stream=Stream.stringToEnum(educationVo.getStream());
-        this.status=Status.stringToEnum(educationVo.getStatus());
-        this.year=educationVo.getYear()==null?null:educationVo.getYear();
-        this.aggregateMarks=educationVo.getAggregateMarks()==null?null:educationVo.getAggregateMarks();
-        this.markScheme=MarkScheme.stringToEnum(educationVo.getMarkScheme());
-        this.type=educationVo.getType()==null||educationVo.getType().isEmpty()?null:educationVo.getType();
+    public InquiryEducation(List<EducationVo> educationVo) {
+        Iterator iterator = educationVo.iterator();
+        Integer i=0;
+        while (iterator.hasNext()) {
+            this.setId(educationVo.get(i).getId());
+            this.educationQualification = EducationQualification.stringToEnum(educationVo.get(i).getEducationQualification());
+            this.instituteName = educationVo.get(i).getInstituteName() == null || educationVo.get(i).getInstituteName().isEmpty() ? null : educationVo.get(i).getInstituteName();
+            this.stream = Stream.stringToEnum(educationVo.get(i).getStream());
+            this.status = EducationStatus.stringToEnum(educationVo.get(i).getStatus());
+            this.year = educationVo.get(i).getYear() == null ? null : educationVo.get(i).getYear();
+            this.aggregateMarks = educationVo.get(i).getAggregateMarks() == null ? null : educationVo.get(i).getAggregateMarks();
+            this.markScheme = MarkScheme.stringToEnum(educationVo.get(i).getMarkScheme());
+            this.type = educationVo.get(i).getType() == null || educationVo.get(i).getType().isEmpty() ? null : educationVo.get(i).getType();
+            iterator.next();
+            i++;
+        }
     }
 
     public String getType() {return type;}

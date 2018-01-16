@@ -26,7 +26,7 @@ public enum Relation {
     private static final Map<String, Relation> lookup = new HashMap<String,Relation>();
 
     public static List<String> getEnumValue(){
-        List<String> s= java.util.stream.Stream.of(Relation.values()).map(Relation::name).collect(Collectors.toList());
+        List<String> s= java.util.stream.Stream.of(Relation.values()).map(relation -> relation.value).collect(Collectors.toList());
         return s;
     }
 

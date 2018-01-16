@@ -15,6 +15,13 @@ public class InquiryServerInfoVo {
     public InquiryServerInfoVo(){
         setGender();
         setAreaOfInterest();
+        setComputerKnowledge();
+        setEducationStatus();
+        setHighestEducation();
+        setMarketingSource();
+        setMarkScheme();
+        setOccupation();
+        setRelation();
     }
 
     public List<String> getGender() {
@@ -78,14 +85,14 @@ public class InquiryServerInfoVo {
     }
 
     public void setMarketingSource() {
-        this.marketingSource = MarketingSource.get;
+        this.marketingSource = MarketingSource.getEnumValue();
     }
 
     public List<String> getRelation() {
         return relation;
     }
 
-    public void setRelation(List<String> relation) {
-        this.relation = relation;
+    public void setRelation() {
+        this.relation = Relation.getEnumValue();
     }
 }

@@ -20,7 +20,7 @@ public enum EducationStatus {
     private static final Map<String, EducationStatus> lookup = new HashMap<String,EducationStatus>();
 
     public static List<String> getEnumValue(){
-        List<String> s= java.util.stream.Stream.of(EducationStatus.values()).map(EducationStatus::name).collect(Collectors.toList());
+        List<String> s= java.util.stream.Stream.of(EducationStatus.values()).map(educationStatus -> educationStatus.value).collect(Collectors.toList());
         return s;
     }
 

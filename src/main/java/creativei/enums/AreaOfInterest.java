@@ -1,5 +1,6 @@
 package creativei.enums;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.*;
 
@@ -22,7 +23,8 @@ public enum  AreaOfInterest {
         }
     }
     public static List<String> getEnumValue(){
-        List<String> s= java.util.stream.Stream.of(AreaOfInterest.values()).map(AreaOfInterest::name).collect(Collectors.toList());
+
+       List<String> s= java.util.stream.Stream.of(AreaOfInterest.values()).map(areaOfInterest -> areaOfInterest.value).collect(Collectors.toList());
         return s;
     }
 

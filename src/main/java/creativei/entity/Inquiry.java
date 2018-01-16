@@ -9,7 +9,9 @@ import util.LocalizationUtil;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -32,8 +34,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
-        if(inquiryVo.getEducation()!=null)
-            this.inquiryEducation=new InquiryEducation(inquiryVo.getEducation());
+        if(inquiryVo.getEducation()!=null) {
+            InquiryEducation inquiryEducations=new InquiryEducation(inquiryVo.getEducation());
+            this.inquiryEducation.add(inquiryEducations);
+        }
         if(inquiryVo.getGuardian()!=null)
             this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian());
         if(inquiryVo.getMarketing()!=null)
@@ -61,10 +65,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private Date dob;
     @Column(name = "area_of_interest")
     private AreaOfInterest areaOfInterest;
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private InquiryAddress inquiryAddress;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private InquiryEducation inquiryEducation;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<InquiryEducation> inquiryEducation=new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;
     @OneToOne(cascade = CascadeType.ALL)
@@ -74,11 +78,11 @@ public class Inquiry  extends BaseEntity implements Serializable  {
 
     public void setInquiryGuardian(InquiryGuardian inquiryGuardian) { this.inquiryGuardian = inquiryGuardian; }
 
-    public InquiryEducation getInquiryEducation() {
+    public List<InquiryEducation> getInquiryEducation() {
         return inquiryEducation;
     }
 
-    public void setInquiryEducation(InquiryEducation inquiryEducation) {
+    public void setInquiryEducation(List<InquiryEducation> inquiryEducation) {
         this.inquiryEducation = inquiryEducation;
     }
 

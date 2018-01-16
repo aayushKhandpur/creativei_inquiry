@@ -5,6 +5,10 @@ import creativei.enums.*;
 import creativei.vo.*;
 import util.LocalizationUtil;
 
+import javax.validation.constraints.Size;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Created by Aayush on 12/24/2017.
  */
@@ -50,17 +54,24 @@ public class ResponseHelper {
         addressVo.setState(inquiryAddress.getState());
         return addressVo;
    }
-   private static EducationVo getCreateEducationResponseData(InquiryEducation inquiryEducation,EducationVo educationVo){
-        educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks()==null?null:inquiryEducation.getAggregateMarks());
-        educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
-        educationVo.setInstituteName(inquiryEducation.getInstituteName()==null?null:inquiryEducation.getInstituteName());
-        educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
-        educationVo.setStatus(EducationStatus.enumToString(inquiryEducation.getStatus()));
-        educationVo.setStream(Stream.enumToString(inquiryEducation.getStream()));
-        educationVo.setYear(inquiryEducation.getYear()==null?null:inquiryEducation.getYear());
-        educationVo.setType(inquiryEducation.getType()==null?null:inquiryEducation.getType());
-        return educationVo;
-    }
+   private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducation, List<EducationVo> educationVo) {
+       Iterator iterator = inquiryEducation.iterator();
+       Integer i=0;
+       while (iterator.hasNext()) {
+           educationVo.get(i).setId(inquiryEducation.get(i).getId());
+           educationVo.get(i).setAggregateMarks(inquiryEducation.get(i).getAggregateMarks() == null ? null : inquiryEducation.get(i).getAggregateMarks());
+           educationVo.get(i).setEducationQualification(EducationQualification.enumToString(inquiryEducation.get(i).getEducationQualification()));
+           educationVo.get(i).setInstituteName(inquiryEducation.get(i).getInstituteName() == null ? null : inquiryEducation.get(i).getInstituteName());
+           educationVo.get(i).setMarkScheme(MarkScheme.enumToString(inquiryEducation.get(i).getMarkScheme()));
+           educationVo.get(i).setStatus(EducationStatus.enumToString(inquiryEducation.get(i).getStatus()));
+           educationVo.get(i).setStream(Stream.enumToString(inquiryEducation.get(i).getStream()));
+           educationVo.get(i).setYear(inquiryEducation.get(i).getYear() == null ? null : inquiryEducation.get(i).getYear());
+           educationVo.get(i).setType(inquiryEducation.get(i).getType() == null ? null : inquiryEducation.get(i).getType());
+           iterator.next();
+           i++;
+       }
+       return educationVo;
+   }
 
     private static GuardianVo getCreateGuardianResponseData(InquiryGuardian inquiryGuardian,GuardianVo guardianVo){
        guardianVo.setName(inquiryGuardian.getName());
@@ -71,7 +82,7 @@ public class ResponseHelper {
        return guardianVo;
     }
     private static MarketingVo getCreateMarketingResponseData(InquiryMarketing inquiryMarketing,MarketingVo marketingVo){
-        marketingVo.setSource(Source.enumToString(inquiryMarketing.getSource()));
+        marketingVo.setSource(MarketingSource.enumToString(inquiryMarketing.getMarketingSource()));
         marketingVo.setReferant(inquiryMarketing.getReferant());
         marketingVo.setReferred(inquiryMarketing.getIsReferred());
         return marketingVo;

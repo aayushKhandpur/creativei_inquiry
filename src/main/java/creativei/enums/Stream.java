@@ -18,8 +18,9 @@ public enum Stream {
         }
 
         private static final Map<String, Stream> lookup = new HashMap<String,Stream>();
+
         public static List<String> getEnumValue(){
-                List<String> s= java.util.stream.Stream.of(MarkScheme.values()).map(MarkScheme::name).collect(Collectors.toList());
+                List<String> s= java.util.stream.Stream.of(Stream.values()).map(stream->stream.value).collect(Collectors.toList());
                 return s;
         }
 

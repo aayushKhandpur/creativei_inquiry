@@ -26,7 +26,7 @@ public enum MarketingSource {
     private static final Map<String, MarketingSource> lookup = new HashMap<String,MarketingSource>();
 
     public static List<String> getEnumValue(){
-        List<String> s= java.util.stream.Stream.of(MarketingSource.values()).map(MarketingSource::name).collect(Collectors.toList());
+        List<String> s= java.util.stream.Stream.of(MarketingSource.values()).map(marketingSource -> marketingSource.value).collect(Collectors.toList());
         return s;
     }
 

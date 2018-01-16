@@ -20,7 +20,7 @@ public enum MarkScheme {
     private static final Map<String, MarkScheme> lookup = new HashMap<String,MarkScheme>();
 
     public static List<String> getEnumValue(){
-        List<String> s= java.util.stream.Stream.of(MarkScheme.values()).map(MarkScheme::name).collect(Collectors.toList());
+        List<String> s= java.util.stream.Stream.of(MarkScheme.values()).map(markScheme -> markScheme.value).collect(Collectors.toList());
         return s;
     }
 

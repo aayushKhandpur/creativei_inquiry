@@ -20,7 +20,7 @@ public enum Gender {
         private static final Map<String, Gender> lookup = new HashMap<String,Gender>();
 
         public static List<String> getEnumValue(){
-                List<String> s= java.util.stream.Stream.of(Gender.values()).map(Gender::name).collect(Collectors.toList());
+                List<String> s= java.util.stream.Stream.of(Gender.values()).map(gender -> gender.value).collect(Collectors.toList());
                 return s;
         }
 

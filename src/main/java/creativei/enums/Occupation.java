@@ -26,7 +26,7 @@ public enum Occupation {
         private static final Map<String, Occupation> lookup = new HashMap<String,Occupation>();
 
         public static List<String> getEnumValue(){
-                List<String> s= java.util.stream.Stream.of(Occupation.values()).map(Occupation::name).collect(Collectors.toList());
+                List<String> s= java.util.stream.Stream.of(Occupation.values()).map(occupation -> occupation.value).collect(Collectors.toList());
                 return s;
         }
         static {

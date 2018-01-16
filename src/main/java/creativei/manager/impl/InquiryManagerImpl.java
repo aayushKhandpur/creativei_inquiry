@@ -102,9 +102,7 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject getAllEnum() {
-       // List<InquiryServerInfoVo> inquiryServerInfoVoList=new ArrayList<>();
-       InquiryServerInfoVo inquiryServerInfoVo=new InquiryServerInfoVo();
-       // inquiryServerInfoVoList.add(inquiryServerInfoVo);
+        InquiryServerInfoVo inquiryServerInfoVo=new InquiryServerInfoVo();
         return ResponseObject.getResponse(inquiryServerInfoVo);
     }
 }

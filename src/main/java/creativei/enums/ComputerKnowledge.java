@@ -21,7 +21,7 @@ public enum ComputerKnowledge {
         private static final Map<String, ComputerKnowledge> lookup = new HashMap<String,ComputerKnowledge>();
 
         public static List<String> getEnumValue(){
-                List<String> s= java.util.stream.Stream.of(ComputerKnowledge.values()).map(ComputerKnowledge::name).collect(Collectors.toList());
+                List<String> s= java.util.stream.Stream.of(ComputerKnowledge.values()).map(computerKnowledge -> computerKnowledge.value).collect(Collectors.toList());
                 return s;
         }
 

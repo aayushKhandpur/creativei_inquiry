@@ -1,6 +1,7 @@
 package creativei.vo;
 
 import java.lang.*;
+import java.util.List;
 
 public class InquiryVo {
     private String name;
@@ -13,7 +14,7 @@ public class InquiryVo {
     private String computerKnowledge;
     private AddressVo address;
     private String gender;
-    private EducationVo education;
+    private List<EducationVo> education;
     private GuardianVo guardian;
     private MarketingVo marketing;
     private Long id;
@@ -114,7 +115,7 @@ public class InquiryVo {
         this.id = id;
     }
 
-    public EducationVo getEducation() {    return education;    }
+    public List<EducationVo> getEducation() {    return education;    }
 
-    public void setEducation(EducationVo education) {  this.education = education;}
+    public void setEducation(List<EducationVo> education) {  this.education = education;}
 }

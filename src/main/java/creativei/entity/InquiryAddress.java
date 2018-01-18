@@ -20,8 +20,8 @@ public class InquiryAddress extends BaseEntity implements Serializable {
         this.country=addressVo.getCountry()==null||addressVo.getCountry().isEmpty()?null:addressVo.getCountry();
         this.state=addressVo.getState()==null||addressVo.getState().isEmpty()?null:addressVo.getState();
     }
-    @OneToOne
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Inquiry.id")
     private Inquiry inquiry;
     @Column(nullable = false)
     private String pincode;

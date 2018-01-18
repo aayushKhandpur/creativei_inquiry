@@ -8,37 +8,39 @@ import java.util.stream.Collectors;
 
 public enum Stream {
 
-        SCIENCE("Science"),
-        COMMERCE("Commerce"),
-        ARTS("Arts");
-        private String value;
+    SCIENCE("Science"),
+    COMMERCE("Commerce"),
+    ARTS("Arts");
+    private static final Map<String, Stream> lookup = new HashMap<String, Stream>();
 
-        private Stream(String value) {
-                this.value=value;
+    static {
+        for (Stream stream : Stream.values()) {
+            lookup.put(stream.enumToString(stream).toLowerCase(), stream);
         }
+    }
 
-        private static final Map<String, Stream> lookup = new HashMap<String,Stream>();
+    private String value;
 
-        public static List<String> getEnumValue(){
-                List<String> s= java.util.stream.Stream.of(Stream.values()).map(stream->stream.value).collect(Collectors.toList());
-                return s;
+    private Stream(String value) {
+        this.value = value;
+    }
+
+    public static List<String> getEnumValue() {
+        return java.util.stream.Stream.of(Stream.values()).map(stream -> stream.value).collect(Collectors.toList());
+    }
+
+    public static String enumToString(Stream stream) {
+        if (stream == null) {
+            return null;
         }
+        return stream.value;
+    }
 
-
-        static {
-                for ( Stream stream: Stream.values()) {
-                        lookup.put(stream.enumToString(stream).toLowerCase(),stream );
-                }
+    public static Stream stringToEnum(String value) {
+        if (value == null) {
+            return null;
         }
-
-        public static String enumToString(Stream stream)
-        {  if(stream==null){return  null;}
-                return stream.value;
-        }
-
-        public static Stream stringToEnum(String value) {
-                if(value==null){return  null;}
-                return lookup.get(value.toLowerCase());
-        }
+        return lookup.get(value.toLowerCase());
+    }
 
 }

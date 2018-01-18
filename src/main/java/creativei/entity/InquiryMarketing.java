@@ -15,9 +15,10 @@ public class InquiryMarketing extends BaseEntity implements Serializable {
     public InquiryMarketing(){}
 
     public InquiryMarketing(MarketingVo marketingVo){
+        //this.setId(marketingVo.getId());
         this.marketingSource=MarketingSource.stringToEnum(marketingVo.getSource());
         this.isReferred=marketingVo.getReferred()==null?null:marketingVo.getReferred();
-        this.referant=marketingVo.getReferant()==null||marketingVo.getReferant().equals(null)?null:marketingVo.getReferant();
+        this.referant=marketingVo.getReferant()==null||marketingVo.getReferant().isEmpty()?null:marketingVo.getReferant();
     }
 
     @OneToOne
@@ -25,7 +26,7 @@ public class InquiryMarketing extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private MarketingSource marketingSource;
     @Column(name = "is_referred")
-    private boolean isReferred;
+    private Boolean isReferred;
     private String referant;
 
     public MarketingSource getMarketingSource() {
@@ -36,11 +37,11 @@ public class InquiryMarketing extends BaseEntity implements Serializable {
         this.marketingSource = marketingSource;
     }
 
-    public boolean getIsReferred() {
+    public Boolean getIsReferred() {
         return isReferred;
     }
 
-    public void setIsReferred(boolean isReferred) {
+    public void setIsReferred(Boolean isReferred) {
         this.isReferred = isReferred;
     }
 

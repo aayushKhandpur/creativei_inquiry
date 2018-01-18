@@ -61,7 +61,7 @@ public class InquiryController {
     }
     @RequestMapping(value = "/inquiry/server-info",produces = "application/json",method = RequestMethod.GET)
     public @ResponseBody
-     ResponseObject getEnum(){
+     ResponseObject enumList(){
          ResponseObject responseObject=inquiryManager.getAllEnum();
          return responseObject;
     }

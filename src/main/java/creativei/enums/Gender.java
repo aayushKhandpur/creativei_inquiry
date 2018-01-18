@@ -8,36 +8,38 @@ import java.util.stream.Collectors;
 
 public enum Gender {
 
-        MALE("Male"),
-        FEMALE("Female");
+    MALE("Male"),
+    FEMALE("Female");
 
-        private String value;
+    private static final Map<String, Gender> lookup = new HashMap<String, Gender>();
 
-        private Gender(String value) {
-                this.value=value;
+    static {
+        for (Gender gender : Gender.values()) {
+            lookup.put(gender.enumToString(gender).toLowerCase(), gender);
         }
+    }
 
-        private static final Map<String, Gender> lookup = new HashMap<String,Gender>();
+    private String value;
 
-        public static List<String> getEnumValue(){
-                List<String> s= java.util.stream.Stream.of(Gender.values()).map(gender -> gender.value).collect(Collectors.toList());
-                return s;
+    private Gender(String value) {
+        this.value = value;
+    }
+
+    public static List<String> getEnumValue() {
+        return java.util.stream.Stream.of(Gender.values()).map(gender -> gender.value).collect(Collectors.toList());
+    }
+
+    public static String enumToString(Gender gender) {
+        if (gender == null) {
+            return null;
         }
+        return gender.value;
+    }
 
-
-        static {
-                for ( Gender gender :Gender.values()) {
-                        lookup.put(gender.enumToString(gender).toLowerCase(),gender );
-                }
+    public static Gender stringToEnum(String value) {
+        if (value == null) {
+            return null;
         }
-
-        public static String enumToString(Gender gender) {
-                if(gender==null){return  null;}
-                return gender.value;
-        }
-
-        public static Gender stringToEnum(String value) {
-                if(value==null){return  null;}
-                return lookup.get(value.toLowerCase());
-        }
+        return lookup.get(value.toLowerCase());
+    }
 }

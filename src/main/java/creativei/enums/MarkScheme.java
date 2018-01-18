@@ -11,31 +11,35 @@ public enum MarkScheme {
     PERCENTAGE("Percentage"),
     TOTAL("Total");
 
-    private String value;
-
-    private MarkScheme(String value) {
-        this.value=value;
-    }
-
-    private static final Map<String, MarkScheme> lookup = new HashMap<String,MarkScheme>();
-
-    public static List<String> getEnumValue(){
-        List<String> s= java.util.stream.Stream.of(MarkScheme.values()).map(markScheme -> markScheme.value).collect(Collectors.toList());
-        return s;
-    }
+    private static final Map<String, MarkScheme> lookup = new HashMap<String, MarkScheme>();
 
     static {
-        for ( MarkScheme markScheme :MarkScheme.values()) {
-            lookup.put(markScheme.enumToString(markScheme).toLowerCase(),markScheme );
+        for (MarkScheme markScheme : MarkScheme.values()) {
+            lookup.put(markScheme.enumToString(markScheme).toLowerCase(), markScheme);
         }
     }
 
+    private String value;
+
+    private MarkScheme(String value) {
+        this.value = value;
+    }
+
+    public static List<String> getEnumValue() {
+        return java.util.stream.Stream.of(MarkScheme.values()).map(markScheme -> markScheme.value).collect(Collectors.toList());
+    }
+
     public static String enumToString(MarkScheme markScheme) {
-        if(markScheme==null){return  null;}
-        return markScheme.value;}
+        if (markScheme == null) {
+            return null;
+        }
+        return markScheme.value;
+    }
 
     public static MarkScheme stringToEnum(String value) {
-        if(value==null){return  null;}
+        if (value == null) {
+            return null;
+        }
         return lookup.get(value.toLowerCase());
     }
 }

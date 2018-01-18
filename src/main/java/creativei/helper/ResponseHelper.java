@@ -42,6 +42,8 @@ public class ResponseHelper {
             getCreateEducationResponseData(inquiry.getInquiryEducation(),inquiryVo.getEducation());
         if(inquiryVo.getGuardian()!=null)
             getCreateGuardianResponseData(inquiry.getInquiryGuardian(),inquiryVo.getGuardian());
+        if(inquiryVo.getMarketing()!=null)
+            getCreateMarketingResponseData(inquiry.getInquiryMarketing(),inquiryVo.getMarketing());
         return inquiryVo;
     }
     private static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress,AddressVo addressVo){
@@ -74,17 +76,19 @@ public class ResponseHelper {
    }
 
     private static GuardianVo getCreateGuardianResponseData(InquiryGuardian inquiryGuardian,GuardianVo guardianVo){
-       guardianVo.setName(inquiryGuardian.getName());
-       guardianVo.setRelation(Relation.enumToString(inquiryGuardian.getRelation()));
-       guardianVo.setEmail(inquiryGuardian.getEmail());
-       guardianVo.setPhoneNumber(inquiryGuardian.getPhoneNumber());
-       guardianVo.setOccupation(Occupation.enumToString(inquiryGuardian.getOccupation()));
-       return guardianVo;
+        guardianVo.setId(inquiryGuardian.getId());
+        guardianVo.setName(inquiryGuardian.getName());
+        guardianVo.setRelation(Relation.enumToString(inquiryGuardian.getRelation()));
+        guardianVo.setEmail(inquiryGuardian.getEmail());
+        guardianVo.setPhoneNumber(inquiryGuardian.getPhoneNumber());
+        guardianVo.setOccupation(Occupation.enumToString(inquiryGuardian.getOccupation()));
+        return guardianVo;
     }
     private static MarketingVo getCreateMarketingResponseData(InquiryMarketing inquiryMarketing,MarketingVo marketingVo){
+        marketingVo.setId(inquiryMarketing.getId());
         marketingVo.setSource(MarketingSource.enumToString(inquiryMarketing.getMarketingSource()));
-        marketingVo.setReferant(inquiryMarketing.getReferant());
-        marketingVo.setReferred(inquiryMarketing.getIsReferred());
+        marketingVo.setReferant(inquiryMarketing.getReferant()==null?null:inquiryMarketing.getReferant());
+        marketingVo.setReferred(inquiryMarketing.getIsReferred()==null?null:inquiryMarketing.getIsReferred());
         return marketingVo;
     }
 

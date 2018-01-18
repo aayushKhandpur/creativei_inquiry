@@ -9,12 +9,6 @@ public enum  AreaOfInterest {
     VFX("VFX"),
     WEB_DEVELOPMENT("Web Development");
 
-    private String value;
-
-    private AreaOfInterest(String value) {
-        this.value =value;
-    }
-
     private static final Map<String, AreaOfInterest> lookup = new HashMap<String, AreaOfInterest>();
 
     static {
@@ -22,11 +16,14 @@ public enum  AreaOfInterest {
             lookup.put(areaOfInterest.enumToString(areaOfInterest).toLowerCase(),areaOfInterest );
         }
     }
-    public static List<String> getEnumValue(){
 
-       List<String> s= java.util.stream.Stream.of(AreaOfInterest.values()).map(areaOfInterest -> areaOfInterest.value).collect(Collectors.toList());
-        return s;
+    private String value;
+
+    private AreaOfInterest(String value) {
+        this.value =value;
     }
+
+    public static List<String> getEnumValue() {return java.util.stream.Stream.of(AreaOfInterest.values()).map(areaOfInterest -> areaOfInterest.value).collect(Collectors.toList());}
 
     public static String enumToString(AreaOfInterest areaOfInterest) {
         if (areaOfInterest == null) {return null;}

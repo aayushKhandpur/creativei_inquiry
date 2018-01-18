@@ -17,33 +17,35 @@ public enum MarketingSource {
     RELATIVE("Relative"),
     OTHER("Other");
 
-    private String value;
-
-    private MarketingSource(String value) {
-        this.value=value;
-    }
-
-    private static final Map<String, MarketingSource> lookup = new HashMap<String,MarketingSource>();
-
-    public static List<String> getEnumValue(){
-        List<String> s= java.util.stream.Stream.of(MarketingSource.values()).map(marketingSource -> marketingSource.value).collect(Collectors.toList());
-        return s;
-    }
-
+    private static final Map<String, MarketingSource> lookup = new HashMap<String, MarketingSource>();
 
     static {
-        for ( MarketingSource marketingSource :MarketingSource.values()) {
-            lookup.put(marketingSource.enumToString(marketingSource).toLowerCase(),marketingSource );
+        for (MarketingSource marketingSource : MarketingSource.values()) {
+            lookup.put(marketingSource.enumToString(marketingSource).toLowerCase(), marketingSource);
         }
     }
 
+    private String value;
+
+    private MarketingSource(String value) {
+        this.value = value;
+    }
+
+    public static List<String> getEnumValue() {
+        return java.util.stream.Stream.of(MarketingSource.values()).map(marketingSource -> marketingSource.value).collect(Collectors.toList());
+    }
+
     public static String enumToString(MarketingSource marketingSource) {
-        if(marketingSource==null){return  null;}
+        if (marketingSource == null) {
+            return null;
+        }
         return marketingSource.value;
     }
 
     public static MarketingSource stringToEnum(String value) {
-        if(value==null){return  null;}
+        if (value == null) {
+            return null;
+        }
         return lookup.get(value.toLowerCase());
     }
 }

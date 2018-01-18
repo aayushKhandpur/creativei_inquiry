@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Entity
-]
+
 public class Locality extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String name;

@@ -1,9 +1,6 @@
 package creativei.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 @Entity
 
@@ -12,8 +9,7 @@ public class City extends BaseEntity implements Serializable{
     private String name;
     @Column(name = "is_default",nullable = false)
     private Boolean isDefault;
-    @ManyToOne
-    @Column(name = "state_id",nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
     private State state;
 
     public String getName() {

@@ -1,8 +1,12 @@
 package creativei.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.List;
 
+@Entity
 public class State extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String name;

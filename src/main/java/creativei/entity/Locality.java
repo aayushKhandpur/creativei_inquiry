@@ -1,12 +1,12 @@
 package creativei.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
-/**
- * Created by user on 1/18/2018.
- */
+@Entity
+]
 public class Locality extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String name;

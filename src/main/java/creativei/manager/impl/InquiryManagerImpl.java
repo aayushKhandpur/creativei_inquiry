@@ -1,28 +1,25 @@
 package creativei.manager.impl;
 
+import creativei.entity.City;
 import creativei.entity.Inquiry;
-import creativei.entity.InquiryAddress;
+import creativei.entity.Locality;
+import creativei.entity.State;
 import creativei.enums.ExceptionType;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.helper.ResponseHelper;
 import creativei.manager.InquiryManager;
-import creativei.service.BranchService;
-import creativei.service.InquiryAddressService;
 import creativei.service.InquiryService;
-import creativei.service.impl.InquiryAddressServiceImpl;
-import creativei.vo.AddressVo;
-import creativei.vo.InquiryServerInfoVo;
-import creativei.vo.InquiryVo;
-import creativei.vo.ResponseObject;
+import creativei.service.LocalityService;
+import creativei.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -30,6 +27,8 @@ public class InquiryManagerImpl implements InquiryManager {
    private static final Logger logger= LoggerFactory.getLogger(InquiryManagerImpl.class);
     @Autowired
     InquiryService inquiryService;
+    @Autowired
+    LocalityService localityService;
 
     @Override
     public ResponseObject getAll() {
@@ -60,7 +59,9 @@ public class InquiryManagerImpl implements InquiryManager {
     }
 
     @Override
-    public ResponseObject getById(Long id) {return null;}
+    public ResponseObject getById(Long id) {
+        return null;
+    }
 
     @Override
     public ResponseObject getByName(String name) {
@@ -104,5 +105,37 @@ public class InquiryManagerImpl implements InquiryManager {
     public ResponseObject getAllEnum() {
         InquiryServerInfoVo inquiryServerInfoVo=new InquiryServerInfoVo();
         return ResponseObject.getResponse(inquiryServerInfoVo);
+    }
+
+    @Override
+    public ResponseObject getPincodes(String pincode) {
+        List<String> pin= localityService.getListOfPincode(pincode);
+        return ResponseObject.getResponse(pin);
+    }
+
+    @Override
+    public ResponseObject getLocalityDataByPincode(String pincode) {
+        AddressDataVo addressDataVo =new AddressDataVo();
+        List<Locality> localities= localityService.getLocality(pincode);
+        City cityId= localityService.getLocality(pincode).get(0).getCity();
+        String city=cityId.getName();
+        State stateId=cityId.getState();
+        StateVo stateVo=new StateVo();
+        stateVo.setId(stateId.getId());
+        stateVo.setName(stateId.getName());
+        String country=stateId.getCountry();
+        List<String> loc=new ArrayList<>();
+        Iterator iterator=localities.iterator();
+        int i=0;
+        while(iterator.hasNext()) {
+            loc.add((localities.get(i).getName()));
+            iterator.next();
+            i++;
+        }
+        addressDataVo.setLocality(loc);
+        addressDataVo.setCountry(country);
+        addressDataVo.setState(stateVo);
+        addressDataVo.setCity(city);
+        return ResponseObject.getResponse(addressDataVo);
     }
 }

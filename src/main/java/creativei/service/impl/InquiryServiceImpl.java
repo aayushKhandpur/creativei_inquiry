@@ -23,7 +23,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service("InquiryService")
 public class InquiryServiceImpl implements InquiryService {
-    private static final Logger logger = LoggerFactory.getLogger(BranchService.class);
+    private static final Logger logger = LoggerFactory.getLogger(InquiryService.class);
     @Autowired
     private InquiryDao inquiryDao;
 
@@ -34,7 +34,7 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public Inquiry getById(Long id) {
-        return inquiryDao.findOne(id);
+        return null;
     }
 
     @Override

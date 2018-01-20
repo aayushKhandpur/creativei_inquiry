@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 
-
 public class AddressVo {
     private String country;
     private String state;

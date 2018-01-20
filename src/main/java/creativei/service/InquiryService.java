@@ -3,6 +3,7 @@ package creativei.service;
 import creativei.entity.Inquiry;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
+import creativei.exception.NoDataAvailable;
 import creativei.exception.UniqueConstraintViolationException;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface InquiryService {
     List<Inquiry> getAll();
-    Inquiry getById(Long id);
+    Inquiry getById(Long id) throws NoDataAvailable;
     Inquiry getByName(String name);
     Inquiry create (Inquiry inquiry)throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest;
     Inquiry createAll(List<Inquiry> inquiries);

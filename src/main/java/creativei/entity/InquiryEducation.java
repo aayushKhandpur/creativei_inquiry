@@ -3,10 +3,7 @@ package creativei.entity;
 import creativei.enums.*;
 import creativei.vo.EducationVo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.List;
 @Table(name="Inquiry_Education")
 public class InquiryEducation extends BaseEntity implements Serializable {
 
-    @OneToOne
+    @ManyToOne
     private Inquiry inquiry;
     @Column(name="education_qualificaton",nullable = false)
     private EducationQualification educationQualification;

@@ -6,6 +6,7 @@ import creativei.entity.Branch;
 import creativei.entity.Inquiry;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
+import creativei.exception.NoDataAvailable;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.BranchService;
 import creativei.service.InquiryService;
@@ -33,8 +34,11 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry getById(Long id) {
-        return null;
+    public Inquiry getById(Long id) throws NoDataAvailable{
+        if(inquiryDao.findOne(id)==null){
+            throw new NoDataAvailable("There is not data available for this id in your database");
+        }
+        return inquiryDao.findOne(id);
     }
 
     @Override

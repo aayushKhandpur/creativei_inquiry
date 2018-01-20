@@ -7,6 +7,7 @@ import creativei.entity.State;
 import creativei.enums.ExceptionType;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
+import creativei.exception.NoDataAvailable;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.helper.ResponseHelper;
 import creativei.manager.InquiryManager;
@@ -32,7 +33,9 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject getAll() {
-        return null;
+       List<Inquiry> inquiries= inquiryService.getAll();
+       List<InquiryVo> inquiryVos=ResponseHelper.getAllInquiryResponse(inquiries,new InquiryVo());
+       return ResponseObject.getResponse(inquiryVos);
     }
 
     @Override
@@ -60,7 +63,13 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject getById(Long id) {
-        return null;
+        try {
+            Inquiry inquiry = inquiryService.getById(id);
+            InquiryVo inquiryVo=ResponseHelper.getInquiryResponseById(inquiry,new InquiryVo());
+            return ResponseObject.getResponse(inquiryVo);
+        }catch (NoDataAvailable noDataAvailable){
+            return ResponseObject.getResponse(noDataAvailable.getMessage(),ExceptionType.DATA_NOT_AVAILABLE.getCode());
+        }
     }
 
     @Override

@@ -1,20 +1,13 @@
 package creativei.enums;
 
-import java.awt.geom.Area;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.*;
 
 public enum  AreaOfInterest {
     WEB_DESIGNING("Web Designing"),
     VFX("VFX"),
     WEB_DEVELOPMENT("Web Development");
-
-    private String value;
-
-    private AreaOfInterest(String value) {
-        this.value =value;
-    }
 
     private static final Map<String, AreaOfInterest> lookup = new HashMap<String, AreaOfInterest>();
 
@@ -23,6 +16,14 @@ public enum  AreaOfInterest {
             lookup.put(areaOfInterest.enumToString(areaOfInterest).toLowerCase(),areaOfInterest );
         }
     }
+
+    private String value;
+
+    private AreaOfInterest(String value) {
+        this.value =value;
+    }
+
+    public static List<String> getEnumValue() {return java.util.stream.Stream.of(AreaOfInterest.values()).map(areaOfInterest -> areaOfInterest.value).collect(Collectors.toList());}
 
     public static String enumToString(AreaOfInterest areaOfInterest) {
         if (areaOfInterest == null) {return null;}

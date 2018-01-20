@@ -1,6 +1,7 @@
 package creativei.entity;
 
 import creativei.vo.AddressVo;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +20,8 @@ public class InquiryAddress extends BaseEntity implements Serializable {
         this.country=addressVo.getCountry()==null||addressVo.getCountry().isEmpty()?null:addressVo.getCountry();
         this.state=addressVo.getState()==null||addressVo.getState().isEmpty()?null:addressVo.getState();
     }
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Inquiry.id")
     private Inquiry inquiry;
     @Column(nullable = false)
     private String pincode;
@@ -37,6 +39,7 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String addressLine2;
     @Column(name = "is_current")
     private boolean isCurrent = true;
+
     public String getState() {
         return state;
     }

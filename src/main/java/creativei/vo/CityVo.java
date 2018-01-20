@@ -1,6 +1,9 @@
 package creativei.vo;
 
-public class StateVo {
+/**
+ * Created by user on 1/20/2018.
+ */
+public class CityVo {
     private Long id;
     private String name;
 

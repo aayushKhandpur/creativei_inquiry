@@ -118,23 +118,23 @@ public class InquiryManagerImpl implements InquiryManager {
         AddressDataVo addressDataVo =new AddressDataVo();
         List<Locality> localities= localityService.getLocality(pincode);
         City cityId= localityService.getLocality(pincode).get(0).getCity();
-        String city=cityId.getName();
+        CityVo city=new CityVo();
+        city.setName(cityId.getName());
+        city.setId(cityId.getId());
         State stateId=cityId.getState();
-        StateVo stateVo=new StateVo();
-        stateVo.setId(stateId.getId());
-        stateVo.setName(stateId.getName());
+        String state=stateId.getName();
         String country=stateId.getCountry();
-        List<String> loc=new ArrayList<>();
+        List<LocalityVo> loc=new ArrayList<>();
         Iterator iterator=localities.iterator();
         int i=0;
         while(iterator.hasNext()) {
-            loc.add((localities.get(i).getName()));
+            loc.add(new LocalityVo(localities.get(i).getId(),localities.get(i).getName()));
             iterator.next();
             i++;
         }
         addressDataVo.setLocality(loc);
         addressDataVo.setCountry(country);
-        addressDataVo.setState(stateVo);
+        addressDataVo.setState(state);
         addressDataVo.setCity(city);
         return ResponseObject.getResponse(addressDataVo);
     }

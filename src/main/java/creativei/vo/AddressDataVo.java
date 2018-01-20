@@ -1,20 +1,21 @@
 package creativei.vo;
 
+import creativei.entity.Locality;
 import creativei.entity.State;
 
 import java.util.List;
 
 public class AddressDataVo {
     private String country;
-    private StateVo state;
-    private String city;
-    private List<String> locality;
+    private String state;
+    private CityVo city;
+    private List<LocalityVo> locality;
 
-    public String getCity() {
+    public CityVo getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(CityVo city) {
         this.city = city;
     }
 
@@ -26,19 +27,19 @@ public class AddressDataVo {
         this.country = country;
     }
 
-    public StateVo getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(StateVo state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public List<String> getLocality() {
+    public List<LocalityVo> getLocality() {
         return locality;
     }
 
-    public void setLocality(List<String> locality) {
+    public void setLocality(List<LocalityVo> locality) {
         this.locality = locality;
     }
 }

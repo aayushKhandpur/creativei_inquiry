@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-
+@Table(indexes =@Index(columnList = "name,pincode"))
 public class Locality extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String name;

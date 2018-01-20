@@ -4,6 +4,7 @@ import creativei.dao.BranchDao;
 import creativei.dao.InquiryDao;
 import creativei.entity.Branch;
 import creativei.entity.Inquiry;
+import creativei.enums.InquiryStatus;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.NoDataAvailable;
@@ -31,6 +32,11 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public List<Inquiry> getAll() {
         return inquiryDao.findAll();
+    }
+
+    @Override
+    public List<Inquiry> getByStatus(InquiryStatus status) {
+        return inquiryDao.findByInquiryStatus(status);
     }
 
     @Override

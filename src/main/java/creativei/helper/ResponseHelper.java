@@ -37,6 +37,7 @@ public class ResponseHelper {
         inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
         inquiryVo.setGender(Gender.enumToString(inquiry.getGender()));
         inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
+        inquiryVo.setInquiryStatus(InquiryStatus.enumToString(inquiry.getInquiryStatus()));
         if(inquiryVo.getAddress()!=null)
             inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(),inquiryVo.getAddress()));
         if(inquiryVo.getEducation()!=null)
@@ -146,4 +147,36 @@ public class ResponseHelper {
         }
         return inquiryVos;
     }
-}
+
+    public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries,InquiryVo inquiryVo){
+        List<InquiryVo> inquiryVos=new ArrayList<>();
+        Iterator iterator=inquiries.iterator();
+        int i=0;
+        while(iterator.hasNext()){
+            inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiries.get(i).getAreaOfInterest()));
+            inquiryVo.setName(inquiries.get(i).getName());
+            inquiryVo.setDob(LocalizationUtil.getFormattedDate(inquiries.get(i).getDob()));
+            inquiryVo.sethQualification(EducationQualification.enumToString(inquiries.get(i).getHighestEducation()));
+            inquiryVo.setEmail(inquiries.get(i).getEmail());
+            inquiryVo.setMobile(inquiries.get(i).getPhoneNumber());
+            inquiryVo.setId(inquiries.get(i).getId());
+            inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiries.get(i).getInquiryDate()));
+            inquiryVo.setGender(Gender.enumToString(inquiries.get(i).getGender()));
+            inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiries.get(i).getComputerKnowledge()));
+            inquiryVo.setAddress(getCreateAddressResponseData(inquiries.get(i).getInquiryAddress(),new AddressVo()));
+            List<EducationVo> educationVos=new ArrayList<>();
+            if(inquiries.get(i).getInquiryEducation()!=null)
+                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducation(),educationVos));
+            if(inquiries.get(i).getInquiryGuardian()!=null)
+                inquiryVo.setGuardian(getCreateGuardianResponseData(inquiries.get(i).getInquiryGuardian(),new GuardianVo()));
+            if(inquiries.get(i).getInquiryMarketing()!=null)
+                inquiryVo.setMarketing(getCreateMarketingResponseData(inquiries.get(i).getInquiryMarketing(),new MarketingVo()));
+            iterator.next();
+            i++;
+            inquiryVos.add(inquiryVo);
+        }
+        return inquiryVos;
+    }
+
+
+    }

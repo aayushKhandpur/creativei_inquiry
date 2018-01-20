@@ -7,6 +7,7 @@ public class InquiryVo {
     private String name;
     private String mobile;
     private String email;
+    private String inquiryStatus;
     private String dob;
     private String inquiryDate;
     private String hQualification;
@@ -76,6 +77,10 @@ public class InquiryVo {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getInquiryStatus() { return inquiryStatus;}
+
+    public void setInquiryStatus(String inquiryStatus) { this.inquiryStatus = inquiryStatus;}
 
     public String getDob() {
         return dob;

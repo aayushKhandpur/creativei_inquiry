@@ -4,6 +4,7 @@ package creativei.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.regexp.internal.RE;
 import creativei.enums.ExceptionType;
+import creativei.enums.InquiryStatus;
 import creativei.exception.InvalidParamRequest;
 import creativei.helper.RequestHelper;
 import creativei.manager.InquiryManager;
@@ -80,5 +81,8 @@ public class InquiryController {
     public @ResponseBody
     ResponseObject getAllInqueries(){return inquiryManager.getAll();}
 
+    @RequestMapping(value = "inquiry/getByStatus",produces = "application/json",method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseObject getInquiriesByStatus(@RequestParam InquiryStatus status){return inquiryManager.getByStatus(status);}
 }
 

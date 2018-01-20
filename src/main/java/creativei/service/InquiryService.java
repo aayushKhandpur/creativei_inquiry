@@ -1,6 +1,7 @@
 package creativei.service;
 
 import creativei.entity.Inquiry;
+import creativei.enums.InquiryStatus;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.NoDataAvailable;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 public interface InquiryService {
     List<Inquiry> getAll();
+    List<Inquiry> getByStatus(InquiryStatus status);
     Inquiry getById(Long id) throws NoDataAvailable;
     Inquiry getByName(String name);
     Inquiry create (Inquiry inquiry)throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest;

@@ -5,6 +5,7 @@ import creativei.entity.Inquiry;
 import creativei.entity.Locality;
 import creativei.entity.State;
 import creativei.enums.ExceptionType;
+import creativei.enums.InquiryStatus;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.NoDataAvailable;
@@ -36,6 +37,13 @@ public class InquiryManagerImpl implements InquiryManager {
        List<Inquiry> inquiries= inquiryService.getAll();
        List<InquiryVo> inquiryVos=ResponseHelper.getAllInquiryResponse(inquiries,new InquiryVo());
        return ResponseObject.getResponse(inquiryVos);
+    }
+
+    @Override
+    public ResponseObject getByStatus(InquiryStatus status) {
+        List<Inquiry> inquiries=inquiryService.getByStatus(status);
+        List<InquiryVo> inquiryVos=ResponseHelper.getInquiryResponseByStatus(inquiries,new InquiryVo());
+        return ResponseObject.getResponse(inquiryVos);
     }
 
     @Override

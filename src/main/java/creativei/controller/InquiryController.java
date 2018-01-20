@@ -3,7 +3,7 @@ package creativei.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import creativei.enums.ExceptionType;
-import creativei.exception.InvalidParamRequest;
+import creativei.helper.RequestHelper;
 import creativei.manager.InquiryManager;
 import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
@@ -11,12 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8100")
 @ControllerAdvice
@@ -33,7 +30,7 @@ public class InquiryController {
     ResponseObject createInquiry(@RequestBody String inquiryStr, HttpServletRequest request) {
         logger.info("CreateInquiry method");
         try {
-            if(nullStringValidation(inquiryStr))
+            if(RequestHelper.isEmptyRequestString(inquiryStr))
                 return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.create(inquiryVo);
@@ -49,7 +46,7 @@ public class InquiryController {
     ResponseObject updateInquiry(@RequestBody String inquiryStr, HttpServletRequest request){
         logger.info("UpdateInquiry method");
         try {
-            if(nullStringValidation(inquiryStr))
+            if(RequestHelper.isEmptyRequestString(inquiryStr))
                 return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.update(inquiryVo);
@@ -64,14 +61,6 @@ public class InquiryController {
      ResponseObject enumList(){
          ResponseObject responseObject=inquiryManager.getAllEnum();
          return responseObject;
-    }
-
-    private Boolean nullStringValidation(String inquiryStr){
-        if (StringUtils.isBlank(inquiryStr)){
-            logger.error("Request data is null or empty.");
-            return  true;
-        }
-        return false;
     }
 }
 

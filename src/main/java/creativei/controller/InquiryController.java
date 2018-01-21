@@ -7,6 +7,7 @@ import creativei.enums.ExceptionType;
 import creativei.enums.InquiryStatus;
 import creativei.exception.InvalidParamRequest;
 import creativei.helper.RequestHelper;
+import creativei.helper.RequestHelper;
 import creativei.manager.InquiryManager;
 import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
@@ -20,7 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8100")
 @RestController
@@ -37,7 +37,7 @@ public class InquiryController {
     ResponseObject createInquiry(@RequestBody String inquiryStr, HttpServletRequest request) {
         logger.info("CreateInquiry method");
         try {
-            if (RequestHelper.nullStringValidation(inquiryStr))
+            if(RequestHelper.isEmptyRequestString(inquiryStr))
                 return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.create(inquiryVo);
@@ -53,7 +53,7 @@ public class InquiryController {
     ResponseObject updateInquiry(@RequestBody String inquiryStr, HttpServletRequest request) {
         logger.info("UpdateInquiry method");
         try {
-            if (RequestHelper.nullStringValidation(inquiryStr))
+            if(RequestHelper.isEmptyRequestString(inquiryStr))
                 return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.update(inquiryVo);
@@ -66,9 +66,9 @@ public class InquiryController {
 
     @RequestMapping(value = "/inquiry/server-info", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseObject enumList() {
-        ResponseObject responseObject = inquiryManager.getAllEnum();
-        return responseObject;
+     ResponseObject enumList(){
+         ResponseObject responseObject=inquiryManager.getInquiryServerInfo();
+         return responseObject;
     }
 
     @RequestMapping(value="inquiry/getById",produces = "application/json",method = RequestMethod.GET)

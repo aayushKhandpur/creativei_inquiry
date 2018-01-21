@@ -1,12 +1,37 @@
 package creativei.vo;
 
-/**
- * Created by user on 1/20/2018.
- */
+import java.util.List;
+
 public class CityVo {
     private Long id;
-    private String name;
+    private String city;
+    private String country;
+    private String state;
+    private List<LocalityVo> locality;
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public List<LocalityVo> getLocality() {
+        return locality;
+    }
+
+    public void setLocality(List<LocalityVo> locality) {
+        this.locality = locality;
+    }
     public Long getId() {
         return id;
     }
@@ -15,11 +40,11 @@ public class CityVo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCity() {
+        return city;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCity(String city) {
+        this.city = city;
     }
 }

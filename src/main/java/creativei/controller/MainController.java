@@ -7,9 +7,6 @@ import creativei.vo.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by Aayush on 12/7/2017.
- */
 @CrossOrigin(origins = "http://localhost:8100")
 @RestController
 public class MainController {

@@ -158,6 +158,7 @@ public class ResponseHelper {
             inquiryVo.setDob(LocalizationUtil.getFormattedDate(inquiries.get(i).getDob()));
             inquiryVo.sethQualification(EducationQualification.enumToString(inquiries.get(i).getHighestEducation()));
             inquiryVo.setEmail(inquiries.get(i).getEmail());
+            inquiryVo.setInquiryStatus(InquiryStatus.enumToString(inquiries.get(i).getInquiryStatus()));
             inquiryVo.setMobile(inquiries.get(i).getPhoneNumber());
             inquiryVo.setId(inquiries.get(i).getId());
             inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiries.get(i).getInquiryDate()));

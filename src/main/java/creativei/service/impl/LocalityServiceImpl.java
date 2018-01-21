@@ -15,12 +15,12 @@ public class LocalityServiceImpl implements LocalityService {
 
 
     @Override
-    public List<String> getListOfPincode(String pincode) {
+    public List<String> getPincodes(String pincode) {
         return localityDao.findByPincodeStartsWith(pincode);
     }
 
     @Override
-    public List<Locality> getLocality(String pincode) {
+    public List<Locality> getLocalities(String pincode) {
         return localityDao.findByPincode(pincode);
     }
 }

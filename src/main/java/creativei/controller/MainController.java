@@ -2,6 +2,7 @@ package creativei.controller;
 
 import creativei.manager.BranchManager;
 import creativei.manager.InquiryManager;
+import creativei.manager.LocalityManager;
 import creativei.vo.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,23 +17,23 @@ public class MainController {
     @Autowired
     BranchManager branchManager;
     @Autowired
-    InquiryManager inquiryManager;
+    LocalityManager localityManager;
 
     @RequestMapping("/")
     public String index() {
         return "Greetings from Spring Boot!";
     }
 
-    @RequestMapping(value="/pincode/beginWith",produces ="application/json",method = RequestMethod.GET)
+    @RequestMapping(value="/pincodes",produces ="application/json",method = RequestMethod.GET)
     public @ResponseBody
-    ResponseObject getPincodeStartWith( @RequestParam String pincode){
-      ResponseObject responseObject=  inquiryManager.getPincodes(pincode);
+    ResponseObject getMatchingPincodes( @RequestParam String pincode){
+      ResponseObject responseObject= localityManager.getPincodes(pincode);
       return responseObject;
     }
-    @RequestMapping(value = "/pincode/equalsTo",produces = "application/json",method=RequestMethod.GET)
+    @RequestMapping(value = "/locality/pincode",produces = "application/json",method=RequestMethod.GET)
     public @ResponseBody
-    ResponseObject getLocalityData(@RequestParam String pincode){
-        ResponseObject responseObject=inquiryManager.getLocalityDataByPincode(pincode);
+    ResponseObject getLocalitiesByPincode(@RequestParam String pincode){
+        ResponseObject responseObject=localityManager.getLocalityDataByPincode(pincode);
         return responseObject;
     }
 }

@@ -17,7 +17,5 @@ public interface InquiryManager {
     ResponseObject createAll(List<Inquiry> inquiries);
     ResponseObject update(InquiryVo inquiryVo);
     ResponseObject updateAll(List<Inquiry> inquiries);
-    ResponseObject getAllEnum();
-    ResponseObject getPincodes(String pincode);
-    ResponseObject getLocalityDataByPincode(String pincode);
+    ResponseObject getInquiryServerInfo();
 }

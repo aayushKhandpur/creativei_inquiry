@@ -33,6 +33,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
         this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
+        this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
@@ -62,6 +63,8 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private String alternatePhone;
     @Column(name="computer_knowledge")
     private ComputerKnowledge computerKnowledge;
+    @Column(name = "inquiry_status")
+    private InquiryStatus inquiryStatus;
     @ManyToOne
     private Branch branch;
     private Date dob;
@@ -145,6 +148,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public InquiryStatus getInquiryStatus() {return inquiryStatus;}
+
+    public void setInquiryStatus(InquiryStatus inquiryStatus) {this.inquiryStatus = inquiryStatus;}
 
     public EducationQualification getHighestEducation() {
         return highestEducation;

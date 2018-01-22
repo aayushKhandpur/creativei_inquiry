@@ -8,9 +8,7 @@ import creativei.exception.UniqueConstraintViolationException;
 import creativei.helper.ResponseHelper;
 import creativei.manager.InquiryManager;
 import creativei.service.InquiryService;
-import creativei.vo.InquiryServerInfoVo;
-import creativei.vo.InquiryVo;
-import creativei.vo.ResponseObject;
+import creativei.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +50,9 @@ public class InquiryManagerImpl implements InquiryManager {
     }
 
     @Override
-    public ResponseObject getById(Long id) {return null;}
+    public ResponseObject getById(Long id) {
+        return null;
+    }
 
     @Override
     public ResponseObject getByName(String name) {
@@ -93,7 +93,7 @@ public class InquiryManagerImpl implements InquiryManager {
     }
 
     @Override
-    public ResponseObject getAllEnum() {
+    public ResponseObject getInquiryServerInfo() {
         InquiryServerInfoVo inquiryServerInfoVo=new InquiryServerInfoVo();
         return ResponseObject.getResponse(inquiryServerInfoVo);
     }

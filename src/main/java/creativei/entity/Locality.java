@@ -1,12 +1,11 @@
 package creativei.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+
 import java.io.Serializable;
 
 @Entity
-
+@Table(indexes =@Index(columnList = "name,pincode"))
 public class Locality extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String name;
@@ -19,9 +18,7 @@ public class Locality extends BaseEntity implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
     public String getPincode() {
         return pincode;
@@ -38,4 +35,5 @@ public class Locality extends BaseEntity implements Serializable {
     public void setCity(City city) {
         this.city = city;
     }
+
 }

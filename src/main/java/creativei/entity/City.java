@@ -3,7 +3,7 @@ package creativei.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity
-
+@Table(indexes = @Index(columnList = "name,state_id"))
 public class City extends BaseEntity implements Serializable{
     @Column(nullable = false)
     private String name;

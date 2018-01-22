@@ -4,6 +4,7 @@ package creativei.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import creativei.enums.ExceptionType;
 import creativei.helper.RequestHelper;
+import creativei.helper.RequestHelper;
 import creativei.manager.InquiryManager;
 import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "http://localhost:8100")
-@ControllerAdvice
 @RestController
 public class InquiryController {
     private static final Logger logger =LoggerFactory.getLogger(InquiryController.class);
@@ -59,7 +59,7 @@ public class InquiryController {
     @RequestMapping(value = "/inquiry/server-info",produces = "application/json",method = RequestMethod.GET)
     public @ResponseBody
      ResponseObject enumList(){
-         ResponseObject responseObject=inquiryManager.getAllEnum();
+         ResponseObject responseObject=inquiryManager.getInquiryServerInfo();
          return responseObject;
     }
 }

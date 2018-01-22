@@ -1,18 +1,17 @@
 package creativei.dao;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4987f7e8bf28bbfc0390208ae879f6896334d083
 import creativei.entity.Locality;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
-<<<<<<< HEAD
-public interface LocalityDao extends JpaRepository<Locality, Long>{
-=======
 public interface LocalityDao extends JpaRepository<Locality,Long>{
->>>>>>> 4987f7e8bf28bbfc0390208ae879f6896334d083
+    @Query("select distinct p.pincode from Locality p where p.pincode like concat('%',:pin,'%') ")
+    List<String> findByPincodeStartsWith(@Param("pin")String pin);
+    List<Locality> findByPincode(@Param("pin")String pin);
 }

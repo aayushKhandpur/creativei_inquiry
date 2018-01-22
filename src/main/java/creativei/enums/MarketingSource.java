@@ -13,7 +13,7 @@ public enum MarketingSource {
     INTERNET("Internet"),
     APTECH_STUDENT("Aptech student"),
     BANNER_HOARDING("Banner Hoarding"),
-    FRIEND("Freind"),
+    FRIEND("Friend"),
     RELATIVE("Relative"),
     OTHER("Other");
 

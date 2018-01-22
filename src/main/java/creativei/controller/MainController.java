@@ -1,7 +1,8 @@
 package creativei.controller;
 
-import creativei.entity.Branch;
 import creativei.manager.BranchManager;
+import creativei.manager.InquiryManager;
+import creativei.manager.LocalityManager;
 import creativei.vo.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,19 +12,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- * Created by Aayush on 12/7/2017.
- */
+@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 public class MainController {
 
     @Autowired
     BranchManager branchManager;
+    @Autowired
+    LocalityManager localityManager;
 
     @RequestMapping("/")
     public String index() {
         return "Greetings from Spring Boot!";
     }
+
     @PostMapping("/creativei/upload")
     public String uploadLocalityDate() throws IOException {
         CSVReader reader = null;
@@ -45,5 +47,17 @@ public class MainController {
         return null;
     }
 
+    @RequestMapping(value="/pincodes",produces ="application/json",method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseObject getMatchingPincodes( @RequestParam String pincode){
+      ResponseObject responseObject= localityManager.getPincodes(pincode);
+      return responseObject;
+    }
 
+    @RequestMapping(value = "/locality/pincode",produces = "application/json",method=RequestMethod.GET)
+    public @ResponseBody
+    ResponseObject getLocalitiesByPincode(@RequestParam String pincode){
+        ResponseObject responseObject=localityManager.getLocalityDataByPincode(pincode);
+        return responseObject;
+    }
 }

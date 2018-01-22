@@ -36,7 +36,7 @@ public class ResponseHelper {
         inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
         inquiryVo.setGender(Gender.enumToString(inquiry.getGender()));
         inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
-        if(inquiry.getInquiryAddress()!=null)
+        if(inquiryVo.getAddress()!=null)
             getCreateAddressResponseData(inquiry.getInquiryAddress(),inquiryVo.getAddress());
         if(inquiryVo.getEducation()!=null)
             getCreateEducationResponseData(inquiry.getInquiryEducation(),inquiryVo.getEducation());

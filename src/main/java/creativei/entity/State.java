@@ -9,7 +9,7 @@ public class State extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false,name="is_default")
-    private Boolean isDefault;
+    private Boolean isDefault = false;
     @Column(nullable = false)
     private String country;
 

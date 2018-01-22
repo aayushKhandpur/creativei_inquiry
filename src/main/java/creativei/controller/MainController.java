@@ -1,13 +1,16 @@
 package creativei.controller;
 
+import creativei.enums.ExceptionType;
 import creativei.manager.BranchManager;
 import creativei.manager.InquiryManager;
 import creativei.manager.LocalityManager;
+import creativei.service.DataUploadService;
 import creativei.vo.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.opencsv.CSVReader;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,29 +23,30 @@ public class MainController {
     BranchManager branchManager;
     @Autowired
     LocalityManager localityManager;
+    @Autowired
+    DataUploadService dataUploadService;
 
     @RequestMapping("/")
     public String index() {
-        return "Greetings from Spring Boot!";
+        String path = MainController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        System.out.println(path);
+        return "Greetings from Spring Boot! " + path;
     }
 
-    @PostMapping("/creativei/upload")
-    public String uploadLocalityDate() throws IOException {
+    @GetMapping("/creativei/upload")
+    public Boolean uploadLocalityDate() throws IOException {
         CSVReader reader = null;
         try {
-            reader = new CSVReader(new FileReader("LocalityData.csv"), ',');
-            String[] record = null;
-            while ((record = reader.readNext()) != null) {
-                System.out.println(record);
-            }
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("LocalityData.csv").getFile());
+            boolean isSuccess = dataUploadService.uploadLoaclityData(file);
+            return isSuccess;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if(reader != null){
-                reader.close();;
-            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return null;
     }

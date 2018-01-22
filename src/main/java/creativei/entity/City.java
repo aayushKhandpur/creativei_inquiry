@@ -8,7 +8,7 @@ public class City extends BaseEntity implements Serializable{
     @Column(nullable = false)
     private String name;
     @Column(name = "is_default",nullable = false)
-    private Boolean isDefault;
+    private Boolean isDefault = false;
     @ManyToOne(cascade = CascadeType.ALL)
     private State state;
 

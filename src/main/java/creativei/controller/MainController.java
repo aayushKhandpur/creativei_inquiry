@@ -24,7 +24,6 @@ public class MainController {
     public String index() {
         return "Greetings from Spring Boot!";
     }
-
     @PostMapping("/creativei/upload")
     public String uploadLocalityDate() throws IOException {
         CSVReader reader = null;

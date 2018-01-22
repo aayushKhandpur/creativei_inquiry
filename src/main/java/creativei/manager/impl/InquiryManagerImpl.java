@@ -1,26 +1,20 @@
 package creativei.manager.impl;
 
 import creativei.entity.Inquiry;
-import creativei.entity.InquiryAddress;
 import creativei.enums.ExceptionType;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.helper.ResponseHelper;
 import creativei.manager.InquiryManager;
-import creativei.service.BranchService;
-import creativei.service.InquiryAddressService;
 import creativei.service.InquiryService;
-import creativei.service.impl.InquiryAddressServiceImpl;
-import creativei.vo.AddressVo;
+import creativei.vo.InquiryServerInfoVo;
 import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.PrintWriter;
 import java.util.List;
 
 @Service
@@ -96,5 +90,11 @@ public class InquiryManagerImpl implements InquiryManager {
     @Override
     public ResponseObject updateAll(List<Inquiry> inquiries) {
         return null;
+    }
+
+    @Override
+    public ResponseObject getAllEnum() {
+        InquiryServerInfoVo inquiryServerInfoVo=new InquiryServerInfoVo();
+        return ResponseObject.getResponse(inquiryServerInfoVo);
     }
 }

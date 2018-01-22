@@ -1,16 +1,19 @@
 package creativei.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
-@Entity
+import java.util.List;
 
-public class City extends BaseEntity implements Serializable{
+@Entity
+public class State extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String name;
-    @Column(name = "is_default",nullable = false)
+    @Column(nullable = false,name="is_default")
     private Boolean isDefault;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private State state;
+    @Column(nullable = false)
+    private String country;
 
     public String getName() {
         return name;
@@ -28,11 +31,11 @@ public class City extends BaseEntity implements Serializable{
         isDefault = aDefault;
     }
 
-    public State getState() {
-        return state;
+    public String getCountry() {
+        return country;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

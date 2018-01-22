@@ -1,6 +1,6 @@
 package creativei.entity;
 
-import creativei.enums.Source;
+import creativei.enums.MarketingSource;
 import creativei.vo.MarketingVo;
 
 import javax.persistence.Column;
@@ -15,32 +15,33 @@ public class InquiryMarketing extends BaseEntity implements Serializable {
     public InquiryMarketing(){}
 
     public InquiryMarketing(MarketingVo marketingVo){
-        this.source=Source.stringToEnum(marketingVo.getSource());
+        //this.setId(marketingVo.getId());
+        this.marketingSource=MarketingSource.stringToEnum(marketingVo.getSource());
         this.isReferred=marketingVo.getReferred()==null?null:marketingVo.getReferred();
-        this.referant=marketingVo.getReferant()==null||marketingVo.getReferant().equals(null)?null:marketingVo.getReferant();
+        this.referant=marketingVo.getReferant()==null||marketingVo.getReferant().isEmpty()?null:marketingVo.getReferant();
     }
 
     @OneToOne
     private Inquiry inquiry;
     @Column(nullable = false)
-    private Source source;
+    private MarketingSource marketingSource;
     @Column(name = "is_referred")
-    private boolean isReferred;
+    private Boolean isReferred;
     private String referant;
 
-    public Source getSource() {
-        return source;
+    public MarketingSource getMarketingSource() {
+        return marketingSource;
     }
 
-    public void setSource(Source source) {
-        this.source = source;
+    public void setMarketingSource(MarketingSource marketingSource) {
+        this.marketingSource = marketingSource;
     }
 
-    public boolean getIsReferred() {
+    public Boolean getIsReferred() {
         return isReferred;
     }
 
-    public void setIsReferred(boolean isReferred) {
+    public void setIsReferred(Boolean isReferred) {
         this.isReferred = isReferred;
     }
 

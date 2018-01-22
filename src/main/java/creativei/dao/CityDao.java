@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface CityDao extends JpaRepository<City,Long> {
+public interface CityDao extends JpaRepository<City, Long > {
 }

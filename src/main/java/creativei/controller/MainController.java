@@ -6,10 +6,12 @@ import creativei.manager.LocalityManager;
 import creativei.vo.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.opencsv.CSVReader;
 
-/**
- * Created by Aayush on 12/7/2017.
- */
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 @CrossOrigin(origins = "http://localhost:8100")
 @RestController
 public class MainController {
@@ -24,12 +26,34 @@ public class MainController {
         return "Greetings from Spring Boot!";
     }
 
+    @PostMapping("/creativei/upload")
+    public String uploadLocalityDate() throws IOException {
+        CSVReader reader = null;
+        try {
+            reader = new CSVReader(new FileReader("LocalityData.csv"), ',');
+            String[] record = null;
+            while ((record = reader.readNext()) != null) {
+                System.out.println(record);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(reader != null){
+                reader.close();;
+            }
+        }
+        return null;
+    }
+
     @RequestMapping(value="/pincodes",produces ="application/json",method = RequestMethod.GET)
     public @ResponseBody
     ResponseObject getMatchingPincodes( @RequestParam String pincode){
       ResponseObject responseObject= localityManager.getPincodes(pincode);
       return responseObject;
     }
+
     @RequestMapping(value = "/locality/pincode",produces = "application/json",method=RequestMethod.GET)
     public @ResponseBody
     ResponseObject getLocalitiesByPincode(@RequestParam String pincode){

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InquiryServerInfoVo {
-    private List<String> gender,areaOfInterest,highestEducation,occupation,computerKnowledge,educationStatus,markScheme,marketingSource,relation;
+    private List<String> gender,areaOfInterest,highestEducation,occupation,computerKnowledge,educationStatus,markScheme,marketingSource,relation,stream,educationType;
 
     public InquiryServerInfoVo(){
         this.gender = Gender.getEnumValue();
@@ -19,6 +19,8 @@ public class InquiryServerInfoVo {
         this.marketingSource = MarketingSource.getEnumValue();
         this.occupation = Occupation.getEnumValue();
         this.relation = Relation.getEnumValue();
+        this.stream=Stream.getEnumValue();
+        this.educationType=EducationType.getEnumValue();
     }
 
     public List<String> getGender() {
@@ -56,4 +58,8 @@ public class InquiryServerInfoVo {
     public List<String> getRelation() {
         return relation;
     }
+
+    public List<String> getStream(){return stream;}
+
+    public List<String> getEducationType(){return educationType;}
 }

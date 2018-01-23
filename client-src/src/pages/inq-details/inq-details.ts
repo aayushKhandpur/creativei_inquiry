@@ -23,9 +23,9 @@ export class InqDetailsPage {
   eduStatus = [{ key: "Completed", value: "Completed" },{ key: "Pursuing", value: "Pursuing" }];
   eduType = [{ key: "Distance", value: "Distance" },{ key: "Regular", value: "Regular" }];
   markScheme = [{ key: "Percentage", value: "Percentage" },{ key: "GPA", value: "GPA" },{ key: "Total", value: "Total" }];
-  enqSource = [{ key: "Newspaper", value: "Newspaper" },{ key: "Friends", value: "Friends" },{ key: "Internet", value: "Internet" }];
   guardianRelation = [{ key: "Father", value: "Father" },{ key: "Mother", value: "Mother" },{ key: "Uncle", value: "Uncle" }];
   guardianOccupation = [{ key: "Student", value: "Student" },{ key: "Service", value: "Service" },{ key: "Housewife", value: "Housewife" }];
+  enqSource = [{ key: "Newspaper", value: "Newspaper" },{ key: "Friends", value: "Friends" },{ key: "Internet", value: "Internet" }];
 
   private diffState: boolean;
 
@@ -81,8 +81,8 @@ export class InqDetailsPage {
 
     this.marketing = this.formBuilder.group({
       source: ['',Validators.required],
-      isReferred: [false],
-      referrer: ['']
+      referred: [false],
+      referant: ['']
     });
 
     this.diffState = false;
@@ -92,8 +92,6 @@ export class InqDetailsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad InqDetailsPage');
   }
-  
-  today : string = new Date().toISOString();
 
   changeState() {
     this.diffState = !this.diffState;

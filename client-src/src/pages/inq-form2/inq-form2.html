@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>Hi Anon! Please provide additional details while you wait...</ion-title>
     <ion-buttons end>
-      <button ion-button>Skip</button>
+      <ion-title>Form 2 of 3</ion-title>
     </ion-buttons>
   </ion-navbar>
 
@@ -15,83 +15,75 @@
     <ion-grid>
       <!-- <ion-item-group> -->
       <ion-item-divider color="light">Additional Education Details</ion-item-divider>
-      <div formGroupName="education">
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Qualification</ion-label>
-              <ion-select formControlName="qualification">
-                <ion-option value="ssc">SSC</ion-option>
-                <ion-option value="hsc">HSC</ion-option>
-                <ion-option value="undergraduate">Under Graduate</ion-option>
-                <ion-option value="graduate">Graduate</ion-option>
-                <ion-option value="postgraduate">Post Graduate</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Stream</ion-label>
-              <ion-select formControlName="stream">
-                <ion-option value="arts">Arts</ion-option>
-                <ion-option value="commerce">Commerce</ion-option>
-                <ion-option value="science">Science</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Year of Completion</ion-label>
-              <ion-input type="number" formControlName="year"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Institute</ion-label>
-              <ion-input type="text" formControlName="institute"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Education Status</ion-label>
-              <ion-select formControlName="status">
-                <ion-option value="pursuing">Pursuing</ion-option>
-                <ion-option value="completed">Completed</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Education Type</ion-label>
-              <ion-select formControlName="type">
-                <ion-option value="regular">Regular</ion-option>
-                <ion-option value="distance">Distance</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Marks</ion-label>
-              <ion-input type="number" formControlName="aggregate"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Marking Scheme</ion-label>
-              <ion-select formControlName="markScheme">
-                <ion-option value="percent">Percent</ion-option>
-                <ion-option value="gpa">GPA</ion-option>
-                <ion-option value="total">Total</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      <div formArrayName="education" *ngFor="let item of inqForm.get('education').controls; let i = index;">
+        <div [formGroupName]="i">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Qualification</ion-label>
+                <ion-select formControlName="educationQualification">
+                  <ion-option *ngFor="let qualification of hQualifications" [value]=qualification>{{qualification}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Stream</ion-label>
+                <ion-select formControlName="stream">
+                  <ion-option *ngFor="let stream of streams" [value]=stream>{{stream}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Year of Completion</ion-label>
+                <ion-input type="number" formControlName="year"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Institute</ion-label>
+                <ion-input type="text" formControlName="instituteName"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Education Status</ion-label>
+                <ion-select formControlName="status">
+                  <ion-option *ngFor="let status of eduStatus" [value]=status>{{status}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Education Type</ion-label>
+                <ion-select formControlName="type">
+                  <ion-option *ngFor="let type of eduType" [value]=type>{{type}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Marks</ion-label>
+                <ion-input type="number" formControlName="aggregateMarks"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Marking Scheme</ion-label>
+                <ion-select formControlName="markScheme">
+                  <ion-option *ngFor="let scheme of markScheme" [value]=scheme>{{scheme}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
       <!-- </ion-item-group> -->
       <!-- <ion-item-group> -->
@@ -107,7 +99,9 @@
           <ion-col>
             <ion-item>
               <ion-label>Relation</ion-label>
-              <ion-input type="text" formControlName="relation"></ion-input>
+              <ion-select type="text" formControlName="relation">
+                <ion-option *ngFor="let relation of guardianRelation" [value]=relation>{{relation}}</ion-option>
+              </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -121,7 +115,8 @@
           <ion-col>
             <ion-item>
               <ion-label>Alternate Number</ion-label>
-              <ion-input type="number" formControlName="alternatePhone"></ion-input>
+              <!-- <ion-input type="number" formControlName="alternatePhone"></ion-input> -->
+              <ion-input type="number"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -135,7 +130,9 @@
           <ion-col>
             <ion-item>
               <ion-label>Occupation</ion-label>
-              <ion-input type="text" formControlName="occupation"></ion-input>
+              <ion-select type="text" formControlName="occupation">
+                <ion-option *ngFor="let occupation of guardianOccupation" [value]=occupation>{{occupation}}</ion-option>
+              </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -144,4 +141,13 @@
       <button ion-button full type="submit">Submit</button>
     </ion-grid>
   </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-buttons end>
+          <button ion-button clear (click)="skip()">Skip</button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -46,7 +46,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Date of Birth</ion-label>
-              <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" min = "1900" [max] = "today" formControlName="dob"></ion-datetime>
+              <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" formControlName="dob"></ion-datetime>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -278,15 +278,15 @@
           <ion-col>
             <ion-item>
               <ion-label>Referred</ion-label>
-              <ion-toggle formControlName="isReferred"></ion-toggle>
+              <ion-toggle formControlName="referred"></ion-toggle>
             </ion-item>
           </ion-col>
         </ion-row>
-        <ion-row *ngIf = "marketing.controls.isReferred.value">
+        <ion-row *ngIf = "marketing.controls.referred.value">
           <ion-col>
             <ion-item>
               <ion-label>Referrer Name</ion-label>
-              <ion-input type="text" formControlName="referrer"></ion-input>
+              <ion-input type="text" formControlName="referant"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>

@@ -8,6 +8,7 @@ import { CompleterService, RemoteData, CompleterItem } from 'ng2-completer';
 
 import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
 import { LocalityProvider } from '../../providers/locality/locality';
 import { InqForm2Page } from '../inq-form2/inq-form2';
 
@@ -34,7 +35,7 @@ export class InqForm1Page {
 
   today : string = new Date().toISOString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private localityProvider: LocalityProvider, private completerService: CompleterService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private completerService: CompleterService) {
     this.inqForm = this.formBuilder.group({
       name: ['', Validators.required],
       gender: ['', Validators.required],
@@ -99,11 +100,11 @@ export class InqForm1Page {
         data => { 
           this.responseData = data;
           if(this.responseData.data){
-            this.notify.showInfo("Inquiry Registered Successfully");
-            console.log("POST successful, the response data is:", data)
+            this.notify.showInfo(this.message.INQUIRY.REGISTER.SUCCESS);
+            console.log("POST successful, the response data is:", data);
           }else{
-            this.notify.showError("Server retutned an error. Cannot register inquiry.")
-            console.log("POST unsucessful, server responded with error", this.responseData.exception)
+            this.notify.showError(this.message.INQUIRY.REGISTER.FAILURE);
+            console.log("POST unsucessful, server responded with error", this.responseData.exception);
           }
         },
         error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
@@ -116,7 +117,7 @@ export class InqForm1Page {
         }
         );
     }else{
-      this.notify.showError("Invalid Form! Please fill proper values");
+      this.notify.showError(this.message.FORM.INVALID);
     }
   }
 

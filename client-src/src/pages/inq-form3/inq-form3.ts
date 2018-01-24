@@ -6,6 +6,7 @@ import { Validators } from '@angular/forms';
 
 import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
 
 @Component({
   selector: 'page-inq-form3',
@@ -21,7 +22,7 @@ export class InqForm3Page {
 
   private inqForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider) {
     this.currentInq = this.navParams.get('data');
     this.inqForm = this.formBuilder.group({
       marketing: this.formBuilder.group({
@@ -65,10 +66,10 @@ export class InqForm3Page {
         data => { 
           this.responseData = data;
           if(this.responseData.data){
-            this.notify.showInfo("Inquiry Updated Successfully");
+            this.notify.showInfo(this.message.INQUIRY.UPDATE.SUCCESS);
             console.log("POST successful, the response data is:", data)
           }else{
-            this.notify.showError("Server retutned an error. Cannot update inquiry.")
+            this.notify.showError(this.message.INQUIRY.UPDATE.FAILURE)
             console.log("POST unsucessful, server responded with error", this.responseData.exception)
           }
         },
@@ -82,7 +83,7 @@ export class InqForm3Page {
         }
         );
     }else{
-      this.notify.showError("Invalid Form! Please fill proper values");
+      this.notify.showError(this.message.FORM.INVALID);
     }
   }
 

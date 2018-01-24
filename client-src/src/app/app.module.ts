@@ -19,6 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { InqProvider } from '../providers/inq/inq';
 import { NotificationProvider } from '../providers/notification/notification';
 import { LocalityProvider } from '../providers/locality/locality';
+import { NotificationMessageProvider } from '../providers/notification-message/notification-message';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { LocalityProvider } from '../providers/locality/locality';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     InqProvider,
     NotificationProvider,
-    LocalityProvider
+    LocalityProvider,
+    NotificationMessageProvider
   ]
 })
 export class AppModule {}

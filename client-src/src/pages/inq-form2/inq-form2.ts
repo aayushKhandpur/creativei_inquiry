@@ -6,6 +6,7 @@ import { Validators } from '@angular/forms';
 
 import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
 import { InqForm3Page } from '../inq-form3/inq-form3';
 
 @Component({
@@ -29,7 +30,7 @@ export class InqForm2Page {
   private requestData;
   private education;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider) {
     this.currentInq = this.navParams.get('data');
     this.education = this.currentInq.data.hQualification;
     this.inqForm = this.formBuilder.group({
@@ -96,11 +97,11 @@ export class InqForm2Page {
         data => { 
           this.responseData = data;
           if(this.responseData.data){
-            this.notify.showInfo("Inquiry Updated Successfully");
-            console.log("POST successful, the response data is:", data)
+            this.notify.showInfo(this.message.INQUIRY.UPDATE.SUCCESS);
+            console.log("POST successful, the response data is:", data);
           }else{
-            this.notify.showError("Server retutned an error. Cannot update inquiry.")
-            console.log("POST unsucessful, server responded with error", this.responseData.exception)
+            this.notify.showError(this.message.INQUIRY.UPDATE.FAILURE);
+            console.log("POST unsucessful, server responded with error", this.responseData.exception);
           }
         },
         error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
@@ -113,7 +114,7 @@ export class InqForm2Page {
         }
         );
     }else{
-      this.notify.showError("Invalid Form! Please fill proper values");
+      this.notify.showError(this.message.FORM.INVALID);
     }
   }
 

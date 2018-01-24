@@ -50,7 +50,6 @@ export class InqForm2Page {
         name: ['',Validators.required],
         relation: ['',Validators.required],
         phoneNumber: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-        // alternatePhone: ['',[Validators.minLength(10),Validators.maxLength(10)]],
         email: ['',Validators.email],
         occupation: ['']
       })

@@ -13,7 +13,6 @@
 <ion-content>
   <form [formGroup]="inqForm" (ngSubmit)="logForm2()">
     <ion-grid>
-      <!-- <ion-item-group> -->
       <ion-item-divider color="light">Additional Education Details</ion-item-divider>
       <div formArrayName="education" *ngFor="let item of inqForm.get('education').controls; let i = index;">
         <div [formGroupName]="i">
@@ -85,8 +84,6 @@
           </ion-row>
         </div>
       </div>
-      <!-- </ion-item-group> -->
-      <!-- <ion-item-group> -->
       <ion-item-divider color="light">Guardian's Details</ion-item-divider>
       <div formGroupName="guardian">
         <ion-row>
@@ -137,7 +134,6 @@
           </ion-col>
         </ion-row>
       </div>
-      <!-- </ion-item-group> -->
       <button ion-button full type="submit">Submit</button>
     </ion-grid>
   </form>

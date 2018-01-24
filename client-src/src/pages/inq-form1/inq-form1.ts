@@ -34,15 +34,9 @@ export class InqForm1Page {
 
   today : string = new Date().toISOString();
 
-  // countries = [{ key: "India", value: "India" }];
-  // states = [{ key: "Rajasthan", value: "Rajasthan" }];
-  // cities = [{ key: "Jaipur", value: "Jaipur" }, { key: "Jodhpur", value: "Jodhpur" }];
-  // pincodes = [{ key: "302021", value: "302021" }];
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private localityProvider: LocalityProvider, private completerService: CompleterService) {
     this.inqForm = this.formBuilder.group({
       name: ['', Validators.required],
-      // lname: [''],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       address: this.formBuilder.group({
@@ -53,7 +47,6 @@ export class InqForm1Page {
         pin: ['', Validators.required],
         country: ['']
       }),
-      // phone: [''],
       mobile: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       email: ['', [Validators.required, Validators.email]],
       hQualification: ['', Validators.required],

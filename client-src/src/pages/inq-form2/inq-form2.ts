@@ -14,9 +14,6 @@ import { InqForm3Page } from '../inq-form3/inq-form3';
 })
 export class InqForm2Page {
 
-  // streams = [{ key: "Science", value: "Science" },{ key: "Arts", value: "Arts" },{ key: "Commerce", value: "Commerce" }];
-  // eduType = [{ key: "Distance", value: "Distance" },{ key: "Regular", value: "Regular" }];
-  
   private enums;
   private hQualifications;
   private streams;

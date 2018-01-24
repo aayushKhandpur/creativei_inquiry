@@ -10,6 +10,7 @@ import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
 import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
 import { LocalityProvider } from '../../providers/locality/locality';
+import { HelperProvider } from '../../providers/helper/helper';
 import { InqForm2Page } from '../inq-form2/inq-form2';
 
 @Component({
@@ -35,7 +36,7 @@ export class InqForm1Page {
 
   today : string = new Date().toISOString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private completerService: CompleterService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
     this.inqForm = this.formBuilder.group({
       name: ['', Validators.required],
       gender: ['', Validators.required],
@@ -129,7 +130,7 @@ export class InqForm1Page {
     this.city = locality.data.city;
     this.state = locality.data.state;
     this.country = locality.data.country;
-    this.areas = locality.data.locality;
+    this.areas = this.helper.sortLocalityByName(locality.data.locality);
   }
 
   getLocality(pincode){

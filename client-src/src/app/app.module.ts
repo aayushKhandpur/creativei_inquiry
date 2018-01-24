@@ -20,6 +20,7 @@ import { InqProvider } from '../providers/inq/inq';
 import { NotificationProvider } from '../providers/notification/notification';
 import { LocalityProvider } from '../providers/locality/locality';
 import { NotificationMessageProvider } from '../providers/notification-message/notification-message';
+import { HelperProvider } from '../providers/helper/helper';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { NotificationMessageProvider } from '../providers/notification-message/n
     InqProvider,
     NotificationProvider,
     LocalityProvider,
-    NotificationMessageProvider
+    NotificationMessageProvider,
+    HelperProvider
   ]
 })
 export class AppModule {}

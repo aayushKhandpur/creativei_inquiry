@@ -3,8 +3,8 @@
   <ion-navbar>
     <ion-title>Just a final few questions...</ion-title>
     <ion-buttons end>
-        <button ion-button>Skip</button>
-      </ion-buttons>
+      <p class="form-number">3 of 3</p>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -14,37 +14,42 @@
   <form [formGroup]="inqForm" (ngSubmit)="logForm3()">
     <ion-grid>
       <ion-item-divider color="light">How did you hear about us?</ion-item-divider>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Source</ion-label>
-            <ion-select formControlName="source">
-              <ion-option value="news">Newspaper</ion-option>
-              <ion-option value="friend">Friends</ion-option>
-              <ion-option value="web">Internet</ion-option>
-              <ion-option value="social">Social Media</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label>Referred</ion-label>
-            <ion-select formControlName="isReferred">
-              <ion-option value="true">Yes</ion-option>
-              <ion-option value="false">No</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Referrer Name</ion-label>
-            <ion-input type="text" formControlName="referrer"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+      <div formGroupName= "marketing">
+          <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Source</ion-label>
+                  <ion-select formControlName="source">
+                    <ion-option *ngFor="let source of enqSource" [value]=source>{{source}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Referred</ion-label>
+                  <ion-toggle formControlName="referred"></ion-toggle>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf = "inqForm.controls.marketing.controls.referred.value">
+              <ion-col>
+                <ion-item>
+                  <ion-label>Referrer Name</ion-label>
+                  <ion-input type="text" formControlName="referant"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+      </div>
       <button ion-button full type="submit">Submit</button>
     </ion-grid>
   </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-buttons end>
+          <button ion-button clear class="skip-button">Skip</button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+</ion-grid>
 </ion-content>

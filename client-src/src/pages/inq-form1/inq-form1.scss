@@ -11,11 +11,12 @@ form{
     background-color: #fff;
 }
 
-ion-content{
-    background-image: url(../assets/imgs/bg-6.jpg);
-    // background-repeat-y: no-repeat;
-    background-position: bottom;
-}
+//Uncomment the following block for the application background image.
+// ion-content{
+//     background-image: url(../assets/imgs/bg-6.jpg);
+//     // background-repeat-y: no-repeat;
+//     background-position: bottom;
+// }
 
 .error-notification{
     .toast-wrapper{
@@ -27,4 +28,43 @@ ion-content{
     .toast-wrapper{
         background-color: #488aff;
     }
+}
+
+.pin-autocomplete{
+    ion-label{
+        padding-left: 16px;
+        color: #999;
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+    .completer-holder{
+        // padding: 20px;
+        padding-left: 16px;
+    };
+    .completer-input{
+        padding: 10px;
+        padding-left: 2px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #ebebeb;
+    }
+    .completer-input:focus{
+        border-bottom: 2px solid #488aff;
+    }
+
+    .completer-input.ng-invalid{
+        border-bottom: 2px solid #f53d3d;
+    }
+}
+
+.form-number{
+    color: #999;
+    padding-right: 12px;
+}
+
+.skip-button{
+    color: #999;
+}
+.skip-button:hover{
+    color: #488aff;
 }

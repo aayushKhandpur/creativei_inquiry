@@ -12,6 +12,7 @@ import { InqForm3Page } from '../pages/inq-form3/inq-form3';
 import { InqDetailsPage } from '../pages/inq-details/inq-details';
 import { InqListPage } from '../pages/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/inq-summary/inq-summary';
+import { ThankyouPage } from '../pages/thankyou/thankyou';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +32,8 @@ import { HelperProvider } from '../providers/helper/helper';
     InqForm3Page,
     InqDetailsPage,
     InqListPage,
-    InqSummaryPage
+    InqSummaryPage,
+    ThankyouPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { HelperProvider } from '../providers/helper/helper';
     InqForm3Page,
     InqDetailsPage,
     InqListPage,
-    InqSummaryPage
+    InqSummaryPage,
+    ThankyouPage
   ],
   providers: [
     StatusBar,

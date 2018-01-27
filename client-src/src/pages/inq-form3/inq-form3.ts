@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
 import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
+import { ThankyouPage } from '../thankyou/thankyou';
 
 @Component({
   selector: 'page-inq-form3',
@@ -78,7 +79,7 @@ export class InqForm3Page {
           console.log("complete");
           this.loading.dismissAll();
           if(this.responseData.data){
-            this.navCtrl.push(InqForm3Page,{ data: this.responseData });
+            this.navCtrl.setRoot(ThankyouPage);
           }
         }
         );
@@ -92,5 +93,9 @@ export class InqForm3Page {
   }
   setMarketingSource(){
     this.enqSource = this.enums.data.marketingSource;
+  }
+
+  skip(){
+    this.navCtrl.setRoot(ThankyouPage)
   }
 }

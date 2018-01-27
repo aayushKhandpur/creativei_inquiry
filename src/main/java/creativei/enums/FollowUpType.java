@@ -2,8 +2,8 @@ package creativei.enums;
 
 public enum FollowUpType {
     CALL("Call"),
-    SMS("SMS"),
-    F2F("F2F"),
+    SMS("Text Message"),
+    F2F("Face to Face"),
     EMAIL("Email");
 
     private String value;
@@ -12,4 +12,7 @@ public enum FollowUpType {
         this.value=value;
     }
 
+    public String getValue() {
+        return value;
+    }
 }

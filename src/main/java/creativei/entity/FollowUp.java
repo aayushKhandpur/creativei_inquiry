@@ -1,9 +1,8 @@
 package creativei.entity;
 
 import creativei.enums.CaseIndex;
-import creativei.enums.EducationStatus;
 import creativei.enums.FollowUpType;
-import creativei.enums.StatusId;
+import creativei.enums.FollowUpStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +18,7 @@ public class FollowUp extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private FollowUpType type;
     @Column(nullable = false, name = "status_id")
-    private StatusId statusId;
+    private FollowUpStatus status;
     private String remark;
     @Column(name = "case_index", nullable = false)
     private CaseIndex caseIndex;
@@ -32,15 +31,21 @@ public class FollowUp extends BaseEntity implements Serializable {
         this.followUpDate = followUpDate;
     }
 
-    public FollowUpType getType() {return type;}
+    public FollowUpType getType() {
+        return type;
+    }
 
     public void setType(FollowUpType type) {
         this.type = type;
     }
 
-    public StatusId getStatusId() {return statusId;}
+    public FollowUpStatus getStatus() {
+        return status;
+    }
 
-    public void setStatusId(StatusId statusId) {this.statusId = statusId;}
+    public void setStatus(FollowUpStatus status) {
+        this.status = status;
+    }
 
     public String getRemark() {
         return remark;

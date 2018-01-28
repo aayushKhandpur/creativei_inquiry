@@ -1,5 +1,8 @@
 package creativei.enums;
 
+import java.util.List;
+import java.util.stream.*;
+
 public enum FollowUpSubStatus {
     MORE_COUNSELLING("Need More Cunselling"),
     ENROLLMENT_IN_THIRTY_DAYS("Possible Enrollment In A Month"),
@@ -24,5 +27,9 @@ public enum FollowUpSubStatus {
 
     public String getValue() {
         return value;
+    }
+
+    public static List<String> getEnumValue(){
+       return java.util.stream.Stream.of(FollowUpSubStatus.values()).map(FollowUpSubStatus->FollowUpSubStatus.value).collect(Collectors.toList());
     }
 }

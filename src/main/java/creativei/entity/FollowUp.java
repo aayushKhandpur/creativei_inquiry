@@ -1,28 +1,30 @@
 package creativei.entity;
 
 import creativei.enums.CaseIndex;
-import creativei.enums.EducationStatus;
-import creativei.enums.StatusId;
+import creativei.enums.FollowUpSubStatus;
+import creativei.enums.FollowUpType;
+import creativei.enums.FollowUpStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="Follow_Up")
+@Table(name = "Follow_Up")
 public class FollowUp extends BaseEntity implements Serializable {
     @ManyToOne
     private Inquiry inquiry;
-    @Column(nullable = false,name="follow_up_date")
+    @Column(nullable = false, name = "follow_up_date")
     private Date followUpDate;
     @Column(nullable = false)
-    private String type;
-    @Column(nullable = false,name = "status_id")
-     private StatusId statusId;
+    private FollowUpType type;
+    @Column(nullable = false, name = "status_id")
+    private FollowUpStatus status;
     private String remark;
-    private String state;
-    @Column(name = "case_index",nullable = false)
+    @Column(name = "case_index", nullable = false)
     private CaseIndex caseIndex;
+    @Column(name = "sub_status")
+    private FollowUpSubStatus subStatus;
 
     public Date getFollowUpDate() {
         return followUpDate;
@@ -32,15 +34,29 @@ public class FollowUp extends BaseEntity implements Serializable {
         this.followUpDate = followUpDate;
     }
 
-    public String getType() {return type;}
+    public FollowUpType getType() {
+        return type;
+    }
 
-    public void setType(String type) {
+    public void setType(FollowUpType type) {
         this.type = type;
     }
 
-    public StatusId getStatusId() {return statusId;}
+    public FollowUpSubStatus getSubStatus() {
+        return subStatus;
+    }
 
-    public void setStatusId(StatusId statusId) {this.statusId = statusId;}
+    public void setSubStatus(FollowUpSubStatus subStatus) {
+        this.subStatus = subStatus;
+    }
+
+    public FollowUpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FollowUpStatus status) {
+        this.status = status;
+    }
 
     public String getRemark() {
         return remark;
@@ -48,14 +64,6 @@ public class FollowUp extends BaseEntity implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
     }
 
     public CaseIndex getCaseIndex() {

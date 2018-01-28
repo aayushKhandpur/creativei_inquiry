@@ -1,6 +1,7 @@
 package creativei.entity;
 
 import creativei.enums.CaseIndex;
+import creativei.enums.FollowUpSubStatus;
 import creativei.enums.FollowUpType;
 import creativei.enums.FollowUpStatus;
 
@@ -22,6 +23,8 @@ public class FollowUp extends BaseEntity implements Serializable {
     private String remark;
     @Column(name = "case_index", nullable = false)
     private CaseIndex caseIndex;
+    @Column(name = "sub_status")
+    private FollowUpSubStatus subStatus;
 
     public Date getFollowUpDate() {
         return followUpDate;
@@ -37,6 +40,14 @@ public class FollowUp extends BaseEntity implements Serializable {
 
     public void setType(FollowUpType type) {
         this.type = type;
+    }
+
+    public FollowUpSubStatus getSubStatus() {
+        return subStatus;
+    }
+
+    public void setSubStatus(FollowUpSubStatus subStatus) {
+        this.subStatus = subStatus;
     }
 
     public FollowUpStatus getStatus() {

@@ -33,7 +33,7 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String city="JAIPUR";
     @Column(nullable = false)
     private String area;
-    @Column(name = "address_line_1",nullable = false)
+    @Column(name = "address_line_1")
     private String addressLine1;
     @Column(name="address_line_2")
     private String addressLine2;

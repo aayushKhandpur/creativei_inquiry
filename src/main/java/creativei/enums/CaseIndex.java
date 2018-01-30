@@ -46,8 +46,7 @@ public enum CaseIndex {
             try {
                 list.add(new ObjectMapper().writeValueAsString(caseIndex));
             } catch (JsonProcessingException e) {
-                logger.error("JSON content can not be processed");
-                e.printStackTrace();
+                logger.error(e.getMessage(),e);
             }
         }
     }

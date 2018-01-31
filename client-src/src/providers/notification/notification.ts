@@ -15,8 +15,9 @@ export class NotificationProvider {
       message: message,
       position: "top",
       showCloseButton: true,
+      closeButtonText: "X",
       cssClass: 'info-notification',
-      duration: 3000
+      dismissOnPageChange: true
     });
     console.log('Info Toast Presented');
     this.toast.present();
@@ -27,8 +28,9 @@ export class NotificationProvider {
       message: message,
       position: "top",
       showCloseButton: true,
+      closeButtonText: "X",
       cssClass: 'error-notification',
-      duration: 3000
+      dismissOnPageChange: true
     });
     console.log('Error Toast Presented');
     this.toast.present();

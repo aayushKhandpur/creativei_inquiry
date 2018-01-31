@@ -1,5 +1,9 @@
 package creativei.enums;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public enum FollowUpStatus {
     CALL_BACK("To Call Back/Follow Up"),
     FOLLOW_UP_LATER("Not Interested Now/To Follow Up Later"),
@@ -15,4 +19,8 @@ public enum FollowUpStatus {
     }
 
     public String getValue() {return value;}
+
+    public static List<String> getEnumValue(){
+       return Stream.of(FollowUpStatus.values()).map(FollowUpStatus->FollowUpStatus.value).collect(Collectors.toList());
+    }
 }

@@ -21,7 +21,7 @@ public class InquiryAddress extends BaseEntity implements Serializable {
         this.addressLine1=addressVo.getAddressLine1()==null||addressVo.getAddressLine1().isEmpty()?null:addressVo.getAddressLine1();
         this.country=addressVo.getCountry()==null||addressVo.getCountry().isEmpty()?null:addressVo.getCountry();
         this.state=addressVo.getState()==null||addressVo.getState().isEmpty()?null:addressVo.getState();
-        this.location=new Locality(addressVo.getLocationId(),addressVo.getArea(),addressVo.getPin());
+        this.location=new Locality(addressVo.getLocationId());
     }
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Inquiry.id")

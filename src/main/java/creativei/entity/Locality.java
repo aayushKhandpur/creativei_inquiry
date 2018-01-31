@@ -18,10 +18,10 @@ public class Locality extends BaseEntity implements Serializable {
 
     public Locality(){}
 
-    public Locality(AddressVo addressVo){
-        this.setId(addressVo.getLocationId());
-        this.name=addressVo.getArea();
-        this.pincode=addressVo.getPin();
+    public Locality(Long locationId, String area ,String pincode){
+        this.setId(locationId);
+        this.name=area;
+        this.pincode=pincode;
     }
     public String getName() {
         return name;

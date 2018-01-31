@@ -35,10 +35,19 @@ export class HelperProvider {
       formGroup.controls[control].updateValueAndValidity();
     }
     let ionItems = document.getElementsByTagName("ion-item");
-    for(var i = 0; i < ionItems.length; i++){
-      if (ionItems[i].classList.contains('ng-untouched')) {
-        ionItems[i].classList.remove('ng-untouched');
-        ionItems[i].classList.add('ng-touched');
+    if(ionItems){
+      for(var i = 0; i < ionItems.length; i++){
+        if (ionItems[i].classList.contains('ng-untouched')) {
+          ionItems[i].classList.remove('ng-untouched');
+          ionItems[i].classList.add('ng-touched');
+        }
+      }
+    }
+    let pinAutoComplete = document.getElementsByTagName("ng2-completer")[0];
+    if(pinAutoComplete){
+      if (pinAutoComplete.classList.contains('ng-untouched')) {
+        pinAutoComplete.classList.remove('ng-untouched');
+        pinAutoComplete.classList.add('ng-touched');
       }
     }
   }

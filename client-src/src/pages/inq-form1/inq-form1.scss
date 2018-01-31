@@ -49,11 +49,21 @@ form{
         border-bottom: 1px solid #ebebeb;
     }
     .completer-input:focus{
-        border-bottom: 2px solid #488aff;
+        border-bottom: 1px solid #488aff !important;
+        box-shadow: inset 0 -1px 0 0 #488aff !important;
     }
 
-    .completer-input.ng-invalid{
-        border-bottom: 2px solid #f53d3d;
+    ng2-completer.ng-invalid.ng-touched{
+        .completer-input{
+            border-bottom: 1px solid #f53d3d;
+            box-shadow: inset 0 -1px 0 0 #f53d3d;
+        }
+    }
+    ng2-completer.ng-valid.ng-touched{
+        .completer-input{
+            border-bottom: 1px solid #32db64;
+            box-shadow: inset 0 -1px 0 0 #32db64;
+        }
     }
 }
 

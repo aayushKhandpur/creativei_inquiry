@@ -9,6 +9,15 @@ public class FollowUpVo {
     private String remark;
     private String caseIndex;
     private String subStatus;
+    private Long inquiryId;
+
+    public Long getInquiryId() {
+        return inquiryId;
+    }
+
+    public void setInquiryId(Long inquiryId) {
+        this.inquiryId = inquiryId;
+    }
 
     public String getFollowUpDate() {
         return followUpDate;

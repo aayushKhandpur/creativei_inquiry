@@ -19,6 +19,7 @@ public enum CaseIndex {
     HOT_LEAD("Hot Lead",4);
 
     private static final Logger logger = LoggerFactory.getLogger(CaseIndex.class);
+    private static ObjectMapper mapper=new ObjectMapper();
     private int index;
     private String value;
     private CaseIndex(String value,int index){
@@ -44,7 +45,7 @@ public enum CaseIndex {
     static {
         for (CaseIndex caseIndex : CaseIndex.values()) {
             try {
-                list.add(new ObjectMapper().writeValueAsString(caseIndex));
+                list.add(mapper.writeValueAsString(caseIndex));
             } catch (JsonProcessingException e) {
                 logger.error(e.getMessage(),e);
             }

@@ -3,6 +3,7 @@ package creativei.vo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
+import creativei.entity.Locality;
 
 public class AddressVo {
     private String country;
@@ -12,6 +13,15 @@ public class AddressVo {
     private String pin;
     private String addressLine1;
     private Long id;
+    private Long locationId;
+
+    public Long getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
+    }
 
     public String getCountry() {
         return country;

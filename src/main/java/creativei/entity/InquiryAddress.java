@@ -2,6 +2,7 @@ package creativei.entity;
 
 import creativei.vo.AddressVo;
 import org.hibernate.engine.internal.Cascade;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Inquiry_Address")
 public class InquiryAddress extends BaseEntity implements Serializable {
+
     public InquiryAddress(){}
 
     public InquiryAddress(AddressVo addressVo){
@@ -19,6 +21,7 @@ public class InquiryAddress extends BaseEntity implements Serializable {
         this.addressLine1=addressVo.getAddressLine1()==null||addressVo.getAddressLine1().isEmpty()?null:addressVo.getAddressLine1();
         this.country=addressVo.getCountry()==null||addressVo.getCountry().isEmpty()?null:addressVo.getCountry();
         this.state=addressVo.getState()==null||addressVo.getState().isEmpty()?null:addressVo.getState();
+        this.location=new Locality(addressVo);
     }
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Inquiry.id")
@@ -39,6 +42,16 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String addressLine2;
     @Column(name = "is_current")
     private boolean isCurrent = true;
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    private Locality location;
+
+    public Locality getLocation() {
+        return location;
+    }
+
+    public void setLocation(Locality location) {
+        this.location = location;
+    }
 
     public String getState() {
         return state;

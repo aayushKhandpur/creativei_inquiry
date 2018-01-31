@@ -1,5 +1,7 @@
 package creativei.entity;
 
+import creativei.vo.AddressVo;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -14,6 +16,13 @@ public class Locality extends BaseEntity implements Serializable {
     @ManyToOne
     private City city;
 
+    public Locality(){}
+
+    public Locality(AddressVo addressVo){
+        this.setId(addressVo.getLocationId());
+        this.name=addressVo.getArea();
+        this.pincode=addressVo.getPin();
+    }
     public String getName() {
         return name;
     }

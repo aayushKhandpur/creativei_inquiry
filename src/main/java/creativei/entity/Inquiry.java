@@ -16,10 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email",name= DbConstraints.INQUIRY_EMAIL_UNIQUE),
-        @UniqueConstraint(columnNames = "phone_number",name =DbConstraints.INQUIRY_PHONE_UNIQUE),
-})
 
 public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(){}

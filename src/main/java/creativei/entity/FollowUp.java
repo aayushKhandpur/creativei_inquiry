@@ -4,9 +4,12 @@ import creativei.enums.CaseIndex;
 import creativei.enums.FollowUpSubStatus;
 import creativei.enums.FollowUpType;
 import creativei.enums.FollowUpStatus;
+import creativei.vo.FollowUpVo;
+import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Date;
 
 @Entity
@@ -14,17 +17,28 @@ import java.util.Date;
 public class FollowUp extends BaseEntity implements Serializable {
     @ManyToOne
     private Inquiry inquiry;
-    @Column(nullable = false, name = "follow_up_date")
+    @Column(name = "follow_up_date")
     private Date followUpDate;
-    @Column(nullable = false)
     private FollowUpType type;
-    @Column(nullable = false, name = "status_id")
+    @Column(name = "status_id")
     private FollowUpStatus status;
     private String remark;
-    @Column(name = "case_index", nullable = false)
+    @Column(name = "case_index")
     private CaseIndex caseIndex;
     @Column(name = "sub_status")
     private FollowUpSubStatus subStatus;
+
+    public FollowUp() {
+    }
+
+    public FollowUp(FollowUpVo followUpVo) throws ParseException {
+        this.followUpDate = LocalizationUtil.stringToDateConverter(followUpVo.getFollowUpDate());
+        this.type = FollowUpType.stringToEnum(followUpVo.getFollowUpType());
+        this.status = FollowUpStatus.stringToEnum(followUpVo.getFollowUpStatus());
+        this.remark = followUpVo.getRemark();
+        this.caseIndex = CaseIndex.stringToEnum(followUpVo.getCaseIndex());
+        this.subStatus = FollowUpSubStatus.stringToEnum(followUpVo.getSubStatus());
+    }
 
     public Date getFollowUpDate() {
         return followUpDate;

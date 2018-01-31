@@ -20,7 +20,7 @@ export class NotificationMessageProvider {
   }
 
   FORM = {
-    INVALID : "Invalid Form! Please fill proper values"
+    INVALID : "Invalid or missing inquiry details."
   }
 
 }

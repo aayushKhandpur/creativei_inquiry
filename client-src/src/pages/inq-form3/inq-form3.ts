@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
 import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
+import { HelperProvider } from '../../providers/helper/helper';
 import { ThankyouPage } from '../thankyou/thankyou';
 
 @Component({
@@ -23,7 +24,7 @@ export class InqForm3Page {
 
   private inqForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private helper: HelperProvider) {
     this.currentInq = this.navParams.get('data');
     this.inqForm = this.formBuilder.group({
       marketing: this.formBuilder.group({
@@ -85,6 +86,7 @@ export class InqForm3Page {
         );
     }else{
       this.notify.showError(this.message.FORM.INVALID);
+      this.helper.markInvalidFields(this.inqForm);
     }
   }
 

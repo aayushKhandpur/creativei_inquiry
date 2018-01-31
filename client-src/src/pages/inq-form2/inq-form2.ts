@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
 import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
+import { HelperProvider } from '../../providers/helper/helper';
 import { InqForm3Page } from '../inq-form3/inq-form3';
 
 @Component({
@@ -30,7 +31,7 @@ export class InqForm2Page {
   private requestData;
   private education;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private helper: HelperProvider) {
     this.currentInq = this.navParams.get('data');
     this.education = this.currentInq.data.hQualification;
     this.inqForm = this.formBuilder.group({
@@ -114,6 +115,7 @@ export class InqForm2Page {
         );
     }else{
       this.notify.showError(this.message.FORM.INVALID);
+      this.helper.markInvalidFields(this.inqForm);
     }
   }
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class HelperProvider {
@@ -26,6 +27,20 @@ export class HelperProvider {
 
   sortNumber(data){
     return data.sort((a, b) => a - b);
+  }
+
+  markInvalidFields(formGroup: FormGroup) {
+    for(let control in formGroup.controls){
+      formGroup.controls[control].markAsTouched();
+      formGroup.controls[control].updateValueAndValidity();
+    }
+    let ionItems = document.getElementsByTagName("ion-item");
+    for(var i = 0; i < ionItems.length; i++){
+      if (ionItems[i].classList.contains('ng-untouched')) {
+        ionItems[i].classList.remove('ng-untouched');
+        ionItems[i].classList.add('ng-touched');
+      }
+    }
   }
 
 }

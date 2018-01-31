@@ -44,11 +44,9 @@ export class HelperProvider {
       }
     }
     let pinAutoComplete = document.getElementsByTagName("ng2-completer")[0];
-    if(pinAutoComplete){
-      if (pinAutoComplete.classList.contains('ng-untouched')) {
-        pinAutoComplete.classList.remove('ng-untouched');
-        pinAutoComplete.classList.add('ng-touched');
-      }
+    if(pinAutoComplete && pinAutoComplete.classList.contains('ng-untouched')){
+      pinAutoComplete.classList.remove('ng-untouched');
+      pinAutoComplete.classList.add('ng-touched');
     }
   }
 

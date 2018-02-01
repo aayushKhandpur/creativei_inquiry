@@ -19,11 +19,11 @@ public enum CaseIndex {
     HOT_LEAD("Hot Lead", 4);
 
     private static final Logger logger = LoggerFactory.getLogger(CaseIndex.class);
-    private static ObjectMapper mapper = new ObjectMapper();
     private static Map<String, CaseIndex> lookup = new HashMap<>();
     private static List<String> list = new ArrayList<>();
 
     static {
+        ObjectMapper mapper = new ObjectMapper();
         for (CaseIndex caseIndex : CaseIndex.values()) {
             try {
                 list.add(mapper.writeValueAsString(caseIndex));

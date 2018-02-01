@@ -40,6 +40,9 @@ public class FollowUpController {
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
         }
 
     }

@@ -25,7 +25,6 @@ public class FollowUp extends BaseEntity implements Serializable {
     @Column(name = "follow_up_date")
     private Date followUpDate;
     private FollowUpType type;
-    @Column(name = "status_id")
     private FollowUpStatus status;
     private String remark;
     @Column(name = "case_index")

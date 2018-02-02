@@ -42,6 +42,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         if(inquiryVo.getMarketing()!=null)
             this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing());
     }
+
+    public Inquiry(Long id){
+        this.setId(id);
+    }
    @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)

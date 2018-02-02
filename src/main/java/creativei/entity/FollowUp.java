@@ -4,27 +4,46 @@ import creativei.enums.CaseIndex;
 import creativei.enums.FollowUpSubStatus;
 import creativei.enums.FollowUpType;
 import creativei.enums.FollowUpStatus;
+import creativei.exception.NoDataAvailable;
+import creativei.helper.ResponseHelper;
+import creativei.service.InquiryService;
+import creativei.vo.FollowUpVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Date;
 
 @Entity
 @Table(name = "Follow_Up")
 public class FollowUp extends BaseEntity implements Serializable {
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private Inquiry inquiry;
-    @Column(nullable = false, name = "follow_up_date")
+    @Column(name = "follow_up_date")
     private Date followUpDate;
-    @Column(nullable = false)
     private FollowUpType type;
-    @Column(nullable = false, name = "status_id")
     private FollowUpStatus status;
     private String remark;
-    @Column(name = "case_index", nullable = false)
+    @Column(name = "case_index")
     private CaseIndex caseIndex;
     @Column(name = "sub_status")
     private FollowUpSubStatus subStatus;
+
+    public FollowUp() {
+    }
+
+    public FollowUp(FollowUpVo followUpVo) throws ParseException, NoDataAvailable {
+        this.followUpDate = LocalizationUtil.stringToDateConverter(followUpVo.getFollowUpDate());
+        this.type = FollowUpType.stringToEnum(followUpVo.getFollowUpType());
+        this.status = FollowUpStatus.stringToEnum(followUpVo.getFollowUpStatus());
+        this.remark = followUpVo.getRemark();
+        this.caseIndex = CaseIndex.stringToEnum(followUpVo.getCaseIndex());
+        this.subStatus = FollowUpSubStatus.stringToEnum(followUpVo.getSubStatus());
+        this.inquiry=new Inquiry(followUpVo.getInquiryId());
+    }
 
     public Date getFollowUpDate() {
         return followUpDate;

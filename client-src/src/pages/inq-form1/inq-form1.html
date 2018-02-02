@@ -92,8 +92,8 @@
             <ion-col col-3>
               <ion-item>
                 <ion-label floating>Area</ion-label>
-                <ion-select formControlName="area">
-                  <ion-option *ngFor="let area of areas" [value]=area.name>{{area.name | titlecase}}</ion-option>
+                <ion-select formControlName="locationId">
+                  <ion-option *ngFor="let area of areas" [value]=area.id>{{area.name | titlecase}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>

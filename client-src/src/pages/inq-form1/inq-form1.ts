@@ -43,11 +43,8 @@ export class InqForm1Page {
       dob: ['', Validators.required],
       address: this.formBuilder.group({
         addressLine1: [''],
-        area: ['', Validators.required],
-        city: [''],
-        state: [''],
-        pin: ['', Validators.required],
-        country: ['']
+        locationId: ['', Validators.required],
+        pin: ['', Validators.required]
       }),
       mobile: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       email: ['', [Validators.required, Validators.email]],
@@ -90,9 +87,6 @@ export class InqForm1Page {
   }
 
   logForm1() {
-    this.inqForm.value.address.city = this.city;
-    this.inqForm.value.address.state = this.state;
-    this.inqForm.value.address.country = this.country;
     if(this.inqForm.valid){
       console.log("Form to be logged", this.inqForm.value);
       this.presentLoadingCustom();

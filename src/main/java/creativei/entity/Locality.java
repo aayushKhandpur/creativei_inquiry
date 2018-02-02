@@ -1,5 +1,7 @@
 package creativei.entity;
 
+import creativei.vo.AddressVo;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -13,6 +15,12 @@ public class Locality extends BaseEntity implements Serializable {
     private String pincode;
     @ManyToOne
     private City city;
+
+    public Locality(){}
+
+    public Locality(Long locationId){
+        this.setId(locationId);
+    }
 
     public String getName() {
         return name;

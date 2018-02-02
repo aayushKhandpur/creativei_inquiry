@@ -50,12 +50,7 @@ public class ResponseHelper {
     }
     private static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress,AddressVo addressVo){
         addressVo.setId(inquiryAddress.getId());
-        addressVo.setPin(inquiryAddress.getPincode());
-        addressVo.setCity(inquiryAddress.getCity());
-        addressVo.setArea(inquiryAddress.getArea());
         addressVo.setAddressLine1(inquiryAddress.getAddressLine1());
-        addressVo.setCountry(inquiryAddress.getCountry());
-        addressVo.setState(inquiryAddress.getState());
         return addressVo;
    }
    private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducation, List<EducationVo> educationVos) {

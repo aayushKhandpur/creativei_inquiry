@@ -3,6 +3,7 @@ package creativei.service.impl;
 import creativei.dao.InquiryAddressDao;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
+import creativei.entity.Locality;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
@@ -30,8 +31,8 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
     }
 
     @Override
-    public InquiryAddress getById(Inquiry inquiry) {
-        return null;
+    public InquiryAddress getById(Long id) {
+        return inquiryAddressDao.findOne(id);
     }
 
     @Override
@@ -73,5 +74,12 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
     public InquiryAddress updateAll(List<InquiryAddress> inquiryAddresses) {
         return null;
     }
+
+    @Override
+    public Locality getLocalityData(Long id) {
+        return inquiryAddressDao.getLocationData(id);
+    }
+
+
 }
 

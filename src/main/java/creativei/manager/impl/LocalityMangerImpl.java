@@ -5,6 +5,7 @@ import creativei.entity.Locality;
 import creativei.entity.State;
 import creativei.manager.LocalityManager;
 import creativei.service.LocalityService;
+import creativei.vo.AddressVo;
 import creativei.vo.CityVo;
 import creativei.vo.LocalityVo;
 import creativei.vo.ResponseObject;
@@ -29,7 +30,7 @@ public class LocalityMangerImpl implements LocalityManager {
 
     @Override
     public ResponseObject getLocalityDataByPincode(String pincode) {
-        CityVo city=new CityVo();
+        CityVo city = new CityVo();
         List<Locality> localities = localityService.getLocalities(pincode);
         if (localities.size() == 0)
             return ResponseObject.getResponse(null);
@@ -52,4 +53,5 @@ public class LocalityMangerImpl implements LocalityManager {
         city.setState(state);
         return ResponseObject.getResponse(city);
     }
+
 }

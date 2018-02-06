@@ -9,6 +9,15 @@ public class CityVo {
     private String state;
     private List<LocalityVo> locality;
 
+    public CityVo(){}
+
+    public CityVo(Long id ,String city,String country,String state,List<LocalityVo> locality){
+        this.id=id;
+        this.city=city;
+        this.country=country;
+        this.state=state;
+        this.locality=locality;
+    }
     public String getCountry() {
         return country;
     }

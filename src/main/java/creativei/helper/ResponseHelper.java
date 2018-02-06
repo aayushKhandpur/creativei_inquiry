@@ -195,10 +195,4 @@ public class ResponseHelper {
         return followUpVo;
     }
 
-    public static LocalityVo getCreateLocalityVo(Inquiry inquiry, InquiryVo inquiryVo) {
-        Locality locality = inquiry.getInquiryAddress().getLocation();
-        return null;
-    }
-
-
 }

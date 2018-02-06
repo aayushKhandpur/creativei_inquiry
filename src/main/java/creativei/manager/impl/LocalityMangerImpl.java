@@ -30,16 +30,10 @@ public class LocalityMangerImpl implements LocalityManager {
 
     @Override
     public ResponseObject getLocalityDataByPincode(String pincode) {
-        CityVo city = new CityVo();
+
         List<Locality> localities = localityService.getLocalities(pincode);
         if (localities.size() == 0)
             return ResponseObject.getResponse(null);
-        City cityId = localities.get(0).getCity();
-        city.setCity(cityId.getName());
-        city.setId(cityId.getId());
-        State stateId = cityId.getState();
-        String state = stateId.getName();
-        String country = stateId.getCountry();
         List<LocalityVo> loc = new ArrayList<>();
         Iterator iterator = localities.iterator();
         int i = 0;
@@ -48,10 +42,9 @@ public class LocalityMangerImpl implements LocalityManager {
             iterator.next();
             i++;
         }
-        city.setLocality(loc);
-        city.setCountry(country);
-        city.setState(state);
-        return ResponseObject.getResponse(city);
+        City city = localities.get(0).getCity();
+        CityVo cityVo = new CityVo(city.getId(),city.getName(),city.getState().getCountry(),city.getState().getName(),loc);
+        return ResponseObject.getResponse(cityVo);
     }
 
 }

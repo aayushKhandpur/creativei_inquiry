@@ -53,6 +53,7 @@ public class ResponseHelper {
         addressVo.setId(inquiryAddress.getId());
         addressVo.setAddressLine1(inquiryAddress.getAddressLine1());
         addressVo.setLocationId(inquiryAddress.getLocation().getId());
+        addressVo.setPin(inquiryAddress.getPincode());
         return addressVo;
     }
 

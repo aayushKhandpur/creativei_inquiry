@@ -21,18 +21,16 @@
           <ion-col col-1>
             <p>From:</p>
           </ion-col>
-          <ion-col class="vertical-center-contents">
-            <!-- <ion-input class="filter-date" placeholder="DD/MM/YYYY"></ion-input> -->
+          <ion-col col-2 class="vertical-center-contents">
             <input #fromDate type="date">
           </ion-col>
           <ion-col col-1>
             <p>To:</p>
           </ion-col>
-          <ion-col class="vertical-center-contents">
-            <!-- <ion-input class="filter-date" placeholder="DD/MM/YYYY"></ion-input> -->
+          <ion-col col-2 class="vertical-center-contents">
             <input #toDate type="date">
           </ion-col>
-          <ion-col class="vertical-center-contents">
+          <ion-col col-1 class="vertical-center-contents">
               <button (click)="filterInqByDate(fromDate.value,toDate.value)" ion-button clear small>Apply</button>
           </ion-col>
         </ion-row>
@@ -49,11 +47,11 @@
         <ion-col col-1 class="vertical-center-contents">
           <div *ngIf = "inq.caseIndex">
             <div *ngIf = "inq.caseIndex.index == 3">
-              <ion-icon name="flash" style="color:#ffd633"></ion-icon>
+              <ion-icon name="flash" class="case-index-3"></ion-icon>
             </div>
             <div *ngIf = "inq.caseIndex.index == 4">
-              <ion-icon name="flash" style="color:#f53d3d"></ion-icon>
-              <ion-icon name="flash" style="color:#f53d3d"></ion-icon>
+              <ion-icon name="flash" class="case-index-4"></ion-icon>
+              <ion-icon name="flash" class="case-index-4"></ion-icon>
             </div>
           </div>
         </ion-col>
@@ -77,8 +75,8 @@
             </button>
         </ion-col>
         <ion-col (click)="toggleSeeMore(i)" col-1 class="vertical-center-contents">
-          <ion-icon *ngIf = "inq.seeMore" name="ios-arrow-down" style="color:#222"></ion-icon>
-          <ion-icon *ngIf = "!inq.seeMore" name="ios-arrow-forward" style="color:#222"></ion-icon>
+          <ion-icon *ngIf = "inq.seeMore" name="ios-arrow-down" class="see-more"></ion-icon>
+          <ion-icon *ngIf = "!inq.seeMore" name="ios-arrow-forward" class="see-more"></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="inq.seeMore">

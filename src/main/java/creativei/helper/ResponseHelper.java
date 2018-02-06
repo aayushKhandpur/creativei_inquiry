@@ -41,7 +41,7 @@ public class ResponseHelper {
         if (inquiryVo.getAddress() != null)
             inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), inquiryVo.getAddress()));
         if (inquiryVo.getEducation() != null)
-            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), inquiryVo.getEducation()));
+            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), new ArrayList<EducationVo>() {}));
         if (inquiryVo.getGuardian() != null)
             inquiryVo.setGuardian(getCreateGuardianResponseData(inquiry.getInquiryGuardian(), inquiryVo.getGuardian()));
         if (inquiryVo.getMarketing() != null)
@@ -70,8 +70,8 @@ public class ResponseHelper {
             educationVo.setYear(inquiryEducation.get(i).getYear() == null ? null : inquiryEducation.get(i).getYear());
             educationVo.setType(inquiryEducation.get(i).getType() == null ? null : inquiryEducation.get(i).getType());
             iterator.next();
-            i++;
             educationVos.add(educationVo);
+            i++;
         }
         return educationVos;
     }
@@ -186,6 +186,4 @@ public class ResponseHelper {
         followUpVo.setSubStatus(FollowUpSubStatus.enumToString(followUp.getSubStatus()));
         return followUpVo;
     }
-
-
 }

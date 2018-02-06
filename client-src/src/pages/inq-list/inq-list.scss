@@ -1,3 +1,11 @@
 page-inq-list {
-
+    .filter-toolbar{
+        min-height: unset;
+        height: 48px;
+    }
+    .vertical-center-contents{
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
 }

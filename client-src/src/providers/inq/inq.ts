@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -9,6 +9,22 @@ export class InqProvider {
 
   constructor(public http: HttpClient,) {
     console.log('Hello InqProvider Provider');
+  }
+
+  getInqById(id){
+    return this.http.get(this.baseUrl+'/getById',{
+      params: new HttpParams().set('id', id)
+    });
+  }
+
+  getInqByStatus(status){
+    return this.http.get(this.baseUrl+'/getByStatus',{
+      params: new HttpParams().set('status', status)
+    });
+  }
+
+  getAllInq(){
+    return this.http.get(this.baseUrl+'/getAll');
   }
 
   createInq(data){

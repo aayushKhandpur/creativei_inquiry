@@ -34,8 +34,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
         if(inquiryVo.getEducation()!=null) {
-            InquiryEducation inquiryEducations=new InquiryEducation(inquiryVo.getEducation());
-            this.inquiryEducation.add(inquiryEducations);
+            for(int i=0;i<inquiryVo.getEducation().size();i++) {
+                InquiryEducation inquiryEducations = new InquiryEducation(inquiryVo.getEducation().get(i));
+                this.inquiryEducation.add(inquiryEducations);
+            }
         }
         if(inquiryVo.getGuardian()!=null)
             this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian());
@@ -46,7 +48,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(Long id){
         this.setId(id);
     }
-   @Column(nullable = false)
+    @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
     private Date inquiryDate=new Date();

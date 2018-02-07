@@ -48,7 +48,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(Long id){
         this.setId(id);
     }
-   @Column(nullable = false)
+    @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
     private Date inquiryDate=new Date();

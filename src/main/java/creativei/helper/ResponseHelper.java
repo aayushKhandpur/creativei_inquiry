@@ -2,7 +2,10 @@ package creativei.helper;
 
 import creativei.entity.*;
 import creativei.enums.*;
+import creativei.manager.LocalityManager;
+import creativei.manager.impl.LocalityMangerImpl;
 import creativei.vo.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import util.LocalizationUtil;
 
 import javax.validation.constraints.Size;
@@ -51,9 +54,13 @@ public class ResponseHelper {
 
     private static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress, AddressVo addressVo) {
         addressVo.setId(inquiryAddress.getId());
-        addressVo.setAddressLine1(inquiryAddress.getAddressLine1());
-        addressVo.setLocationId(inquiryAddress.getLocation().getId());
         addressVo.setPin(inquiryAddress.getPincode());
+        addressVo.setAddressLine1(inquiryAddress.getAddressLine1());
+        addressVo.setArea(inquiryAddress.getLocation().getName());
+        addressVo.setCity(inquiryAddress.getLocation().getCity().getName());
+        addressVo.setState(inquiryAddress.getLocation().getCity().getState().getName());
+        addressVo.setCountry(inquiryAddress.getLocation().getCity().getState().getCountry());
+        addressVo.setLocationId(inquiryAddress.getLocation().getId());
         return addressVo;
     }
 

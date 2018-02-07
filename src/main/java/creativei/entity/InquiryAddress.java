@@ -1,6 +1,8 @@
 package creativei.entity;
 
 import creativei.vo.AddressVo;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.engine.internal.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,7 +21,7 @@ public class InquiryAddress extends BaseEntity implements Serializable {
         this.addressLine1=addressVo.getAddressLine1()==null||addressVo.getAddressLine1().isEmpty()?null:addressVo.getAddressLine1();
         this.location=new Locality(addressVo.getLocationId());
     }
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Inquiry inquiry;
     @Column(nullable = false)
     private String pincode;
@@ -29,8 +31,9 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     private String addressLine2;
     @Column(name = "is_current")
     private boolean isCurrent = true;
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Locality location;;
+    @ManyToOne(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "location_id")
+    private Locality location;
 
     public Locality getLocation() {
         return location;

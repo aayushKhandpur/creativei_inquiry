@@ -63,4 +63,12 @@ public class InquiryAddress extends BaseEntity implements Serializable {
     public void setCurrent(boolean current) {
         this.isCurrent = current;
     }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
 }

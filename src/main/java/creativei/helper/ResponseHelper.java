@@ -52,6 +52,8 @@ public class ResponseHelper {
     private static AddressVo getCreateAddressResponseData(InquiryAddress inquiryAddress, AddressVo addressVo) {
         addressVo.setId(inquiryAddress.getId());
         addressVo.setAddressLine1(inquiryAddress.getAddressLine1());
+        addressVo.setLocationId(inquiryAddress.getLocation().getId());
+        addressVo.setPin(inquiryAddress.getPincode());
         return addressVo;
     }
 
@@ -99,6 +101,7 @@ public class ResponseHelper {
         inquiryVo.setMobile(inquiry.getPhoneNumber());
         inquiryVo.setId(inquiry.getId());
         inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
+        inquiryVo.setInquiryStatus(InquiryStatus.enumToString(inquiry.getInquiryStatus()));
         inquiryVo.setGender(Gender.enumToString(inquiry.getGender()));
         inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
         inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), new AddressVo()));
@@ -124,6 +127,7 @@ public class ResponseHelper {
             inquiryVo.setEmail(inquiries.get(i).getEmail());
             inquiryVo.setMobile(inquiries.get(i).getPhoneNumber());
             inquiryVo.setId(inquiries.get(i).getId());
+            inquiryVo.setInquiryStatus(InquiryStatus.enumToString(inquiries.get(i).getInquiryStatus()));
             inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiries.get(i).getInquiryDate()));
             inquiryVo.setGender(Gender.enumToString(inquiries.get(i).getGender()));
             inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiries.get(i).getComputerKnowledge()));

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 public interface LocalityDao extends JpaRepository<Locality,Long>{
-    @Query("select distinct p.pincode from Locality p where p.pincode like concat('%',:pin,'%') ")
+    @Query("select distinct p.pincode from Locality p where p.pincode like concat(:pin,'%') order by p.pincode ")
     List<String> findByPincodeStartsWith(@Param("pin")String pin);
     List<Locality> findByPincode(@Param("pin")String pin);
 }

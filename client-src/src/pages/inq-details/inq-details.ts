@@ -39,6 +39,9 @@ export class InqDetailsPage {
   private guardianOccupation;
   private enqSource;
   private responseData;
+  private currentInqId;
+  private currentInq;
+  private requestData;
 
   private inqForm: FormGroup;
 
@@ -46,17 +49,16 @@ export class InqDetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
 
+    this.updateInq();
+    
     this.inqForm = this.formBuilder.group({
       name: ['', Validators.required],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       address: this.formBuilder.group({
         addressLine1: [''],
-        area: ['', Validators.required],
-        city: [''],
-        state: [''],
-        pin: ['', Validators.required],
-        country: ['']
+        locationId: ['', Validators.required],
+        pin: ['', Validators.required]
       }),
       mobile: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       email: ['', [Validators.required, Validators.email]],
@@ -65,7 +67,7 @@ export class InqDetailsPage {
       areaOfInterest: ['', Validators.required],
       education: this.formBuilder.array([
         this.formBuilder.group({
-          educationQualification: ['', Validators.required],
+          educationQualification: [''],
           instituteName: [''],
           stream: [''],
           status: [''],
@@ -76,14 +78,14 @@ export class InqDetailsPage {
         })
       ]),
       guardian: this.formBuilder.group({
-        name: ['',Validators.required],
-        relation: ['',Validators.required],
-        phoneNumber: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+        name: [''],
+        relation: [''],
+        phoneNumber: ['',[Validators.minLength(10),Validators.maxLength(10)]],
         email: ['',Validators.email],
         occupation: ['']
       }),
       marketing: this.formBuilder.group({
-        source: ['',Validators.required],
+        source: [''],
         referred: [false],
         referant: ['']
       })
@@ -129,13 +131,15 @@ export class InqDetailsPage {
     this.loading.present();
   }
   logForm() {
-    this.inqForm.value.address.city = this.city;
-    this.inqForm.value.address.state = this.state;
-    this.inqForm.value.address.country = this.country;
     if(this.inqForm.valid){
-      console.log("Form to be logged", this.inqForm.value);
+      if(this.currentInq){
+        this.requestData = Object.assign({},this.inqForm.value,{id: this.currentInqId})
+      }else{
+        this.requestData = Object.assign({},this.inqForm.value);
+      }
+      console.log("Form to be logged", this.requestData);
       this.presentLoadingCustom();
-      this.inqProvider.createInq(this.inqForm.value)
+      this.inqProvider.createInq(this.requestData)
         .subscribe(
         data => { 
           this.responseData = data;
@@ -163,6 +167,32 @@ export class InqDetailsPage {
 
   changeState() {
     this.diffState = !this.diffState;
+  }
+
+  updateInq(){
+    if(this.navParams.data){
+      this.currentInqId = this.navParams.data;
+      console.log("Inquiry ID to be edited is",this.currentInqId);
+      this.presentLoadingCustom();
+      this.inqProvider.getInqById(this.currentInqId)
+        .subscribe(
+          data => {
+            this.currentInq = data;
+          },
+          error => { console.log("GET unsucessful, the server returned this error:", error), this.loading.dismissAll(); },
+          () => {
+            console.log("complete");
+            this.loading.dismissAll();
+            this.patchData(this.currentInq.data);
+          }
+        )
+    }
+  }
+
+  patchData(inq){
+    let patch = this.helper.removeEmptyFromObject(inq);
+    console.log("Object to be patched:", patch);
+    this.inqForm.patchValue(patch);
   }
 
   setLocality(locality){

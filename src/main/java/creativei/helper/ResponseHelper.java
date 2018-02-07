@@ -41,7 +41,7 @@ public class ResponseHelper {
         if (inquiryVo.getAddress() != null)
             inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), inquiryVo.getAddress()));
         if (inquiryVo.getEducation() != null)
-            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), inquiryVo.getEducation()));
+            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), new ArrayList<EducationVo>() {}));
         if (inquiryVo.getGuardian() != null)
             inquiryVo.setGuardian(getCreateGuardianResponseData(inquiry.getInquiryGuardian(), inquiryVo.getGuardian()));
         if (inquiryVo.getMarketing() != null)
@@ -56,21 +56,17 @@ public class ResponseHelper {
     }
 
     private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducation, List<EducationVo> educationVos) {
-        EducationVo educationVo = new EducationVo();
-        Iterator iterator = inquiryEducation.iterator();
-        Integer i = 0;
-        while (iterator.hasNext()) {
-            educationVo.setId(inquiryEducation.get(i).getId());
-            educationVo.setAggregateMarks(inquiryEducation.get(i).getAggregateMarks() == null ? null : inquiryEducation.get(i).getAggregateMarks());
-            educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.get(i).getEducationQualification()));
-            educationVo.setInstituteName(inquiryEducation.get(i).getInstituteName() == null ? null : inquiryEducation.get(i).getInstituteName());
-            educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.get(i).getMarkScheme()));
-            educationVo.setStatus(EducationStatus.enumToString(inquiryEducation.get(i).getStatus()));
-            educationVo.setStream(Stream.enumToString(inquiryEducation.get(i).getStream()));
-            educationVo.setYear(inquiryEducation.get(i).getYear() == null ? null : inquiryEducation.get(i).getYear());
-            educationVo.setType(inquiryEducation.get(i).getType() == null ? null : inquiryEducation.get(i).getType());
-            iterator.next();
-            i++;
+        EducationVo educationVo=new EducationVo();
+        for(InquiryEducation inquiryEducation1:inquiryEducation){
+            educationVo.setId(inquiryEducation1.getId());
+            educationVo.setAggregateMarks(inquiryEducation1.getAggregateMarks() == null ? null : inquiryEducation1.getAggregateMarks());
+            educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation1.getEducationQualification()));
+            educationVo.setInstituteName(inquiryEducation1.getInstituteName() == null ? null : inquiryEducation1.getInstituteName());
+            educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation1.getMarkScheme()));
+            educationVo.setStatus(EducationStatus.enumToString(inquiryEducation1.getStatus()));
+            educationVo.setStream(Stream.enumToString(inquiryEducation1.getStream()));
+            educationVo.setYear(inquiryEducation1.getYear() == null ? null : inquiryEducation1.getYear());
+            educationVo.setType(inquiryEducation1.getType() == null ? null : inquiryEducation1.getType());
             educationVos.add(educationVo);
         }
         return educationVos;
@@ -186,6 +182,4 @@ public class ResponseHelper {
         followUpVo.setSubStatus(FollowUpSubStatus.enumToString(followUp.getSubStatus()));
         return followUpVo;
     }
-
-
 }

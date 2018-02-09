@@ -80,6 +80,33 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private InquiryGuardian inquiryGuardian;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryMarketing inquiryMarketing;
+    private FollowUpStatus status;
+    private FollowUpSubStatus subStatus;
+    private String remark;
+
+    public FollowUpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FollowUpStatus status) {
+        this.status = status;
+    }
+
+    public FollowUpSubStatus getSubStatus() {
+        return subStatus;
+    }
+
+    public void setSubStatus(FollowUpSubStatus subStatus) {
+        this.subStatus = subStatus;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public InquiryMarketing getInquiryMarketing() { return inquiryMarketing;}
 

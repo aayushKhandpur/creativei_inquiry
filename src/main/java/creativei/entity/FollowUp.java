@@ -20,7 +20,7 @@ import java.util.Date;
 @Table(name = "Follow_Up")
 public class FollowUp extends BaseEntity implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
     private Inquiry inquiry;
     @Column(name = "follow_up_date")
     private Date followUpDate;
@@ -36,6 +36,7 @@ public class FollowUp extends BaseEntity implements Serializable {
     }
 
     public FollowUp(FollowUpVo followUpVo) throws ParseException, NoDataAvailable {
+        this.setId(followUpVo.getId());
         this.followUpDate = LocalizationUtil.stringToDateConverter(followUpVo.getFollowUpDate());
         this.type = FollowUpType.stringToEnum(followUpVo.getFollowUpType());
         this.status = FollowUpStatus.stringToEnum(followUpVo.getFollowUpStatus());

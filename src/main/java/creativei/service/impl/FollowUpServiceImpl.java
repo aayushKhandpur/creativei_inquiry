@@ -22,6 +22,16 @@ public class FollowUpServiceImpl implements FollowUpService {
 
         return followUpDao.save(followUp);
     }
+
+    @Override
+    public FollowUp updateFollowUp(FollowUp followUp) throws InvalidParamRequest {
+        if (!validateFollowUp(followUp))
+            throw new InvalidParamRequest("Required field can not be empty");
+
+        return followUpDao.save(followUp);
+
+    }
+
     private Boolean validateFollowUp(FollowUp followUp) {
         if (followUp.getCaseIndex() == null || followUp.getFollowUpDate() == null || followUp.getType() == null || followUp.getStatus() == null || followUp.getSubStatus() == null) {
             return false;

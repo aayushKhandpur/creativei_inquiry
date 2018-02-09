@@ -13,7 +13,7 @@
 <ion-content>
   <form [formGroup]="inqForm" (ngSubmit)="logForm()">
     <ion-grid>
-      <ion-item-divider color="light">Personal Details</ion-item-divider>
+      <ion-item-divider color="light">Personal Details<span class="inq-status" *ngIf="currentInq">Status: {{currentInq.data.inquiryStatus}}</span></ion-item-divider>
       <ion-row>
         <ion-col>
           <ion-item>

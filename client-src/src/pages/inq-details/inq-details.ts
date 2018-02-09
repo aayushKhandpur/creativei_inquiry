@@ -19,7 +19,6 @@ import { ThankyouPage } from '../thankyou/thankyou';
 })
 export class InqDetailsPage {
 
-  private diffState: boolean;
   private pinService: RemoteData;
   private localities;
   private areas;
@@ -103,7 +102,6 @@ export class InqDetailsPage {
     this.setGuardianRelation();
     this.setGuardinaOccupation();
     this.setMarketingSource();
-    this.diffState = false;
     this.pinService = this.completerService.remote(null);
     this.pinService.urlFormater(term => {
       return `http://localhost:9002/pincodes?pincode=${term}`;
@@ -165,12 +163,8 @@ export class InqDetailsPage {
     }
   }
 
-  changeState() {
-    this.diffState = !this.diffState;
-  }
-
   updateInq(){
-    if(this.navParams.data){
+    if(typeof this.navParams.data === 'number'){
       this.currentInqId = this.navParams.data;
       console.log("Inquiry ID to be edited is",this.currentInqId);
       this.presentLoadingCustom();

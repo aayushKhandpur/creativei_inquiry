@@ -1,16 +1,13 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.helper.constant.DbConstraints;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +28,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
         this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus())==null?InquiryStatus.OPEN:InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
+        this.closingStatus =FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
         if(inquiryVo.getEducation()!=null) {
@@ -80,32 +78,35 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private InquiryGuardian inquiryGuardian;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryMarketing inquiryMarketing;
-    private FollowUpStatus status;
-    private FollowUpSubStatus subStatus;
-    private String remark;
+    @Column(name = "closing_status")
+    private FollowUpStatus closingStatus;
+    @Column(name = "closing_substatus")
+    private FollowUpSubStatus closingSubStatus;
+    @Column(name = "closing_remark")
+    private String closingRemark;
 
-    public FollowUpStatus getStatus() {
-        return status;
+    public FollowUpStatus getClosingStatus() {
+        return closingStatus;
     }
 
-    public void setStatus(FollowUpStatus status) {
-        this.status = status;
+    public void setClosingStatus(FollowUpStatus closingStatus) {
+        this.closingStatus = closingStatus;
     }
 
-    public FollowUpSubStatus getSubStatus() {
-        return subStatus;
+    public FollowUpSubStatus getClosingSubStatus() {
+        return closingSubStatus;
     }
 
-    public void setSubStatus(FollowUpSubStatus subStatus) {
-        this.subStatus = subStatus;
+    public void setClosingSubStatus(FollowUpSubStatus closingSubStatus) {
+        this.closingSubStatus = closingSubStatus;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getClosingRemark() {
+        return closingRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setClosingRemark(String closingRemark) {
+        this.closingRemark = closingRemark;
     }
 
     public InquiryMarketing getInquiryMarketing() { return inquiryMarketing;}

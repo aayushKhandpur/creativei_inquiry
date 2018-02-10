@@ -65,8 +65,8 @@ public class ResponseHelper {
     }
 
     private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducation, List<EducationVo> educationVos) {
-        EducationVo educationVo=new EducationVo();
         for(InquiryEducation inquiryEducation1:inquiryEducation){
+            EducationVo educationVo=new EducationVo();
             educationVo.setId(inquiryEducation1.getId());
             educationVo.setAggregateMarks(inquiryEducation1.getAggregateMarks() == null ? null : inquiryEducation1.getAggregateMarks());
             educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation1.getEducationQualification()));

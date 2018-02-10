@@ -74,7 +74,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private AreaOfInterest areaOfInterest;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryAddress inquiryAddress;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "inquiry")
     private List<InquiryEducation> inquiryEducation=new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;

@@ -16,6 +16,7 @@ public class InquiryGuardian extends BaseEntity implements Serializable {
     public InquiryGuardian(){}
 
     public InquiryGuardian(GuardianVo guardianVo){
+        this.setId(guardianVo.getId());
         this.name=guardianVo.getName()==null||guardianVo.getName().isEmpty()?null:guardianVo.getName();
         this.relation=Relation.stringToEnum(guardianVo.getRelation());
         this.phoneNumber=guardianVo.getPhoneNumber().equals(null)||guardianVo.getPhoneNumber().isEmpty()?null:guardianVo.getPhoneNumber();

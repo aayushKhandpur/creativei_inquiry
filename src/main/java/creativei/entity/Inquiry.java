@@ -29,6 +29,8 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus())==null?InquiryStatus.OPEN:InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         this.closingStatus =FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());
+        this.closingSubStatus=FollowUpSubStatus.stringToEnum(inquiryVo.getClosingSubStatus());
+        this.remark=inquiryVo.getClosingRemark();
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
         if(inquiryVo.getEducation()!=null) {
@@ -83,7 +85,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     @Column(name = "closing_substatus")
     private FollowUpSubStatus closingSubStatus;
     @Column(name = "closing_remark")
-    private String closingRemark;
+    private String remark;
 
     public FollowUpStatus getClosingStatus() {
         return closingStatus;
@@ -101,12 +103,12 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.closingSubStatus = closingSubStatus;
     }
 
-    public String getClosingRemark() {
-        return closingRemark;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setClosingRemark(String closingRemark) {
-        this.closingRemark = closingRemark;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public InquiryMarketing getInquiryMarketing() { return inquiryMarketing;}

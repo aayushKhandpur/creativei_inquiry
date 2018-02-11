@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { TitleCasePipe } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
@@ -46,7 +46,7 @@ export class InqDetailsPage {
 
   today : string = new Date().toISOString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
 
     this.updateInq();
     
@@ -187,6 +187,47 @@ export class InqDetailsPage {
     let patch = this.helper.removeEmptyFromObject(inq);
     console.log("Object to be patched:", patch);
     this.inqForm.patchValue(patch);
+  }
+
+  isInqOpen(status){
+    if(status.toLowerCase() == "open"){
+      return true;
+    }else return false;
+  }
+
+  changeInqStatus(e){
+    console.log(e.target.value);
+    if(e.target.value == "close"){
+      this.showClosingRemarkAlert();
+    }
+  }
+
+  showClosingRemarkAlert(){
+    let alert = this.alertCtrl.create({
+      title: 'Closing Inquiry',
+      message: "Enter the closing remarks for this inquiry",
+      inputs: [
+        {
+          name: 'remarks',
+          placeholder: 'Remarks'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Saved clicked', data);   //data.remarks is the data entered in the input box
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   setLocality(locality){

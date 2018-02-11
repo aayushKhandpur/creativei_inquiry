@@ -64,18 +64,18 @@ public class ResponseHelper {
         return addressVo;
     }
 
-    private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducation, List<EducationVo> educationVos) {
-        for(InquiryEducation inquiryEducation1:inquiryEducation){
+    private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducations, List<EducationVo> educationVos) {
+        for(InquiryEducation inquiryEducation:inquiryEducations){
             EducationVo educationVo=new EducationVo();
-            educationVo.setId(inquiryEducation1.getId());
-            educationVo.setAggregateMarks(inquiryEducation1.getAggregateMarks() == null ? null : inquiryEducation1.getAggregateMarks());
-            educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation1.getEducationQualification()));
-            educationVo.setInstituteName(inquiryEducation1.getInstituteName() == null ? null : inquiryEducation1.getInstituteName());
-            educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation1.getMarkScheme()));
-            educationVo.setStatus(EducationStatus.enumToString(inquiryEducation1.getStatus()));
-            educationVo.setStream(Stream.enumToString(inquiryEducation1.getStream()));
-            educationVo.setYear(inquiryEducation1.getYear() == null ? null : inquiryEducation1.getYear());
-            educationVo.setType(inquiryEducation1.getType() == null ? null : inquiryEducation1.getType());
+            educationVo.setId(inquiryEducation.getId());
+            educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks());
+            educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
+            educationVo.setInstituteName(inquiryEducation.getInstituteName());
+            educationVo.setMarkScheme(MarkScheme.enumToString(inquiryEducation.getMarkScheme()));
+            educationVo.setStatus(EducationStatus.enumToString(inquiryEducation.getStatus()));
+            educationVo.setStream(Stream.enumToString(inquiryEducation.getStream()));
+            educationVo.setYear(inquiryEducation.getYear());
+            educationVo.setType(inquiryEducation.getType());
             educationVos.add(educationVo);
         }
         return educationVos;
@@ -94,8 +94,8 @@ public class ResponseHelper {
     private static MarketingVo getCreateMarketingResponseData(InquiryMarketing inquiryMarketing, MarketingVo marketingVo) {
         marketingVo.setId(inquiryMarketing.getId());
         marketingVo.setSource(MarketingSource.enumToString(inquiryMarketing.getMarketingSource()));
-        marketingVo.setReferant(inquiryMarketing.getReferant() == null ? null : inquiryMarketing.getReferant());
-        marketingVo.setReferred(inquiryMarketing.getIsReferred() == null ? null : inquiryMarketing.getIsReferred());
+        marketingVo.setReferant(inquiryMarketing.getReferant() );
+        marketingVo.setReferred(inquiryMarketing.getIsReferred());
         return marketingVo;
     }
 

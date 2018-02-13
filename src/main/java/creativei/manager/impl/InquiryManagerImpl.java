@@ -73,7 +73,8 @@ public class InquiryManagerImpl implements InquiryManager {
             InquiryVo inquiryVo = ResponseHelper.getInquiryResponseById(inquiry, new InquiryVo());
             return ResponseObject.getResponse(inquiryVo);
         } catch (NoDataAvailable noDataAvailable) {
-            return ResponseObject.getResponse(noDataAvailable.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
+            logger.error(noDataAvailable.getMessage(),noDataAvailable);
+            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
         }
     }
 

@@ -4,6 +4,7 @@ import creativei.dao.BranchDao;
 import creativei.dao.InquiryDao;
 import creativei.entity.Branch;
 import creativei.entity.Inquiry;
+import creativei.enums.ExceptionType;
 import creativei.enums.InquiryStatus;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
@@ -40,11 +41,12 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry getById(Long id) throws NoDataAvailable{
-        if(inquiryDao.findOne(id)==null){
-            throw new NoDataAvailable("There is not data available for this id in your database");
-        }
-        return inquiryDao.findOne(id);
+    public Inquiry getById(Long id) throws NoDataAvailable {
+       Inquiry inquiry=inquiryDao.findOne(id);
+       if(inquiry==null){
+           throw new NoDataAvailable(ExceptionType.DATA_NOT_AVAILABLE.getMessage());
+       }
+       return inquiry;
     }
 
     @Override

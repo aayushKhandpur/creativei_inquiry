@@ -23,14 +23,14 @@ public class FollowUpServiceImpl implements FollowUpService {
     @Override
     public FollowUp createFollowUp(FollowUp followUp) throws InvalidParamRequest {
         if (!validateFollowUp(followUp))
-            throw new InvalidParamRequest("Required field can not be empty");
+            throw new InvalidParamRequest("Required field are either null or does not contain the appropirate value");
         return followUpDao.save(followUp);
     }
 
     @Override
     public FollowUp updateFollowUp(FollowUp followUp) throws InvalidParamRequest {
         if (!validateFollowUp(followUp))
-            throw new InvalidParamRequest("Required field can not be empty");
+            throw new InvalidParamRequest("Required field are either null or does not contain the appropirate value");
         return followUpDao.save(followUp);
     }
 
@@ -42,19 +42,19 @@ public class FollowUpServiceImpl implements FollowUpService {
                 if(cond[i]==true){
                     switch (i){
                         case 0:
-                            logger.error("CaseIndex field can not be null or empty");
+                            logger.error("CaseIndex field does not have appropirate value");
                             break;
                         case 1:
-                            logger.error("FollowUp Date field can not be null or empty");
+                            logger.error("FollowUp Date field does not have appropirate value");
                             break;
                         case 2:
-                            logger.error("FollowUp Type field can not be null or empty");
+                            logger.error("FollowUp Type field does not have appropirate value");
                             break;
                         case 3:
-                            logger.error("FollowUp Status field can not be null or empty");
+                            logger.error("FollowUp Status field does not have appropirate value");
                             break;
                         case 4:
-                            logger.error("Follow Up SubStatus field can not be null or empty");
+                            logger.error("Follow Up SubStatus field does not have appropirate value");
                             break;
                     }
                 }

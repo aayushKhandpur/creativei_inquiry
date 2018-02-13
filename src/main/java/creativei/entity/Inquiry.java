@@ -1,16 +1,13 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.helper.constant.DbConstraints;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +33,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         if(inquiryVo.getEducation()!=null) {
             for(int i=0;i<inquiryVo.getEducation().size();i++) {
                 InquiryEducation inquiryEducations = new InquiryEducation(inquiryVo.getEducation().get(i));
-                this.inquiryEducation.add(inquiryEducations);
+                this.addEducation(inquiryEducations);
             }
         }
         if(inquiryVo.getGuardian()!=null)
@@ -74,8 +71,8 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private AreaOfInterest areaOfInterest;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryAddress inquiryAddress;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "inquiry")
-    private List<InquiryEducation> inquiryEducation=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inquiry")
+    private List<InquiryEducation> inquiryEducations =new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;
     @OneToOne(cascade = CascadeType.ALL)
@@ -89,12 +86,12 @@ public class Inquiry  extends BaseEntity implements Serializable  {
 
     public void setInquiryGuardian(InquiryGuardian inquiryGuardian) { this.inquiryGuardian = inquiryGuardian; }
 
-    public List<InquiryEducation> getInquiryEducation() {
-        return inquiryEducation;
+    public List<InquiryEducation> getInquiryEducations() {
+        return inquiryEducations;
     }
 
-    public void setInquiryEducation(List<InquiryEducation> inquiryEducation) {
-        this.inquiryEducation = inquiryEducation;
+    public void setInquiryEducations(List<InquiryEducation> inquiryEducations) {
+        this.inquiryEducations = inquiryEducations;
     }
 
     public Date getInquiryDate() {
@@ -199,4 +196,8 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.areaOfInterest = areaOfInterest;
     }
 
+    public void addEducation(InquiryEducation inquiryEducation){
+        this.inquiryEducations.add(inquiryEducation);
+        inquiryEducation.setInquiry(this);
+    }
 }

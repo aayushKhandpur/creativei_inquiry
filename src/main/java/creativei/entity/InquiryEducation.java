@@ -15,7 +15,8 @@ import java.util.List;
 @Table(name = "Inquiry_Education")
 public class InquiryEducation extends BaseEntity implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
     @Column(name = "education_qualificaton", nullable = false)
     private EducationQualification educationQualification;
@@ -107,5 +108,13 @@ public class InquiryEducation extends BaseEntity implements Serializable {
 
     public void setMarkScheme(MarkScheme markScheme) {
         this.markScheme = markScheme;
+    }
+
+    public Inquiry getInquiry() {
+        return inquiry;
+    }
+
+    public void setInquiry(Inquiry inquiry) {
+        this.inquiry = inquiry;
     }
 }

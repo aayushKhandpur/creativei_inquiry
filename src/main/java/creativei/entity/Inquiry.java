@@ -29,17 +29,17 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus())==null?InquiryStatus.OPEN:InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
-            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
+            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress(),this);
         if(inquiryVo.getEducation()!=null) {
             for(int i=0;i<inquiryVo.getEducation().size();i++) {
-                InquiryEducation inquiryEducations = new InquiryEducation(inquiryVo.getEducation().get(i));
-                this.addEducation(inquiryEducations);
+                InquiryEducation inquiryEducation = new InquiryEducation(inquiryVo.getEducation().get(i),this);
+                this.inquiryEducations.add(inquiryEducation);
             }
         }
         if(inquiryVo.getGuardian()!=null)
-            this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian());
+            this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian(),this);
         if(inquiryVo.getMarketing()!=null)
-            this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing());
+            this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing(),this);
     }
 
     public Inquiry(Long id){
@@ -194,10 +194,5 @@ public class Inquiry  extends BaseEntity implements Serializable  {
 
     public void setAreaOfInterest(AreaOfInterest areaOfInterest) {
         this.areaOfInterest = areaOfInterest;
-    }
-
-    public void addEducation(InquiryEducation inquiryEducation){
-        this.inquiryEducations.add(inquiryEducation);
-        inquiryEducation.setInquiry(this);
     }
 }

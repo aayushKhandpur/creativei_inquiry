@@ -15,8 +15,9 @@ public class InquiryAddress extends BaseEntity implements Serializable {
 
     public InquiryAddress(){}
 
-    public InquiryAddress(AddressVo addressVo){
+    public InquiryAddress(AddressVo addressVo,Inquiry inquiry){
         this.setId(addressVo.getId());
+        this.inquiry=inquiry;
         this.pincode=addressVo.getPin()==null||addressVo.getPin().isEmpty()?null:addressVo.getPin();
         this.addressLine1=addressVo.getAddressLine1()==null||addressVo.getAddressLine1().isEmpty()?null:addressVo.getAddressLine1();
         this.location=new Locality(addressVo.getLocationId());

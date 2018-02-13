@@ -37,9 +37,15 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject getByStatus(InquiryStatus status) {
-        List<Inquiry> inquiries = inquiryService.getByStatus(status);
-        List<InquiryVo> inquiryVos = ResponseHelper.getInquiryResponseByStatus(inquiries, new InquiryVo());
-        return ResponseObject.getResponse(inquiryVos);
+        List<Inquiry> inquiries = null;
+        try {
+            inquiries = inquiryService.getByStatus(status);
+            List<InquiryVo> inquiryVos = ResponseHelper.getInquiryResponseByStatus(inquiries, new InquiryVo());
+            return ResponseObject.getResponse(inquiryVos);
+        } catch (NoDataAvailable noDataAvailable) {
+            logger.error(noDataAvailable.getMessage(),noDataAvailable);
+            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(),ExceptionType.DATA_NOT_AVAILABLE.getCode());
+        }
     }
 
     @Override
@@ -55,7 +61,7 @@ public class InquiryManagerImpl implements InquiryManager {
             return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
         } catch (InvalidParamRequest ipr) {
             logger.error(ipr.getMessage(), ipr);
-            return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
+            return ResponseObject.getResponse(ipr.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
         } catch (DataIntegrityException de) {
             logger.error(de.getMessage(), de);
             return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
@@ -73,8 +79,8 @@ public class InquiryManagerImpl implements InquiryManager {
             InquiryVo inquiryVo = ResponseHelper.getInquiryResponseById(inquiry, new InquiryVo());
             return ResponseObject.getResponse(inquiryVo);
         } catch (NoDataAvailable noDataAvailable) {
-            logger.error(noDataAvailable.getMessage(),noDataAvailable);
-            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
+            logger.error("Inquiry field is empty for id: "+id);
+            return ResponseObject.getResponse(ExceptionType.NO_RECORD_FOUND.getMessage(), ExceptionType.NO_RECORD_FOUND.getCode());
         }
     }
 

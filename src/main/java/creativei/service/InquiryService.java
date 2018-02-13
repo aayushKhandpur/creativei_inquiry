@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface InquiryService {
     List<Inquiry> getAll();
-    List<Inquiry> getByStatus(InquiryStatus status);
+    List<Inquiry> getByStatus(InquiryStatus status)throws NoDataAvailable;
     Inquiry getById(Long id) throws NoDataAvailable;
     Inquiry getByName(String name);
     Inquiry create (Inquiry inquiry)throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest;

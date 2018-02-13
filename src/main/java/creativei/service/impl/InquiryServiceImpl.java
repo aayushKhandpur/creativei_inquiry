@@ -36,15 +36,19 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public List<Inquiry> getByStatus(InquiryStatus status) {
-        return inquiryDao.findByInquiryStatus(status);
+    public List<Inquiry> getByStatus(InquiryStatus status) throws NoDataAvailable{
+        List<Inquiry> inquiries= inquiryDao.findByInquiryStatus(status);
+        if(inquiries.size()==0){
+            throw new NoDataAvailable(ExceptionType.DATA_NOT_AVAILABLE.getMessage());
+        }
+        return inquiries;
     }
 
     @Override
     public Inquiry getById(Long id) throws NoDataAvailable {
        Inquiry inquiry=inquiryDao.findOne(id);
        if(inquiry==null){
-           throw new NoDataAvailable(ExceptionType.DATA_NOT_AVAILABLE.getMessage());
+           throw new NoDataAvailable(ExceptionType.NO_RECORD_FOUND.getMessage());
        }
        return inquiry;
     }
@@ -63,7 +67,7 @@ public class InquiryServiceImpl implements InquiryService {
             if(de.getCause() instanceof ConstraintViolationException){
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
                 if(ce.getConstraintName()==null)
-                    throw new InvalidParamRequest("Required Field Can not be Empty");
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
                 else
                     throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
             }

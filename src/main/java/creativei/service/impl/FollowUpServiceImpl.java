@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service("FollowUpService")
 public class FollowUpServiceImpl implements FollowUpService {
     private static final Logger logger= LoggerFactory.getLogger(FollowUpService.class);
@@ -33,8 +35,30 @@ public class FollowUpServiceImpl implements FollowUpService {
     }
 
     private Boolean validateFollowUp(FollowUp followUp) {
-        if (followUp.getCaseIndex() == null || followUp.getFollowUpDate() == null || followUp.getType() == null || followUp.getStatus() == null || followUp.getSubStatus() == null) {
-            logger.error("Some or more required field is missing");
+        Boolean []cond=new Boolean[5];
+        Arrays.fill(cond,false);
+        if (((followUp.getCaseIndex() == null) && (cond[0]=true)) | (followUp.getFollowUpDate() == null&& (cond[1]=true)) | (followUp.getType() == null&& (cond[2]=true)) | (followUp.getStatus() == null && (cond[3]=true)) | (followUp.getSubStatus() == null&& (cond[4]=true))) {
+            for(int i=0;i<cond.length;i++){
+                if(cond[i]==true){
+                    switch (i){
+                        case 0:
+                            logger.error("CaseIndex field can not be null or empty");
+                            break;
+                        case 1:
+                            logger.error("FollowUp Date field can not be null or empty");
+                            break;
+                        case 2:
+                            logger.error("FollowUp Type field can not be null or empty");
+                            break;
+                        case 3:
+                            logger.error("FollowUp Status field can not be null or empty");
+                            break;
+                        case 4:
+                            logger.error("Follow Up SubStatus field can not be null or empty");
+                            break;
+                    }
+                }
+            }
             return false;
         }
         return true;

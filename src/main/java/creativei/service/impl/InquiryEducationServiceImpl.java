@@ -4,6 +4,7 @@ import creativei.dao.InquiryEducationDao;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryEducation;
 import creativei.exception.DataIntegrityException;
+import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.InquiryEducationService;
 import org.hibernate.exception.ConstraintViolationException;
@@ -13,13 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service("InquiryEducationService")
 public class InquiryEducationServiceImpl implements InquiryEducationService {
-    public static final Logger logger= LoggerFactory.getLogger(InquiryEducation.class);
+    public static final Logger logger = LoggerFactory.getLogger(InquiryEducation.class);
     @Autowired
     InquiryEducationDao inquiryEducationDao;
+
     @Override
     public List<InquiryEducation> getAll() {
         return null;
@@ -31,14 +34,16 @@ public class InquiryEducationServiceImpl implements InquiryEducationService {
     }
 
     @Override
-    public InquiryEducation create(InquiryEducation inquiryEducation) throws UniqueConstraintViolationException,DataIntegrityException {
-        try{
-           return inquiryEducationDao.save(inquiryEducation);
-        }catch(DataIntegrityViolationException de){
+    public InquiryEducation create(InquiryEducation inquiryEducation) throws InvalidParamRequest, DataIntegrityException {
+        logger.info("Inquiry Education create");
+        try {
+            return inquiryEducationDao.save(inquiryEducation);
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }
@@ -50,14 +55,16 @@ public class InquiryEducationServiceImpl implements InquiryEducationService {
     }
 
     @Override
-    public InquiryEducation update(InquiryEducation inquiryEducation) throws UniqueConstraintViolationException,DataIntegrityException {
-        try{
+    public InquiryEducation update(InquiryEducation inquiryEducation) throws InvalidParamRequest, DataIntegrityException {
+        logger.info("Inquiry Education update");
+        try {
             return inquiryEducationDao.save(inquiryEducation);
-        }catch(DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }

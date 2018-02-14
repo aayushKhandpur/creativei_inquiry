@@ -8,8 +8,7 @@ public enum ExceptionType {
     DUPLICATE_VALUE(1002, "Value already exists"),
     DATABASE_EXCEPTION(1003, "Exception occured while adding values to database"),
     INVALID_METHOD_PARAM(1004,"Invalid Method Request "),
-    NO_RECORD_FOUND(1005,"No Record Found"),
-    DATA_NOT_AVAILABLE(400,"Invalid Inquiry Status");
+    DATA_NOT_AVAILABLE(400,"No record found for requested parameter");
     private final int code;
     private final String message;
     private ExceptionType(int code, String message) {

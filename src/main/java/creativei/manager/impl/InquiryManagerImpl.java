@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -43,8 +44,8 @@ public class InquiryManagerImpl implements InquiryManager {
             List<InquiryVo> inquiryVos = ResponseHelper.getInquiryResponseByStatus(inquiries, new InquiryVo());
             return ResponseObject.getResponse(inquiryVos);
         } catch (NoDataAvailable noDataAvailable) {
-            logger.error(noDataAvailable.getMessage(),noDataAvailable);
-            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(),ExceptionType.DATA_NOT_AVAILABLE.getCode());
+            logger.error(noDataAvailable.getMessage(), noDataAvailable);
+            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
         }
     }
 
@@ -58,10 +59,10 @@ public class InquiryManagerImpl implements InquiryManager {
             return ResponseObject.getResponse(inquiryVo);
         } catch (UniqueConstraintViolationException ue) {
             logger.error(ue.getMessage(), ue);
-            return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
+            return ResponseObject.getResponse(ExceptionType.DUPLICATE_VALUE.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
         } catch (InvalidParamRequest ipr) {
             logger.error(ipr.getMessage(), ipr);
-            return ResponseObject.getResponse(ipr.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
+            return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
         } catch (DataIntegrityException de) {
             logger.error(de.getMessage(), de);
             return ResponseObject.getResponse(ExceptionType.DATABASE_EXCEPTION.getMessage(), ExceptionType.DATABASE_EXCEPTION.getCode());
@@ -79,8 +80,8 @@ public class InquiryManagerImpl implements InquiryManager {
             InquiryVo inquiryVo = ResponseHelper.getInquiryResponseById(inquiry, new InquiryVo());
             return ResponseObject.getResponse(inquiryVo);
         } catch (NoDataAvailable noDataAvailable) {
-            logger.error("Inquiry field is empty for id: "+id);
-            return ResponseObject.getResponse(ExceptionType.NO_RECORD_FOUND.getMessage(), ExceptionType.NO_RECORD_FOUND.getCode());
+            logger.error("Inquiry field is empty for id: " + id);
+            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
         }
     }
 

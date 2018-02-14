@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "Inquiry_Education")
 public class InquiryEducation extends BaseEntity implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
     @Column(name = "education_qualificaton", nullable = false)
@@ -36,7 +36,7 @@ public class InquiryEducation extends BaseEntity implements Serializable {
 
     public InquiryEducation(EducationVo educationVo, Inquiry inquiry) {
         this.setId(educationVo.getId());
-        this.inquiry=inquiry;
+        this.inquiry = inquiry;
         this.educationQualification = EducationQualification.stringToEnum(educationVo.getEducationQualification());
         this.instituteName = educationVo.getInstituteName() == null || educationVo.getInstituteName().isEmpty() ? null : educationVo.getInstituteName();
         this.stream = Stream.stringToEnum(educationVo.getStream());

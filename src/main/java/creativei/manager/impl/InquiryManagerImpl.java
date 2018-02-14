@@ -32,7 +32,7 @@ public class InquiryManagerImpl implements InquiryManager {
     @Override
     public ResponseObject getAll() {
         List<Inquiry> inquiries = inquiryService.getAll();
-        List<InquiryVo> inquiryVos = ResponseHelper.getAllInquiryResponse(inquiries, new InquiryVo());
+        List<InquiryVo> inquiryVos = ResponseHelper.getAllInquiryResponse(inquiries);
         return ResponseObject.getResponse(inquiryVos);
     }
 
@@ -41,7 +41,7 @@ public class InquiryManagerImpl implements InquiryManager {
         List<Inquiry> inquiries = null;
         try {
             inquiries = inquiryService.getByStatus(status);
-            List<InquiryVo> inquiryVos = ResponseHelper.getInquiryResponseByStatus(inquiries, new InquiryVo());
+            List<InquiryVo> inquiryVos = ResponseHelper.getInquiryResponseByStatus(inquiries);
             return ResponseObject.getResponse(inquiryVos);
         } catch (NoDataAvailable noDataAvailable) {
             logger.error(noDataAvailable.getMessage(), noDataAvailable);
@@ -77,7 +77,7 @@ public class InquiryManagerImpl implements InquiryManager {
     public ResponseObject getById(Long id) {
         try {
             Inquiry inquiry = inquiryService.getById(id);
-            InquiryVo inquiryVo = ResponseHelper.getInquiryResponseById(inquiry, new InquiryVo());
+            InquiryVo inquiryVo = ResponseHelper.getInquiryResponseById(inquiry);
             return ResponseObject.getResponse(inquiryVo);
         } catch (NoDataAvailable noDataAvailable) {
             logger.error("Inquiry field is empty for id: " + id);

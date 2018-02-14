@@ -43,7 +43,8 @@ public class ResponseHelper {
         if (inquiryVo.getAddress() != null)
             inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), inquiryVo.getAddress()));
         if (inquiryVo.getEducation() != null)
-            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), new ArrayList<EducationVo>() {}));
+            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), new ArrayList<EducationVo>() {
+            }));
         if (inquiryVo.getGuardian() != null)
             inquiryVo.setGuardian(getCreateGuardianResponseData(inquiry.getInquiryGuardian(), inquiryVo.getGuardian()));
         if (inquiryVo.getMarketing() != null)
@@ -64,8 +65,8 @@ public class ResponseHelper {
     }
 
     private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducations, List<EducationVo> educationVos) {
-        for(InquiryEducation inquiryEducation:inquiryEducations){
-            EducationVo educationVo=new EducationVo();
+        for (InquiryEducation inquiryEducation : inquiryEducations) {
+            EducationVo educationVo = new EducationVo();
             educationVo.setId(inquiryEducation.getId());
             educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks());
             educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
@@ -93,12 +94,13 @@ public class ResponseHelper {
     private static MarketingVo getCreateMarketingResponseData(InquiryMarketing inquiryMarketing, MarketingVo marketingVo) {
         marketingVo.setId(inquiryMarketing.getId());
         marketingVo.setSource(MarketingSource.enumToString(inquiryMarketing.getMarketingSource()));
-        marketingVo.setReferant(inquiryMarketing.getReferant() );
+        marketingVo.setReferant(inquiryMarketing.getReferant());
         marketingVo.setReferred(inquiryMarketing.getIsReferred());
         return marketingVo;
     }
 
-    public static InquiryVo getInquiryResponseById(Inquiry inquiry, InquiryVo inquiryVo) {
+    public static InquiryVo getInquiryResponseById(Inquiry inquiry) {
+        InquiryVo inquiryVo = new InquiryVo();
         inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
         inquiryVo.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
@@ -124,7 +126,8 @@ public class ResponseHelper {
         return inquiryVo;
     }
 
-    public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries, InquiryVo inquiryVo) {
+    public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries) {
+        InquiryVo inquiryVo = new InquiryVo();
         List<InquiryVo> inquiryVos = new ArrayList<>();
         Iterator iterator = inquiries.iterator();
         int i = 0;
@@ -158,7 +161,8 @@ public class ResponseHelper {
         return inquiryVos;
     }
 
-    public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries, InquiryVo inquiryVo) {
+    public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries) {
+        InquiryVo inquiryVo = new InquiryVo();
         List<InquiryVo> inquiryVos = new ArrayList<>();
         Iterator iterator = inquiries.iterator();
         int i = 0;

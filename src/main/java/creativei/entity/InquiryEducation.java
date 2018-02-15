@@ -1,16 +1,11 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.helper.ResponseHelper;
 import creativei.vo.EducationVo;
-import creativei.vo.ResponseObject;
 import util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 @Entity
 @Table(name = "Inquiry_Education")
@@ -37,13 +32,13 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     public InquiryEducation(EducationVo educationVo) {
         this.setId(educationVo.getId());
         this.educationQualification = EducationQualification.stringToEnum(educationVo.getEducationQualification());
-        this.instituteName = StringUtil.validateAndSetVo(educationVo.getInstituteName());
+        this.instituteName = StringUtil.validateVo(educationVo.getInstituteName());
         this.stream = Stream.stringToEnum(educationVo.getStream());
         this.status = EducationStatus.stringToEnum(educationVo.getStatus());
         this.year =educationVo.getYear();
         this.aggregateMarks =educationVo.getAggregateMarks();
         this.markScheme = MarkScheme.stringToEnum(educationVo.getMarkScheme());
-        this.type = StringUtil.validateAndSetVo(educationVo.getType());
+        this.type = StringUtil.validateVo(educationVo.getType());
     }
 
     public String getType() {

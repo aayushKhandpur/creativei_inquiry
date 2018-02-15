@@ -1,7 +1,6 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.helper.constant.DbConstraints;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
@@ -9,9 +8,7 @@ import util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,10 +20,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
 
     public Inquiry(InquiryVo inquiryVo) throws ParseException {
         this.setId(inquiryVo.getId());
-        this.name= StringUtil.validateAndSetVo(inquiryVo.getName());
+        this.name= StringUtil.validateVo(inquiryVo.getName());
         this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber=StringUtil.validateAndSetVo(inquiryVo.getMobile());
-        this.email=StringUtil.validateAndSetVo(inquiryVo.getEmail());
+        this.phoneNumber=StringUtil.validateVo(inquiryVo.getMobile());
+        this.email=StringUtil.validateVo(inquiryVo.getEmail());
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
         this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());

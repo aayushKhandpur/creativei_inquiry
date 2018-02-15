@@ -1,10 +1,6 @@
 package creativei.entity;
 
 import creativei.vo.AddressVo;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.engine.internal.Cascade;
-import org.springframework.beans.factory.annotation.Autowired;
 import util.StringUtil;
 
 import javax.persistence.*;
@@ -18,8 +14,8 @@ public class InquiryAddress extends BaseEntity implements Serializable {
 
     public InquiryAddress(AddressVo addressVo){
         this.setId(addressVo.getId());
-        this.pincode= StringUtil.validateAndSetVo(addressVo.getPin());
-        this.addressLine1=StringUtil.validateAndSetVo(addressVo.getAddressLine1());
+        this.pincode= StringUtil.validateVo(addressVo.getPin());
+        this.addressLine1=StringUtil.validateVo(addressVo.getAddressLine1());
         this.location=new Locality(addressVo.getLocationId());
     }
     @OneToOne

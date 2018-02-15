@@ -19,7 +19,7 @@ public class InquiryMarketing extends BaseEntity implements Serializable {
         this.setId(marketingVo.getId());
         this.marketingSource=MarketingSource.stringToEnum(marketingVo.getSource());
         this.isReferred= marketingVo.getReferred();
-        this.referant=StringUtil.validateAndSetVo(marketingVo.getReferant());
+        this.referant=StringUtil.validateVo(marketingVo.getReferant());
     }
 
     @OneToOne

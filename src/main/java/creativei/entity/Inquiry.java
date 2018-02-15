@@ -14,8 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-
 public class Inquiry extends BaseEntity implements Serializable {
+
     @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
@@ -48,6 +48,36 @@ public class Inquiry extends BaseEntity implements Serializable {
     private InquiryGuardian inquiryGuardian;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryMarketing inquiryMarketing;
+    @Column(name = "closing_status")
+    private FollowUpStatus closingStatus;
+    @Column(name = "closing_substatus")
+    private FollowUpSubStatus closingSubStatus;
+    @Column(name = "closing_remark")
+    private String remark;
+
+    public FollowUpStatus getClosingStatus() {
+        return closingStatus;
+    }
+
+    public void setClosingStatus(FollowUpStatus closingStatus) {
+        this.closingStatus = closingStatus;
+    }
+
+    public FollowUpSubStatus getClosingSubStatus() {
+        return closingSubStatus;
+    }
+
+    public void setClosingSubStatus(FollowUpSubStatus closingSubStatus) {
+        this.closingSubStatus = closingSubStatus;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Inquiry() {
     }

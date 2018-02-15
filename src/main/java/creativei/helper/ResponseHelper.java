@@ -36,6 +36,9 @@ public class ResponseHelper {
         inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
         inquiryVo.setGender(Gender.enumToString(inquiry.getGender()));
         inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
+        inquiryVo.setClosingStatus(FollowUpStatus.enumToString(inquiry.getClosingStatus()));
+        inquiryVo.setClosingSubStatus(FollowUpSubStatus.enumToString(inquiry.getClosingSubStatus()));
+        inquiryVo.setClosingRemark(inquiry.getRemark());
         inquiryVo.setInquiryStatus(InquiryStatus.enumToString(inquiry.getInquiryStatus()));
         if (inquiryVo.getAddress() != null)
             inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), inquiryVo.getAddress()));
@@ -108,6 +111,9 @@ public class ResponseHelper {
         inquiryVo.setInquiryStatus(InquiryStatus.enumToString(inquiry.getInquiryStatus()));
         inquiryVo.setGender(Gender.enumToString(inquiry.getGender()));
         inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
+        inquiryVo.setClosingStatus(FollowUpStatus.enumToString(inquiry.getClosingStatus()));
+        inquiryVo.setClosingSubStatus(FollowUpSubStatus.enumToString(inquiry.getClosingSubStatus()));
+        inquiryVo.setClosingRemark(inquiry.getRemark());
         inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), new AddressVo()));
         List<EducationVo> educationVos = new ArrayList<>();
         if (inquiry.getInquiryEducations() != null)
@@ -135,6 +141,9 @@ public class ResponseHelper {
             inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiries.get(i).getInquiryDate()));
             inquiryVo.setGender(Gender.enumToString(inquiries.get(i).getGender()));
             inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiries.get(i).getComputerKnowledge()));
+            inquiryVo.setClosingStatus(FollowUpStatus.enumToString(inquiries.get(i).getClosingStatus()));
+            inquiryVo.setClosingSubStatus(FollowUpSubStatus.enumToString(inquiries.get(i).getClosingSubStatus()));
+            inquiryVo.setClosingRemark(inquiries.get(i).getRemark());
             inquiryVo.setAddress(getCreateAddressResponseData(inquiries.get(i).getInquiryAddress(), new AddressVo()));
             List<EducationVo> educationVos = new ArrayList<>();
             if (inquiries.get(i).getInquiryEducations() != null)
@@ -166,6 +175,9 @@ public class ResponseHelper {
             inquiryVo.setInquiryDate(LocalizationUtil.getFormattedDate(inquiries.get(i).getInquiryDate()));
             inquiryVo.setGender(Gender.enumToString(inquiries.get(i).getGender()));
             inquiryVo.setComputerKnowledge(ComputerKnowledge.enumToString(inquiries.get(i).getComputerKnowledge()));
+            inquiryVo.setClosingStatus(FollowUpStatus.enumToString(inquiries.get(i).getClosingStatus()));
+            inquiryVo.setClosingSubStatus(FollowUpSubStatus.enumToString(inquiries.get(i).getClosingSubStatus()));
+            inquiryVo.setClosingRemark(inquiries.get(i).getRemark());
             inquiryVo.setAddress(getCreateAddressResponseData(inquiries.get(i).getInquiryAddress(), new AddressVo()));
             List<EducationVo> educationVos = new ArrayList<>();
             if (inquiries.get(i).getInquiryEducations() != null)

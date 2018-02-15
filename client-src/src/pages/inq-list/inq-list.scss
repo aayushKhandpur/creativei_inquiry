@@ -1,3 +1,20 @@
 page-inq-list {
-
+    .filter-toolbar{
+        min-height: unset;
+        height: 48px;
+    }
+    .vertical-center-contents{
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
+    .case-index-3{
+        color: #ffd633;
+    }
+    .case-index-4{
+        color: #f53d3d;
+    }
+    .see-more{
+        color: #222;
+    }
 }

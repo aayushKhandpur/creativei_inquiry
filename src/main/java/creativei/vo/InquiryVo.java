@@ -4,6 +4,7 @@ import java.lang.*;
 import java.util.List;
 
 public class InquiryVo {
+    private Long id;
     private String name;
     private String mobile;
     private String email;
@@ -18,7 +19,33 @@ public class InquiryVo {
     private List<EducationVo> education;
     private GuardianVo guardian;
     private MarketingVo marketing;
-    private Long id;
+    private String closingStatus;
+    private String closingSubStatus;
+    private String closingRemark;
+
+    public String getClosingStatus() {
+        return closingStatus;
+    }
+
+    public void setClosingStatus(String closingStatus) {
+        this.closingStatus = closingStatus;
+    }
+
+    public String getClosingSubStatus() {
+        return closingSubStatus;
+    }
+
+    public void setClosingSubStatus(String closingSubStatus) {
+        this.closingSubStatus = closingSubStatus;
+    }
+
+    public String getClosingRemark() {
+        return closingRemark;
+    }
+
+    public void setClosingRemark(String closingRemark) {
+        this.closingRemark = closingRemark;
+    }
 
     public MarketingVo getMarketing() {
         return marketing;

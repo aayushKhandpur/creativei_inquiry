@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 @Service("FollowUpService")
 public class FollowUpServiceImpl implements FollowUpService {
-    private static final Logger logger= LoggerFactory.getLogger(FollowUpService.class);
+    private static final Logger logger = LoggerFactory.getLogger(FollowUpService.class);
     @Autowired
     FollowUpDao followUpDao;
 
@@ -35,30 +35,26 @@ public class FollowUpServiceImpl implements FollowUpService {
     }
 
     private Boolean validateFollowUp(FollowUp followUp) {
-        Boolean []cond=new Boolean[5];
-        Arrays.fill(cond,false);
-        if (((followUp.getCaseIndex() == null) && (cond[0]=true)) | (followUp.getFollowUpDate() == null&& (cond[1]=true)) | (followUp.getType() == null&& (cond[2]=true)) | (followUp.getStatus() == null && (cond[3]=true)) | (followUp.getSubStatus() == null&& (cond[4]=true))) {
-            for(int i=0;i<cond.length;i++){
-                if(cond[i]==true){
-                    switch (i){
-                        case 0:
-                            logger.error("CaseIndex field does not have appropirate value");
-                            break;
-                        case 1:
-                            logger.error("FollowUp Date field does not have appropirate value");
-                            break;
-                        case 2:
-                            logger.error("FollowUp Type field does not have appropirate value");
-                            break;
-                        case 3:
-                            logger.error("FollowUp Status field does not have appropirate value");
-                            break;
-                        case 4:
-                            logger.error("Follow Up SubStatus field does not have appropirate value");
-                            break;
-                    }
-                }
-            }
+
+        if (followUp.getCaseIndex() == null) {
+            logger.error("CaseIndex field does not have appropirate value");
+            return false;
+        }
+        if (followUp.getFollowUpDate() == null) {
+            logger.error("FollowUp Type field does not have appropirate value");
+            return false;
+        }
+
+        if (followUp.getType() == null) {
+            logger.error("FollowUp Type field does not have appropirate value");
+            return false;
+        }
+        if (followUp.getStatus() == null) {
+            logger.error("FollowUp Status field does not have appropirate value");
+            return false;
+        }
+        if (followUp.getSubStatus() == null) {
+            logger.error("Follow Up SubStatus field does not have appropirate value");
             return false;
         }
         return true;

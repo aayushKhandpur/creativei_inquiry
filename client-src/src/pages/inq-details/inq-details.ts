@@ -182,8 +182,9 @@ export class InqDetailsPage {
           error => { console.log("GET unsucessful, the server returned this error:", error), this.loading.dismissAll(); },
           () => {
             console.log("complete");
-            this.loading.dismissAll();
             this.patchData(this.currentInq.data);
+            this.getLocality(this.currentInq.data.address.pin);
+            this.loading.dismissAll();
           }
         )
     }

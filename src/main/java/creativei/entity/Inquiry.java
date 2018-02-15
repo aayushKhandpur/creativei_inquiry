@@ -5,6 +5,7 @@ import creativei.helper.constant.DbConstraints;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
+import util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,14 +23,14 @@ public class Inquiry  extends BaseEntity implements Serializable  {
 
     public Inquiry(InquiryVo inquiryVo) throws ParseException {
         this.setId(inquiryVo.getId());
-        this.name=inquiryVo.getName()==null||inquiryVo.getName().isEmpty()?null:inquiryVo.getName();
+        this.name= StringUtil.validateAndSetVo(inquiryVo.getName());
         this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber=inquiryVo.getMobile()==null||inquiryVo.getMobile().isEmpty()?null:inquiryVo.getMobile();
-        this.email=inquiryVo.getEmail()==null||inquiryVo.getEmail().isEmpty()?null:inquiryVo.getEmail();
+        this.phoneNumber=StringUtil.validateAndSetVo(inquiryVo.getMobile());
+        this.email=StringUtil.validateAndSetVo(inquiryVo.getEmail());
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
         this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
-        this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus())==null?InquiryStatus.OPEN:InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
+        this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
@@ -66,7 +67,7 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     @Column(name="computer_knowledge")
     private ComputerKnowledge computerKnowledge;
     @Column(name = "inquiry_status")
-    private InquiryStatus inquiryStatus=InquiryStatus.OPEN;
+    private InquiryStatus inquiryStatus;
     @ManyToOne
     private Branch branch;
     private Date dob;

@@ -5,6 +5,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.engine.internal.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
+import util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,8 +18,8 @@ public class InquiryAddress extends BaseEntity implements Serializable {
 
     public InquiryAddress(AddressVo addressVo){
         this.setId(addressVo.getId());
-        this.pincode=addressVo.getPin()==null||addressVo.getPin().isEmpty()?null:addressVo.getPin();
-        this.addressLine1=addressVo.getAddressLine1()==null||addressVo.getAddressLine1().isEmpty()?null:addressVo.getAddressLine1();
+        this.pincode= StringUtil.validateAndSetVo(addressVo.getPin());
+        this.addressLine1=StringUtil.validateAndSetVo(addressVo.getAddressLine1());
         this.location=new Locality(addressVo.getLocationId());
     }
     @OneToOne

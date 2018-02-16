@@ -17,7 +17,6 @@ import java.util.List;
 @Entity
 public class Inquiry extends BaseEntity implements Serializable {
 
-public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(){}
 
     public Inquiry(InquiryVo inquiryVo) throws ParseException {
@@ -32,17 +31,17 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
-            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
+            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress(),this);
         if(inquiryVo.getEducation()!=null) {
             for(int i=0;i<inquiryVo.getEducation().size();i++) {
-                InquiryEducation inquiryEducations = new InquiryEducation(inquiryVo.getEducation().get(i));
-                this.inquiryEducation.add(inquiryEducations);
+                InquiryEducation inquiryEducations = new InquiryEducation(inquiryVo.getEducation().get(i),this);
+                this.inquiryEducations.add(inquiryEducations);
             }
         }
         if(inquiryVo.getGuardian()!=null)
-            this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian());
+            this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian(),this);
         if(inquiryVo.getMarketing()!=null)
-            this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing());
+            this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing(),this);
     }
 
     public Inquiry(Long id){

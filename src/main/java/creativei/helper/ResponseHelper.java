@@ -94,12 +94,13 @@ public class ResponseHelper {
     private static MarketingVo getCreateMarketingResponseData(InquiryMarketing inquiryMarketing, MarketingVo marketingVo) {
         marketingVo.setId(inquiryMarketing.getId());
         marketingVo.setSource(MarketingSource.enumToString(inquiryMarketing.getMarketingSource()));
-        marketingVo.setReferant(inquiryMarketing.getReferant() );
+        marketingVo.setReferant(inquiryMarketing.getReferant());
         marketingVo.setReferred(inquiryMarketing.getIsReferred());
         return marketingVo;
     }
 
-    public static InquiryVo getInquiryResponseById(Inquiry inquiry, InquiryVo inquiryVo) {
+    public static InquiryVo getInquiryResponseById(Inquiry inquiry) {
+        InquiryVo inquiryVo = new InquiryVo();
         inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
         inquiryVo.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
@@ -125,7 +126,8 @@ public class ResponseHelper {
         return inquiryVo;
     }
 
-    public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries, InquiryVo inquiryVo) {
+    public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries) {
+        InquiryVo inquiryVo = new InquiryVo();
         List<InquiryVo> inquiryVos = new ArrayList<>();
         Iterator iterator = inquiries.iterator();
         int i = 0;
@@ -159,7 +161,8 @@ public class ResponseHelper {
         return inquiryVos;
     }
 
-    public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries, InquiryVo inquiryVo) {
+    public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries) {
+        InquiryVo inquiryVo = new InquiryVo();
         List<InquiryVo> inquiryVos = new ArrayList<>();
         Iterator iterator = inquiries.iterator();
         int i = 0;

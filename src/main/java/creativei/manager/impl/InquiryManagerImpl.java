@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -31,15 +32,21 @@ public class InquiryManagerImpl implements InquiryManager {
     @Override
     public ResponseObject getAll() {
         List<Inquiry> inquiries = inquiryService.getAll();
-        List<InquiryVo> inquiryVos = ResponseHelper.getAllInquiryResponse(inquiries, new InquiryVo());
+        List<InquiryVo> inquiryVos = ResponseHelper.getAllInquiryResponse(inquiries);
         return ResponseObject.getResponse(inquiryVos);
     }
 
     @Override
     public ResponseObject getByStatus(InquiryStatus status) {
-        List<Inquiry> inquiries = inquiryService.getByStatus(status);
-        List<InquiryVo> inquiryVos = ResponseHelper.getInquiryResponseByStatus(inquiries, new InquiryVo());
-        return ResponseObject.getResponse(inquiryVos);
+        List<Inquiry> inquiries = null;
+        try {
+            inquiries = inquiryService.getByStatus(status);
+            List<InquiryVo> inquiryVos = ResponseHelper.getInquiryResponseByStatus(inquiries);
+            return ResponseObject.getResponse(inquiryVos);
+        } catch (NoDataAvailable noDataAvailable) {
+            logger.error(noDataAvailable.getMessage(), noDataAvailable);
+            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
+        }
     }
 
     @Override
@@ -52,7 +59,7 @@ public class InquiryManagerImpl implements InquiryManager {
             return ResponseObject.getResponse(inquiryVo);
         } catch (UniqueConstraintViolationException ue) {
             logger.error(ue.getMessage(), ue);
-            return ResponseObject.getResponse(ue.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
+            return ResponseObject.getResponse(ExceptionType.DUPLICATE_VALUE.getMessage(), ExceptionType.DUPLICATE_VALUE.getCode());
         } catch (InvalidParamRequest ipr) {
             logger.error(ipr.getMessage(), ipr);
             return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
@@ -70,10 +77,11 @@ public class InquiryManagerImpl implements InquiryManager {
     public ResponseObject getById(Long id) {
         try {
             Inquiry inquiry = inquiryService.getById(id);
-            InquiryVo inquiryVo = ResponseHelper.getInquiryResponseById(inquiry, new InquiryVo());
+            InquiryVo inquiryVo = ResponseHelper.getInquiryResponseById(inquiry);
             return ResponseObject.getResponse(inquiryVo);
         } catch (NoDataAvailable noDataAvailable) {
-            return ResponseObject.getResponse(noDataAvailable.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
+            logger.error("Inquiry field is empty for id: " + id);
+            return ResponseObject.getResponse(ExceptionType.DATA_NOT_AVAILABLE.getMessage(), ExceptionType.DATA_NOT_AVAILABLE.getCode());
         }
     }
 

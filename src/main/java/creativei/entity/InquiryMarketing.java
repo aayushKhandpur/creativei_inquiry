@@ -2,6 +2,7 @@ package creativei.entity;
 
 import creativei.enums.MarketingSource;
 import creativei.vo.MarketingVo;
+import util.StringUtil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +14,12 @@ import java.io.Serializable;
 @Table(name = "Inquiry_Marketing")
 public class InquiryMarketing extends BaseEntity implements Serializable {
     public InquiryMarketing(){}
-
-    public InquiryMarketing(MarketingVo marketingVo){
+  
+    public InquiryMarketing(MarketingVo marketingVo,Inquiry inquiry){
+        this.setId(marketingVo.getId());
         this.marketingSource=MarketingSource.stringToEnum(marketingVo.getSource());
-        this.isReferred=marketingVo.getReferred()==null?null:marketingVo.getReferred();
-        this.referant=marketingVo.getReferant()==null||marketingVo.getReferant().isEmpty()?null:marketingVo.getReferant();
+        this.isReferred= marketingVo.getReferred();
+        this.referant=StringUtil.validateEmpty(marketingVo.getReferant());
     }
 
     @OneToOne

@@ -5,6 +5,7 @@ import creativei.entity.Inquiry;
 import creativei.entity.InquiryEducation;
 import creativei.entity.InquiryGuardian;
 import creativei.exception.DataIntegrityException;
+import creativei.exception.InvalidParamRequest;
 import creativei.exception.UniqueConstraintViolationException;
 import creativei.service.InquiryGuardianService;
 import org.hibernate.exception.ConstraintViolationException;
@@ -18,9 +19,10 @@ import java.util.List;
 
 @Service("InquiryGuardianService")
 public class InquiryGuardianServiceImpl implements InquiryGuardianService {
-    public static final Logger logger= LoggerFactory.getLogger(InquiryGuardian.class);
+    public static final Logger logger = LoggerFactory.getLogger(InquiryGuardian.class);
     @Autowired
     InquiryGuardianDao inquiryGuardianDao;
+
     @Override
     public List<InquiryGuardian> getAll() {
         return null;
@@ -32,14 +34,16 @@ public class InquiryGuardianServiceImpl implements InquiryGuardianService {
     }
 
     @Override
-    public InquiryGuardian create(InquiryGuardian inquiryGuardian) throws UniqueConstraintViolationException,DataIntegrityException {
-        try{
+    public InquiryGuardian create(InquiryGuardian inquiryGuardian) throws InvalidParamRequest, DataIntegrityException {
+        logger.info("Inquiry Guardian create");
+        try {
             return inquiryGuardianDao.save(inquiryGuardian);
-        }catch(DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }
@@ -51,14 +55,16 @@ public class InquiryGuardianServiceImpl implements InquiryGuardianService {
     }
 
     @Override
-    public InquiryGuardian upadate(InquiryGuardian inquiryGuardian)throws UniqueConstraintViolationException,DataIntegrityException {
-        try{
+    public InquiryGuardian upadate(InquiryGuardian inquiryGuardian) throws InvalidParamRequest, DataIntegrityException {
+        logger.info("Inquiry Guardian update");
+        try {
             return inquiryGuardianDao.save(inquiryGuardian);
-        }catch(DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }

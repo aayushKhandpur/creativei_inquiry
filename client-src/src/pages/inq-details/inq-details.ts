@@ -191,12 +191,13 @@ export class InqDetailsPage {
           error => { console.log("GET unsucessful, the server returned this error:", error), this.loading.dismissAll(); },
           () => {
             console.log("complete");
-            this.loading.dismissAll();
             this.patchData(this.currentInq.data);
+            this.getLocality(this.currentInq.data.address.pin);
             this.currentInqAddressId = this.currentInq.data.address.id;
             this.currentInqEducationId = this.currentInq.data.education[0].id;
             this.currentInqGuardianId = this.currentInq.data.guardian.id;
             this.currentInqMarketingId = this.currentInq.data.marketing.id;
+            this.loading.dismissAll();
           }
         )
     }

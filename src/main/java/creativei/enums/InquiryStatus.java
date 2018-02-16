@@ -35,7 +35,7 @@ public enum InquiryStatus {
 
     public static InquiryStatus stringToEnum(String value) {
         if (value == null) {
-            return null;
+            return OPEN;
         }
         return lookup.get(value.toLowerCase());
     }

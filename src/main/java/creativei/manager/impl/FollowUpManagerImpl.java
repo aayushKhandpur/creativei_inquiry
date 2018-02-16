@@ -43,4 +43,20 @@ public class FollowUpManagerImpl implements FollowUpManager {
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
     }
+
+    @Override
+    public ResponseObject updateFollowUp(FollowUpVo followUpVo) {
+        try {
+            FollowUp followUp = new FollowUp(followUpVo);
+            followUp = followUpService.updateFollowUp(followUp);
+            followUpVo = ResponseHelper.getCreateFollowUpData(followUp, followUpVo);
+            return ResponseObject.getResponse(followUpVo);
+        } catch (InvalidParamRequest e) {
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+        }
+    }
 }

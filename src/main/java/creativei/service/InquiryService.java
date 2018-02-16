@@ -15,12 +15,12 @@ import java.util.List;
  */
 public interface InquiryService {
     List<Inquiry> getAll();
-    List<Inquiry> getByStatus(InquiryStatus status);
+    List<Inquiry> getByStatus(InquiryStatus status)throws NoDataAvailable;
     Inquiry getById(Long id) throws NoDataAvailable;
     Inquiry getByName(String name);
-    Inquiry create (Inquiry inquiry)throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest;
+    Inquiry create (Inquiry inquiry)throws  DataIntegrityException,InvalidParamRequest;
     Inquiry createAll(List<Inquiry> inquiries);
-    Inquiry update(Inquiry inquiry )throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest;
+    Inquiry update(Inquiry inquiry )throws  DataIntegrityException,InvalidParamRequest;
     Inquiry updateAll(List<Inquiry> inquiries);
 
 }

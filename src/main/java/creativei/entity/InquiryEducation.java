@@ -1,21 +1,18 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.helper.ResponseHelper;
 import creativei.vo.EducationVo;
-import creativei.vo.ResponseObject;
+import util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 @Entity
 @Table(name = "Inquiry_Education")
 public class InquiryEducation extends BaseEntity implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
     @Column(name = "education_qualificaton", nullable = false)
     private EducationQualification educationQualification;
@@ -33,16 +30,17 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     public InquiryEducation() {
     }
 
-    public InquiryEducation(EducationVo educationVo) {
+    public InquiryEducation(EducationVo educationVo, Inquiry inquiry) {
         this.setId(educationVo.getId());
+        this.inquiry = inquiry;
         this.educationQualification = EducationQualification.stringToEnum(educationVo.getEducationQualification());
-        this.instituteName = educationVo.getInstituteName() == null || educationVo.getInstituteName().isEmpty() ? null : educationVo.getInstituteName();
+        this.instituteName = StringUtil.validateEmpty(educationVo.getInstituteName());
         this.stream = Stream.stringToEnum(educationVo.getStream());
         this.status = EducationStatus.stringToEnum(educationVo.getStatus());
-        this.year = educationVo.getYear() == null ? null : educationVo.getYear();
-        this.aggregateMarks = educationVo.getAggregateMarks() == null ? null : educationVo.getAggregateMarks();
+        this.year =educationVo.getYear();
+        this.aggregateMarks =educationVo.getAggregateMarks();
         this.markScheme = MarkScheme.stringToEnum(educationVo.getMarkScheme());
-        this.type = educationVo.getType() == null || educationVo.getType().isEmpty() ? null : educationVo.getType();
+        this.type = StringUtil.validateEmpty(educationVo.getType());
     }
 
     public String getType() {
@@ -107,5 +105,13 @@ public class InquiryEducation extends BaseEntity implements Serializable {
 
     public void setMarkScheme(MarkScheme markScheme) {
         this.markScheme = markScheme;
+    }
+
+    public Inquiry getInquiry() {
+        return inquiry;
+    }
+
+    public void setInquiry(Inquiry inquiry) {
+        this.inquiry = inquiry;
     }
 }

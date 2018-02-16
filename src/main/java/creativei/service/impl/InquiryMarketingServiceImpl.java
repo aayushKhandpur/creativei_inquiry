@@ -15,28 +15,34 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service("InquiryMarketingService")
 public class InquiryMarketingServiceImpl implements InquiryMarketingService {
-    public Logger logger= LoggerFactory.getLogger(InquiryMarketing.class);
+    public Logger logger = LoggerFactory.getLogger(InquiryMarketing.class);
     @Autowired
     InquiryMarketingDao inquiryMarketingDao;
+
     @Override
     public List<InquiryMarketing> getAll() {
         return null;
     }
 
     @Override
-    public InquiryMarketing getById(Inquiry inquiry) { return null; }
+    public InquiryMarketing getById(Inquiry inquiry) {
+        return null;
+    }
 
     @Override
-    public InquiryMarketing create(InquiryMarketing inquiryMarketing)throws InvalidParamRequest,DataIntegrityException {
-        try{
+    public InquiryMarketing create(InquiryMarketing inquiryMarketing) throws InvalidParamRequest, DataIntegrityException {
+        logger.info("Inquiry Marketing create");
+        try {
             return inquiryMarketingDao.save(inquiryMarketing);
-        }catch(DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }
@@ -48,14 +54,16 @@ public class InquiryMarketingServiceImpl implements InquiryMarketingService {
     }
 
     @Override
-    public InquiryMarketing update(InquiryMarketing inquiryMarketing)throws InvalidParamRequest,DataIntegrityException {
-        try{
+    public InquiryMarketing update(InquiryMarketing inquiryMarketing) throws InvalidParamRequest, DataIntegrityException {
+        logger.info("Inqiury Marketing update");
+        try {
             return inquiryMarketingDao.save(inquiryMarketing);
-        }catch(DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }

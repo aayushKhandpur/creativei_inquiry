@@ -37,6 +37,7 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
 
     @Override
     public InquiryAddress create(InquiryAddress inquiryAddress)throws  DataIntegrityException ,InvalidParamRequest {
+        logger.info("Inquiry Address create");
         try {
             return inquiryAddressDao.save(inquiryAddress);
         }catch (DataIntegrityViolationException de){
@@ -44,7 +45,7 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
             if(de.getCause() instanceof ConstraintViolationException){
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
                 if(ce.getConstraintName()==null)
-                    throw new InvalidParamRequest("Required Field Can not be Empty");
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }
@@ -57,6 +58,7 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
 
     @Override
     public InquiryAddress update(InquiryAddress inquiryAddress) throws  DataIntegrityException,InvalidParamRequest  {
+        logger.info("Inquiry Address update");
         try {
             return inquiryAddressDao.save(inquiryAddress);
         }catch (DataIntegrityViolationException de){
@@ -64,7 +66,7 @@ public class InquiryAddressServiceImpl implements InquiryAddressService {
             if(de.getCause() instanceof ConstraintViolationException){
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
                 if(ce.getConstraintName()==null)
-                    throw new InvalidParamRequest("Required Field Can not be Empty");
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }

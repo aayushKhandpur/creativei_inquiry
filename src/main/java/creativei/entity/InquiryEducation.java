@@ -32,13 +32,13 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     public InquiryEducation(EducationVo educationVo) {
         this.setId(educationVo.getId());
         this.educationQualification = EducationQualification.stringToEnum(educationVo.getEducationQualification());
-        this.instituteName = StringUtil.validateVo(educationVo.getInstituteName());
+        this.instituteName = StringUtil.validateEmpty(educationVo.getInstituteName());
         this.stream = Stream.stringToEnum(educationVo.getStream());
         this.status = EducationStatus.stringToEnum(educationVo.getStatus());
         this.year =educationVo.getYear();
         this.aggregateMarks =educationVo.getAggregateMarks();
         this.markScheme = MarkScheme.stringToEnum(educationVo.getMarkScheme());
-        this.type = StringUtil.validateVo(educationVo.getType());
+        this.type = StringUtil.validateEmpty(educationVo.getType());
     }
 
     public String getType() {

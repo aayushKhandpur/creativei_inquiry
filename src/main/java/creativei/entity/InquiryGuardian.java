@@ -18,10 +18,10 @@ public class InquiryGuardian extends BaseEntity implements Serializable {
 
     public InquiryGuardian(GuardianVo guardianVo){
         this.setId(guardianVo.getId());
-        this.name= StringUtil.validateVo(guardianVo.getName());
+        this.name= StringUtil.validateEmpty(guardianVo.getName());
         this.relation=Relation.stringToEnum(guardianVo.getRelation());
-        this.phoneNumber=StringUtil.validateVo(guardianVo.getPhoneNumber());
-        this.email=StringUtil.validateVo(guardianVo.getEmail());
+        this.phoneNumber=StringUtil.validateEmpty(guardianVo.getPhoneNumber());
+        this.email=StringUtil.validateEmpty(guardianVo.getEmail());
         this.occupation=Occupation.stringToEnum(guardianVo.getOccupation());
     }
 

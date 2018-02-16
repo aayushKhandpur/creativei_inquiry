@@ -20,10 +20,10 @@ public class Inquiry  extends BaseEntity implements Serializable  {
 
     public Inquiry(InquiryVo inquiryVo) throws ParseException {
         this.setId(inquiryVo.getId());
-        this.name= StringUtil.validateVo(inquiryVo.getName());
+        this.name= StringUtil.validateEmpty(inquiryVo.getName());
         this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber=StringUtil.validateVo(inquiryVo.getMobile());
-        this.email=StringUtil.validateVo(inquiryVo.getEmail());
+        this.phoneNumber=StringUtil.validateEmpty(inquiryVo.getMobile());
+        this.email=StringUtil.validateEmpty(inquiryVo.getEmail());
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
         this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());

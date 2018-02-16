@@ -11,37 +11,89 @@
 
 <ion-content>
 
-  <ion-card>
-    <ion-card-header>
-      <h2>
-        <b>#1021&nbsp;|&nbsp;John Doe</b>
-      </h2>
-      <h3>+91-9928123456&nbsp;|&nbsp;xyz@testmail.com</h3>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Status: Open&nbsp;&nbsp;Next Follow Up On: 10/01/2018 @ 4 PM</p>
-      <p>Remarks: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</p>
-    </ion-card-content>
-    <ion-row no-padding>
+  <ion-toolbar class="filter-toolbar" color="light">
+    <ion-row>
+      <ion-col col-1 class="vertical-center-contents">
+        <ion-title>Filter</ion-title>
+      </ion-col>
       <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='md-create'></ion-icon>
-          Edit
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='list'></ion-icon>
-          View Summary
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='add'></ion-icon>
-          Add Follow Up
-        </button>
+        <ion-row>
+          <ion-col col-1>
+            <p>From:</p>
+          </ion-col>
+          <ion-col col-2 class="vertical-center-contents">
+            <input #fromDate type="date">
+          </ion-col>
+          <ion-col col-1>
+            <p>To:</p>
+          </ion-col>
+          <ion-col col-2 class="vertical-center-contents">
+            <input #toDate type="date">
+          </ion-col>
+          <ion-col col-1 class="vertical-center-contents">
+              <button (click)="filterInqByDate(fromDate.value,toDate.value)" ion-button clear small>Apply</button>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
+  </ion-toolbar>
+
+  <ion-card *ngFor = "let inq of inquiries; let i = index;">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-1 class="vertical-center-contents">
+          <p>{{i+1}}.</p>
+        </ion-col>
+        <ion-col col-1 class="vertical-center-contents">
+          <div *ngIf = "inq.caseIndex">
+            <div *ngIf = "inq.caseIndex.index == 3">
+              <ion-icon name="flash" class="case-index-3"></ion-icon>
+            </div>
+            <div *ngIf = "inq.caseIndex.index == 4">
+              <ion-icon name="flash" class="case-index-4"></ion-icon>
+              <ion-icon name="flash" class="case-index-4"></ion-icon>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <p><b>{{inq.name}}</b>&nbsp;&nbsp;&nbsp;<ion-icon color="primary" name='md-create' (click)="editInq(inq.id)"></ion-icon></p>
+          <p>{{inq.mobile}} | {{inq.email}}</p>
+        </ion-col>
+        <ion-col col-1 class="vertical-center-contents">
+          <p>{{inq.inquiryDate | date: "dd/MM/yyyy"}}</p>
+        </ion-col>
+        <ion-col col-2 class="vertical-center-contents">
+          <p>{{inq.areaOfInterest}}</p>
+        </ion-col>
+        <ion-col col-2 class="vertical-center-contents">
+          <p *ngIf = "inq.followUp">{{inq.followUp.followUpStatus}}</p>
+        </ion-col>
+        <ion-col col-1 class="vertical-center-contents">
+            <button ion-button icon-end clear small>
+              Follow Up
+              <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-col>
+        <ion-col (click)="toggleSeeMore(i)" col-1 class="vertical-center-contents">
+          <ion-icon *ngIf = "inq.seeMore" name="ios-arrow-down" class="see-more"></ion-icon>
+          <ion-icon *ngIf = "!inq.seeMore" name="ios-arrow-forward" class="see-more"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="inq.seeMore">
+        <ion-col col-1></ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col>
+          <p>Guardian: {{inq.guardian.name}}, {{inq.guardian.relation}}</p>
+          <p>{{inq.guardian.phoneNumber}}</p>
+        </ion-col>
+        <ion-col col-2 class="vertical-center-contents">
+          <p *ngIf = "inq.followUp">{{inq.followUp.subStatus}}</p>
+        </ion-col>
+        <ion-col col-2 class="vertical-center-contents">
+          <p *ngIf = "inq.followUp">{{inq.followUp.remark}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card>
 
 </ion-content>

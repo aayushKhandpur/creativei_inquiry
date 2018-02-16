@@ -12,10 +12,11 @@ public class InquiryAddress extends BaseEntity implements Serializable {
 
     public InquiryAddress(){}
 
-    public InquiryAddress(AddressVo addressVo){
+    public InquiryAddress(AddressVo addressVo,Inquiry inquiry){
         this.setId(addressVo.getId());
         this.pincode= StringUtil.validateEmpty(addressVo.getPin());
         this.addressLine1=StringUtil.validateEmpty(addressVo.getAddressLine1());
+        this.inquiry=inquiry;
         this.location=new Locality(addressVo.getLocationId());
     }
     @OneToOne

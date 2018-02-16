@@ -11,7 +11,8 @@ import java.io.Serializable;
 @Table(name = "Inquiry_Education")
 public class InquiryEducation extends BaseEntity implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
     @Column(name = "education_qualificaton", nullable = false)
     private EducationQualification educationQualification;
@@ -29,8 +30,9 @@ public class InquiryEducation extends BaseEntity implements Serializable {
     public InquiryEducation() {
     }
 
-    public InquiryEducation(EducationVo educationVo) {
+    public InquiryEducation(EducationVo educationVo, Inquiry inquiry) {
         this.setId(educationVo.getId());
+        this.inquiry = inquiry;
         this.educationQualification = EducationQualification.stringToEnum(educationVo.getEducationQualification());
         this.instituteName = StringUtil.validateEmpty(educationVo.getInstituteName());
         this.stream = Stream.stringToEnum(educationVo.getStream());
@@ -103,5 +105,13 @@ public class InquiryEducation extends BaseEntity implements Serializable {
 
     public void setMarkScheme(MarkScheme markScheme) {
         this.markScheme = markScheme;
+    }
+
+    public Inquiry getInquiry() {
+        return inquiry;
+    }
+
+    public void setInquiry(Inquiry inquiry) {
+        this.inquiry = inquiry;
     }
 }

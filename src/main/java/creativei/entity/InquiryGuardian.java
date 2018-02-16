@@ -15,9 +15,10 @@ import java.io.Serializable;
 @Table(name="Inquiry_Guardian")
 public class InquiryGuardian extends BaseEntity implements Serializable {
     public InquiryGuardian(){}
-
-    public InquiryGuardian(GuardianVo guardianVo){
+       
+    public InquiryGuardian(GuardianVo guardianVo,Inquiry inquiry){
         this.setId(guardianVo.getId());
+        this.inquiry=inquiry;
         this.name= StringUtil.validateEmpty(guardianVo.getName());
         this.relation=Relation.stringToEnum(guardianVo.getRelation());
         this.phoneNumber=StringUtil.validateEmpty(guardianVo.getPhoneNumber());

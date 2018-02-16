@@ -1,6 +1,7 @@
 package creativei.entity;
 
 import creativei.enums.*;
+
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+public class Inquiry extends BaseEntity implements Serializable {
 
 public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(){}
@@ -46,22 +48,23 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     public Inquiry(Long id){
         this.setId(id);
     }
+
     @Column(nullable = false)
     private String name;
     @Column(name = "inquiry_date", nullable = false)
-    private Date inquiryDate=new Date();
+    private Date inquiryDate = new Date();
     private Gender gender;
-    @Column(nullable = false,name="phone_number")
+    @Column(nullable = false, name = "phone_number")
     private String phoneNumber;
     @Column(nullable = false)
     @Email
     private String email;
-    @Column(nullable=false,name = "highest_education")
+    @Column(nullable = false, name = "highest_education")
     private EducationQualification highestEducation;
     private Occupation occupation;
-    @Column(name="alternate_phone")
+    @Column(name = "alternate_phone")
     private String alternatePhone;
-    @Column(name="computer_knowledge")
+    @Column(name = "computer_knowledge")
     private ComputerKnowledge computerKnowledge;
     @Column(name = "inquiry_status")
     private InquiryStatus inquiryStatus;
@@ -72,27 +75,65 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     private AreaOfInterest areaOfInterest;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryAddress inquiryAddress;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<InquiryEducation> inquiryEducation=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inquiry")
+    private List<InquiryEducation> inquiryEducations=new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryMarketing inquiryMarketing;
+    @Column(name = "closing_status")
+    private FollowUpStatus closingStatus;
+    @Column(name = "closing_substatus")
+    private FollowUpSubStatus closingSubStatus;
+    @Column(name = "closing_remark")
+    private String remark;
 
-    public InquiryMarketing getInquiryMarketing() { return inquiryMarketing;}
-
-    public void setInquiryMarketing(InquiryMarketing inquiryMarketing) { this.inquiryMarketing = inquiryMarketing;}
-
-    public InquiryGuardian getInquiryGuardian() {  return inquiryGuardian;    }
-
-    public void setInquiryGuardian(InquiryGuardian inquiryGuardian) { this.inquiryGuardian = inquiryGuardian; }
-
-    public List<InquiryEducation> getInquiryEducation() {
-        return inquiryEducation;
+    public FollowUpStatus getClosingStatus() {
+        return closingStatus;
     }
 
-    public void setInquiryEducation(List<InquiryEducation> inquiryEducation) {
-        this.inquiryEducation = inquiryEducation;
+    public void setClosingStatus(FollowUpStatus closingStatus) {
+        this.closingStatus = closingStatus;
+    }
+
+    public FollowUpSubStatus getClosingSubStatus() {
+        return closingSubStatus;
+    }
+
+    public void setClosingSubStatus(FollowUpSubStatus closingSubStatus) {
+        this.closingSubStatus = closingSubStatus;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public InquiryMarketing getInquiryMarketing() {
+        return inquiryMarketing;
+    }
+
+    public void setInquiryMarketing(InquiryMarketing inquiryMarketing) {
+        this.inquiryMarketing = inquiryMarketing;
+    }
+
+    public InquiryGuardian getInquiryGuardian() {
+        return inquiryGuardian;
+    }
+
+    public void setInquiryGuardian(InquiryGuardian inquiryGuardian) {
+        this.inquiryGuardian = inquiryGuardian;
+    }
+
+    public List<InquiryEducation> getInquiryEducations() {
+        return inquiryEducations;
+    }
+
+    public void setInquiryEducations(List<InquiryEducation> inquiryEducations) {
+        this.inquiryEducations = inquiryEducations;
     }
 
     public Date getInquiryDate() {
@@ -111,7 +152,9 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.inquiryAddress = inquiryAddress;
     }
 
-    public Branch getBranch() { return branch; }
+    public Branch getBranch() {
+        return branch;
+    }
 
     public void setBranch(Branch branch) {
         this.branch = branch;
@@ -149,15 +192,21 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         this.email = email;
     }
 
-    public InquiryStatus getInquiryStatus() {return inquiryStatus;}
+    public InquiryStatus getInquiryStatus() {
+        return inquiryStatus;
+    }
 
-    public void setInquiryStatus(InquiryStatus inquiryStatus) {this.inquiryStatus = inquiryStatus;}
+    public void setInquiryStatus(InquiryStatus inquiryStatus) {
+        this.inquiryStatus = inquiryStatus;
+    }
 
     public EducationQualification getHighestEducation() {
         return highestEducation;
     }
 
-    public void setHighestEducation(EducationQualification highestEducation) { this.highestEducation = highestEducation;}
+    public void setHighestEducation(EducationQualification highestEducation) {
+        this.highestEducation = highestEducation;
+    }
 
     public Occupation getOccupation() {
         return occupation;
@@ -179,7 +228,9 @@ public class Inquiry  extends BaseEntity implements Serializable  {
         return computerKnowledge;
     }
 
-    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {this.computerKnowledge = computerKnowledge;}
+    public void setComputerKnowledge(ComputerKnowledge computerKnowledge) {
+        this.computerKnowledge = computerKnowledge;
+    }
 
     public Date getDob() {
         return dob;
@@ -196,5 +247,4 @@ public class Inquiry  extends BaseEntity implements Serializable  {
     public void setAreaOfInterest(AreaOfInterest areaOfInterest) {
         this.areaOfInterest = areaOfInterest;
     }
-
 }

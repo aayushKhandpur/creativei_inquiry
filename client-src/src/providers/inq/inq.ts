@@ -17,6 +17,16 @@ export class InqProvider {
     });
   }
 
+  getInqByStatus(status){
+    return this.http.get(this.baseUrl+'/getByStatus',{
+      params: new HttpParams().set('status', status)
+    });
+  }
+
+  getAllInq(){
+    return this.http.get(this.baseUrl+'/getAll');
+  }
+
   createInq(data){
     return this.http.post(this.baseUrl+'/register',data);
   }

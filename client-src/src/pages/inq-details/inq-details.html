@@ -16,9 +16,9 @@
       <ion-item-divider color="light">Personal Details
         <span class="inq-status" *ngIf="currentInq">
           Status:
-          <select (change)="changeInqStatus($event)">
-            <option [selected]=isInqOpen(currentInq.data.inquiryStatus) value="open">Open</option>
-            <option [selected]=!isInqOpen(currentInq.data.inquiryStatus) value="close">Closed</option>
+          <select #inqStatus (change)="changeInqStatus(inqStatus.value)">
+            <option [selected]=isInqOpen(currentInqStatus) value="open">Open</option>
+            <option [selected]=!isInqOpen(currentInqStatus) value="close">Closed</option>
           </select>
         </span>
       </ion-item-divider>

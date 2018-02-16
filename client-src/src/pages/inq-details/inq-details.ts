@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { TitleCasePipe } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
@@ -12,6 +12,7 @@ import { NotificationMessageProvider } from '../../providers/notification-messag
 import { LocalityProvider } from '../../providers/locality/locality';
 import { HelperProvider } from '../../providers/helper/helper';
 import { ThankyouPage } from '../thankyou/thankyou';
+import { InqCloseModalPage } from '../inq-close-modal/inq-close-modal';
 
 @Component({
   selector: 'page-inq-details',
@@ -38,19 +39,23 @@ export class InqDetailsPage {
   private guardianOccupation;
   private enqSource;
   private responseData;
+  private currentInq;
   private currentInqId;
   private currentInqAddressId;
   private currentInqEducationId;
   private currentInqGuardianId;
   private currentInqMarketingId;
-  private currentInq;
+  private currentInqStatus;
+  private currentInqClosingStatus;
+  private currentInqClosingSubStatus;
+  private currentInqClosingRemark;
   private requestData;
 
   private inqForm: FormGroup;
 
   today : string = new Date().toISOString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
 
     this.updateInq();
     
@@ -141,6 +146,10 @@ export class InqDetailsPage {
         this.requestData.education[0].id = this.currentInqEducationId;
         this.requestData.guardian.id = this.currentInqGuardianId;
         this.requestData.marketing.id = this.currentInqMarketingId;
+        this.requestData.inquiryStatus = this.currentInqStatus;
+        this.requestData.closingStatus = this.currentInqClosingStatus;
+        this.requestData.closingSubStatus = this.currentInqClosingSubStatus;
+        this.requestData.closingRemark = this.currentInqClosingRemark;
       }else{
         this.requestData = Object.assign({},this.inqForm.value);
       }
@@ -191,6 +200,10 @@ export class InqDetailsPage {
             this.currentInqEducationId = this.currentInq.data.education[0].id;
             this.currentInqGuardianId = this.currentInq.data.guardian.id;
             this.currentInqMarketingId = this.currentInq.data.marketing.id;
+            this.setClosingStatus(this.currentInq.data.closingStatus);
+            this.setClosingSubStatus(this.currentInq.data.closingSubStatus);
+            this.setClosingRemark(this.currentInq.data.closingRemark);
+            this.setInqStatus(this.currentInq.data.inquiryStatus);
             this.loading.dismissAll();
           }
         )
@@ -210,38 +223,57 @@ export class InqDetailsPage {
   }
 
   changeInqStatus(e){
-    console.log(e.target.value);
-    if(e.target.value == "close"){
-      this.showClosingRemarkAlert();
+    console.log(e);
+    if(e == "close"){
+      this.showInqCloseModal();
+    }else if(e == "open"){
+      this.setInqStatus('open');
+      this.setClosingStatus(null);
+      this.setClosingSubStatus(null);
+      this.setClosingRemark(null);
     }
   }
 
-  showClosingRemarkAlert(){
-    let alert = this.alertCtrl.create({
-      title: 'Closing Inquiry',
-      message: "Enter the closing remarks for this inquiry",
-      inputs: [
-        {
-          name: 'remarks',
-          placeholder: 'Remarks'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            console.log('Saved clicked', data);   //data.remarks is the data entered in the input box
-          }
-        }
-      ]
+  showInqCloseModal(){
+    let modal = this.modalCtrl.create(
+      InqCloseModalPage
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+        this.setClosingStatus(data.closingStatus);
+        this.setClosingSubStatus(data.closingSubStatus);
+        this.setClosingRemark(data.closingRemark);
+        this.setInqStatus('close');
+      }
     });
-    alert.present();
+  }
+
+  setClosingStatus(data){
+    if(data){
+      this.currentInqClosingStatus = data;
+    }else{
+      this.currentInqClosingRemark = '';
+        }
+  }
+  setClosingSubStatus(data){
+    if(data){
+      this.currentInqClosingSubStatus = data;
+    }else{
+      this.currentInqClosingRemark = '';
+    }
+  }
+  setClosingRemark(data){
+    if(data){
+      this.currentInqClosingRemark = data;
+    }else{
+      this.currentInqClosingRemark = '';
+    }
+  }
+
+  setInqStatus(status){
+    this.currentInqStatus = status.toLowerCase();
   }
 
   setLocality(locality){

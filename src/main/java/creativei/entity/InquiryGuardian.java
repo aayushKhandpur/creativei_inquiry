@@ -3,6 +3,7 @@ package creativei.entity;
 import creativei.enums.Occupation;
 import creativei.enums.Relation;
 import creativei.vo.GuardianVo;
+import util.StringUtil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +15,14 @@ import java.io.Serializable;
 @Table(name="Inquiry_Guardian")
 public class InquiryGuardian extends BaseEntity implements Serializable {
     public InquiryGuardian(){}
-
+       
     public InquiryGuardian(GuardianVo guardianVo,Inquiry inquiry){
+        this.setId(guardianVo.getId());
         this.inquiry=inquiry;
-        this.name=guardianVo.getName()==null||guardianVo.getName().isEmpty()?null:guardianVo.getName();
+        this.name= StringUtil.validateEmpty(guardianVo.getName());
         this.relation=Relation.stringToEnum(guardianVo.getRelation());
-        this.phoneNumber=guardianVo.getPhoneNumber().equals(null)||guardianVo.getPhoneNumber().isEmpty()?null:guardianVo.getPhoneNumber();
-        this.email=guardianVo.getEmail()==null||guardianVo.getEmail().isEmpty()?null:guardianVo.getEmail();
+        this.phoneNumber=StringUtil.validateEmpty(guardianVo.getPhoneNumber());
+        this.email=StringUtil.validateEmpty(guardianVo.getEmail());
         this.occupation=Occupation.stringToEnum(guardianVo.getOccupation());
     }
 

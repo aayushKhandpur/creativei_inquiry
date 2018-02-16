@@ -1,10 +1,11 @@
 package creativei.entity;
 
 import creativei.enums.*;
-import creativei.vo.EducationVo;
+
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
+import util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,38 @@ import java.util.List;
 
 @Entity
 public class Inquiry extends BaseEntity implements Serializable {
+
+public class Inquiry  extends BaseEntity implements Serializable  {
+    public Inquiry(){}
+
+    public Inquiry(InquiryVo inquiryVo) throws ParseException {
+        this.setId(inquiryVo.getId());
+        this.name= StringUtil.validateEmpty(inquiryVo.getName());
+        this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
+        this.phoneNumber=StringUtil.validateEmpty(inquiryVo.getMobile());
+        this.email=StringUtil.validateEmpty(inquiryVo.getEmail());
+        this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
+        this.gender=Gender.stringToEnum(inquiryVo.getGender());
+        this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
+        this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
+        if(inquiryVo.getAddress()!=null)
+            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress());
+        if(inquiryVo.getEducation()!=null) {
+            for(int i=0;i<inquiryVo.getEducation().size();i++) {
+                InquiryEducation inquiryEducations = new InquiryEducation(inquiryVo.getEducation().get(i));
+                this.inquiryEducation.add(inquiryEducations);
+            }
+        }
+        if(inquiryVo.getGuardian()!=null)
+            this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian());
+        if(inquiryVo.getMarketing()!=null)
+            this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing());
+    }
+
+    public Inquiry(Long id){
+        this.setId(id);
+    }
 
     @Column(nullable = false)
     private String name;
@@ -34,7 +67,7 @@ public class Inquiry extends BaseEntity implements Serializable {
     @Column(name = "computer_knowledge")
     private ComputerKnowledge computerKnowledge;
     @Column(name = "inquiry_status")
-    private InquiryStatus inquiryStatus = InquiryStatus.OPEN;
+    private InquiryStatus inquiryStatus;
     @ManyToOne
     private Branch branch;
     private Date dob;
@@ -77,37 +110,6 @@ public class Inquiry extends BaseEntity implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public Inquiry() {
-    }
-
-    public Inquiry(InquiryVo inquiryVo) throws ParseException {
-        this.setId(inquiryVo.getId());
-        this.name = inquiryVo.getName() == null || inquiryVo.getName().isEmpty() ? null : inquiryVo.getName();
-        this.areaOfInterest = AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber = inquiryVo.getMobile() == null || inquiryVo.getMobile().isEmpty() ? null : inquiryVo.getMobile();
-        this.email = inquiryVo.getEmail() == null || inquiryVo.getEmail().isEmpty() ? null : inquiryVo.getEmail();
-        this.highestEducation = EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob = LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
-        this.gender = Gender.stringToEnum(inquiryVo.getGender());
-        this.inquiryStatus = InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus()) == null ? InquiryStatus.OPEN : InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
-        this.computerKnowledge = ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
-        if (inquiryVo.getAddress() != null)
-            this.inquiryAddress = new InquiryAddress(inquiryVo.getAddress(), this);
-        if (inquiryVo.getEducation() != null) {
-            for (EducationVo educationVo : inquiryVo.getEducation()) {
-                this.inquiryEducations.add(new InquiryEducation(educationVo, this));
-            }
-        }
-        if (inquiryVo.getGuardian() != null)
-            this.inquiryGuardian = new InquiryGuardian(inquiryVo.getGuardian(), this);
-        if (inquiryVo.getMarketing() != null)
-            this.inquiryMarketing = new InquiryMarketing(inquiryVo.getMarketing(), this);
-    }
-
-    public Inquiry(Long id) {
-        this.setId(id);
     }
 
     public InquiryMarketing getInquiryMarketing() {

@@ -43,8 +43,7 @@ public class ResponseHelper {
         if (inquiryVo.getAddress() != null)
             inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), inquiryVo.getAddress()));
         if (inquiryVo.getEducation() != null)
-            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), new ArrayList<EducationVo>() {
-            }));
+            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducations()));
         if (inquiryVo.getGuardian() != null)
             inquiryVo.setGuardian(getCreateGuardianResponseData(inquiry.getInquiryGuardian(), inquiryVo.getGuardian()));
         if (inquiryVo.getMarketing() != null)
@@ -64,9 +63,10 @@ public class ResponseHelper {
         return addressVo;
     }
 
-    private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducations, List<EducationVo> educationVos) {
-        for (InquiryEducation inquiryEducation : inquiryEducations) {
-            EducationVo educationVo = new EducationVo();
+    private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducations) {
+        List<EducationVo> educationVos=new ArrayList<>();
+        for(InquiryEducation inquiryEducation:inquiryEducations){
+            EducationVo educationVo=new EducationVo();
             educationVo.setId(inquiryEducation.getId());
             educationVo.setAggregateMarks(inquiryEducation.getAggregateMarks());
             educationVo.setEducationQualification(EducationQualification.enumToString(inquiryEducation.getEducationQualification()));
@@ -117,8 +117,8 @@ public class ResponseHelper {
         inquiryVo.setClosingRemark(inquiry.getRemark());
         inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), new AddressVo()));
         List<EducationVo> educationVos = new ArrayList<>();
-        if (inquiry.getInquiryEducation() != null)
-            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), educationVos));
+        if (inquiry.getInquiryEducations() != null)
+            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducations()));
         if (inquiry.getInquiryGuardian() != null)
             inquiryVo.setGuardian(getCreateGuardianResponseData(inquiry.getInquiryGuardian(), new GuardianVo()));
         if (inquiry.getInquiryMarketing() != null)
@@ -148,8 +148,8 @@ public class ResponseHelper {
             inquiryVo.setClosingRemark(inquiries.get(i).getRemark());
             inquiryVo.setAddress(getCreateAddressResponseData(inquiries.get(i).getInquiryAddress(), new AddressVo()));
             List<EducationVo> educationVos = new ArrayList<>();
-            if (inquiries.get(i).getInquiryEducation() != null)
-                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducation(), educationVos));
+            if (inquiries.get(i).getInquiryEducations() != null)
+                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducations()));
             if (inquiries.get(i).getInquiryGuardian() != null)
                 inquiryVo.setGuardian(getCreateGuardianResponseData(inquiries.get(i).getInquiryGuardian(), new GuardianVo()));
             if (inquiries.get(i).getInquiryMarketing() != null)
@@ -183,8 +183,8 @@ public class ResponseHelper {
             inquiryVo.setClosingRemark(inquiries.get(i).getRemark());
             inquiryVo.setAddress(getCreateAddressResponseData(inquiries.get(i).getInquiryAddress(), new AddressVo()));
             List<EducationVo> educationVos = new ArrayList<>();
-            if (inquiries.get(i).getInquiryEducation() != null)
-                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducation(), educationVos));
+            if (inquiries.get(i).getInquiryEducations() != null)
+                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducations()));
             if (inquiries.get(i).getInquiryGuardian() != null)
                 inquiryVo.setGuardian(getCreateGuardianResponseData(inquiries.get(i).getInquiryGuardian(), new GuardianVo()));
             if (inquiries.get(i).getInquiryMarketing() != null)

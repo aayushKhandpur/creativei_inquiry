@@ -14,7 +14,8 @@ import java.io.Serializable;
 public class InquiryMarketing extends BaseEntity implements Serializable {
     public InquiryMarketing(){}
 
-    public InquiryMarketing(MarketingVo marketingVo){
+    public InquiryMarketing(MarketingVo marketingVo,Inquiry inquiry){
+        this.inquiry=inquiry;
         this.marketingSource=MarketingSource.stringToEnum(marketingVo.getSource());
         this.isReferred=marketingVo.getReferred()==null?null:marketingVo.getReferred();
         this.referant=marketingVo.getReferant()==null||marketingVo.getReferant().isEmpty()?null:marketingVo.getReferant();

@@ -2,6 +2,7 @@ package creativei.entity;
 
 import creativei.enums.*;
 
+import creativei.vo.EducationVo;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
 import util.LocalizationUtil;
@@ -29,13 +30,15 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
         this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
+        this.closingStatus =FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());
+        this.closingSubStatus=FollowUpSubStatus.stringToEnum(inquiryVo.getClosingSubStatus());
+        this.remark=inquiryVo.getClosingRemark();
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress(),this);
         if(inquiryVo.getEducation()!=null) {
-            for(int i=0;i<inquiryVo.getEducation().size();i++) {
-                InquiryEducation inquiryEducations = new InquiryEducation(inquiryVo.getEducation().get(i),this);
-                this.inquiryEducations.add(inquiryEducations);
+            for (EducationVo educationVo : inquiryVo.getEducation()) {
+                this.inquiryEducations.add(new InquiryEducation(educationVo, this));
             }
         }
         if(inquiryVo.getGuardian()!=null)

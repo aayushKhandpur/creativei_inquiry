@@ -35,26 +35,27 @@ public class FollowUpServiceImpl implements FollowUpService {
     }
 
     private Boolean validateFollowUp(FollowUp followUp) {
-
+        logger.info("Inside Validate Follow Up Method");
+        
         if (followUp.getCaseIndex() == null) {
-            logger.error("CaseIndex field does not have appropirate value");
+            logger.error("CaseIndex field is null");
             return false;
         }
         if (followUp.getFollowUpDate() == null) {
-            logger.error("FollowUp Type field does not have appropirate value");
+            logger.error("FollowUp Type field is null");
             return false;
         }
 
         if (followUp.getType() == null) {
-            logger.error("FollowUp Type field does not have appropirate value");
+            logger.error("FollowUp Type field is null");
             return false;
         }
         if (followUp.getStatus() == null) {
-            logger.error("FollowUp Status field does not have appropirate value");
+            logger.error("FollowUp Status field is null");
             return false;
         }
         if (followUp.getSubStatus() == null) {
-            logger.error("Follow Up SubStatus field does not have appropirate value");
+            logger.error("Follow Up SubStatus field is null");
             return false;
         }
         return true;

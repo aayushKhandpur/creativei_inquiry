@@ -4,6 +4,7 @@ import creativei.dao.BranchDao;
 import creativei.dao.InquiryDao;
 import creativei.entity.Branch;
 import creativei.entity.Inquiry;
+import creativei.enums.ExceptionType;
 import creativei.enums.InquiryStatus;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
@@ -35,16 +36,22 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public List<Inquiry> getByStatus(InquiryStatus status) {
-        return inquiryDao.findByInquiryStatus(status);
+    public List<Inquiry> getByStatus(InquiryStatus status) throws NoDataAvailable {
+        List<Inquiry> inquiries = inquiryDao.findByInquiryStatus(status);
+        if (inquiries.size() == 0) {
+            throw new NoDataAvailable(ExceptionType.DATA_NOT_AVAILABLE.getMessage());
+        }
+        return inquiries;
     }
 
     @Override
-    public Inquiry getById(Long id) throws NoDataAvailable{
-        if(inquiryDao.findOne(id)==null){
-            throw new NoDataAvailable("There is not data available for this id in your database");
+    public Inquiry getById(Long id) throws NoDataAvailable {
+        logger.info("Inquiry getById");
+        Inquiry inquiry = inquiryDao.findOne(id);
+        if (inquiry == null) {
+            throw new NoDataAvailable(ExceptionType.DATA_NOT_AVAILABLE.getMessage());
         }
-        return inquiryDao.findOne(id);
+        return inquiry;
     }
 
     @Override
@@ -53,17 +60,16 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry create(Inquiry inquiry) throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest {
-        try{
+    public Inquiry create(Inquiry inquiry) throws  DataIntegrityException, InvalidParamRequest {
+        logger.info("Inquiry Create");
+        try {
             return inquiryDao.save(inquiry);
-        } catch (DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                if(ce.getConstraintName()==null)
-                    throw new InvalidParamRequest("Required Field Can not be Empty");
-                else
-                    throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }
@@ -75,17 +81,16 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry update(Inquiry inquiry)throws UniqueConstraintViolationException, DataIntegrityException,InvalidParamRequest  {
-        try{
+    public Inquiry update(Inquiry inquiry) throws  DataIntegrityException, InvalidParamRequest {
+        logger.info("Inquiry Create");
+        try {
             return inquiryDao.save(inquiry);
-        }catch (DataIntegrityViolationException de){
+        } catch (DataIntegrityViolationException de) {
             logger.error(de.getMessage(), de);
-            if(de.getCause() instanceof ConstraintViolationException){
+            if (de.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException ce = (ConstraintViolationException) de.getCause();
-                if(ce.getConstraintName()==null)
-                    throw new InvalidParamRequest("Required Field Can not be Empty");
-                else
-                    throw UniqueConstraintViolationException.getInstance(ce.getConstraintName(), ce.getMessage());
+                if (ce.getConstraintName() == null)
+                    throw new InvalidParamRequest(ce.getCause().getMessage());
             }
             throw new DataIntegrityException(de.getMessage());
         }

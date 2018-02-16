@@ -3,6 +3,7 @@ package creativei.vo;
 import java.util.Date;
 
 public class FollowUpVo {
+    private Long id;
     private String followUpDate;
     private String followUpType;
     private String followUpStatus;
@@ -10,6 +11,14 @@ public class FollowUpVo {
     private String caseIndex;
     private String subStatus;
     private Long inquiryId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getInquiryId() {
         return inquiryId;

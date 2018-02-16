@@ -1,5 +1,7 @@
 package creativei.controller;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import creativei.entity.FollowUp;
 import creativei.enums.ExceptionType;
@@ -40,10 +42,29 @@ public class FollowUpController {
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
-        }catch (Exception e){
-            logger.error(e.getMessage(),e);
-            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
 
+    }
+
+    @PostMapping(value = "/follow-up/update", produces = "application/json")
+    public @ResponseBody
+    ResponseObject updateFollowUp(@RequestBody String followUpStr, HttpServletRequest request) {
+        try {
+            if (RequestHelper.isEmptyRequestString(followUpStr)) {
+                return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
+            }
+            FollowUpVo followUpVo = new ObjectMapper().readValue(followUpStr, FollowUpVo.class);
+            ResponseObject responseObject = followUpManager.updateFollowUp(followUpVo);
+            return responseObject;
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+        }
     }
 }

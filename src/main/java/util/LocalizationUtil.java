@@ -12,6 +12,8 @@ public class LocalizationUtil {
         return dateFormat.format(date);
     }
     public static final Date stringToDateConverter(String string) throws ParseException{
+        if(string==null||string.isEmpty())
+            return null;
         return dateFormat.parse(string);
     }
 }

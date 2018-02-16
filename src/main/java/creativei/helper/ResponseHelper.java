@@ -197,6 +197,7 @@ public class ResponseHelper {
     }
 
     public static FollowUpVo getCreateFollowUpData(FollowUp followUp, FollowUpVo followUpVo) {
+        followUpVo.setId(followUp.getId());
         followUpVo.setCaseIndex(CaseIndex.enumToString(followUp.getCaseIndex()));
         followUpVo.setFollowUpDate(LocalizationUtil.getFormattedDate(followUp.getFollowUpDate()));
         followUpVo.setFollowUpStatus(FollowUpStatus.enumToString(followUp.getStatus()));

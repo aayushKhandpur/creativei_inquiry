@@ -39,6 +39,10 @@ export class InqDetailsPage {
   private enqSource;
   private responseData;
   private currentInqId;
+  private currentInqAddressId;
+  private currentInqEducationId;
+  private currentInqGuardianId;
+  private currentInqMarketingId;
   private currentInq;
   private requestData;
 
@@ -131,7 +135,12 @@ export class InqDetailsPage {
   logForm() {
     if(this.inqForm.valid){
       if(this.currentInq){
-        this.requestData = Object.assign({},this.inqForm.value,{id: this.currentInqId})
+        this.requestData = Object.assign({},this.inqForm.value);
+        this.requestData.id = this.currentInqId;
+        this.requestData.address.id = this.currentInqAddressId;
+        this.requestData.education[0].id = this.currentInqEducationId;
+        this.requestData.guardian.id = this.currentInqGuardianId;
+        this.requestData.marketing.id = this.currentInqMarketingId;
       }else{
         this.requestData = Object.assign({},this.inqForm.value);
       }
@@ -178,6 +187,10 @@ export class InqDetailsPage {
             console.log("complete");
             this.patchData(this.currentInq.data);
             this.getLocality(this.currentInq.data.address.pin);
+            this.currentInqAddressId = this.currentInq.data.address.id;
+            this.currentInqEducationId = this.currentInq.data.education[0].id;
+            this.currentInqGuardianId = this.currentInq.data.guardian.id;
+            this.currentInqMarketingId = this.currentInq.data.marketing.id;
             this.loading.dismissAll();
           }
         )

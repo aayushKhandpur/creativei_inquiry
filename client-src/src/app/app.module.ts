@@ -13,6 +13,7 @@ import { InqDetailsPage } from '../pages/inq-details/inq-details';
 import { InqListPage } from '../pages/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/inq-summary/inq-summary';
 import { ThankyouPage } from '../pages/thankyou/thankyou';
+import { InqCloseModalPage } from '../pages/inq-close-modal/inq-close-modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,6 +23,7 @@ import { NotificationProvider } from '../providers/notification/notification';
 import { LocalityProvider } from '../providers/locality/locality';
 import { NotificationMessageProvider } from '../providers/notification-message/notification-message';
 import { HelperProvider } from '../providers/helper/helper';
+import { FollowUpProvider } from '../providers/follow-up/follow-up';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { HelperProvider } from '../providers/helper/helper';
     InqDetailsPage,
     InqListPage,
     InqSummaryPage,
-    ThankyouPage
+    ThankyouPage,
+    InqCloseModalPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { HelperProvider } from '../providers/helper/helper';
     InqDetailsPage,
     InqListPage,
     InqSummaryPage,
-    ThankyouPage
+    ThankyouPage,
+    InqCloseModalPage
   ],
   providers: [
     StatusBar,
@@ -61,7 +65,8 @@ import { HelperProvider } from '../providers/helper/helper';
     NotificationProvider,
     LocalityProvider,
     NotificationMessageProvider,
-    HelperProvider
+    HelperProvider,
+    FollowUpProvider
   ]
 })
 export class AppModule {}

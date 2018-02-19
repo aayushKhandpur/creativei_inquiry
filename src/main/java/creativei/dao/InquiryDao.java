@@ -11,6 +11,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public interface InquiryDao extends JpaRepository<Inquiry,Long>{
+public interface InquiryDao extends JpaRepository<Inquiry,Long>, InquiryCustomDao{
     List<Inquiry> findByInquiryStatus(@Param("status")InquiryStatus status);
 }

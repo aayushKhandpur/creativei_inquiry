@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { TitleCasePipe } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
@@ -12,6 +12,7 @@ import { NotificationMessageProvider } from '../../providers/notification-messag
 import { LocalityProvider } from '../../providers/locality/locality';
 import { HelperProvider } from '../../providers/helper/helper';
 import { ThankyouPage } from '../thankyou/thankyou';
+import { InqCloseModalPage } from '../inq-close-modal/inq-close-modal';
 
 @Component({
   selector: 'page-inq-details',
@@ -19,7 +20,6 @@ import { ThankyouPage } from '../thankyou/thankyou';
 })
 export class InqDetailsPage {
 
-  private diffState: boolean;
   private pinService: RemoteData;
   private localities;
   private areas;
@@ -39,15 +39,23 @@ export class InqDetailsPage {
   private guardianOccupation;
   private enqSource;
   private responseData;
-  private currentInqId;
   private currentInq;
+  private currentInqId;
+  private currentInqAddressId;
+  private currentInqEducationId;
+  private currentInqGuardianId;
+  private currentInqMarketingId;
+  private currentInqStatus;
+  private currentInqClosingStatus;
+  private currentInqClosingSubStatus;
+  private currentInqClosingRemark;
   private requestData;
 
   private inqForm: FormGroup;
 
   today : string = new Date().toISOString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
 
     this.updateInq();
     
@@ -103,7 +111,6 @@ export class InqDetailsPage {
     this.setGuardianRelation();
     this.setGuardinaOccupation();
     this.setMarketingSource();
-    this.diffState = false;
     this.pinService = this.completerService.remote(null);
     this.pinService.urlFormater(term => {
       return `http://localhost:9002/pincodes?pincode=${term}`;
@@ -133,7 +140,16 @@ export class InqDetailsPage {
   logForm() {
     if(this.inqForm.valid){
       if(this.currentInq){
-        this.requestData = Object.assign({},this.inqForm.value,{id: this.currentInqId})
+        this.requestData = Object.assign({},this.inqForm.value);
+        this.requestData.id = this.currentInqId;
+        this.requestData.address.id = this.currentInqAddressId;
+        this.requestData.education[0].id = this.currentInqEducationId;
+        this.requestData.guardian.id = this.currentInqGuardianId;
+        this.requestData.marketing.id = this.currentInqMarketingId;
+        this.requestData.inquiryStatus = this.currentInqStatus;
+        this.requestData.closingStatus = this.currentInqClosingStatus;
+        this.requestData.closingSubStatus = this.currentInqClosingSubStatus;
+        this.requestData.closingRemark = this.currentInqClosingRemark;
       }else{
         this.requestData = Object.assign({},this.inqForm.value);
       }
@@ -165,12 +181,8 @@ export class InqDetailsPage {
     }
   }
 
-  changeState() {
-    this.diffState = !this.diffState;
-  }
-
   updateInq(){
-    if(this.navParams.data){
+    if(typeof this.navParams.data === 'number'){
       this.currentInqId = this.navParams.data;
       console.log("Inquiry ID to be edited is",this.currentInqId);
       this.presentLoadingCustom();
@@ -182,8 +194,17 @@ export class InqDetailsPage {
           error => { console.log("GET unsucessful, the server returned this error:", error), this.loading.dismissAll(); },
           () => {
             console.log("complete");
-            this.loading.dismissAll();
             this.patchData(this.currentInq.data);
+            this.getLocality(this.currentInq.data.address.pin);
+            this.currentInqAddressId = this.currentInq.data.address.id;
+            this.currentInqEducationId = this.currentInq.data.education[0].id;
+            this.currentInqGuardianId = this.currentInq.data.guardian.id;
+            this.currentInqMarketingId = this.currentInq.data.marketing.id;
+            this.setClosingStatus(this.currentInq.data.closingStatus);
+            this.setClosingSubStatus(this.currentInq.data.closingSubStatus);
+            this.setClosingRemark(this.currentInq.data.closingRemark);
+            this.setInqStatus(this.currentInq.data.inquiryStatus);
+            this.loading.dismissAll();
           }
         )
     }
@@ -193,6 +214,66 @@ export class InqDetailsPage {
     let patch = this.helper.removeEmptyFromObject(inq);
     console.log("Object to be patched:", patch);
     this.inqForm.patchValue(patch);
+  }
+
+  isInqOpen(status){
+    if(status.toLowerCase() == "open"){
+      return true;
+    }else return false;
+  }
+
+  changeInqStatus(e){
+    console.log(e);
+    if(e == "close"){
+      this.showInqCloseModal();
+    }else if(e == "open"){
+      this.setInqStatus('open');
+      this.setClosingStatus(null);
+      this.setClosingSubStatus(null);
+      this.setClosingRemark(null);
+    }
+  }
+
+  showInqCloseModal(){
+    let modal = this.modalCtrl.create(
+      InqCloseModalPage
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+        this.setClosingStatus(data.closingStatus);
+        this.setClosingSubStatus(data.closingSubStatus);
+        this.setClosingRemark(data.closingRemark);
+        this.setInqStatus('close');
+      }
+    });
+  }
+
+  setClosingStatus(data){
+    if(data){
+      this.currentInqClosingStatus = data;
+    }else{
+      this.currentInqClosingRemark = '';
+        }
+  }
+  setClosingSubStatus(data){
+    if(data){
+      this.currentInqClosingSubStatus = data;
+    }else{
+      this.currentInqClosingRemark = '';
+    }
+  }
+  setClosingRemark(data){
+    if(data){
+      this.currentInqClosingRemark = data;
+    }else{
+      this.currentInqClosingRemark = '';
+    }
+  }
+
+  setInqStatus(status){
+    this.currentInqStatus = status.toLowerCase();
   }
 
   setLocality(locality){
@@ -217,6 +298,10 @@ export class InqDetailsPage {
       console.log(pincode);
       this.getLocality(pincode.originalObject);
     }
+  }
+
+  setPincodeFieldTypeNumber(){
+    document.getElementById('completer-input').setAttribute('type','number');
   }
 
   setEnums(){

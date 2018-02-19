@@ -43,7 +43,7 @@ public class ResponseHelper {
         if (inquiryVo.getAddress() != null)
             inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), inquiryVo.getAddress()));
         if (inquiryVo.getEducation() != null)
-            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), new ArrayList<EducationVo>() {}));
+            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducations()));
         if (inquiryVo.getGuardian() != null)
             inquiryVo.setGuardian(getCreateGuardianResponseData(inquiry.getInquiryGuardian(), inquiryVo.getGuardian()));
         if (inquiryVo.getMarketing() != null)
@@ -63,7 +63,8 @@ public class ResponseHelper {
         return addressVo;
     }
 
-    private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducations, List<EducationVo> educationVos) {
+    private static List<EducationVo> getCreateEducationResponseData(List<InquiryEducation> inquiryEducations) {
+        List<EducationVo> educationVos=new ArrayList<>();
         for(InquiryEducation inquiryEducation:inquiryEducations){
             EducationVo educationVo=new EducationVo();
             educationVo.setId(inquiryEducation.getId());
@@ -93,12 +94,13 @@ public class ResponseHelper {
     private static MarketingVo getCreateMarketingResponseData(InquiryMarketing inquiryMarketing, MarketingVo marketingVo) {
         marketingVo.setId(inquiryMarketing.getId());
         marketingVo.setSource(MarketingSource.enumToString(inquiryMarketing.getMarketingSource()));
-        marketingVo.setReferant(inquiryMarketing.getReferant() );
+        marketingVo.setReferant(inquiryMarketing.getReferant());
         marketingVo.setReferred(inquiryMarketing.getIsReferred());
         return marketingVo;
     }
 
-    public static InquiryVo getInquiryResponseById(Inquiry inquiry, InquiryVo inquiryVo) {
+    public static InquiryVo getInquiryResponseById(Inquiry inquiry) {
+        InquiryVo inquiryVo = new InquiryVo();
         inquiryVo.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         inquiryVo.setName(inquiry.getName());
         inquiryVo.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
@@ -115,8 +117,8 @@ public class ResponseHelper {
         inquiryVo.setClosingRemark(inquiry.getRemark());
         inquiryVo.setAddress(getCreateAddressResponseData(inquiry.getInquiryAddress(), new AddressVo()));
         List<EducationVo> educationVos = new ArrayList<>();
-        if (inquiry.getInquiryEducation() != null)
-            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducation(), educationVos));
+        if (inquiry.getInquiryEducations() != null)
+            inquiryVo.setEducation(getCreateEducationResponseData(inquiry.getInquiryEducations()));
         if (inquiry.getInquiryGuardian() != null)
             inquiryVo.setGuardian(getCreateGuardianResponseData(inquiry.getInquiryGuardian(), new GuardianVo()));
         if (inquiry.getInquiryMarketing() != null)
@@ -124,7 +126,8 @@ public class ResponseHelper {
         return inquiryVo;
     }
 
-    public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries, InquiryVo inquiryVo) {
+    public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries) {
+        InquiryVo inquiryVo = new InquiryVo();
         List<InquiryVo> inquiryVos = new ArrayList<>();
         Iterator iterator = inquiries.iterator();
         int i = 0;
@@ -145,8 +148,8 @@ public class ResponseHelper {
             inquiryVo.setClosingRemark(inquiries.get(i).getRemark());
             inquiryVo.setAddress(getCreateAddressResponseData(inquiries.get(i).getInquiryAddress(), new AddressVo()));
             List<EducationVo> educationVos = new ArrayList<>();
-            if (inquiries.get(i).getInquiryEducation() != null)
-                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducation(), educationVos));
+            if (inquiries.get(i).getInquiryEducations() != null)
+                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducations()));
             if (inquiries.get(i).getInquiryGuardian() != null)
                 inquiryVo.setGuardian(getCreateGuardianResponseData(inquiries.get(i).getInquiryGuardian(), new GuardianVo()));
             if (inquiries.get(i).getInquiryMarketing() != null)
@@ -158,7 +161,8 @@ public class ResponseHelper {
         return inquiryVos;
     }
 
-    public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries, InquiryVo inquiryVo) {
+    public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries) {
+        InquiryVo inquiryVo = new InquiryVo();
         List<InquiryVo> inquiryVos = new ArrayList<>();
         Iterator iterator = inquiries.iterator();
         int i = 0;
@@ -179,8 +183,8 @@ public class ResponseHelper {
             inquiryVo.setClosingRemark(inquiries.get(i).getRemark());
             inquiryVo.setAddress(getCreateAddressResponseData(inquiries.get(i).getInquiryAddress(), new AddressVo()));
             List<EducationVo> educationVos = new ArrayList<>();
-            if (inquiries.get(i).getInquiryEducation() != null)
-                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducation(), educationVos));
+            if (inquiries.get(i).getInquiryEducations() != null)
+                inquiryVo.setEducation(getCreateEducationResponseData(inquiries.get(i).getInquiryEducations()));
             if (inquiries.get(i).getInquiryGuardian() != null)
                 inquiryVo.setGuardian(getCreateGuardianResponseData(inquiries.get(i).getInquiryGuardian(), new GuardianVo()));
             if (inquiries.get(i).getInquiryMarketing() != null)
@@ -193,6 +197,7 @@ public class ResponseHelper {
     }
 
     public static FollowUpVo getCreateFollowUpData(FollowUp followUp, FollowUpVo followUpVo) {
+        followUpVo.setId(followUp.getId());
         followUpVo.setCaseIndex(CaseIndex.enumToString(followUp.getCaseIndex()));
         followUpVo.setFollowUpDate(LocalizationUtil.getFormattedDate(followUp.getFollowUpDate()));
         followUpVo.setFollowUpStatus(FollowUpStatus.enumToString(followUp.getStatus()));

@@ -145,6 +145,10 @@ export class InqForm1Page {
     }
   }
 
+  setPincodeFieldTypeNumber(){
+    document.getElementById('completer-input').setAttribute('type','number');
+  }
+
   setEnums(){
     this.enums = this.inqProvider.getEnums();
   }

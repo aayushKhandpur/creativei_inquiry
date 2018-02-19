@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from 'ionic-angular';
+import { ToastController, Toast } from 'ionic-angular';
 
 @Injectable()
 export class NotificationProvider {
   
-  private toast;
+  private toast: Toast;
   
   constructor(public toastCtrl: ToastController) {
     console.log('Hello NotificationProvider Provider');
   }
   
   showInfo(message) {
+    try {
+      this.toast.dismiss();
+    } catch(e) {}
     this.toast = this.toastCtrl.create({
       message: message,
       position: "top",
@@ -24,6 +27,9 @@ export class NotificationProvider {
   }
 
   showError(message) {
+    try {
+      this.toast.dismiss();
+    } catch(e) {}
     this.toast = this.toastCtrl.create({
       message: message,
       position: "top",

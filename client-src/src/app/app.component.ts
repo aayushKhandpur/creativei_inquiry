@@ -3,6 +3,9 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { InqProvider } from '../providers/inq/inq';
+import { FollowUpProvider } from '../providers/follow-up/follow-up';
+
 import { HomePage } from '../pages/home/home';
 import { InqForm1Page } from '../pages/inq-form1/inq-form1';
 import { InqDetailsPage } from '../pages/inq-details/inq-details';
@@ -19,7 +22,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private inqProvider: InqProvider, private followUpProvider: FollowUpProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -39,6 +42,10 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      //Getting all the enum values for the application here
+      this.inqProvider.getEnums();
+      this.followUpProvider.getEnums();
+
     });
   }
 

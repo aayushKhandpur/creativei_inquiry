@@ -1,6 +1,7 @@
 package creativei.service.impl;
 
 import creativei.dao.BranchDao;
+import creativei.dao.InquiryCustomDao;
 import creativei.dao.InquiryDao;
 import creativei.entity.Branch;
 import creativei.entity.Inquiry;
@@ -29,6 +30,9 @@ public class InquiryServiceImpl implements InquiryService {
     private static final Logger logger = LoggerFactory.getLogger(InquiryService.class);
     @Autowired
     private InquiryDao inquiryDao;
+
+    @Autowired
+    private InquiryCustomDao inquiryCustomDao;
 
     @Override
     public List<Inquiry> getAll() {

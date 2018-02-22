@@ -4,10 +4,10 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
-import { HelperProvider } from '../../providers/helper/helper';
+import { InqProvider } from '../../../providers/inq/inq';
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { HelperProvider } from '../../../providers/helper/helper';
 import { ThankyouPage } from '../thankyou/thankyou';
 
 @Component({

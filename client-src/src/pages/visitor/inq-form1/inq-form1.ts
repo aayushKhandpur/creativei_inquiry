@@ -6,11 +6,11 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { CompleterService, RemoteData, CompleterItem } from 'ng2-completer';
 
-import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
-import { LocalityProvider } from '../../providers/locality/locality';
-import { HelperProvider } from '../../providers/helper/helper';
+import { InqProvider } from '../../../providers/inq/inq';
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { LocalityProvider } from '../../../providers/locality/locality';
+import { HelperProvider } from '../../../providers/helper/helper';
 import { InqForm2Page } from '../inq-form2/inq-form2';
 
 @Component({

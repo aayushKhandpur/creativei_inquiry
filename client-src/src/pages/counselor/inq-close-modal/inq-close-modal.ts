@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { FollowUpProvider } from '../../providers/follow-up/follow-up'
+import { FollowUpProvider } from '../../../providers/follow-up/follow-up'
 
 @Component({
   selector: 'page-inq-close-modal',

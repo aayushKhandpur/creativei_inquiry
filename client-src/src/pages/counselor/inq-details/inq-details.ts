@@ -6,12 +6,11 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { CompleterService, RemoteData, CompleterItem } from 'ng2-completer';
 
-import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
-import { LocalityProvider } from '../../providers/locality/locality';
-import { HelperProvider } from '../../providers/helper/helper';
-import { ThankyouPage } from '../thankyou/thankyou';
+import { InqProvider } from '../../../providers/inq/inq';
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { LocalityProvider } from '../../../providers/locality/locality';
+import { HelperProvider } from '../../../providers/helper/helper';
 import { InqCloseModalPage } from '../inq-close-modal/inq-close-modal';
 
 @Component({
@@ -160,10 +159,14 @@ export class InqDetailsPage {
         data => { 
           this.responseData = data;
           if(this.responseData.data){
-            this.notify.showInfo(this.message.INQUIRY.REGISTER.SUCCESS);
+            if(this.currentInq){
+              this.notify.showInfo(this.message.INQUIRY.UPDATE.SUCCESS);
+            }else this.notify.showInfo(this.message.INQUIRY.REGISTER.SUCCESS);
             console.log("POST successful, the response data is:", data);
           }else{
-            this.notify.showError(this.message.INQUIRY.REGISTER.FAILURE);
+            if(this.currentInq){
+              this.notify.showError(this.message.INQUIRY.UPDATE.FAILURE);
+            }else this.notify.showError(this.message.INQUIRY.REGISTER.FAILURE);
             console.log("POST unsucessful, server responded with error", this.responseData.exception);
           }
         },
@@ -171,9 +174,6 @@ export class InqDetailsPage {
         () => {
           console.log("complete");
           this.loading.dismissAll();
-          if(this.responseData.data){
-            this.navCtrl.setRoot(ThankyouPage);
-          }
         }
         );
     }else{

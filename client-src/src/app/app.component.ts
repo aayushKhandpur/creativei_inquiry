@@ -8,6 +8,7 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
 
 import { HomePage } from '../pages/home/home';
 import { InqForm1Page } from '../pages/visitor/inq-form1/inq-form1';
+import { CounselorHomePage } from '../pages/counselor/home/home';
 import { InqDetailsPage } from '../pages/counselor/inq-details/inq-details';
 import { InqListPage } from '../pages/counselor/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
@@ -20,18 +21,21 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  visitorPages: Array<{title: string, component: any}>;
+  counselorPages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private inqProvider: InqProvider, private followUpProvider: FollowUpProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
+    this.visitorPages = [
       { title: 'Home', component: HomePage },
-      { title: 'Inquiry Form', component: InqForm1Page },
-      { title: 'Inquiry Details', component: InqDetailsPage},
-      { title: 'Inquiry List', component: InqListPage},
-      { title: 'Inquiry Summary', component: InqSummaryPage}
+    ];
+    this.counselorPages = [
+      { title: 'Home', component: CounselorHomePage},
+      { title: 'View Inquiries', component: InqListPage},
+      { title: 'Reports', component: InqSummaryPage},
+      { title: 'Logout', component: HomePage}
     ];
 
   }

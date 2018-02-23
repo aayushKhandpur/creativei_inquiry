@@ -34,7 +34,8 @@ export class InqForm1Page {
   private computerKnowledge;
   private areasOfInterest;
 
-  today : string = new Date().toISOString();
+  today: string = new Date().toISOString();
+  private activeMenu: string = "visitor";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
     this.inqForm = this.formBuilder.group({
@@ -53,6 +54,7 @@ export class InqForm1Page {
       areaOfInterest: ['', Validators.required]
     });
 
+    this.helper.setActiveMenu(this.activeMenu);
     this.setEnums();
     this.setGenders();
     this.setQualifications();

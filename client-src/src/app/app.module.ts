@@ -9,10 +9,11 @@ import { HomePage } from '../pages/home/home';
 import { InqForm1Page } from '../pages/visitor/inq-form1/inq-form1';
 import { InqForm2Page } from '../pages/visitor/inq-form2/inq-form2';
 import { InqForm3Page } from '../pages/visitor/inq-form3/inq-form3';
+import { ThankyouPage } from '../pages/visitor/thankyou/thankyou';
+import { CounselorHomePage } from '../pages/counselor/home/home';
 import { InqDetailsPage } from '../pages/counselor/inq-details/inq-details';
 import { InqListPage } from '../pages/counselor/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
-import { ThankyouPage } from '../pages/visitor/thankyou/thankyou';
 import { InqCloseModalPage } from '../pages/counselor/inq-close-modal/inq-close-modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -36,7 +37,8 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
     InqListPage,
     InqSummaryPage,
     ThankyouPage,
-    InqCloseModalPage
+    InqCloseModalPage,
+    CounselorHomePage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
     InqListPage,
     InqSummaryPage,
     ThankyouPage,
-    InqCloseModalPage
+    InqCloseModalPage,
+    CounselorHomePage
   ],
   providers: [
     StatusBar,

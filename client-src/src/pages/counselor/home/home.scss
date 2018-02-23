@@ -1,3 +1,17 @@
-page-home {
-
+page-counselor-home {
+    .no-padding{
+        padding: 0;
+    }
+    .blockquote {
+        font-size: 16px;
+        width: fit-content;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        border-left: 3px solid #ccc;
+    } 
+    .inq-stats{
+        font-size: 3rem;
+    }
 }

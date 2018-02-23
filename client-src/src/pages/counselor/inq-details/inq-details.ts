@@ -178,6 +178,7 @@ export class InqDetailsPage {
         );
     }else{
       this.notify.showError(this.message.FORM.INVALID);
+      this.helper.markInvalidFields(this.inqForm);
     }
   }
 

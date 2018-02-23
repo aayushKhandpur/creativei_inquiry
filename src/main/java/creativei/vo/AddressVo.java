@@ -18,6 +18,17 @@ public class AddressVo {
 
     public AddressVo(){}
 
+    public AddressVo(InquiryAddress inquiryAddress){
+        this.pin=inquiryAddress.getPincode();
+        this.addressLine1=inquiryAddress.getAddressLine1();
+        this.id=inquiryAddress.getId();
+        this.locationId=inquiryAddress.getLocation().getId();
+        this.city=inquiryAddress.getLocation().getCity().getName();
+        this.area=inquiryAddress.getLocation().getName();
+        this.country=inquiryAddress.getLocation().getCity().getState().getCountry();
+        this.state=inquiryAddress.getLocation().getCity().getState().getName();
+    }
+
     public AddressVo(String area, String city, String state, String country) {
         this.area=area;
         this.city=city;

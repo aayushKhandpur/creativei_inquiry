@@ -1,5 +1,9 @@
 package creativei.vo;
 
+import creativei.entity.InquiryGuardian;
+import creativei.enums.Occupation;
+import creativei.enums.Relation;
+
 public class GuardianVo {
     private Long id;
     private String name;
@@ -7,6 +11,16 @@ public class GuardianVo {
     private String email;
     private String occupation;
     private String relation;
+
+    public GuardianVo(){}
+
+    public GuardianVo(InquiryGuardian inquiryGuardian){
+        this.setId(inquiryGuardian.getId());
+        this.name=inquiryGuardian.getName();
+        this.email=inquiryGuardian.getEmail();
+        this.occupation= Occupation.enumToString(inquiryGuardian.getOccupation());
+        this.relation= Relation.enumToString(inquiryGuardian.getRelation());
+    }
 
     public String getRelation() {
         return relation;

@@ -2,22 +2,16 @@ package creativei.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.regexp.internal.RE;
 import creativei.enums.ExceptionType;
 import creativei.enums.InquiryStatus;
-import creativei.exception.InvalidParamRequest;
-import creativei.helper.RequestHelper;
 import creativei.helper.RequestHelper;
 import creativei.manager.InquiryManager;
+import creativei.vo.FilterVo;
 import creativei.vo.InquiryVo;
 import creativei.vo.ResponseObject;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +31,7 @@ public class InquiryController {
     ResponseObject createInquiry(@RequestBody String inquiryStr, HttpServletRequest request) {
         logger.info("CreateInquiry method");
         try {
-            if(RequestHelper.isEmptyRequestString(inquiryStr))
+            if (RequestHelper.isEmptyRequestString(inquiryStr))
                 return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.create(inquiryVo);
@@ -53,7 +47,7 @@ public class InquiryController {
     ResponseObject updateInquiry(@RequestBody String inquiryStr, HttpServletRequest request) {
         logger.info("UpdateInquiry method");
         try {
-            if(RequestHelper.isEmptyRequestString(inquiryStr))
+            if (RequestHelper.isEmptyRequestString(inquiryStr))
                 return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
             InquiryVo inquiryVo = mapper.readValue(inquiryStr, InquiryVo.class);
             ResponseObject responseObject = inquiryManager.update(inquiryVo);
@@ -66,23 +60,43 @@ public class InquiryController {
 
     @RequestMapping(value = "/inquiry/server-info", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody
-     ResponseObject enumList(){
-         ResponseObject responseObject=inquiryManager.getInquiryServerInfo();
-         return responseObject;
+    ResponseObject enumList() {
+        ResponseObject responseObject = inquiryManager.getInquiryServerInfo();
+        return responseObject;
     }
 
-    @RequestMapping(value="inquiry/getById",produces = "application/json",method = RequestMethod.GET)
+    @RequestMapping(value = "inquiry/getById", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseObject getInquiryById(@RequestParam Long id){
+    ResponseObject getInquiryById(@RequestParam Long id) {
         return inquiryManager.getById(id);
     }
 
-    @RequestMapping(value = "inquiry/getAll",produces = "application/json",method = RequestMethod.GET)
+    @RequestMapping(value = "inquiry/getAll", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseObject getAllInqueries(){return inquiryManager.getAll();}
+    ResponseObject getAllInqueries() {
+        return inquiryManager.getAll();
+    }
 
-    @RequestMapping(value = "inquiry/getByStatus",produces = "application/json",method = RequestMethod.GET)
+    @RequestMapping(value = "inquiry/getByStatus", produces = "application/json", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseObject getInquiriesByStatus(@RequestParam InquiryStatus status){return inquiryManager.getByStatus(status);}
+    ResponseObject getInquiriesByStatus(@RequestParam InquiryStatus status) {
+        return inquiryManager.getByStatus(status);
+    }
+
+    @PostMapping(value = "/inquiry/getAllByFilter", produces = "application/json")
+    public @ResponseBody
+    ResponseObject getAllByFilter(@RequestBody String filterString, HttpServletRequest request) {
+        logger.info("getAllByFilter method");
+        try {
+            if (RequestHelper.isEmptyRequestString(filterString))
+                return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode());
+            FilterVo filterVo = mapper.readValue(filterString, FilterVo.class);
+            ResponseObject responseObject = inquiryManager.getAllByFilter(filterVo);
+            return responseObject;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
+        }
+    }
 }
 

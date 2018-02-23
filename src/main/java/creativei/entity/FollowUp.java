@@ -35,6 +35,10 @@ public class FollowUp extends BaseEntity implements Serializable {
     public FollowUp() {
     }
 
+    public FollowUp(Long id) {
+        this.setId(id);
+    }
+
     public FollowUp(FollowUpVo followUpVo) throws ParseException, NoDataAvailable {
         this.setId(followUpVo.getId());
         this.followUpDate = LocalizationUtil.stringToDateConverter(followUpVo.getFollowUpDate());
@@ -43,7 +47,7 @@ public class FollowUp extends BaseEntity implements Serializable {
         this.remark = followUpVo.getRemark();
         this.caseIndex = CaseIndex.stringToEnum(followUpVo.getCaseIndex());
         this.subStatus = FollowUpSubStatus.stringToEnum(followUpVo.getSubStatus());
-        this.inquiry=new Inquiry(followUpVo.getInquiryId());
+        this.inquiry = new Inquiry(followUpVo.getInquiryId(), followUpVo.getId());
     }
 
     public Date getFollowUpDate() {

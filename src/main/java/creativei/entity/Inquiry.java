@@ -1,5 +1,9 @@
 package creativei.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import creativei.enums.*;
 
 import creativei.vo.EducationVo;
@@ -15,41 +19,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 public class Inquiry extends BaseEntity implements Serializable {
-
-    public Inquiry(){}
-
-    public Inquiry(InquiryVo inquiryVo) throws ParseException {
-        this.setId(inquiryVo.getId());
-        this.name= StringUtil.validateEmpty(inquiryVo.getName());
-        this.areaOfInterest=AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
-        this.phoneNumber=StringUtil.validateEmpty(inquiryVo.getMobile());
-        this.email=StringUtil.validateEmpty(inquiryVo.getEmail());
-        this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
-        this.gender=Gender.stringToEnum(inquiryVo.getGender());
-        this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
-        this.closingStatus =FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());
-        this.closingSubStatus=FollowUpSubStatus.stringToEnum(inquiryVo.getClosingSubStatus());
-        this.remark=inquiryVo.getClosingRemark();
-        this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
-        if(inquiryVo.getAddress()!=null)
-            this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress(),this);
-        if(inquiryVo.getEducation()!=null) {
-            for (EducationVo educationVo : inquiryVo.getEducation()) {
-                this.inquiryEducations.add(new InquiryEducation(educationVo, this));
-            }
-        }
-        if(inquiryVo.getGuardian()!=null)
-            this.inquiryGuardian=new InquiryGuardian(inquiryVo.getGuardian(),this);
-        if(inquiryVo.getMarketing()!=null)
-            this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing(),this);
-    }
-
-    public Inquiry(Long id){
-        this.setId(id);
-    }
 
     @Column(nullable = false)
     private String name;
@@ -78,7 +52,8 @@ public class Inquiry extends BaseEntity implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryAddress inquiryAddress;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inquiry")
-    private List<InquiryEducation> inquiryEducations=new ArrayList<>();
+    @JsonIgnore
+    private List<InquiryEducation> inquiryEducations = new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;
     @OneToOne(cascade = CascadeType.ALL)
@@ -89,6 +64,41 @@ public class Inquiry extends BaseEntity implements Serializable {
     private FollowUpSubStatus closingSubStatus;
     @Column(name = "closing_remark")
     private String remark;
+    @OneToMany(mappedBy = "inquiry")
+    @JsonIgnore
+    private List<FollowUp> followUps = new ArrayList<>();
+    public Inquiry() {
+    }
+    public Inquiry(InquiryVo inquiryVo) throws ParseException {
+        this.setId(inquiryVo.getId());
+        this.name = StringUtil.validateEmpty(inquiryVo.getName());
+        this.areaOfInterest = AreaOfInterest.stringToEnum(inquiryVo.getAreaOfInterest());
+        this.phoneNumber = StringUtil.validateEmpty(inquiryVo.getMobile());
+        this.email = StringUtil.validateEmpty(inquiryVo.getEmail());
+        this.highestEducation = EducationQualification.stringToEnum(inquiryVo.gethQualification());
+        this.dob = LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
+        this.gender = Gender.stringToEnum(inquiryVo.getGender());
+        this.inquiryStatus = InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
+        this.closingStatus = FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());
+        this.closingSubStatus = FollowUpSubStatus.stringToEnum(inquiryVo.getClosingSubStatus());
+        this.remark = inquiryVo.getClosingRemark();
+        this.computerKnowledge = ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
+        if (inquiryVo.getAddress() != null)
+            this.inquiryAddress = new InquiryAddress(inquiryVo.getAddress(), this);
+        if (inquiryVo.getEducation() != null) {
+            for (EducationVo educationVo : inquiryVo.getEducation()) {
+                this.inquiryEducations.add(new InquiryEducation(educationVo, this));
+            }
+        }
+        if (inquiryVo.getGuardian() != null)
+            this.inquiryGuardian = new InquiryGuardian(inquiryVo.getGuardian(), this);
+        if (inquiryVo.getMarketing() != null)
+            this.inquiryMarketing = new InquiryMarketing(inquiryVo.getMarketing(), this);
+    }
+    public Inquiry(Long id, Long followUpId) {
+        this.setId(id);
+        this.followUps.add(new FollowUp(followUpId));
+    }
 
     public FollowUpStatus getClosingStatus() {
         return closingStatus;

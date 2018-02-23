@@ -1,5 +1,7 @@
 package creativei.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import creativei.enums.*;
 import creativei.vo.EducationVo;
 import util.StringUtil;
@@ -9,6 +11,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Inquiry_Education")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class InquiryEducation extends BaseEntity implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

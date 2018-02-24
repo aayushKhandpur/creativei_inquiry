@@ -22,5 +22,6 @@ public interface InquiryService {
     Inquiry createAll(List<Inquiry> inquiries);
     Inquiry update(Inquiry inquiry )throws  DataIntegrityException,InvalidParamRequest;
     Inquiry updateAll(List<Inquiry> inquiries);
+    List<Inquiry> getUnattendedInquiry(String boolParam,String statusParam);
 
 }

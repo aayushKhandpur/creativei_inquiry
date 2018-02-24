@@ -1,5 +1,8 @@
 package creativei.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import creativei.enums.*;
 
 import creativei.vo.EducationVo;
@@ -15,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 public class Inquiry extends BaseEntity implements Serializable {
 
@@ -80,6 +86,7 @@ public class Inquiry extends BaseEntity implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryAddress inquiryAddress;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inquiry")
+    @JsonIgnore
     private List<InquiryEducation> inquiryEducations=new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;

@@ -129,4 +129,10 @@ public class InquiryManagerImpl implements InquiryManager {
         return ResponseObject.getResponse(inquiryServerInfoVo);
     }
 
+    @Override
+    public ResponseObject getUnattendedInquiry(String boolParam,String statusParam) {
+        return ResponseObject.getResponse(inquiryService.getUnattendedInquiry(boolParam,statusParam));
+    }
+
+
 }

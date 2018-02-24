@@ -8,7 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface InquiryCustomDao extends JpaRepository<Inquiry,Long>{
+public interface InquiryCustomDao {
     List<Inquiry> findByInquiryStatus(InquiryStatus status);
+
     List<Inquiry> getFilteredInquiries(InquiryStatus status, CaseIndex caseIndex, Long cityId);
+
+    Inquiry save(Inquiry inquiry);
+
+    List<Inquiry> findAll();
+
+    Inquiry findOne(Long aLong);
 }

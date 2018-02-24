@@ -21,8 +21,9 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+
 @Repository
-@Transactional(readOnly=true)
+@Transactional
 public class InquiryCustomDaoImpl implements InquiryCustomDao {
 
     @Autowired
@@ -38,128 +39,27 @@ public class InquiryCustomDaoImpl implements InquiryCustomDao {
 
     @Override
     public List<Inquiry> getFilteredInquiries(InquiryStatus status, CaseIndex caseIndex, Long cityId) {
-        InquirySpecification inquirySpecification=new InquirySpecification(status,caseIndex,cityId);
-            return inquiryDao.findAll(inquirySpecification);
+        InquirySpecification inquirySpecification = new InquirySpecification(status, caseIndex, cityId);
+        return inquiryDao.findAll(inquirySpecification);
 
     }
 
     @Override
-    public <S extends Inquiry> S save(S s) {
-        return inquiryDao.save(s);
+    public Inquiry save(Inquiry inquiry) {
+        return inquiryDao.save(inquiry);
     }
+
 
     @Override
     public Inquiry findOne(Long aLong) {
         return inquiryDao.findOne(aLong);
     }
 
-    @Override
-    public boolean exists(Long aLong) {
-        return inquiryDao.exists(aLong);
-    }
 
     @Override
     public List<Inquiry> findAll() {
         return inquiryDao.findAll();
     }
 
-    @Override
-    public List<Inquiry> findAll(Sort sort) {
-        return  inquiryDao.findAll(sort);
-    }
 
-    @Override
-    public Page<Inquiry> findAll(Pageable pageable) {
-        return inquiryDao.findAll(pageable);
-    }
-
-    @Override
-    public List<Inquiry> findAll(Iterable<Long> iterable) {
-        return inquiryDao.findAll(iterable);
-    }
-
-    @Override
-    public long count() {
-        return inquiryDao.count();
-    }
-
-    @Override
-    public void delete(Long aLong) {
-
-    }
-
-    @Override
-    public void delete(Inquiry inquiry) {
-
-    }
-
-    @Override
-    public void delete(Iterable<? extends Inquiry> iterable) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
-
-    @Override
-    public void flush() {
-
-    }
-
-    @Override
-    public void deleteInBatch(Iterable<Inquiry> iterable) {
-
-    }
-
-    @Override
-    public void deleteAllInBatch() {
-
-    }
-
-    @Override
-    public Inquiry getOne(Long aLong) {
-        return inquiryDao.getOne(aLong);
-    }
-
-    @Override
-    public <S extends Inquiry> List<S> findAll(Example<S> example, Sort sort) {
-        return inquiryDao.findAll(example,sort);
-    }
-
-    @Override
-    public <S extends Inquiry> List<S> findAll(Example<S> example) {
-        return inquiryDao.findAll(example);
-    }
-
-    @Override
-    public <S extends Inquiry> S saveAndFlush(S s) {
-        return inquiryDao.saveAndFlush(s);
-    }
-
-    @Override
-    public <S extends Inquiry> List<S> save(Iterable<S> iterable) {
-        return inquiryDao.save(iterable);
-    }
-
-    @Override
-    public <S extends Inquiry> S findOne(Example<S> example) {
-        return inquiryDao.findOne(example);
-    }
-
-    @Override
-    public <S extends Inquiry> Page<S> findAll(Example<S> example, Pageable pageable) {
-        return inquiryDao.findAll(example, pageable);
-    }
-
-    @Override
-    public <S extends Inquiry> long count(Example<S> example) {
-        return inquiryDao.count(example);
-    }
-
-    @Override
-    public <S extends Inquiry> boolean exists(Example<S> example) {
-        return inquiryDao.exists(example);
-    }
 }

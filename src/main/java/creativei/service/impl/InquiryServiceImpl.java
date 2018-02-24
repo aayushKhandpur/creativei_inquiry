@@ -1,8 +1,6 @@
 package creativei.service.impl;
 
 import creativei.dao.InquiryCustomDao;
-import creativei.dao.InquiryDao;
-import creativei.entity.City;
 import creativei.entity.Inquiry;
 import creativei.enums.*;
 import creativei.exception.DataIntegrityException;
@@ -26,6 +24,7 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Autowired
     private InquiryCustomDao inquiryCustomDao;
+
     @Override
     public List<Inquiry> getAll() {
         return inquiryCustomDao.findAll();
@@ -56,7 +55,7 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry create(Inquiry inquiry) throws  DataIntegrityException, InvalidParamRequest {
+    public Inquiry create(Inquiry inquiry) throws DataIntegrityException, InvalidParamRequest {
         logger.info("Inquiry Create");
         try {
             return inquiryCustomDao.save(inquiry);
@@ -77,7 +76,7 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Inquiry update(Inquiry inquiry) throws  DataIntegrityException, InvalidParamRequest {
+    public Inquiry update(Inquiry inquiry) throws DataIntegrityException, InvalidParamRequest {
         logger.info("Inquiry Create");
         try {
             return inquiryCustomDao.save(inquiry);
@@ -99,9 +98,9 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public List<Inquiry> getAllByFilter(FilterVo filterVo) {
-        InquiryStatus status=InquiryStatus.stringToEnum(filterVo.getInquiryVo().getInquiryStatus());
-        CaseIndex caseIndex=CaseIndex.stringToEnum(filterVo.getFollowUpVo().getCaseIndex());
-        Long cityId=filterVo.getCityVo().getId();
-        return inquiryCustomDao.getFilteredInquiries(status,caseIndex,cityId);
+        InquiryStatus status = InquiryStatus.stringToEnum(filterVo.getInquiryVo().getInquiryStatus());
+        CaseIndex caseIndex = CaseIndex.stringToEnum(filterVo.getFollowUpVo().getCaseIndex());
+        Long cityId = filterVo.getCityVo().getId();
+        return inquiryCustomDao.getFilteredInquiries(status, caseIndex, cityId);
     }
 }

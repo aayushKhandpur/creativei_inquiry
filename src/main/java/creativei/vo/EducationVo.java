@@ -1,5 +1,11 @@
 package creativei.vo;
 
+import creativei.entity.InquiryEducation;
+import creativei.enums.EducationQualification;
+import creativei.enums.EducationStatus;
+import creativei.enums.MarkScheme;
+import creativei.enums.Stream;
+
 /**
  * Created by user on 1/3/2018.
  */
@@ -14,6 +20,19 @@ public class EducationVo {
     private Double aggregateMarks;
     private String markScheme;
 
+    public EducationVo(){}
+
+    public EducationVo(InquiryEducation inquiryEducation){
+        this.setId(inquiryEducation.getId());
+        this.educationQualification= EducationQualification.enumToString(inquiryEducation.getEducationQualification());
+        this.instituteName=inquiryEducation.getInstituteName();
+        this.stream= Stream.enumToString(inquiryEducation.getStream());
+        this.status= EducationStatus.enumToString(inquiryEducation.getStatus());
+        this.year=inquiryEducation.getYear();
+        this.type=inquiryEducation.getType();
+        this.aggregateMarks=inquiryEducation.getAggregateMarks();
+        this.markScheme= MarkScheme.enumToString(inquiryEducation.getMarkScheme());
+    }
     public Long getId() {
         return id;
     }

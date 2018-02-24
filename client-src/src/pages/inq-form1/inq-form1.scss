@@ -65,6 +65,11 @@ form{
             box-shadow: inset 0 -1px 0 0 #32db64;
         }
     }
+    .completer-limit .completer-dropdown {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 20rem;
+    }
 }
 
 .form-number{

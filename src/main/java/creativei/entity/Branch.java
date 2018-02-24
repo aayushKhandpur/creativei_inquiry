@@ -23,7 +23,7 @@ public class Branch extends BaseEntity implements Serializable {
     @Column(name = "alternate_name" )
     private String alternateName;
 
-    @Column(name = "fixedline_number", nullable = false )
+    @Column(name = "fixedline_number")
     private String fixedLineNumber;
     @Column(nullable = false)
     private String mobile;

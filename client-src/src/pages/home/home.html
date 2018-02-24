@@ -12,7 +12,14 @@
     <div class="login-button-group">
       <button (click)="goToVisitorPage()" outline large ion-button color="light">VISITOR</button>
       <div class="login-button-seperator">- OR -</div>
-      <button outline small ion-button color="light">LOGIN</button>
+      <button (click)="toggleLogin()" *ngIf="!isLogin" outline small ion-button color="light">LOGIN</button>
+      <form *ngIf="isLogin">
+        <label for='username'>Username</label>
+        <input id='username' type='text'>
+        <label for='password'>Password</label>
+        <input id='password' type='password'>
+      </form>
+      <button class="dash-login" (click)="goToCounselorDash()" *ngIf="isLogin" outline small ion-button color="light">LOGIN</button>
     </div>
   </section>
 </ion-content>

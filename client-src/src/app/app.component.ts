@@ -9,7 +9,6 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
 import { HomePage } from '../pages/home/home';
 import { InqForm1Page } from '../pages/visitor/inq-form1/inq-form1';
 import { CounselorHomePage } from '../pages/counselor/home/home';
-import { InqDetailsPage } from '../pages/counselor/inq-details/inq-details';
 import { InqListPage } from '../pages/counselor/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
 

@@ -9,6 +9,8 @@ import { InqForm1Page } from '../visitor/inq-form1/inq-form1';
 })
 export class HomePage {
 
+  private isLogin: boolean = false;
+
   constructor(public navCtrl: NavController) {
   }
 
@@ -17,5 +19,8 @@ export class HomePage {
   }
   goToVisitorPage(){
     this.navCtrl.setRoot(InqForm1Page);
+  }
+  toggleLogin(){
+    this.isLogin = !this.isLogin;
   }
 }

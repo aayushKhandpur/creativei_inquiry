@@ -33,6 +33,7 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.closingStatus =FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());
         this.closingSubStatus=FollowUpSubStatus.stringToEnum(inquiryVo.getClosingSubStatus());
         this.remark=inquiryVo.getClosingRemark();
+        this.isAttended=inquiryStatus==InquiryStatus.CLOSE?true:false;
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress(),this);
@@ -47,8 +48,9 @@ public class Inquiry extends BaseEntity implements Serializable {
             this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing(),this);
     }
 
-    public Inquiry(Long id){
+    public Inquiry(Long id,boolean isAttended){
         this.setId(id);
+        this.isAttended=isAttended;
     }
 
     @Column(nullable = false)
@@ -89,6 +91,16 @@ public class Inquiry extends BaseEntity implements Serializable {
     private FollowUpSubStatus closingSubStatus;
     @Column(name = "closing_remark")
     private String remark;
+    @Column
+    private Boolean isAttended=false;
+
+    public Boolean getAttended() {
+        return isAttended;
+    }
+
+    public void setAttended(Boolean attended) {
+        isAttended = attended;
+    }
 
     public FollowUpStatus getClosingStatus() {
         return closingStatus;

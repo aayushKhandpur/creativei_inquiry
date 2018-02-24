@@ -54,7 +54,8 @@ public class InquiryManagerImpl implements InquiryManager {
         try {
             Inquiry inquiry = new Inquiry(inquiryVo);
             inquiry = inquiryService.create(inquiry);
-            inquiry.getInquiryAddress().setLocation(inquiryAddressService.getLocalityData(inquiry.getInquiryAddress().getLocation().getId()));
+            if(inquiry.getInquiryAddress().getLocation()!=null)
+                inquiry.getInquiryAddress().setLocation(inquiryAddressService.getLocalityData(inquiry.getInquiryAddress().getLocation().getId()));
             inquiryVo = ResponseHelper.getCreateInquiryResponseData(inquiry);
             return ResponseObject.getResponse(inquiryVo);
         } catch (UniqueConstraintViolationException ue) {

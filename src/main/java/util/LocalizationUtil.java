@@ -16,4 +16,14 @@ public class LocalizationUtil {
             return null;
         return dateFormat.parse(string);
     }
+    static SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+    public static final String getFormattedReminderDate(Date date){
+        if(date==null||date.toString().isEmpty())return null;
+        return simpleDateFormat.format(date);
+    }
+    public static final Date reminderStringToDateConverter(String string) throws ParseException{
+        if(string==null||string.isEmpty())
+            return null;
+        return simpleDateFormat.parse(string);
+    }
 }

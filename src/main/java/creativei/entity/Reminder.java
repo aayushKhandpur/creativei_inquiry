@@ -23,7 +23,7 @@ public class Reminder extends BaseEntity {
         this.setId(reminderVo.getId());
         this.title=reminderVo.getTitle();
         this.description=reminderVo.getDescription();
-        this.reminderTime= LocalizationUtil.stringToDateConverter(reminderVo.getTime());
+        this.reminderTime= LocalizationUtil.reminderStringToDateConverter(reminderVo.getTime());
         this.inquiry=new Inquiry(reminderVo.getInquiryId());
     }
     public String getTitle() {

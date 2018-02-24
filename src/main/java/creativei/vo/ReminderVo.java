@@ -1,5 +1,8 @@
 package creativei.vo;
 
+import creativei.entity.Reminder;
+import util.LocalizationUtil;
+
 public class ReminderVo {
 
     private Long id;
@@ -8,6 +11,15 @@ public class ReminderVo {
     private String time;
     private Long inquiryId;
 
+    public ReminderVo(){}
+
+    public  ReminderVo(Reminder reminder){
+        this.id=reminder.getId();
+        this.title=reminder.getTitle();
+        this.description=reminder.getDescription();
+        this.time= LocalizationUtil.getFormattedDate(reminder.getReminderTime());
+        this.inquiryId=reminder.getInquiry().getId();
+    }
     public Long getId() {
         return id;
     }

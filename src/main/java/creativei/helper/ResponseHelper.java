@@ -53,6 +53,11 @@ public class ResponseHelper {
         return inquiryVos;
     }
 
+    public static ReminderVo getCreateReminderResponse(Reminder reminder){
+        ReminderVo reminderVo=new ReminderVo(reminder);
+        return reminderVo;
+    }
+
     public static FollowUpVo getCreateFollowUpData(FollowUp followUp, FollowUpVo followUpVo) {
         followUpVo.setId(followUp.getId());
         followUpVo.setCaseIndex(CaseIndex.enumToString(followUp.getCaseIndex()));

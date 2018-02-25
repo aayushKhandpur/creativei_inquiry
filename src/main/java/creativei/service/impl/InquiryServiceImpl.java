@@ -104,7 +104,7 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public List<Inquiry> getUnattendedInquiry(String boolParam, String statusParam) {
         Boolean isAttended;
-        isAttended=boolParam=="false"?false:true;
+        isAttended=boolParam.equals(false)?false:true;
         InquiryStatus inquiryStatus=InquiryStatus.stringToEnum(statusParam);
         return inquiryDao.findByInquiryStatusAndIsAttended(inquiryStatus,isAttended);
     }

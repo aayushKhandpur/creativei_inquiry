@@ -1,5 +1,8 @@
 package creativei.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import creativei.enums.*;
 
 import creativei.vo.EducationVo;
@@ -15,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 public class Inquiry extends BaseEntity implements Serializable {
 
@@ -33,6 +39,7 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.closingStatus =FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());
         this.closingSubStatus=FollowUpSubStatus.stringToEnum(inquiryVo.getClosingSubStatus());
         this.remark=inquiryVo.getClosingRemark();
+        this.isAttended=inquiryStatus==InquiryStatus.CLOSE?true:false;
         this.computerKnowledge=ComputerKnowledge.stringToEnum(inquiryVo.getComputerKnowledge());
         if(inquiryVo.getAddress()!=null)
             this.inquiryAddress=new InquiryAddress(inquiryVo.getAddress(),this);
@@ -47,8 +54,9 @@ public class Inquiry extends BaseEntity implements Serializable {
             this.inquiryMarketing=new InquiryMarketing(inquiryVo.getMarketing(),this);
     }
 
-    public Inquiry(Long id){
+    public Inquiry(Long id,boolean isAttended){
         this.setId(id);
+        this.isAttended=isAttended;
     }
 
     @Column(nullable = false)
@@ -78,6 +86,7 @@ public class Inquiry extends BaseEntity implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryAddress inquiryAddress;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inquiry")
+    @JsonIgnore
     private List<InquiryEducation> inquiryEducations=new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     private InquiryGuardian inquiryGuardian;
@@ -89,6 +98,16 @@ public class Inquiry extends BaseEntity implements Serializable {
     private FollowUpSubStatus closingSubStatus;
     @Column(name = "closing_remark")
     private String remark;
+    @Column
+    private Boolean isAttended=false;
+
+    public Boolean getAttended() {
+        return isAttended;
+    }
+
+    public void setAttended(Boolean attended) {
+        isAttended = attended;
+    }
 
     public FollowUpStatus getClosingStatus() {
         return closingStatus;

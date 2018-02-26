@@ -28,4 +28,6 @@ public interface InquiryManager {
     ResponseObject updateAll(List<Inquiry> inquiries);
 
     ResponseObject getInquiryServerInfo();
+
+    ResponseObject getUnattendedInquiry(String boolParam,String statusParam);
 }

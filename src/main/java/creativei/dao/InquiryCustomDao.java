@@ -13,6 +13,8 @@ public interface InquiryCustomDao {
 
     List<Inquiry> getFilteredInquiries(InquiryStatus status, CaseIndex caseIndex, Long cityId);
 
+    List<Inquiry> findByInquiryStatusAndIsAttended(InquiryStatus inquiryStatus,Boolean isAttended);
+
     Inquiry save(Inquiry inquiry);
 
     List<Inquiry> findAll();

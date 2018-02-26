@@ -97,6 +97,14 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
+    public List<Inquiry> getUnattendedInquiry(String boolParam, String statusParam) {
+        Boolean isAttended;
+        isAttended=boolParam.equalsIgnoreCase("false")?false:true;
+        InquiryStatus inquiryStatus=InquiryStatus.stringToEnum(statusParam);
+        return inquiryCustomDao.findByInquiryStatusAndIsAttended(inquiryStatus,isAttended);
+    }
+
+    @Override
     public List<Inquiry> getAllByFilter(FilterVo filterVo) {
         InquiryStatus status = InquiryStatus.stringToEnum(filterVo.getInquiryVo().getInquiryStatus());
         CaseIndex caseIndex = CaseIndex.stringToEnum(filterVo.getFollowUpVo().getCaseIndex());

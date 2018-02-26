@@ -13,7 +13,15 @@
 <ion-content>
   <form [formGroup]="inqForm" (ngSubmit)="logForm()">
     <ion-grid>
-      <ion-item-divider color="light">Personal Details</ion-item-divider>
+      <ion-item-divider color="light">Personal Details
+        <span class="inq-status" *ngIf="currentInq">
+          Status:
+          <select #inqStatus (change)="changeInqStatus(inqStatus.value)">
+            <option [selected]=isInqOpen(currentInqStatus) value="open">Open</option>
+            <option [selected]=!isInqOpen(currentInqStatus) value="close">Closed</option>
+          </select>
+        </span>
+      </ion-item-divider>
       <ion-row>
         <ion-col>
           <ion-item>
@@ -83,8 +91,8 @@
         <ion-col no-padding>
           <ion-row>
             <ion-col col-3 class="pin-autocomplete">
-              <ion-label>Enter Your Pincode</ion-label>
-              <ng2-completer formControlName="pin" (selected)="onPincodeSelected($event)" [datasource]="pinService" [minSearchLength]="3"></ng2-completer>
+              <ion-label>Pincode</ion-label>
+              <ng2-completer class="completer-limit" formControlName="pin" (focus)="setPincodeFieldTypeNumber()" (selected)="onPincodeSelected($event)" [datasource]="pinService" [minSearchLength]="3" [placeholder]="'Enter the first 3 digits to search'" [maxChars]="6" [clearUnselected]="true" [autoMatch]="true" [inputId]="'completer-input'"></ng2-completer>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="areas">

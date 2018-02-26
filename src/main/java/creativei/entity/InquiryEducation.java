@@ -10,6 +10,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Table(name = "Inquiry_Education")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,

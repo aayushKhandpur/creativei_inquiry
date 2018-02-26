@@ -55,8 +55,9 @@ public class InquiryManagerImpl implements InquiryManager {
         try {
             Inquiry inquiry = new Inquiry(inquiryVo);
             inquiry = inquiryService.create(inquiry);
-            inquiry.getInquiryAddress().setLocation(inquiryAddressService.getLocalityData(inquiry.getInquiryAddress().getLocation().getId()));
-            inquiryVo = ResponseHelper.getCreateInquiryResponseData(inquiry, inquiryVo);
+            if(inquiry.getInquiryAddress().getLocation()!=null)
+                inquiry.getInquiryAddress().setLocation(inquiryAddressService.getLocalityData(inquiry.getInquiryAddress().getLocation().getId()));
+            inquiryVo = ResponseHelper.getCreateInquiryResponseData(inquiry);
             return ResponseObject.getResponse(inquiryVo);
         } catch (UniqueConstraintViolationException ue) {
             logger.error(ue.getMessage(), ue);
@@ -102,7 +103,7 @@ public class InquiryManagerImpl implements InquiryManager {
         try {
             inquiry = new Inquiry(inquiryVo);
             inquiry = inquiryService.update(inquiry);
-            inquiryVo = ResponseHelper.getCreateInquiryResponseData(inquiry, inquiryVo);
+            inquiryVo = ResponseHelper.getCreateInquiryResponseData(inquiry);
             return ResponseObject.getResponse(inquiryVo);
         } catch (UniqueConstraintViolationException ue) {
             logger.error(ue.getMessage(), ue);
@@ -130,6 +131,11 @@ public class InquiryManagerImpl implements InquiryManager {
         return ResponseObject.getResponse(inquiryServerInfoVo);
     }
 
+    @Override
+    public ResponseObject getUnattendedInquiry(String boolParam,String statusParam) {
+        List<InquiryVo> inquiryVos=ResponseHelper.getUnattendedInquiryResponse(inquiryService.getUnattendedInquiry(boolParam,statusParam));
+        return ResponseObject.getResponse(inquiryVos);
+    }
     @Override
     public ResponseObject getAllByFilter(FilterVo filterVo) {
         List<Inquiry> inquiry=inquiryService.getAllByFilter(filterVo);

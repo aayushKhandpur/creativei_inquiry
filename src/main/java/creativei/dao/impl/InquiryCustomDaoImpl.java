@@ -45,6 +45,11 @@ public class InquiryCustomDaoImpl implements InquiryCustomDao {
     }
 
     @Override
+    public List<Inquiry> findByInquiryStatusAndIsAttended(InquiryStatus inquiryStatus, Boolean isAttended) {
+        return inquiryDao.findByInquiryStatusAndIsAttended(inquiryStatus,isAttended);
+    }
+
+    @Override
     public Inquiry save(Inquiry inquiry) {
         return inquiryDao.save(inquiry);
     }

@@ -16,4 +16,5 @@ import java.util.List;
 @Transactional
 public interface InquiryDao extends JpaRepository<Inquiry,Long>,JpaSpecificationExecutor<Inquiry>{
     List<Inquiry> findByInquiryStatus(@Param("status")InquiryStatus status);
+    List<Inquiry> findByInquiryStatusAndIsAttended(InquiryStatus inquiryStatus,Boolean isAttended);
 }

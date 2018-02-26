@@ -98,5 +98,11 @@ public class InquiryController {
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
     }
+
+    @GetMapping(value="inquiry/getUnattended-inquiry",produces="application/json")
+    public @ResponseBody
+    ResponseObject getUnattendedInquiry(@RequestParam String boolParam,@RequestParam String statusParam){
+        return inquiryManager.getUnattendedInquiry(boolParam,statusParam);
+    }
 }
 

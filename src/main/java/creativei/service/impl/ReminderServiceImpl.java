@@ -30,11 +30,11 @@ public class ReminderServiceImpl implements ReminderService{
     private Boolean validateReminder(Reminder reminder){
         logger.info("Validate Reminder");
         if(StringUtil.validateEmpty(reminder.getTitle())==null){
-            logger.error("Reminder title can not be null");
+            logger.error("Reminder title is invalid "+reminder.getTitle());
             return false;
         }
         if(reminder.getReminderTime()==null){
-            logger.error("Reminder time can not be null");
+            logger.error("Reminder time is invalid "+reminder.getReminderTime());
             return false;
         }
         return true;

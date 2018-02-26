@@ -11,13 +11,13 @@ import { NotificationProvider } from '../../../providers/notification/notificati
 import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
 import { LocalityProvider } from '../../../providers/locality/locality';
 import { HelperProvider } from '../../../providers/helper/helper';
-import { InqForm2Page } from '../inq-form2/inq-form2';
+import { InqFormEducationGuardianPage } from '../inq-form-education-guardian/inq-form-education-guardian';
 
 @Component({
   selector: 'page-inq-form1',
   templateUrl: 'inq-form1.html',
 })
-export class InqForm1Page {
+export class InqFormPersonalPage {
 
   private diffState: boolean;
   private responseData;
@@ -69,7 +69,7 @@ export class InqForm1Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InqForm1Page');
+    console.log('ionViewDidLoad InqFormPersonalPage');
   }
 
   private loading;
@@ -109,7 +109,7 @@ export class InqForm1Page {
           console.log("complete");
           this.loading.dismissAll();
           if(this.responseData.data){
-            this.navCtrl.push(InqForm2Page,{ data: this.responseData });
+            this.navCtrl.push(InqFormEducationGuardianPage,{ data: this.responseData });
           }
         }
         );

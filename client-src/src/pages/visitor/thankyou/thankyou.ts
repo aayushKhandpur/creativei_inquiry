@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 // import { HomePage } from '../../pages/home/home';
-import { InqForm1Page } from '../inq-form1/inq-form1';
+import { InqFormPersonalPage } from '../inq-form-personal/inq-form-personal';
 
 @Component({
   selector: 'page-thankyou',
@@ -21,7 +21,7 @@ export class ThankyouPage {
   //   this.navCtrl.setRoot(HomePage);
   // }
   newInquiry() {
-    this.navCtrl.setRoot(InqForm1Page);
+    this.navCtrl.setRoot(InqFormPersonalPage);
   }
 
 }

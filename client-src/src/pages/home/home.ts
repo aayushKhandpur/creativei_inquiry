@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CounselorHomePage } from '../counselor/home/home';
-import { InqForm1Page } from '../visitor/inq-form1/inq-form1';
+import { InqFormPersonalPage } from '../visitor/inq-form-personal/inq-form-personal';
 
 @Component({
   selector: 'page-home',
@@ -18,7 +18,7 @@ export class HomePage {
     this.navCtrl.setRoot(CounselorHomePage);
   }
   goToVisitorPage(){
-    this.navCtrl.setRoot(InqForm1Page);
+    this.navCtrl.setRoot(InqFormPersonalPage);
   }
   toggleLogin(){
     this.isLogin = !this.isLogin;

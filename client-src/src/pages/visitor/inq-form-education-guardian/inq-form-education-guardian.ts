@@ -1,45 +1,74 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
 import { InqProvider } from '../../../providers/inq/inq';
 import { NotificationProvider } from '../../../providers/notification/notification';
 import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
 import { HelperProvider } from '../../../providers/helper/helper';
-import { ThankyouPage } from '../thankyou/thankyou';
+import { InqFormMarketingPage } from '../inq-form-marketing/inq-form-marketing';
 
 @Component({
-  selector: 'page-inq-form3',
-  templateUrl: 'inq-form3.html',
+  selector: 'page-inq-form2',
+  templateUrl: 'inq-form2.html',
 })
-export class InqForm3Page {
-  
+export class InqFormEducationGuardianPage {
+
   private enums;
-  private enqSource;
+  private hQualifications;
+  private streams;
+  private eduStatus;
+  private eduType;
+  private markScheme;
+  private guardianRelation;
+  private guardianOccupation;
+
+  private inqForm: FormGroup;
   private currentInq;
   private responseData;
   private requestData;
-
-  private inqForm: FormGroup;
+  private education;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private helper: HelperProvider) {
     this.currentInq = this.navParams.get('data');
+    this.education = this.currentInq.data.hQualification;
     this.inqForm = this.formBuilder.group({
-      marketing: this.formBuilder.group({
-        source: ['',Validators.required],
-        referred: [false],
-        referant: ['']
+      education: this.formBuilder.array([
+        this.formBuilder.group({
+          educationQualification: [this.education, Validators.required],
+          instituteName: [''],
+          stream: [''],
+          status: [''],
+          year: [''],
+          type: [''],
+          aggregateMarks: [''],
+          markScheme: ['']
+        })
+      ]),
+      guardian: this.formBuilder.group({
+        name: ['',Validators.required],
+        relation: ['',Validators.required],
+        phoneNumber: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+        email: ['',Validators.email],
+        occupation: ['']
       })
     });
 
     this.setEnums();
-    this.setMarketingSource();
+    this.setQualifications();
+    this.setStreams();
+    this.setEduStatus();
+    this.setEduType();
+    this.setMarkScheme();
+    this.setGuardianRelation();
+    this.setGuardinaOccupation();
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InqForm3Page');
+    console.log('ionViewDidLoad InqFormEducationGuardianPage');
   }
 
   private loading;
@@ -58,7 +87,7 @@ export class InqForm3Page {
     this.loading.present();
   }
 
-  logForm3(){
+  logForm2(){
     if(this.inqForm.valid){
       this.requestData = Object.assign({},this.currentInq.data,this.inqForm.value)
       console.log("Form to be logged", this.requestData);
@@ -69,10 +98,10 @@ export class InqForm3Page {
           this.responseData = data;
           if(this.responseData.data){
             this.notify.showInfo(this.message.INQUIRY.UPDATE.SUCCESS);
-            console.log("POST successful, the response data is:", data)
+            console.log("POST successful, the response data is:", data);
           }else{
-            this.notify.showError(this.message.INQUIRY.UPDATE.FAILURE)
-            console.log("POST unsucessful, server responded with error", this.responseData.exception)
+            this.notify.showError(this.message.INQUIRY.UPDATE.FAILURE);
+            console.log("POST unsucessful, server responded with error", this.responseData.exception);
           }
         },
         error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
@@ -80,7 +109,7 @@ export class InqForm3Page {
           console.log("complete");
           this.loading.dismissAll();
           if(this.responseData.data){
-            this.navCtrl.setRoot(ThankyouPage);
+            this.navCtrl.push(InqFormMarketingPage,{ data: this.responseData });
           }
         }
         );
@@ -90,14 +119,32 @@ export class InqForm3Page {
     }
   }
 
+  skip(){
+    this.navCtrl.push(InqFormMarketingPage,{ data: this.currentInq });
+  }
+
   setEnums(){
     this.enums = this.inqProvider.getEnums();
   }
-  setMarketingSource(){
-    this.enqSource = this.enums.data.marketingSource;
+  setQualifications(){
+    this.hQualifications = this.enums.data.highestEducation;
   }
-
-  skip(){
-    this.navCtrl.setRoot(ThankyouPage)
+  setStreams(){
+    this.streams = this.enums.data.stream;
+  }
+  setEduStatus(){
+    this.eduStatus = this.enums.data.educationStatus;
+  }
+  setEduType(){
+    this.eduType = this.enums.data.educationType;
+  }
+  setMarkScheme(){
+    this.markScheme = this.enums.data.markScheme;
+  }
+  setGuardianRelation(){
+    this.guardianRelation = this.enums.data.relation;
+  }
+  setGuardinaOccupation(){
+    this.guardianOccupation = this.enums.data.occupation;
   }
 }

@@ -6,9 +6,9 @@ import { Ng2CompleterModule } from "ng2-completer";
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { InqForm1Page } from '../pages/visitor/inq-form1/inq-form1';
-import { InqForm2Page } from '../pages/visitor/inq-form2/inq-form2';
-import { InqForm3Page } from '../pages/visitor/inq-form3/inq-form3';
+import { InqFormPersonalPage } from '../pages/visitor/inq-form-personal/inq-form-personal';
+import { InqFormEducationGuardianPage } from '../pages/visitor/inq-form-education-guardian/inq-form-education-guardian';
+import { InqFormMarketingPage } from '../pages/visitor/inq-form-marketing/inq-form-marketing';
 import { ThankyouPage } from '../pages/visitor/thankyou/thankyou';
 import { CounselorHomePage } from '../pages/counselor/home/home';
 import { InqDetailsPage } from '../pages/counselor/inq-details/inq-details';
@@ -30,9 +30,9 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
   declarations: [
     MyApp,
     HomePage,
-    InqForm1Page,
-    InqForm2Page,
-    InqForm3Page,
+    InqFormPersonalPage,
+    InqFormEducationGuardianPage,
+    InqFormMarketingPage,
     InqDetailsPage,
     InqListPage,
     InqSummaryPage,
@@ -50,9 +50,9 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
   entryComponents: [
     MyApp,
     HomePage,
-    InqForm1Page,
-    InqForm2Page,
-    InqForm3Page,
+    InqFormPersonalPage,
+    InqFormEducationGuardianPage,
+    InqFormMarketingPage,
     InqDetailsPage,
     InqListPage,
     InqSummaryPage,

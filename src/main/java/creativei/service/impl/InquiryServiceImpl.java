@@ -100,4 +100,12 @@ public class InquiryServiceImpl implements InquiryService {
     public Inquiry updateAll(List<Inquiry> inquiries) {
         return null;
     }
+
+    @Override
+    public List<Inquiry> getUnattendedInquiry(String boolParam, String statusParam) {
+        Boolean isAttended;
+        isAttended=boolParam.equalsIgnoreCase("false")?false:true;
+        InquiryStatus inquiryStatus=InquiryStatus.stringToEnum(statusParam);
+        return inquiryDao.findByInquiryStatusAndIsAttended(inquiryStatus,isAttended);
+    }
 }

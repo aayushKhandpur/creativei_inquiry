@@ -84,5 +84,11 @@ public class InquiryController {
     @RequestMapping(value = "inquiry/getByStatus",produces = "application/json",method = RequestMethod.GET)
     public @ResponseBody
     ResponseObject getInquiriesByStatus(@RequestParam InquiryStatus status){return inquiryManager.getByStatus(status);}
+
+    @GetMapping(value="inquiry/getUnattended-inquiry",produces="application/json")
+    public @ResponseBody
+    ResponseObject getUnattendedInquiry(@RequestParam String boolParam,@RequestParam String statusParam){
+        return inquiryManager.getUnattendedInquiry(boolParam,statusParam);
+    }
 }
 

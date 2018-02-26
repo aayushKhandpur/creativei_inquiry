@@ -37,7 +37,7 @@ public class FollowUp extends BaseEntity implements Serializable {
 
     public FollowUp(FollowUpVo followUpVo) throws ParseException, NoDataAvailable {
         this.setId(followUpVo.getId());
-        this.followUpDate = LocalizationUtil.stringToDateConverter(followUpVo.getFollowUpDate(),"yyyy-MM-dd");
+        this.followUpDate = LocalizationUtil.stringToDateConverter(followUpVo.getFollowUpDate());
         this.type = FollowUpType.stringToEnum(followUpVo.getFollowUpType());
         this.status = FollowUpStatus.stringToEnum(followUpVo.getFollowUpStatus());
         this.remark = followUpVo.getRemark();

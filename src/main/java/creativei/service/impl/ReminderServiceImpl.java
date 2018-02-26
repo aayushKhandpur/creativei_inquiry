@@ -20,6 +20,7 @@ public class ReminderServiceImpl implements ReminderService{
 
     @Override
     public Reminder create(Reminder reminder) throws InvalidParamRequest {
+        logger.info(" Service reminder create");
         if(!validateReminder(reminder)){
             throw new InvalidParamRequest("Required Field are null");
         }
@@ -27,6 +28,7 @@ public class ReminderServiceImpl implements ReminderService{
     }
 
     private Boolean validateReminder(Reminder reminder){
+        logger.info("Validate Reminder");
         if(StringUtil.validateEmpty(reminder.getTitle())==null){
             logger.error("Reminder title can not be null");
             return false;

@@ -35,13 +35,13 @@ public class InquiryVo {
         this.setId(inquiry.getId());
         this.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
         this.setName(inquiry.getName());
-        this.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
+        this.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob(),"yyyy-MM-dd"));
         this.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
         this.setEmail(inquiry.getEmail());
         this.setMobile(inquiry.getPhoneNumber());
         this.setId(inquiry.getId());
         this.setInquiryStatus(InquiryStatus.enumToString(inquiry.getInquiryStatus()));
-        this.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
+        this.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate(),"yyyy-MM-dd"));
         this.setGender(Gender.enumToString(inquiry.getGender()));
         this.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
         this.setClosingStatus(FollowUpStatus.enumToString(inquiry.getClosingStatus()));

@@ -27,7 +27,7 @@ public class Inquiry extends BaseEntity implements Serializable {
         this.phoneNumber=StringUtil.validateEmpty(inquiryVo.getMobile());
         this.email=StringUtil.validateEmpty(inquiryVo.getEmail());
         this.highestEducation=EducationQualification.stringToEnum(inquiryVo.gethQualification());
-        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob());
+        this.dob= LocalizationUtil.stringToDateConverter(inquiryVo.getDob(),"yyyy-MM-dd");
         this.gender=Gender.stringToEnum(inquiryVo.getGender());
         this.inquiryStatus=InquiryStatus.stringToEnum(inquiryVo.getInquiryStatus());
         this.closingStatus =FollowUpStatus.stringToEnum(inquiryVo.getClosingStatus());

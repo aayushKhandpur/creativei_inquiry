@@ -17,7 +17,7 @@ public class ReminderVo {
         this.id=reminder.getId();
         this.title=reminder.getTitle();
         this.description=reminder.getDescription();
-        this.time= LocalizationUtil.getFormattedReminderDate(reminder.getReminderTime());
+        this.time= LocalizationUtil.getFormattedDate(reminder.getReminderTime(),"yyyy-MM-dd hh:mm a");
         this.inquiryId=reminder.getInquiry().getId();
     }
     public Long getId() {

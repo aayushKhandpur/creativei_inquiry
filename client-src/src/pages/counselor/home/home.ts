@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { HelperProvider } from '../../../providers/helper/helper';
 import { InqDetailsPage } from '../inq-details/inq-details';
@@ -12,7 +12,7 @@ export class CounselorHomePage {
 
   private activeMenu: string = "counselor";
 
-  constructor(public navCtrl: NavController, private menu: MenuController, private helper: HelperProvider) {
+  constructor(public navCtrl: NavController, private helper: HelperProvider) {
     this.helper.setActiveMenu(this.activeMenu);
   }
 

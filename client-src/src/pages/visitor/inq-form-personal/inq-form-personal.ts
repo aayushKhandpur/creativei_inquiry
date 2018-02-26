@@ -14,8 +14,8 @@ import { HelperProvider } from '../../../providers/helper/helper';
 import { InqFormEducationGuardianPage } from '../inq-form-education-guardian/inq-form-education-guardian';
 
 @Component({
-  selector: 'page-inq-form1',
-  templateUrl: 'inq-form1.html',
+  selector: 'page-inq-form-personal',
+  templateUrl: 'inq-form-personal.html',
 })
 export class InqFormPersonalPage {
 

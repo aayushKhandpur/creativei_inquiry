@@ -11,8 +11,8 @@ import { HelperProvider } from '../../../providers/helper/helper';
 import { ThankyouPage } from '../thankyou/thankyou';
 
 @Component({
-  selector: 'page-inq-form3',
-  templateUrl: 'inq-form3.html',
+  selector: 'page-inq-form-marketing',
+  templateUrl: 'inq-form-marketing.html',
 })
 export class InqFormMarketingPage {
   

@@ -6,13 +6,31 @@ import java.util.Date;
 
 public class LocalizationUtil {
 
-    static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    public static final String getFormattedDate(Date date){
-        if(date == null||date.toString().isEmpty()) return null;
+    private static final String DATE_WITH_TIME = "yyyy-MM-dd hh:mm a";
+    private static final String DATE = "yyyy-MM-dd";
+
+    public static final String getFormattedDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE);
+        if (date == null || date.toString().isEmpty()) return null;
         return dateFormat.format(date);
     }
-    public static final Date stringToDateConverter(String string) throws ParseException{
-        if(string==null||string.isEmpty())
+
+    public static final String getFormattedDateWithTime(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_WITH_TIME);
+        if (date == null || date.toString().isEmpty()) return null;
+        return dateFormat.format(date);
+    }
+
+    public static final Date stringToDateConverter(String string) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE);
+        if (string == null || string.isEmpty())
+            return null;
+        return dateFormat.parse(string);
+    }
+
+    public static final Date stringtoDateWithTimeConverter(String string) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_WITH_TIME);
+        if (string == null || string.isEmpty())
             return null;
         return dateFormat.parse(string);
     }

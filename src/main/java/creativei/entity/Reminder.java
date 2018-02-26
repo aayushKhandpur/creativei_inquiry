@@ -1,7 +1,12 @@
 package creativei.entity;
 
 
+import creativei.vo.ReminderVo;
+import util.LocalizationUtil;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import java.text.ParseException;
 import java.util.Date;
 
 @Entity
@@ -9,10 +14,18 @@ public class Reminder extends BaseEntity {
     private String title;
     private String description;
     private Date reminderTime;
+    @ManyToOne
     private Inquiry inquiry;
 
     public Reminder(){}
 
+    public Reminder(ReminderVo reminderVo) throws ParseException {
+        this.setId(reminderVo.getId());
+        this.title=reminderVo.getTitle();
+        this.description=reminderVo.getDescription();
+        this.reminderTime= LocalizationUtil.stringtoDateWithTimeConverter(reminderVo.getTime());
+        this.inquiry=new Inquiry(reminderVo.getInquiryId());
+    }
     public String getTitle() {
         return title;
     }

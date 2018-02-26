@@ -53,6 +53,7 @@ public class ResponseHelper {
         return inquiryVos;
     }
 
+
     public static List<InquiryVo> getUnattendedInquiryResponse(List<Inquiry> inquiries){
         List<InquiryVo> inquiryVos=new ArrayList<>();
         for(Inquiry inquiry:inquiries){
@@ -71,5 +72,9 @@ public class ResponseHelper {
         followUpVo.setRemark(followUp.getRemark());
         followUpVo.setSubStatus(FollowUpSubStatus.enumToString(followUp.getSubStatus()));
         return followUpVo;
+    }
+  public static ReminderVo getCreateReminderResponse(Reminder reminder){
+        ReminderVo reminderVo=new ReminderVo(reminder);
+        return reminderVo;
     }
 }

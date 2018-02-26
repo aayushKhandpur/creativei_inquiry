@@ -22,6 +22,6 @@ public class ReminderCustomDaoImpl implements ReminderCustomDao {
 
     @Override
     public Reminder save(Reminder reminder) {
-        return null;
+        return reminderDao.save(reminder);
     }
 }

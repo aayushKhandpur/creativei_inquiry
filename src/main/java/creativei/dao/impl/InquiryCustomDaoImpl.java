@@ -38,7 +38,7 @@ public class InquiryCustomDaoImpl implements InquiryCustomDao {
     }
 
     @Override
-    public List<Inquiry> getFilteredInquiries(InquiryStatus status, CaseIndex caseIndex, Long cityId) {
+    public List<Inquiry> findByFilters(InquiryStatus status, CaseIndex caseIndex, Long cityId) {
         InquirySpecification inquirySpecification = new InquirySpecification(status, caseIndex, cityId);
         return inquiryDao.findAll(inquirySpecification);
 

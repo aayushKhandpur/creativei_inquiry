@@ -139,6 +139,6 @@ public class InquiryManagerImpl implements InquiryManager {
     @Override
     public ResponseObject getAllByFilter(FilterVo filterVo) {
         List<Inquiry> inquiry=inquiryService.getAllByFilter(filterVo);
-        return ResponseObject.getResponse(inquiry);
-    }
+        List<InquiryVo> inquiryVos=ResponseHelper.getByFiltersInquiryResponse(inquiry);
+        return ResponseObject.getResponse(inquiryVos);    }
 }

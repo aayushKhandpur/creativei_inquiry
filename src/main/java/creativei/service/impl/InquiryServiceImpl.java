@@ -109,6 +109,6 @@ public class InquiryServiceImpl implements InquiryService {
         InquiryStatus status = InquiryStatus.stringToEnum(filterVo.getInquiryVo().getInquiryStatus());
         CaseIndex caseIndex = CaseIndex.stringToEnum(filterVo.getFollowUpVo().getCaseIndex());
         Long cityId = filterVo.getCityVo().getId();
-        return inquiryCustomDao.getFilteredInquiries(status, caseIndex, cityId);
+        return inquiryCustomDao.findByFilters(status, caseIndex, cityId);
     }
 }

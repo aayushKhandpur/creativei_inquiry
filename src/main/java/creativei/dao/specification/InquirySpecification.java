@@ -39,7 +39,7 @@ public class InquirySpecification implements Specification<Inquiry> {
             predicateCaseIndex = criteriaBuilder.isNotNull(root.join("followUps").get("caseIndex"));
         else
             predicateCaseIndex = criteriaBuilder.equal(root.join("followUps").get("caseIndex"), caseIndex);
-
+        criteriaQuery.distinct(true);
         return criteriaBuilder.and(predicateInquiryStatus, predicateCityId, predicateCaseIndex);
     }
 }

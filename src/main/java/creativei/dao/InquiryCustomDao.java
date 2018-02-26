@@ -11,7 +11,7 @@ import java.util.List;
 public interface InquiryCustomDao {
     List<Inquiry> findByInquiryStatus(InquiryStatus status);
 
-    List<Inquiry> getFilteredInquiries(InquiryStatus status, CaseIndex caseIndex, Long cityId);
+    List<Inquiry> findByFilters(InquiryStatus status, CaseIndex caseIndex, Long cityId);
 
     List<Inquiry> findByInquiryStatusAndIsAttended(InquiryStatus inquiryStatus,Boolean isAttended);
 

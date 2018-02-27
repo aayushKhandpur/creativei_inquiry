@@ -1,6 +1,7 @@
 package creativei.service.impl;
 
 import creativei.dao.InquiryCustomDao;
+import creativei.entity.FollowUp;
 import creativei.entity.Inquiry;
 import creativei.enums.*;
 import creativei.exception.DataIntegrityException;
@@ -14,8 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import util.LocalizationUtil;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service("InquiryService")
@@ -110,5 +116,47 @@ public class InquiryServiceImpl implements InquiryService {
         CaseIndex caseIndex = CaseIndex.stringToEnum(filterVo.getFollowUpVo().getCaseIndex());
         Long cityId = filterVo.getCityVo().getId();
         return inquiryCustomDao.findByFilters(status, caseIndex, cityId);
+    }
+
+    @Override
+    public Integer getDailyCount() throws ParseException {
+        String date1= LocalizationUtil.getFormattedDate(new Date());
+        Date inquiryDateTo=LocalizationUtil.stringToDateConverter(date1);
+        Date inquiryDateFrom=new Date();
+        return inquiryCustomDao.findCountByInquiryDate(inquiryDateTo,inquiryDateFrom);
+    }
+
+    @Override
+    public Integer getWeeklyCount() throws ParseException {
+        Date date=new Date();
+        Date inquiryDateTo=LocalizationUtil.getWeekStartingDate(date);
+        Date inquiryDateFrom=date;
+        return inquiryCustomDao.findCountByInquiryDate(inquiryDateTo,inquiryDateFrom);
+    }
+
+    @Override
+    public Integer getMonthlyCount() throws ParseException {
+        Date date=new Date();
+        Date inquiryDateTo=LocalizationUtil.getMonthStartingDate(date);
+        Date inquiryDateFrom=date;
+        return inquiryCustomDao.findCountByInquiryDate(inquiryDateTo,inquiryDateFrom);
+    }
+
+    @Override
+    public Integer getHotLeadCount() throws ParseException {
+        Date date=new Date();
+        Date inquiryDateTo=LocalizationUtil.getMonthStartingDate(date);
+        Date inquiryDateFrom=date;
+        CaseIndex caseIndex3=CaseIndex.stringToEnum("likely");
+        CaseIndex caseIndex4=CaseIndex.stringToEnum("Hot Lead");
+        return inquiryCustomDao.findHotLeadsInAMonth(inquiryDateTo,inquiryDateFrom,caseIndex3,caseIndex4);
+    }
+
+    @Override
+    public Integer getEnrolledCount() throws ParseException {
+        Date date=new Date();
+        Date inquiryDateTo=LocalizationUtil.getMonthStartingDate(date);
+        Date inquiryDateFrom=date;
+        return inquiryCustomDao.findEnrollementInAMonth(inquiryDateTo,inquiryDateFrom, FollowUpStatus.ENROLLED);
     }
 }

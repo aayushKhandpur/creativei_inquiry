@@ -1,9 +1,6 @@
 package creativei.manager.impl;
 
-import com.sun.org.apache.regexp.internal.RE;
 import creativei.entity.Inquiry;
-import creativei.entity.InquiryAddress;
-import creativei.entity.Locality;
 import creativei.enums.ExceptionType;
 import creativei.enums.InquiryStatus;
 import creativei.exception.DataIntegrityException;
@@ -20,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -136,9 +134,27 @@ public class InquiryManagerImpl implements InquiryManager {
         List<InquiryVo> inquiryVos=ResponseHelper.getUnattendedInquiryResponse(inquiryService.getUnattendedInquiry(boolParam,statusParam));
         return ResponseObject.getResponse(inquiryVos);
     }
+
+    @Override
+    public ResponseObject getInquiryCount() {
+       InquiryCountVo inquiryCountVo=new InquiryCountVo();
+        try {
+            inquiryCountVo.setDailyCount(inquiryService.getDailyCount());
+            inquiryCountVo.setWeekCount(inquiryService.getWeeklyCount());
+            inquiryCountVo.setMonthCount(inquiryService.getMonthlyCount());
+            inquiryCountVo.setHotLeadCount(inquiryService.getHotLeadCount());
+            inquiryCountVo.setEnrolledCount(inquiryService.getEnrolledCount());
+            return ResponseObject.getResponse(inquiryCountVo);
+        } catch (ParseException e) {
+            logger.error(e.getMessage(),e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
+        }
+    }
+
     @Override
     public ResponseObject getAllByFilter(FilterVo filterVo) {
         List<Inquiry> inquiry=inquiryService.getAllByFilter(filterVo);
         List<InquiryVo> inquiryVos=ResponseHelper.getByFiltersInquiryResponse(inquiry);
         return ResponseObject.getResponse(inquiryVos);    }
+
 }

@@ -7,6 +7,8 @@ import creativei.exception.InvalidParamRequest;
 import creativei.exception.NoDataAvailable;
 import creativei.vo.FilterVo;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -22,6 +24,11 @@ public interface InquiryService {
     Inquiry update(Inquiry inquiry )throws  DataIntegrityException,InvalidParamRequest;
     Inquiry updateAll(List<Inquiry> inquiries);
     List<Inquiry> getUnattendedInquiry(String boolParam,String statusParam);
+    Integer getDailyCount() throws ParseException;
+    Integer getWeeklyCount() throws ParseException;
+    Integer getMonthlyCount() throws ParseException;
+    Integer getHotLeadCount() throws ParseException;
+    Integer getEnrolledCount() throws ParseException;
     List<Inquiry> getAllByFilter(FilterVo filterVo);
 
 }

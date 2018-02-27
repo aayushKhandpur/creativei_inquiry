@@ -1,6 +1,7 @@
 package creativei.manager;
 
 
+import com.sun.org.apache.regexp.internal.RE;
 import creativei.entity.Inquiry;
 import creativei.enums.InquiryStatus;
 import creativei.vo.*;
@@ -27,6 +28,8 @@ public interface InquiryManager {
     ResponseObject getInquiryServerInfo();
 
     ResponseObject getUnattendedInquiry(String boolParam,String statusParam);
+
+    ResponseObject getInquiryCount();
 
     ResponseObject getAllByFilter(FilterVo filterVo);
 }

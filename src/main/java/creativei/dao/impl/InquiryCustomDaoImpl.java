@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -60,6 +61,20 @@ public class InquiryCustomDaoImpl implements InquiryCustomDao {
         return inquiryDao.findOne(aLong);
     }
 
+    @Override
+    public Integer findCountByInquiryDate(Date inquiryDateTo, Date inquiryDateFrom) {
+        return inquiryDao.findCountByInquiryDate(inquiryDateTo,inquiryDateFrom);
+    }
+
+    @Override
+    public Integer findHotLeadsInAMonth(Date inquiryDateTo, Date inquiryDateFrom, CaseIndex caseIndex3,CaseIndex caseIndex4) {
+        return inquiryDao.findCountByInquiryDateAndCaseIndex(inquiryDateTo,inquiryDateFrom,caseIndex3,caseIndex4);
+    }
+
+    @Override
+    public Integer findEnrollementInAMonth(Date inquiryDateTo, Date inquiryDateFrom, FollowUpStatus closingStatus) {
+       return inquiryDao.findCountByInquiryDateAndClosingStaus(inquiryDateTo,inquiryDateFrom,closingStatus);
+    }
 
     @Override
     public List<Inquiry> findAll() {

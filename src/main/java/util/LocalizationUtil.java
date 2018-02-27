@@ -1,7 +1,10 @@
 package util;
 
+import sun.awt.geom.AreaOp;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class LocalizationUtil {
@@ -33,5 +36,25 @@ public class LocalizationUtil {
         if (string == null || string.isEmpty())
             return null;
         return dateFormat.parse(string);
+    }
+
+
+    public static final Date getWeekStartingDate(Date date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE);
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfWeek= calendar.get(Calendar.DAY_OF_WEEK);
+        Integer amount=dayOfWeek-Calendar.SUNDAY;
+        calendar.add(Calendar.DATE,-amount+1);
+        return dateFormat.parse(dateFormat.format( calendar.getTime()));
+    }
+
+    public static final Date getMonthStartingDate(Date date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE);
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfMonth= calendar.get(Calendar.DAY_OF_MONTH);
+        calendar.add(Calendar.DATE,-dayOfMonth+1);
+        return dateFormat.parse(dateFormat.format(calendar.getTime()));
     }
 }

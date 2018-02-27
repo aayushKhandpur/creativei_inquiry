@@ -32,15 +32,24 @@ public class ReminderServiceImpl implements ReminderService {
     }
 
     @Override
-    public List<Reminder> getReminderByDateRange(String param1, String param2) throws ParseException {
+    public List<Reminder> getReminderByDateRange(String param1, String param2) throws ParseException, InvalidParamRequest {
         logger.info("getReminderDateRange Method");
-        if (param1.equalsIgnoreCase("null")) {
-            param1 = param2;
-            param2 = LocalizationUtil.getFormattedDateWithTime(new Date());
+        Date toDate=LocalizationUtil.stringtoDateWithTimeConverter(param1);
+        Date fromDate=LocalizationUtil.stringtoDateWithTimeConverter(param2);
+
+        if(toDate.after(fromDate))
+            throw new InvalidParamRequest("ToDate is invalid");
+
+        if(fromDate.equals(null)) {
+            return  reminderCustomDao.findReminderLesserThanDate(toDate);
         }
-        Date to = LocalizationUtil.stringtoDateWithTimeConverter(param1);
-        Date from = LocalizationUtil.stringtoDateWithTimeConverter(param2);
-        return reminderCustomDao.findRemindersBetweenDates(to, from);
+        else if(toDate.equals(null)){
+            return reminderCustomDao.findReminderGreaterThanDate(fromDate);
+        }
+        else{
+            return  reminderCustomDao.findRemindersBetweenDates(toDate,fromDate);
+        }
+
     }
 
     private Boolean validateReminder(Reminder reminder) {

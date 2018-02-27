@@ -6,6 +6,7 @@ import creativei.entity.Reminder;
 import creativei.enums.ExceptionType;
 import creativei.helper.RequestHelper;
 import creativei.manager.ReminderManager;
+import creativei.vo.ReminderDateVo;
 import creativei.vo.ReminderVo;
 import creativei.vo.ResponseObject;
 import org.slf4j.Logger;
@@ -43,9 +44,20 @@ public class ReminderController {
         }
     }
 
-    @GetMapping(value = "/reminder/getByDate",produces = "application/json")
+    @PostMapping(value = "/reminder/getByDate",produces = "application/json")
     public @ResponseBody
-    ResponseObject getReminderByDateRange(@RequestParam String to, @RequestParam String  from){
-        return reminderManager.getReminderByDateRange(to,from);
+    ResponseObject getReminderByDateRange(@RequestBody String remStr,HttpServletRequest request){
+        logger.info("Reminder get by date");
+        try {
+            if(RequestHelper.isEmptyRequestString(remStr))
+                return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
+            ReminderDateVo reminderDateVo=mapper.readValue(remStr,ReminderDateVo.class);
+            ResponseObject responseObject=reminderManager.getReminderByDateRange(reminderDateVo);
+            return responseObject;
+        } catch (IOException e) {
+            logger.error(e.getMessage(),e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
+        }
+
     }
 }

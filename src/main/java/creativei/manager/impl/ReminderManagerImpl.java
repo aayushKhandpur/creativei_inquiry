@@ -6,6 +6,7 @@ import creativei.exception.InvalidParamRequest;
 import creativei.helper.ResponseHelper;
 import creativei.manager.ReminderManager;
 import creativei.service.ReminderService;
+import creativei.vo.ReminderDateVo;
 import creativei.vo.ReminderVo;
 import creativei.vo.ResponseObject;
 import org.slf4j.Logger;
@@ -42,16 +43,19 @@ public class ReminderManagerImpl implements ReminderManager {
     }
 
     @Override
-    public ResponseObject getReminderByDateRange(String to, String from) {
+    public ResponseObject getReminderByDateRange(ReminderDateVo reminderDateVo) {
         logger.info("Get Reminder by date range Method");
         List<Reminder> reminders= null;
         try {
-            reminders = reminderService.getReminderByDateRange(to,from);
+            reminders = reminderService.getReminderByDateRange(reminderDateVo.getToDate(),reminderDateVo.getFromDate());
             List<ReminderVo> reminderVos=ResponseHelper.getReminderByDateRangeResponse(reminders);
             return ResponseObject.getResponse(reminderVos);
         } catch (ParseException e) {
             logger.error(e.getMessage(),e);
-            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
+            return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
+        } catch (InvalidParamRequest invalidParamRequest) {
+            logger.error(invalidParamRequest.getMessage(),invalidParamRequest);
+            return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
         }
     }
 }

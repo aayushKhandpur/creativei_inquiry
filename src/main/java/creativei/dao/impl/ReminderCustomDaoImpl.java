@@ -28,7 +28,17 @@ public class ReminderCustomDaoImpl implements ReminderCustomDao {
     }
 
     @Override
-    public List<Reminder> findRemindersBetweenDates(Date to, Date from) {
-        return reminderDao.findByDateRange(to,from);
+    public List<Reminder> findRemindersBetweenDates(Date toDate, Date fromDate) {
+        return reminderDao.findByDateRange(toDate,fromDate);
+    }
+
+    @Override
+    public List<Reminder> findReminderLesserThanDate(Date toDate) {
+        return reminderDao.findByToDate(toDate);
+    }
+
+    @Override
+    public List<Reminder> findReminderGreaterThanDate(Date fromDate) {
+        return reminderDao.findByFromDate(fromDate);
     }
 }

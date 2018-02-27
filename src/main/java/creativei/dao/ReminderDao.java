@@ -11,6 +11,12 @@ import java.util.List;
 
 @Transactional
 public interface ReminderDao extends JpaRepository<Reminder,Long> {
-    @Query("from Reminder rem where rem.reminderTime between :to and :from")
-    List<Reminder> findByDateRange(@Param("to")Date to, @Param("from") Date from);
+    @Query("from Reminder rem where rem.reminderTime between :toDate and :fromDate")
+    List<Reminder> findByDateRange(@Param("toDate")Date toDate, @Param("fromDate") Date fromDate);
+
+    @Query("from Reminder rem where rem.reminderTime <= :toDate")
+    List<Reminder> findByToDate(@Param("toDate")Date toDate);
+
+    @Query("from Reminder rem where rem.reminderTime >= :fromDate")
+    List<Reminder> findByFromDate(@Param("fromDate")Date fromDate);
 }

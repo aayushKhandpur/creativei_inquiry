@@ -38,8 +38,7 @@ public class ResponseHelper {
     public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries) {
         List<InquiryVo> inquiryVos = new ArrayList<>();
         for (Inquiry inquiry : inquiries) {
-            InquiryVo inquiryVo = new InquiryVo(inquiry);
-            inquiryVos.add(inquiryVo);
+            inquiryVos.add(new InquiryVo(inquiry));
         }
         return inquiryVos;
     }
@@ -47,8 +46,7 @@ public class ResponseHelper {
     public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries) {
         List<InquiryVo> inquiryVos = new ArrayList<>();
         for (Inquiry inquiry : inquiries) {
-            InquiryVo inquiryVo = new InquiryVo(inquiry);
-            inquiryVos.add(inquiryVo);
+            inquiryVos.add(new InquiryVo(inquiry));
         }
         return inquiryVos;
     }
@@ -57,8 +55,7 @@ public class ResponseHelper {
     public static List<InquiryVo> getUnattendedInquiryResponse(List<Inquiry> inquiries) {
         List<InquiryVo> inquiryVos = new ArrayList<>();
         for (Inquiry inquiry : inquiries) {
-            InquiryVo inquiryVo = new InquiryVo(inquiry);
-            inquiryVos.add(inquiryVo);
+            inquiryVos.add(new InquiryVo(inquiry));
         }
         return inquiryVos;
     }
@@ -75,15 +72,13 @@ public class ResponseHelper {
     }
 
     public static ReminderVo getCreateReminderResponse(Reminder reminder) {
-        ReminderVo reminderVo = new ReminderVo(reminder);
-        return reminderVo;
+        return new ReminderVo(reminder);
     }
 
     public static List<ReminderVo> getReminderByDateRangeResponse(List<Reminder> reminders) {
         List<ReminderVo> reminderVos = new ArrayList<>();
         for (Reminder reminder : reminders) {
-            ReminderVo reminderVo = new ReminderVo(reminder);
-            reminderVos.add(reminderVo);
+            reminderVos.add(new ReminderVo(reminder));
         }
         return reminderVos;
     }

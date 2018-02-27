@@ -27,6 +27,12 @@ export class InqProvider {
     return this.http.get(this.baseUrl+'/getAll');
   }
 
+  getUnattendedInquiries(){
+    return this.http.get(this.baseUrl+'/getUnattended-inquiry',{
+      params: new HttpParams().set('boolParam', 'false').set('statusParam', 'open')
+    })
+  }
+
   createInq(data){
     return this.http.post(this.baseUrl+'/register',data);
   }

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { HelperProvider } from '../../../providers/helper/helper';
 import { InqDetailsPage } from '../inq-details/inq-details';
+import { InqProvider } from '../../../providers/inq/inq';
 
 @Component({
   selector: 'page-counselor-home',
@@ -11,9 +12,12 @@ import { InqDetailsPage } from '../inq-details/inq-details';
 export class CounselorHomePage {
 
   private activeMenu: string = "counselor";
+  private responseData;
+  private unattendedInq;
 
-  constructor(public navCtrl: NavController, private helper: HelperProvider) {
+  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private helper: HelperProvider) {
     this.helper.setActiveMenu(this.activeMenu);
+    this.getUnattendedInq();
   }
 
   createInq(){
@@ -22,6 +26,18 @@ export class CounselorHomePage {
 
   createTodo(){
     //todo
+  }
+
+  getUnattendedInq(){
+    this.inqProvider.getUnattendedInquiries()
+    .subscribe(
+      data => {this.responseData = data},
+      error => {console.log("GET unsucessful, the server returned this error: ",error)},
+      () => {
+        this.unattendedInq = this.responseData.data;
+        console.log("GET complete");
+      }
+    )
   }
 
 }

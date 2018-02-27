@@ -51,7 +51,7 @@ export class InqFormEducationGuardianPage {
         name: ['',Validators.required],
         relation: ['',Validators.required],
         phoneNumber: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-        email: ['',Validators.email],
+        email: ['',this.helper.emailOrEmptyValidator],
         occupation: ['']
       })
     });

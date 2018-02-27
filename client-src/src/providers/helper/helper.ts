@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 import { MenuController } from 'ionic-angular';
 
 @Injectable()
@@ -69,5 +69,9 @@ export class HelperProvider {
   
     return o; // Return new object.
   };
+
+  emailOrEmptyValidator(control: AbstractControl): ValidationErrors | null {
+    return control.value === '' ? null : Validators.email(control);
+  }
 
 }

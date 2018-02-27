@@ -4,17 +4,17 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
-import { HelperProvider } from '../../providers/helper/helper';
-import { InqForm3Page } from '../inq-form3/inq-form3';
+import { InqProvider } from '../../../providers/inq/inq';
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { HelperProvider } from '../../../providers/helper/helper';
+import { InqFormMarketingPage } from '../inq-form-marketing/inq-form-marketing';
 
 @Component({
-  selector: 'page-inq-form2',
-  templateUrl: 'inq-form2.html',
+  selector: 'page-inq-form-education-guardian',
+  templateUrl: 'inq-form-education-guardian.html',
 })
-export class InqForm2Page {
+export class InqFormEducationGuardianPage {
 
   private enums;
   private hQualifications;
@@ -68,7 +68,7 @@ export class InqForm2Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InqForm2Page');
+    console.log('ionViewDidLoad InqFormEducationGuardianPage');
   }
 
   private loading;
@@ -109,7 +109,7 @@ export class InqForm2Page {
           console.log("complete");
           this.loading.dismissAll();
           if(this.responseData.data){
-            this.navCtrl.push(InqForm3Page,{ data: this.responseData });
+            this.navCtrl.push(InqFormMarketingPage,{ data: this.responseData });
           }
         }
         );
@@ -120,7 +120,7 @@ export class InqForm2Page {
   }
 
   skip(){
-    this.navCtrl.push(InqForm3Page,{ data: this.currentInq });
+    this.navCtrl.push(InqFormMarketingPage,{ data: this.currentInq });
   }
 
   setEnums(){

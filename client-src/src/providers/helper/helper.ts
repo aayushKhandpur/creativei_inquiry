@@ -1,12 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MenuController } from 'ionic-angular';
 
 @Injectable()
 export class HelperProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private menu: MenuController) {
     console.log('Hello HelperProvider Provider');
+  }
+
+  setActiveMenu(menuID:string){
+    this.menu.enable(true,menuID);
   }
 
   sortLocalityByName(data){

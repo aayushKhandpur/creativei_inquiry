@@ -4,17 +4,17 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
-import { HelperProvider } from '../../providers/helper/helper';
+import { InqProvider } from '../../../providers/inq/inq';
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { HelperProvider } from '../../../providers/helper/helper';
 import { ThankyouPage } from '../thankyou/thankyou';
 
 @Component({
-  selector: 'page-inq-form3',
-  templateUrl: 'inq-form3.html',
+  selector: 'page-inq-form-marketing',
+  templateUrl: 'inq-form-marketing.html',
 })
-export class InqForm3Page {
+export class InqFormMarketingPage {
   
   private enums;
   private enqSource;
@@ -39,7 +39,7 @@ export class InqForm3Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InqForm3Page');
+    console.log('ionViewDidLoad InqFormMarketingPage');
   }
 
   private loading;

@@ -28,6 +28,15 @@ public class InquiryVo {
     private String closingStatus;
     private String closingSubStatus;
     private String closingRemark;
+    private String occupation;
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
 
     public InquiryVo(){}
 

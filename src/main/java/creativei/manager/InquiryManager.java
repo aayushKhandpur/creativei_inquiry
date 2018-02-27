@@ -3,10 +3,7 @@ package creativei.manager;
 
 import creativei.entity.Inquiry;
 import creativei.enums.InquiryStatus;
-import creativei.vo.AddressVo;
-import creativei.vo.InquiryServerInfoVo;
-import creativei.vo.InquiryVo;
-import creativei.vo.ResponseObject;
+import creativei.vo.*;
 
 import java.util.List;
 
@@ -30,4 +27,6 @@ public interface InquiryManager {
     ResponseObject getInquiryServerInfo();
 
     ResponseObject getUnattendedInquiry(String boolParam,String statusParam);
+
+    ResponseObject getAllByFilter(FilterVo filterVo);
 }

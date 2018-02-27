@@ -63,6 +63,16 @@ public class ResponseHelper {
         return inquiryVos;
     }
 
+    public static List<InquiryVo> getByFiltersInquiryResponse(List<Inquiry> inquiries){
+        List<InquiryVo> inquiryVos=new ArrayList<>();
+        for(Inquiry inquiry:inquiries){
+            InquiryVo inquiryVo=new InquiryVo(inquiry);
+            inquiryVos.add(inquiryVo);
+        }
+        return inquiryVos;
+    }
+
+
     public static FollowUpVo getCreateFollowUpData(FollowUp followUp, FollowUpVo followUpVo) {
         followUpVo.setId(followUp.getId());
         followUpVo.setCaseIndex(CaseIndex.enumToString(followUp.getCaseIndex()));

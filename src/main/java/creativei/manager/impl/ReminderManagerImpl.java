@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ReminderManagerImpl implements ReminderManager {
@@ -34,6 +36,20 @@ public class ReminderManagerImpl implements ReminderManager {
             logger.error(invalidParamRequest.getMessage(), invalidParamRequest);
             return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
         }catch (ParseException e) {
+            logger.error(e.getMessage(),e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
+        }
+    }
+
+    @Override
+    public ResponseObject getReminderByDateRange(String to, String from) {
+        logger.info("Get Reminder by date range Method");
+        List<Reminder> reminders= null;
+        try {
+            reminders = reminderService.getReminderByDateRange(to,from);
+            List<ReminderVo> reminderVos=ResponseHelper.getReminderByDateRangeResponse(reminders);
+            return ResponseObject.getResponse(reminderVos);
+        } catch (ParseException e) {
             logger.error(e.getMessage(),e);
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
         }

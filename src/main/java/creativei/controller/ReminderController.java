@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 
 @CrossOrigin(origins = "http://localhost:8100")
 @RestController
@@ -40,5 +41,11 @@ public class ReminderController {
             logger.error(e.getMessage(), e);
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
+    }
+
+    @GetMapping(value = "/reminder/getByDate",produces = "application/json")
+    public @ResponseBody
+    ResponseObject getReminderByDateRange(@RequestParam String to, @RequestParam String  from){
+        return reminderManager.getReminderByDateRange(to,from);
     }
 }

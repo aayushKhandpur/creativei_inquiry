@@ -74,7 +74,7 @@ export class InqDetailsPage {
       areaOfInterest: ['', Validators.required],
       education: this.formBuilder.array([
         this.formBuilder.group({
-          educationQualification: [''],
+          educationQualification: ['',Validators.required],
           instituteName: [''],
           stream: [''],
           status: [''],
@@ -85,14 +85,14 @@ export class InqDetailsPage {
         })
       ]),
       guardian: this.formBuilder.group({
-        name: [''],
-        relation: [''],
-        phoneNumber: ['',[Validators.minLength(10),Validators.maxLength(10)]],
+        name: ['',Validators.required],
+        relation: ['',Validators.required],
+        phoneNumber: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
         email: ['',this.helper.emailOrEmptyValidator],
         occupation: ['']
       }),
       marketing: this.formBuilder.group({
-        source: [''],
+        source: ['',Validators.required],
         referred: [false],
         referant: ['']
       })

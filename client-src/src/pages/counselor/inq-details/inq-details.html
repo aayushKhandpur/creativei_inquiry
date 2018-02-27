@@ -95,7 +95,7 @@
               <ng2-completer class="completer-limit" formControlName="pin" (focus)="setPincodeFieldTypeNumber()" (selected)="onPincodeSelected($event)" [datasource]="pinService" [minSearchLength]="3" [placeholder]="'Enter the first 3 digits to search'" [maxChars]="6" [clearUnselected]="true" [autoMatch]="true" [inputId]="'completer-input'"></ng2-completer>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="areas">
+          <ion-row *ngIf="areas && inqForm.value.address.pin.length == 6">
             <ion-col col-3>
               <ion-item>
                 <ion-label floating>Area</ion-label>

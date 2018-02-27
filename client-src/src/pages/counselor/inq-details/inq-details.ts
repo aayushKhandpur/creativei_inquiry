@@ -232,6 +232,7 @@ export class InqDetailsPage {
       this.setClosingStatus(null);
       this.setClosingSubStatus(null);
       this.setClosingRemark(null);
+      this.logForm();
     }
   }
 
@@ -247,6 +248,7 @@ export class InqDetailsPage {
         this.setClosingSubStatus(data.closingSubStatus);
         this.setClosingRemark(data.closingRemark);
         this.setInqStatus('close');
+        this.logForm();
       }
     });
   }

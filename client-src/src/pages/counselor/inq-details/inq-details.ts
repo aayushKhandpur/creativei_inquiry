@@ -88,7 +88,7 @@ export class InqDetailsPage {
         name: [''],
         relation: [''],
         phoneNumber: ['',[Validators.minLength(10),Validators.maxLength(10)]],
-        email: ['',Validators.email],
+        email: ['',this.helper.emailOrEmptyValidator],
         occupation: ['']
       }),
       marketing: this.formBuilder.group({

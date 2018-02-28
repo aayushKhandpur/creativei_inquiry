@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ReminderService {
     Reminder create(Reminder reminder) throws InvalidParamRequest;
-    List<Reminder> getReminderByDateRange(String from, String to) throws ParseException, InvalidParamRequest;
+    List<Reminder> getReminderByDateRange(Date from, Date to) throws InvalidParamRequest;
 }

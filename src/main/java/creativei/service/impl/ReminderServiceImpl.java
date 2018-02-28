@@ -32,10 +32,8 @@ public class ReminderServiceImpl implements ReminderService {
     }
 
     @Override
-    public List<Reminder> getReminderByDateRange(String param1, String param2) throws ParseException, InvalidParamRequest {
+    public List<Reminder> getReminderByDateRange(Date fromDate, Date toDate) throws InvalidParamRequest {
         logger.info("getReminderDateRange Method");
-        Date fromDate=LocalizationUtil.stringtoDateWithTimeConverter(param1);
-        Date toDate=LocalizationUtil.stringtoDateWithTimeConverter(param2);
         if(fromDate!=null&&toDate!=null){
             validateDateRange(fromDate,toDate);
         }

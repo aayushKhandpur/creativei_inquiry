@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.LocalizationUtil;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -46,8 +47,12 @@ public class ReminderManagerImpl implements ReminderManager {
     public ResponseObject getReminderByDateRange(ReminderDateVo reminderDateVo) {
         logger.info("Get Reminder by date range Method");
         List<Reminder> reminders= null;
+        Date fromDate=null;
+        Date  toDate=null;
         try {
-            reminders = reminderService.getReminderByDateRange(reminderDateVo.getFromDate(),reminderDateVo.getToDate());
+            fromDate=LocalizationUtil.stringtoDateWithTimeConverter(reminderDateVo.getFromDate());
+            toDate=LocalizationUtil.stringtoDateWithTimeConverter(reminderDateVo.getToDate());
+            reminders = reminderService.getReminderByDateRange(fromDate,toDate);
             List<ReminderVo> reminderVos=ResponseHelper.getReminderByDateRangeResponse(reminders);
             return ResponseObject.getResponse(reminderVos);
         } catch (ParseException e) {

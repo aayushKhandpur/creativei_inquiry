@@ -2,8 +2,10 @@ package creativei.dao.impl;
 
 import creativei.dao.ReminderCustomDao;
 import creativei.dao.ReminderDao;
+import creativei.dao.specification.ReminderSpecification;
 import creativei.entity.Reminder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -28,17 +30,8 @@ public class ReminderCustomDaoImpl implements ReminderCustomDao {
     }
 
     @Override
-    public List<Reminder> findRemindersBetweenDates(Date toDate, Date fromDate) {
-        return reminderDao.findByDateRange(toDate,fromDate);
-    }
-
-    @Override
-    public List<Reminder> findReminderLesserThanDate(Date toDate) {
-        return reminderDao.findByToDate(toDate);
-    }
-
-    @Override
-    public List<Reminder> findReminderGreaterThanDate(Date fromDate) {
-        return reminderDao.findByFromDate(fromDate);
+    public List<Reminder> findReminderByDateRange(Date fromDate, Date toDate) {
+        Specification<Reminder> specification=ReminderSpecification.reminderBetweenDateRange(fromDate,toDate);
+        return reminderDao.findAll(specification);
     }
 }

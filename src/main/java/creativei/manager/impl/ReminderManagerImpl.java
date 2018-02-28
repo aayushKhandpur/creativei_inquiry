@@ -47,7 +47,7 @@ public class ReminderManagerImpl implements ReminderManager {
         logger.info("Get Reminder by date range Method");
         List<Reminder> reminders= null;
         try {
-            reminders = reminderService.getReminderByDateRange(reminderDateVo.getToDate(),reminderDateVo.getFromDate());
+            reminders = reminderService.getReminderByDateRange(reminderDateVo.getFromDate(),reminderDateVo.getToDate());
             List<ReminderVo> reminderVos=ResponseHelper.getReminderByDateRangeResponse(reminders);
             return ResponseObject.getResponse(reminderVos);
         } catch (ParseException e) {

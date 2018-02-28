@@ -44,13 +44,11 @@ public class ReminderController {
         }
     }
 
-    @PostMapping(value = "/reminder/getByDate",produces = "application/json")
+    @GetMapping(value = "/reminder/getByDate",produces = "application/json")
     public @ResponseBody
-    ResponseObject getReminderByDateRange(@RequestBody String remStr,HttpServletRequest request){
+    ResponseObject getReminderByDateRange(@RequestParam(value = "remStr") String remStr){
         logger.info("Reminder get by date");
         try {
-            if(RequestHelper.isEmptyRequestString(remStr))
-                return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
             ReminderDateVo reminderDateVo=mapper.readValue(remStr,ReminderDateVo.class);
             ResponseObject responseObject=reminderManager.getReminderByDateRange(reminderDateVo);
             return responseObject;

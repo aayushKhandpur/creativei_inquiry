@@ -22,12 +22,12 @@ public interface InquiryDao extends JpaRepository<Inquiry, Long>, JpaSpecificati
 
     List<Inquiry> findByInquiryStatusAndIsAttended(InquiryStatus inquiryStatus, Boolean isAttended);
 
-    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryDateTo And :inquiryDateFrom")
-    Integer findCountByInquiryDate(@Param("inquiryDateTo") Date inquiryDateTo, @Param("inquiryDateFrom") Date inquiryDateFrom);
+    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryToDate And :inquiryFromDate")
+    Integer findCountByInquiryDate(@Param("inquiryToDate") Date inquiryToDate, @Param("inquiryFromDate") Date inquiryFromDate);
 
-    @Query("select count(inq.id) from Inquiry inq join inq.followUps follUp  where inq.inquiryDate between :inquiryDateTo And :inquiryDateFrom and follUp.caseIndex=:caseIndex3 or follUp.caseIndex=:caseIndex4")
-    Integer findCountByInquiryDateAndCaseIndex(@Param("inquiryDateTo") Date inquiryDateTo, @Param("inquiryDateFrom") Date inquiryDateFrom, @Param("caseIndex3")CaseIndex caseIndex3,@Param("caseIndex4")CaseIndex caseIndex4);
+    @Query("select count(inq.id) from Inquiry inq join inq.followUps follUp  where inq.inquiryDate between :inquiryToDate And :inquiryFromDate and follUp.caseIndex=:caseIndex3 or follUp.caseIndex=:caseIndex4")
+    Integer findCountByInquiryDateAndCaseIndex(@Param("inquiryToDate") Date inquiryToDate, @Param("inquiryFromDate") Date inquiryFromDate, @Param("caseIndex3")CaseIndex caseIndex3,@Param("caseIndex4")CaseIndex caseIndex4);
 
-    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryDateTo And :inquiryDateFrom and inq.closingStatus=:closingStatus")
-    Integer findCountByInquiryDateAndClosingStaus(@Param("inquiryDateTo") Date inquiryDateTo, @Param("inquiryDateFrom") Date inquiryDateFrom, @Param("closingStatus")FollowUpStatus followUpStatus);
+    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryToDate And :inquiryFromDate and inq.closingStatus=:closingStatus")
+    Integer findCountByInquiryDateAndClosingStaus(@Param("inquiryToDate") Date inquiryToDate, @Param("inquiryFromDate") Date inquiryFromDate, @Param("closingStatus")FollowUpStatus followUpStatus);
 }

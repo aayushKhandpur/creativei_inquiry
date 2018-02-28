@@ -121,42 +121,42 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public Integer getDailyCount() throws ParseException {
         String date1= LocalizationUtil.getFormattedDate(new Date());
-        Date inquiryDateTo=LocalizationUtil.stringToDateConverter(date1);
-        Date inquiryDateFrom=new Date();
-        return inquiryCustomDao.findCountByInquiryDate(inquiryDateTo,inquiryDateFrom);
+        Date inquiryToDate=LocalizationUtil.stringToDateConverter(date1);
+        Date inquiryFromDate=new Date();
+        return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
     }
 
     @Override
     public Integer getWeeklyCount() throws ParseException {
         Date date=new Date();
-        Date inquiryDateTo=LocalizationUtil.getWeekStartingDate(date);
-        Date inquiryDateFrom=date;
-        return inquiryCustomDao.findCountByInquiryDate(inquiryDateTo,inquiryDateFrom);
+        Date inquiryToDate=LocalizationUtil.getWeekStartingDate(date);
+        Date inquiryFromDate=date;
+        return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
     }
 
     @Override
     public Integer getMonthlyCount() throws ParseException {
         Date date=new Date();
-        Date inquiryDateTo=LocalizationUtil.getMonthStartingDate(date);
-        Date inquiryDateFrom=date;
-        return inquiryCustomDao.findCountByInquiryDate(inquiryDateTo,inquiryDateFrom);
+        Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
+        Date inquiryFromDate=date;
+        return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
     }
 
     @Override
     public Integer getHotLeadCount() throws ParseException {
         Date date=new Date();
-        Date inquiryDateTo=LocalizationUtil.getMonthStartingDate(date);
-        Date inquiryDateFrom=date;
+        Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
+        Date inquiryFromDate=date;
         CaseIndex caseIndex3=CaseIndex.stringToEnum("likely");
         CaseIndex caseIndex4=CaseIndex.stringToEnum("Hot Lead");
-        return inquiryCustomDao.findHotLeadsInAMonth(inquiryDateTo,inquiryDateFrom,caseIndex3,caseIndex4);
+        return inquiryCustomDao.findHotLeadsInAMonth(inquiryToDate,inquiryFromDate,caseIndex3,caseIndex4);
     }
 
     @Override
     public Integer getEnrolledCount() throws ParseException {
         Date date=new Date();
-        Date inquiryDateTo=LocalizationUtil.getMonthStartingDate(date);
-        Date inquiryDateFrom=date;
-        return inquiryCustomDao.findEnrollementInAMonth(inquiryDateTo,inquiryDateFrom, FollowUpStatus.ENROLLED);
+        Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
+        Date inquiryFromDate=date;
+        return inquiryCustomDao.findEnrollementInAMonth(inquiryToDate,inquiryFromDate, FollowUpStatus.ENROLLED);
     }
 }

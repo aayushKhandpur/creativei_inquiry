@@ -58,7 +58,7 @@ export class InqListPage {
   }
 
   editInq(id){
-    this.navCtrl.setRoot(InqDetailsPage,id);
+    this.navCtrl.push(InqDetailsPage,id);
   }
 
   toggleSeeMore(i){

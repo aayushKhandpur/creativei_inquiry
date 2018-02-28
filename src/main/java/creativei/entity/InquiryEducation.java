@@ -14,6 +14,7 @@ import java.io.Serializable;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 @Table(name = "Inquiry_Education")
+
 public class InquiryEducation extends BaseEntity implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

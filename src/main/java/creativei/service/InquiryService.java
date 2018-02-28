@@ -5,8 +5,7 @@ import creativei.enums.InquiryStatus;
 import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.NoDataAvailable;
-import creativei.exception.UniqueConstraintViolationException;
-import org.springframework.stereotype.Service;
+import creativei.vo.FilterVo;
 
 import java.util.List;
 
@@ -23,5 +22,6 @@ public interface InquiryService {
     Inquiry update(Inquiry inquiry )throws  DataIntegrityException,InvalidParamRequest;
     Inquiry updateAll(List<Inquiry> inquiries);
     List<Inquiry> getUnattendedInquiry(String boolParam,String statusParam);
+    List<Inquiry> getAllByFilter(FilterVo filterVo);
 
 }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
-import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
+import { InqProvider } from '../../../providers/inq/inq';
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
 import { InqDetailsPage } from '../inq-details/inq-details';
 
 @Component({

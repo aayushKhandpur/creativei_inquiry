@@ -1,20 +1,25 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the
-    <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-
+<ion-content padding>  
+  <section class="login">
+    <div class="login-button-group">
+      <button (click)="goToVisitorPage()" outline large ion-button color="light">VISITOR</button>
+      <div class="login-button-seperator">- OR -</div>
+      <button (click)="toggleLogin()" *ngIf="!isLogin" outline small ion-button color="light">LOGIN</button>
+      <form *ngIf="isLogin">
+        <label for='username'>Username</label>
+        <input id='username' type='text'>
+        <label for='password'>Password</label>
+        <input id='password' type='password'>
+      </form>
+      <button class="dash-login" (click)="goToCounselorDash()" *ngIf="isLogin" outline small ion-button color="light">LOGIN</button>
+    </div>
+  </section>
 </ion-content>

@@ -6,18 +6,18 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { CompleterService, RemoteData, CompleterItem } from 'ng2-completer';
 
-import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../providers/notification-message/notification-message';
-import { LocalityProvider } from '../../providers/locality/locality';
-import { HelperProvider } from '../../providers/helper/helper';
-import { InqForm2Page } from '../inq-form2/inq-form2';
+import { InqProvider } from '../../../providers/inq/inq';
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { LocalityProvider } from '../../../providers/locality/locality';
+import { HelperProvider } from '../../../providers/helper/helper';
+import { InqFormEducationGuardianPage } from '../inq-form-education-guardian/inq-form-education-guardian';
 
 @Component({
-  selector: 'page-inq-form1',
-  templateUrl: 'inq-form1.html',
+  selector: 'page-inq-form-personal',
+  templateUrl: 'inq-form-personal.html',
 })
-export class InqForm1Page {
+export class InqFormPersonalPage {
 
   private diffState: boolean;
   private responseData;
@@ -34,7 +34,8 @@ export class InqForm1Page {
   private computerKnowledge;
   private areasOfInterest;
 
-  today : string = new Date().toISOString();
+  today: string = new Date().toISOString();
+  private activeMenu: string = "visitor";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
     this.inqForm = this.formBuilder.group({
@@ -53,6 +54,7 @@ export class InqForm1Page {
       areaOfInterest: ['', Validators.required]
     });
 
+    this.helper.setActiveMenu(this.activeMenu);
     this.setEnums();
     this.setGenders();
     this.setQualifications();
@@ -67,7 +69,7 @@ export class InqForm1Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InqForm1Page');
+    console.log('ionViewDidLoad InqFormPersonalPage');
   }
 
   private loading;
@@ -107,7 +109,7 @@ export class InqForm1Page {
           console.log("complete");
           this.loading.dismissAll();
           if(this.responseData.data){
-            this.navCtrl.push(InqForm2Page,{ data: this.responseData });
+            this.navCtrl.push(InqFormEducationGuardianPage,{ data: this.responseData });
           }
         }
         );

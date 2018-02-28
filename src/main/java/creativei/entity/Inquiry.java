@@ -103,6 +103,17 @@ public class Inquiry extends BaseEntity implements Serializable {
     private String remark;
     @Column
     private Boolean isAttended=false;
+    @OneToMany(mappedBy = "inquiry")
+    @JsonIgnore
+    private List<FollowUp> followUps=new ArrayList<>();
+
+    public List<FollowUp> getFollowUps() {
+        return followUps;
+    }
+
+    public void setFollowUps(List<FollowUp> followUps) {
+        this.followUps = followUps;
+    }
 
     public Boolean getAttended() {
         return isAttended;

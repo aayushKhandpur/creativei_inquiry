@@ -1,5 +1,6 @@
 package creativei.manager.impl;
 
+import com.sun.org.apache.regexp.internal.RE;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryAddress;
 import creativei.entity.Locality;
@@ -135,6 +136,9 @@ public class InquiryManagerImpl implements InquiryManager {
         List<InquiryVo> inquiryVos=ResponseHelper.getUnattendedInquiryResponse(inquiryService.getUnattendedInquiry(boolParam,statusParam));
         return ResponseObject.getResponse(inquiryVos);
     }
-
-
+    @Override
+    public ResponseObject getAllByFilter(FilterVo filterVo) {
+        List<Inquiry> inquiry=inquiryService.getAllByFilter(filterVo);
+        List<InquiryVo> inquiryVos=ResponseHelper.getByFiltersInquiryResponse(inquiry);
+        return ResponseObject.getResponse(inquiryVos);    }
 }

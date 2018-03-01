@@ -137,14 +137,8 @@ public class InquiryManagerImpl implements InquiryManager {
 
     @Override
     public ResponseObject getInquiryCount() {
-       InquiryCountVo inquiryCountVo=new InquiryCountVo();
         try {
-            inquiryCountVo.setDailyCount(inquiryService.getDailyCount());
-            inquiryCountVo.setWeekCount(inquiryService.getWeeklyCount());
-            inquiryCountVo.setMonthCount(inquiryService.getMonthlyCount());
-            inquiryCountVo.setHotLeadCount(inquiryService.getHotLeadCount());
-            inquiryCountVo.setEnrolledCount(inquiryService.getEnrolledCount());
-            return ResponseObject.getResponse(inquiryCountVo);
+            return inquiryService.getInquiryCount();
         } catch (ParseException e) {
             logger.error(e.getMessage(),e);
             return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());

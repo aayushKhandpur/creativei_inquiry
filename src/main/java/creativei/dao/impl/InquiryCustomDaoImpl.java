@@ -67,8 +67,8 @@ public class InquiryCustomDaoImpl implements InquiryCustomDao {
     }
 
     @Override
-    public Integer findHotLeadsInAMonth(Date inquiryToDate, Date inquiryFromDate, CaseIndex caseIndex3,CaseIndex caseIndex4) {
-        return inquiryDao.findCountByInquiryDateAndCaseIndex(inquiryToDate,inquiryFromDate,caseIndex3,caseIndex4);
+    public Integer findHotLeadsInAMonth(Date inquiryToDate, Date inquiryFromDate, List<CaseIndex>caseIndices) {
+        return inquiryDao.findCountByInquiryDateAndCaseIndex(inquiryToDate,inquiryFromDate,caseIndices);
     }
 
     @Override

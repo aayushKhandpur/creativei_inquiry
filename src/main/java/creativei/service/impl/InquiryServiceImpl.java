@@ -9,6 +9,8 @@ import creativei.exception.InvalidParamRequest;
 import creativei.exception.NoDataAvailable;
 import creativei.service.InquiryService;
 import creativei.vo.FilterVo;
+import creativei.vo.InquiryCountVo;
+import creativei.vo.ResponseObject;
 import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import util.LocalizationUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -119,41 +122,61 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Integer getDailyCount() throws ParseException {
+    public ResponseObject getInquiryCount() throws ParseException {
+        InquiryCountVo inquiryCountVo=null;
+        try {
+            inquiryCountVo= new InquiryCountVo();
+            inquiryCountVo.setDailyCount(getDailyCount());
+            inquiryCountVo.setWeekCount(getWeeklyCount());
+            inquiryCountVo.setMonthCount(getMonthlyCount());
+            inquiryCountVo.setHotLeadCount(getHotLeadCount());
+            inquiryCountVo.setEnrolledCount(getEnrolledCount());
+            return ResponseObject.getResponse(inquiryCountVo);
+        }catch (Exception e){
+            logger.error("Cause: "+e.getCause().getCause().getMessage());
+            return ResponseObject.getResponse(ExceptionType.RESULTSET_GENERATION_EXCEPTION.getMessage(),ExceptionType.RESULTSET_GENERATION_EXCEPTION.getCode());
+        }
+    }
+
+
+    private Integer getDailyCount() throws ParseException {
+        logger.info("getDailyCount method");
         String date1= LocalizationUtil.getFormattedDate(new Date());
         Date inquiryToDate=LocalizationUtil.stringToDateConverter(date1);
         Date inquiryFromDate=new Date();
         return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
     }
 
-    @Override
-    public Integer getWeeklyCount() throws ParseException {
+    private Integer getWeeklyCount() throws ParseException {
+        logger.info("getWeeklyCount method");
         Date date=new Date();
         Date inquiryToDate=LocalizationUtil.getWeekStartingDate(date);
         Date inquiryFromDate=date;
         return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
     }
 
-    @Override
-    public Integer getMonthlyCount() throws ParseException {
+    private Integer getMonthlyCount() throws ParseException {
+        logger.info("getMonthlyCount method");
         Date date=new Date();
         Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
         Date inquiryFromDate=date;
         return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
     }
 
-    @Override
-    public Integer getHotLeadCount() throws ParseException {
+    private Integer getHotLeadCount() throws ParseException {
+        logger.info("getHotLeadCount method");
         Date date=new Date();
         Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
         Date inquiryFromDate=date;
-        CaseIndex caseIndex3=CaseIndex.stringToEnum("likely");
-        CaseIndex caseIndex4=CaseIndex.stringToEnum("Hot Lead");
-        return inquiryCustomDao.findHotLeadsInAMonth(inquiryToDate,inquiryFromDate,caseIndex3,caseIndex4);
+        List<CaseIndex> caseIndices=new ArrayList<CaseIndex>(){{
+            add(CaseIndex.LIKELY);
+            add(CaseIndex.HOT_LEAD);
+        }};
+        return inquiryCustomDao.findHotLeadsInAMonth(inquiryToDate,inquiryFromDate,caseIndices);
     }
 
-    @Override
-    public Integer getEnrolledCount() throws ParseException {
+    private Integer getEnrolledCount() throws ParseException {
+        logger.info("getEnrolledCount method");
         Date date=new Date();
         Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
         Date inquiryFromDate=date;

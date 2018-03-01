@@ -61,6 +61,9 @@ public class ReminderManagerImpl implements ReminderManager {
         } catch (InvalidParamRequest invalidParamRequest) {
             logger.error(invalidParamRequest.getMessage(),invalidParamRequest);
             return ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(),ExceptionType.INVALID_METHOD_PARAM.getCode());
+        }catch (Exception e){
+            logger.error(e.getMessage()+" Requested Parameter: "+toDate+" "+fromDate ,e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
         }
     }
 }

@@ -28,14 +28,14 @@ public class ReminderController {
     @Autowired
     ReminderManager reminderManager;
 
-    @PostMapping(value = "/reminder/create",produces = "application/json")
+    @PostMapping(value = "/reminder/create", produces = "application/json")
     public @ResponseBody
-    ResponseObject createReminder(@RequestBody String reminderString, HttpServletRequest request){
+    ResponseObject createReminder(@RequestBody String reminderString, HttpServletRequest request) {
         logger.info("CreateReminder method");
         try {
-            if(RequestHelper.isEmptyRequestString(reminderString))
+            if (RequestHelper.isEmptyRequestString(reminderString))
                 return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
-            ReminderVo reminderVo= mapper.readValue(reminderString, ReminderVo.class);
+            ReminderVo reminderVo = mapper.readValue(reminderString, ReminderVo.class);
             ResponseObject responseObject = reminderManager.create(reminderVo);
             return responseObject;
         } catch (Exception e) {
@@ -44,17 +44,19 @@ public class ReminderController {
         }
     }
 
-    @GetMapping(value = "/reminder/getByDate",produces = "application/json")
+    @GetMapping(value = "/reminder/getByDate", produces = "application/json")
     public @ResponseBody
-    ResponseObject getReminderByDateRange(@RequestParam(value = "remStr") String remStr){
+    ResponseObject getReminderByDateRange(@RequestParam(value = "remStr") String remStr) {
         logger.info("Reminder get by date");
         try {
-            ReminderDateVo reminderDateVo=mapper.readValue(remStr,ReminderDateVo.class);
-            ResponseObject responseObject=reminderManager.getReminderByDateRange(reminderDateVo);
+            if (RequestHelper.isEmptyRequestString(remStr))
+                return (ResponseObject.getResponse(ExceptionType.INVALID_METHOD_PARAM.getMessage(), ExceptionType.INVALID_METHOD_PARAM.getCode()));
+            ReminderDateVo reminderDateVo = mapper.readValue(remStr, ReminderDateVo.class);
+            ResponseObject responseObject = reminderManager.getReminderByDateRange(reminderDateVo);
             return responseObject;
         } catch (IOException e) {
-            logger.error(e.getMessage(),e);
-            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(),ExceptionType.GENERAL_ERROR.getCode());
+            logger.error(e.getMessage(), e);
+            return ResponseObject.getResponse(ExceptionType.GENERAL_ERROR.getMessage(), ExceptionType.GENERAL_ERROR.getCode());
         }
 
     }

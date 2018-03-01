@@ -34,6 +34,7 @@ public class ReminderServiceImpl implements ReminderService {
     @Override
     public List<Reminder> getReminderByDateRange(Date fromDate, Date toDate) throws InvalidParamRequest {
         logger.info("getReminderDateRange Method");
+        validateDate(fromDate,toDate);
         if(fromDate!=null&&toDate!=null){
             validateDateRange(fromDate,toDate);
         }
@@ -55,6 +56,12 @@ public class ReminderServiceImpl implements ReminderService {
 
     private void validateDateRange(Date fromDate,Date toDate) throws InvalidParamRequest {
         if(fromDate.after(toDate))
-            throw new InvalidParamRequest("Invalide Date range- toDate is after fromDate  ");
+            throw new InvalidParamRequest("Invalide Date range- toDate "+toDate+" is after fromDate "+fromDate);
+
+    }
+
+    private void validateDate(Date fromDate,Date toDate) throws InvalidParamRequest{
+        if(toDate==null&& fromDate==null)
+            throw new InvalidParamRequest("toDate and fromDate both are Null");
     }
 }

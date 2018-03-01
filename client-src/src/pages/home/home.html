@@ -13,13 +13,13 @@
       <button (click)="goToVisitorPage()" outline large ion-button color="light">VISITOR</button>
       <div class="login-button-seperator">- OR -</div>
       <button (click)="toggleLogin()" *ngIf="!isLogin" outline small ion-button color="light">LOGIN</button>
-      <form *ngIf="isLogin">
+      <form *ngIf="isLogin" [formGroup]="loginForm" (ngSubmit)="login()">
         <label for='username'>Username</label>
-        <input id='username' type='text'>
+        <input formControlName="id" id='username' type='text'>
         <label for='password'>Password</label>
-        <input id='password' type='password'>
+        <input formControlName="password" id='password' type='password'>
+        <button class="dash-login" type="submit" *ngIf="isLogin" outline small ion-button color="light">LOGIN</button>
       </form>
-      <button class="dash-login" (click)="goToCounselorDash()" *ngIf="isLogin" outline small ion-button color="light">LOGIN</button>
     </div>
   </section>
 </ion-content>

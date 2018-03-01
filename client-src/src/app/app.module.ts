@@ -25,6 +25,7 @@ import { LocalityProvider } from '../providers/locality/locality';
 import { NotificationMessageProvider } from '../providers/notification-message/notification-message';
 import { HelperProvider } from '../providers/helper/helper';
 import { FollowUpProvider } from '../providers/follow-up/follow-up';
+import { AuthProvider } from '../providers/auth/auth';
 import { ReminderProvider } from '../providers/reminder/reminder';
 
 @NgModule({
@@ -71,6 +72,7 @@ import { ReminderProvider } from '../providers/reminder/reminder';
     NotificationMessageProvider,
     HelperProvider,
     FollowUpProvider,
+    AuthProvider,
     ReminderProvider
   ]
 })

@@ -257,14 +257,14 @@ export class InqDetailsPage {
     if(data){
       this.currentInqClosingStatus = data;
     }else{
-      this.currentInqClosingRemark = '';
-        }
+      this.currentInqClosingStatus = '';
+    }
   }
   setClosingSubStatus(data){
     if(data){
       this.currentInqClosingSubStatus = data;
     }else{
-      this.currentInqClosingRemark = '';
+      this.currentInqClosingSubStatus = '';
     }
   }
   setClosingRemark(data){

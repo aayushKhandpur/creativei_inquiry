@@ -283,7 +283,7 @@ export class InqDetailsPage {
     this.city = locality.data.city;
     this.state = locality.data.state;
     this.country = locality.data.country;
-    this.areas = this.helper.sortLocalityByName(locality.data.locality);
+    this.areas = this.helper.sortByStringAscending(locality.data.locality,'name');
   }
 
   getLocality(pincode){

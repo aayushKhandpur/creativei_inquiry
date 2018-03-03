@@ -14,10 +14,10 @@ export class HelperProvider {
     this.menu.enable(true,menuID);
   }
 
-  sortLocalityByName(data){
+  sortByStringAscending(data,field){
     return data.sort(function(a, b) {
-      var valueA = a.name.toUpperCase(); // ignore upper and lowercase
-      var valueB = b.name.toUpperCase(); // ignore upper and lowercase
+      var valueA = a[field].toUpperCase(); // ignore upper and lowercase
+      var valueB = b[field].toUpperCase(); // ignore upper and lowercase
       if (valueA < valueB) {
         return -1;
       }
@@ -29,9 +29,27 @@ export class HelperProvider {
       return 0;
     });
   }
+  sortByStringDescending(data,field){
+    return data.sort(function(a, b) {
+      var valueA = a[field].toUpperCase(); // ignore upper and lowercase
+      var valueB = b[field].toUpperCase(); // ignore upper and lowercase
+      if (valueA > valueB) {
+        return -1;
+      }
+      if (valueA < valueB) {
+        return 1;
+      }
+    
+      // values must be equal
+      return 0;
+    });
+  }
 
-  sortNumber(data){
+  sortNumberAscending(data){
     return data.sort((a, b) => a - b);
+  }
+  sortNumberDescending(data){
+    return data.sort((a, b) => b - a);
   }
 
   markInvalidFields(formGroup: FormGroup) {

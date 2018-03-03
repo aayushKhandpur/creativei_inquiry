@@ -4,7 +4,8 @@
     <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>inq-details</ion-title>
+    <ion-title *ngIf="!currentInq">Create Inquiry</ion-title>
+    <ion-title *ngIf="currentInq">Edit Inquiry</ion-title>
   </ion-navbar>
 
 </ion-header>

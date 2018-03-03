@@ -26,44 +26,31 @@ public class ResponseHelper {
     }
 
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry) {
-        InquiryVo inquiryVo=new InquiryVo(inquiry);
-        return inquiryVo;
+        return new InquiryVo(inquiry);
     }
 
     public static InquiryVo getInquiryResponseById(Inquiry inquiry) {
-        InquiryVo inquiryVo = new InquiryVo(inquiry);
-        return inquiryVo;
+       return new InquiryVo(inquiry);
     }
 
     public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries) {
-        List<InquiryVo> inquiryVos=new ArrayList<>();
-        for(Inquiry inquiry:inquiries){
-            InquiryVo inquiryVo=new InquiryVo(inquiry);
-            inquiryVos.add(inquiryVo);
-        }
-        return inquiryVos;
+        return getListOfInquiryVo(inquiries);
     }
 
     public static List<InquiryVo> getInquiryResponseByStatus(List<Inquiry> inquiries) {
-        List<InquiryVo> inquiryVos=new ArrayList<>();
-        for(Inquiry inquiry:inquiries){
-            InquiryVo inquiryVo=new InquiryVo(inquiry);
-            inquiryVos.add(inquiryVo);
-        }
-        return inquiryVos;
+        return getListOfInquiryVo(inquiries);
     }
 
 
-    public static List<InquiryVo> getUnattendedInquiryResponse(List<Inquiry> inquiries){
-        List<InquiryVo> inquiryVos=new ArrayList<>();
-        for(Inquiry inquiry:inquiries){
-            InquiryVo inquiryVo=new InquiryVo(inquiry);
-            inquiryVos.add(inquiryVo);
-        }
-        return inquiryVos;
+    public static List<InquiryVo> getUnattendedInquiryResponse(List<Inquiry> inquiries) {
+        return getListOfInquiryVo(inquiries);
     }
 
     public static List<InquiryVo> getByFiltersInquiryResponse(List<Inquiry> inquiries){
+        return getListOfInquiryVo(inquiries);
+    }
+
+    private static List<InquiryVo> getListOfInquiryVo(List<Inquiry> inquiries){
         List<InquiryVo> inquiryVos=new ArrayList<>();
         for(Inquiry inquiry:inquiries){
             InquiryVo inquiryVo=new InquiryVo(inquiry);
@@ -71,7 +58,6 @@ public class ResponseHelper {
         }
         return inquiryVos;
     }
-
 
     public static FollowUpVo getCreateFollowUpData(FollowUp followUp, FollowUpVo followUpVo) {
         followUpVo.setId(followUp.getId());
@@ -83,8 +69,16 @@ public class ResponseHelper {
         followUpVo.setSubStatus(FollowUpSubStatus.enumToString(followUp.getSubStatus()));
         return followUpVo;
     }
-  public static ReminderVo getCreateReminderResponse(Reminder reminder){
-        ReminderVo reminderVo=new ReminderVo(reminder);
-        return reminderVo;
+
+    public static ReminderVo getCreateReminderResponse(Reminder reminder) {
+        return new ReminderVo(reminder);
+    }
+
+    public static List<ReminderVo> getReminderByDateRangeResponse(List<Reminder> reminders) {
+        List<ReminderVo> reminderVos = new ArrayList<>();
+        for (Reminder reminder : reminders) {
+            reminderVos.add(new ReminderVo(reminder));
+        }
+        return reminderVos;
     }
 }

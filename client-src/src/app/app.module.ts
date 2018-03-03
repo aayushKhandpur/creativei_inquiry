@@ -26,6 +26,7 @@ import { NotificationMessageProvider } from '../providers/notification-message/n
 import { HelperProvider } from '../providers/helper/helper';
 import { FollowUpProvider } from '../providers/follow-up/follow-up';
 import { AuthProvider } from '../providers/auth/auth';
+import { ReminderProvider } from '../providers/reminder/reminder';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { AuthProvider } from '../providers/auth/auth';
     NotificationMessageProvider,
     HelperProvider,
     FollowUpProvider,
-    AuthProvider
+    AuthProvider,
+    ReminderProvider
   ]
 })
 export class AppModule {}

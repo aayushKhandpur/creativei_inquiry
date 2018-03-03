@@ -104,5 +104,12 @@ public class InquiryController {
     ResponseObject getUnattendedInquiry(@RequestParam String boolParam,@RequestParam String statusParam){
         return inquiryManager.getUnattendedInquiry(boolParam,statusParam);
     }
+
+    @GetMapping(value="inquiry/counsellor/dashboard/inquiryCounts",produces="application/json")
+    public @ResponseBody
+    ResponseObject getInquiryCounts(){
+        return inquiryManager.getInquiryCount();
+    }
+
 }
 

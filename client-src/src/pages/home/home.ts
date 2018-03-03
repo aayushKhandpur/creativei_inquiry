@@ -29,11 +29,11 @@ export class HomePage {
   }
 
   goToCounselorDash(){
-    this.navCtrl.setRoot(CounselorDashboardPage);
+    this.navCtrl.setRoot(CounselorDashboardPage, {}, {animate: true, direction: 'forward'});
   }
   
   goToVisitorPage(){
-    this.navCtrl.setRoot(InqFormPersonalPage);
+    this.navCtrl.setRoot(InqFormPersonalPage, {}, {animate: true, direction: 'forward'});
   }
   
   toggleLogin(){

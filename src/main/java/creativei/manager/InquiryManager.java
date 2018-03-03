@@ -28,5 +28,7 @@ public interface InquiryManager {
 
     ResponseObject getUnattendedInquiry(String boolParam,String statusParam);
 
+    ResponseObject getInquiryCount();
+
     ResponseObject getAllByFilter(FilterVo filterVo);
 }

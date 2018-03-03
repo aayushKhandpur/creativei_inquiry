@@ -6,7 +6,10 @@ import creativei.exception.DataIntegrityException;
 import creativei.exception.InvalidParamRequest;
 import creativei.exception.NoDataAvailable;
 import creativei.vo.FilterVo;
+import creativei.vo.ResponseObject;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -22,6 +25,7 @@ public interface InquiryService {
     Inquiry update(Inquiry inquiry )throws  DataIntegrityException,InvalidParamRequest;
     Inquiry updateAll(List<Inquiry> inquiries);
     List<Inquiry> getUnattendedInquiry(String boolParam,String statusParam);
+    ResponseObject getInquiryCount() throws ParseException;
     List<Inquiry> getAllByFilter(FilterVo filterVo);
 
 }

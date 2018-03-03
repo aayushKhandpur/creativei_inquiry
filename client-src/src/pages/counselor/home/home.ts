@@ -6,10 +6,10 @@ import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqProvider } from '../../../providers/inq/inq';
 
 @Component({
-  selector: 'page-counselor-home',
+  selector: 'page-counselor-dashboard',
   templateUrl: 'home.html'
 })
-export class CounselorHomePage {
+export class CounselorDashboardPage {
 
   private activeMenu: string = "counselor";
   private responseData;

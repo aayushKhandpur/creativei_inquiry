@@ -40,10 +40,10 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col align-self-center>Inquiries Today:</ion-col>
-                    <ion-col text-right class="inq-stats">12</ion-col>
+                    <ion-col text-right class="inq-stats">{{inqStats?.dailyCount}}</ion-col>
                     <div class="divider"></div>
                     <ion-col align-self-center>Inquiries This Week:</ion-col>
-                    <ion-col text-right class="inq-stats">40</ion-col>
+                    <ion-col text-right class="inq-stats">{{inqStats?.weekCount}}</ion-col>
                   </ion-row>
                 </ion-grid>
               </ion-item>
@@ -54,11 +54,11 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col align-self-center>Total Inquiries:</ion-col>
-                    <ion-col>100</ion-col>
+                    <ion-col>{{inqStats?.monthCount}}</ion-col>
                     <ion-col align-self-center>Hot Leads:</ion-col>
-                    <ion-col>40</ion-col>
+                    <ion-col>{{inqStats?.hotLeadCount}}</ion-col>
                     <ion-col align-self-center>Conversions:</ion-col>
-                    <ion-col>28</ion-col>
+                    <ion-col>{{inqStats?.enrolledCount}}</ion-col>
                   </ion-row>
                 </ion-grid>
               </ion-item>

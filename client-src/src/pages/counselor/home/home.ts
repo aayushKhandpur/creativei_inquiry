@@ -14,10 +14,12 @@ export class CounselorDashboardPage {
   private activeMenu: string = "counselor";
   private responseData;
   private unattendedInq;
+  private inqStats;
 
   constructor(public navCtrl: NavController, private inqProvider: InqProvider, private helper: HelperProvider) {
     this.helper.setActiveMenu(this.activeMenu);
     this.getUnattendedInq();
+    this.getInqStats();
   }
 
   createInq(){
@@ -35,6 +37,18 @@ export class CounselorDashboardPage {
       error => {console.log("GET unsucessful, the server returned this error: ",error)},
       () => {
         this.unattendedInq = this.responseData.data;
+        console.log("GET complete");
+      }
+    )
+  }
+
+  getInqStats(){
+    this.inqProvider.getInquiryStats()
+    .subscribe(
+      data => {this.responseData = data},
+      error => {console.log("GET unsucessful, the server returned this error: ",error)},
+      () => {
+        this.inqStats = this.responseData.data;
         console.log("GET complete");
       }
     )

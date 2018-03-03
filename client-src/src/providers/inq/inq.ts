@@ -30,7 +30,11 @@ export class InqProvider {
   getUnattendedInquiries(){
     return this.http.get(this.baseUrl+'/getUnattended-inquiry',{
       params: new HttpParams().set('boolParam', 'false').set('statusParam', 'open')
-    })
+    });
+  }
+
+  getInquiryStats(){
+    return this.http.get(this.baseUrl+'/counsellor/dashboard/inquiryCounts');
   }
 
   createInq(data){

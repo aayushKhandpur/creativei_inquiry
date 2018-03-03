@@ -18,6 +18,7 @@ public class GuardianVo {
         this.setId(inquiryGuardian.getId());
         this.name=inquiryGuardian.getName();
         this.email=inquiryGuardian.getEmail();
+        this.phoneNumber=inquiryGuardian.getPhoneNumber();
         this.occupation= Occupation.enumToString(inquiryGuardian.getOccupation());
         this.relation= Relation.enumToString(inquiryGuardian.getRelation());
     }

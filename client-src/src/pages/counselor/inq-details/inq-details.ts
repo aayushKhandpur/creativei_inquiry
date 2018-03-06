@@ -11,6 +11,7 @@ import { NotificationProvider } from '../../../providers/notification/notificati
 import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
 import { LocalityProvider } from '../../../providers/locality/locality';
 import { HelperProvider } from '../../../providers/helper/helper';
+import { SortProvider } from '../../../providers/sort/sort';
 import { InqCloseModalPage } from '../inq-close-modal/inq-close-modal';
 
 @Component({
@@ -54,7 +55,7 @@ export class InqDetailsPage {
 
   today : string = new Date().toISOString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private sort: SortProvider, private completerService: CompleterService) {
 
     this.updateInq();
     
@@ -283,7 +284,7 @@ export class InqDetailsPage {
     this.city = locality.data.city;
     this.state = locality.data.state;
     this.country = locality.data.country;
-    this.areas = this.helper.sortByStringAscending(locality.data.locality,'name');
+    this.areas = this.sort.sortByString(locality.data.locality,'name','ascending');
   }
 
   getLocality(pincode){

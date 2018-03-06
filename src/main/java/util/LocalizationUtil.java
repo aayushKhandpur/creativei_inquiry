@@ -24,17 +24,17 @@ public class LocalizationUtil {
         return dateFormat.format(date);
     }
 
-    public static final Date stringToDateConverter(String string) throws ParseException {
+    public static final Date stringToDate(String string) throws ParseException {
+        if (string == null || string.isEmpty()) return null;
+
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE);
-        if (string == null || string.isEmpty())
-            return null;
         return dateFormat.parse(string);
     }
 
-    public static final Date stringtoDateWithTimeConverter(String string) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_WITH_TIME);
+    public static final Date stringtoDateWithTime(String string) throws ParseException {
         if (string == null || string.isEmpty())
             return null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_WITH_TIME);
         return dateFormat.parse(string);
     }
 

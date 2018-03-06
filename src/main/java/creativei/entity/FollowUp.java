@@ -5,10 +5,7 @@ import creativei.enums.FollowUpSubStatus;
 import creativei.enums.FollowUpType;
 import creativei.enums.FollowUpStatus;
 import creativei.exception.NoDataAvailable;
-import creativei.helper.ResponseHelper;
-import creativei.service.InquiryService;
 import creativei.vo.FollowUpVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import util.LocalizationUtil;
 
 import javax.persistence.*;
@@ -41,7 +38,7 @@ public class FollowUp extends BaseEntity implements Serializable {
 
     public FollowUp(FollowUpVo followUpVo) throws ParseException, NoDataAvailable {
         this.setId(followUpVo.getId());
-        this.followUpDate = LocalizationUtil.stringToDateConverter(followUpVo.getFollowUpDate());
+        this.followUpDate = LocalizationUtil.stringToDate(followUpVo.getFollowUpDate());
         this.type = FollowUpType.stringToEnum(followUpVo.getFollowUpType());
         this.status = FollowUpStatus.stringToEnum(followUpVo.getFollowUpStatus());
         this.remark = followUpVo.getRemark();

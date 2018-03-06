@@ -44,14 +44,14 @@ public class ReminderManagerImpl implements ReminderManager {
     }
 
     @Override
-    public ResponseObject getReminderByDateRange(ReminderDateVo reminderDateVo) {
+    public ResponseObject getReminderByDateRange(String fromDateStr, String toDateStr) {
         logger.info("Get Reminder by date range Method");
         List<Reminder> reminders= null;
         Date fromDate=null;
-        Date  toDate=null;
+        Date toDate=null;
         try {
-            fromDate=LocalizationUtil.stringtoDateWithTimeConverter(reminderDateVo.getFromDate());
-            toDate=LocalizationUtil.stringtoDateWithTimeConverter(reminderDateVo.getToDate());
+            fromDate=LocalizationUtil.stringToDate(fromDateStr);
+            toDate=LocalizationUtil.stringToDate(toDateStr);
             reminders = reminderService.getReminderByDateRange(fromDate,toDate);
             List<ReminderVo> reminderVos=ResponseHelper.getReminderByDateRangeResponse(reminders);
             return ResponseObject.getResponse(reminderVos);

@@ -198,9 +198,9 @@ export class InqDetailsPage {
             this.patchData(this.currentInq.data);
             this.getLocality(this.currentInq.data.address.pin);
             this.currentInqAddressId = this.currentInq.data.address.id;
-            this.currentInqEducationId = this.currentInq.data.education[0].id;
-            this.currentInqGuardianId = this.currentInq.data.guardian.id;
-            this.currentInqMarketingId = this.currentInq.data.marketing.id;
+            if(this.currentInq.data.education[0]) this.currentInqEducationId = this.currentInq.data.education[0].id;
+            if(this.currentInq.data.guardian) this.currentInqGuardianId = this.currentInq.data.guardian.id;
+            if(this.currentInq.data.marketing) this.currentInqMarketingId = this.currentInq.data.marketing.id;
             this.setClosingStatus(this.currentInq.data.closingStatus);
             this.setClosingSubStatus(this.currentInq.data.closingSubStatus);
             this.setClosingRemark(this.currentInq.data.closingRemark);
@@ -218,7 +218,7 @@ export class InqDetailsPage {
   }
 
   isInqOpen(status){
-    if(status.toLowerCase() == "open"){
+    if(status == "open"){
       return true;
     }else return false;
   }

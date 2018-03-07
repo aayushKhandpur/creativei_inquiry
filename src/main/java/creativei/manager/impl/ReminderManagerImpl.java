@@ -9,6 +9,7 @@ import creativei.service.ReminderService;
 import creativei.vo.ReminderDateVo;
 import creativei.vo.ReminderVo;
 import creativei.vo.ResponseObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,10 @@ public class ReminderManagerImpl implements ReminderManager {
         Date fromDate=null;
         Date toDate=null;
         try {
-            fromDate=LocalizationUtil.stringToDate(fromDateStr);
-            toDate=LocalizationUtil.stringToDate(toDateStr);
+            if(StringUtils.isNotBlank(fromDateStr))
+                fromDate=LocalizationUtil.stringToDate(fromDateStr);
+            if(StringUtils.isNotBlank(toDateStr))
+                toDate=LocalizationUtil.setEodTime(LocalizationUtil.stringToDate(toDateStr));
             reminders = reminderService.getReminderByDateRange(fromDate,toDate);
             List<ReminderVo> reminderVos=ResponseHelper.getReminderByDateRangeResponse(reminders);
             return ResponseObject.getResponse(reminderVos);

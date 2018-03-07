@@ -46,8 +46,8 @@ public class ReminderController {
 
     @GetMapping(value = "/reminder/getByDate", produces = "application/json")
     public @ResponseBody
-    ResponseObject getReminderByDateRange(@RequestParam(value = "from") String fromDate
-    , @RequestParam(value = "to") String toDate) {
+    ResponseObject getReminderByDateRange(@RequestParam(value = "from", required = false) String fromDate
+    , @RequestParam(value = "to", required = false)String toDate) {
         logger.info("Reminder: getByDate");
         try {
 

@@ -56,7 +56,7 @@
           </div>
         </ion-col>
         <ion-col>
-          <p><b>{{inq.name}}</b>&nbsp;&nbsp;&nbsp;<ion-icon color="primary" name='md-create' (click)="editInq(inq.id)"></ion-icon></p>
+          <p><b (click)="viewInq(inq.id)">{{inq.name}}</b>&nbsp;&nbsp;&nbsp;<ion-icon color="primary" name='md-create' (click)="editInq(inq.id)"></ion-icon></p>
           <p>{{inq.mobile}} | {{inq.email}}</p>
         </ion-col>
         <ion-col col-1 class="vertical-center-contents">

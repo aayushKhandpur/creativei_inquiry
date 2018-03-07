@@ -32,7 +32,6 @@ export class MyApp {
     this.counselorPages = [
       { title: 'Home', component: CounselorHomePage},
       { title: 'View Inquiries', component: InqListPage},
-      { title: 'Reports', component: InqSummaryPage},
       { title: 'Logout', component: HomePage}
     ];
 

@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { HelperProvider } from '../../../providers/helper/helper';
 import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqProvider } from '../../../providers/inq/inq';
+import { InqSummaryPage } from '../inq-summary/inq-summary';
 
 @Component({
   selector: 'page-counselor-home',
@@ -22,6 +23,10 @@ export class CounselorHomePage {
 
   createInq(){
     this.navCtrl.push(InqDetailsPage);
+  }
+
+  viewInq(id){
+    this.navCtrl.push(InqSummaryPage,id);
   }
 
   createTodo(){

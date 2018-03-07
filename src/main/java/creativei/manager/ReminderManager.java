@@ -9,5 +9,5 @@ import java.util.Date;
 
 public interface ReminderManager {
     ResponseObject create(ReminderVo reminderVo);
-    ResponseObject getReminderByDateRange(ReminderDateVo reminderDateVo);
+    ResponseObject getReminderByDateRange(String fromDateStr, String toDateStr);
 }

@@ -34,7 +34,6 @@ public class ReminderServiceImpl implements ReminderService {
     @Override
     public List<Reminder> getReminderByDateRange(Date fromDate, Date toDate) throws InvalidParamRequest {
         logger.info("getReminderDateRange Method");
-        validateDate(fromDate,toDate);
         if(fromDate!=null&&toDate!=null){
             validateDateRange(fromDate,toDate);
         }

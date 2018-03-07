@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import creativei.vo.ReminderVo;
 import util.LocalizationUtil;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -28,7 +27,7 @@ public class Reminder extends BaseEntity {
         this.setId(reminderVo.getId());
         this.title = reminderVo.getTitle();
         this.description = reminderVo.getDescription();
-        this.reminderTime = LocalizationUtil.stringtoDateWithTimeConverter(reminderVo.getTime());
+        this.reminderTime = LocalizationUtil.stringtoDateWithTime(reminderVo.getTime());
         if (reminderVo.getInquiryId()!= null)
             this.inquiry = new Inquiry(reminderVo.getInquiryId());
     }

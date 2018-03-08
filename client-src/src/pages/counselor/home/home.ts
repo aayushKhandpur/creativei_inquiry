@@ -16,6 +16,8 @@ export class CounselorDashboardPage {
   private unattendedInq;
   private inqStats;
 
+  today = Date.now();
+
   constructor(public navCtrl: NavController, private inqProvider: InqProvider, private helper: HelperProvider) {
     this.helper.setActiveMenu(this.activeMenu);
     this.getUnattendedInq();

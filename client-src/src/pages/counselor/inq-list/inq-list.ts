@@ -118,7 +118,7 @@ export class InqListPage {
 
   sortInqList(data,field,order){
     if(field != 'followUpDetails' && field != 'caseIndex'){
-      this.sortedInquiries = this.sort.sortByString(data,field,order);
+      this.sortedInquiries = this.sort.byString(data,field,order);
     }
   }
 

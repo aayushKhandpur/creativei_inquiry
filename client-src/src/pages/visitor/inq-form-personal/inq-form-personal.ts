@@ -128,7 +128,7 @@ export class InqFormPersonalPage {
     this.city = locality.data.city;
     this.state = locality.data.state;
     this.country = locality.data.country;
-    this.areas = this.sort.sortByString(locality.data.locality, 'name','ascending');
+    this.areas = this.sort.byString(locality.data.locality, 'name','ascending');
   }
 
   getLocality(pincode){

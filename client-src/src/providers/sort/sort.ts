@@ -8,7 +8,7 @@ export class SortProvider {
     console.log('Hello SortProvider Provider');
   }
   
-  sortByString(data,field,order){
+  byString(data,field,order){
     if(order == 'ascending'){
       return data.sort(function(a, b) {
         var valueA = a[field].toString().toUpperCase(); // ignore upper and lowercase
@@ -40,10 +40,10 @@ export class SortProvider {
     }
   }
 
-  sortNumberAscending(data){
+  byNumberAscending(data){
     return data.sort((a, b) => a - b);
   }
-  sortNumberDescending(data){
+  byNumberDescending(data){
     return data.sort((a, b) => b - a);
   }
 }

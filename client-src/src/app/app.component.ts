@@ -22,6 +22,8 @@ export class MyApp {
   visitorPages: Array<{title: string, component: any}>;
   counselorPages: Array<{title: string, component: any}>;
 
+  user: String = "Admin"
+
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private inqProvider: InqProvider, private followUpProvider: FollowUpProvider) {
     this.initializeApp();
 

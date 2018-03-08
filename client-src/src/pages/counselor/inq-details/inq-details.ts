@@ -219,9 +219,7 @@ export class InqDetailsPage {
   }
 
   isInqOpen(status){
-    if(status == "open"){
-      return true;
-    }else return false;
+    return status == "open"?true:false;
   }
 
   changeInqStatus(e){

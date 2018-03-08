@@ -47,6 +47,13 @@ public class LocalizationUtil {
         return calendar.getTime();
     }
 
+    public static final Date setEodTime(Calendar calendar){
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE,59);
+        calendar.set(Calendar.SECOND,59);
+        return calendar.getTime();
+    }
+
     public static final Date getDateWithStartingTime(Date date) throws ParseException{
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);

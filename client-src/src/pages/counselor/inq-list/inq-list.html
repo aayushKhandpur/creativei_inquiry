@@ -44,8 +44,7 @@
         <div class="header-title" (click)="toggleSort('id')">
           ID
           <span class="sort-icon" *ngIf="sortBy.id.bool">
-              <ion-icon *ngIf = "sortBy.id.ascending" name="ios-arrow-down" class="see-more"></ion-icon>
-              <ion-icon *ngIf = "sortBy.id.descending" name="ios-arrow-up" class="see-more"></ion-icon>
+              <ion-icon [name] = "sortBy.id.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
           </span>
         </div>
       </ion-col>
@@ -53,8 +52,7 @@
         <div class="header-title" (click)="toggleSort('caseIndex')">
           Case index
           <span class="sort-icon" *ngIf="sortBy.caseIndex.bool">
-              <ion-icon *ngIf = "sortBy.caseIndex.ascending" name="ios-arrow-down" class="see-more"></ion-icon>
-              <ion-icon *ngIf = "sortBy.caseIndex.descending" name="ios-arrow-up" class="see-more"></ion-icon>
+            <ion-icon [name] = "sortBy.caseIndex.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
           </span>
         </div>
       </ion-col>
@@ -62,8 +60,7 @@
         <div class="header-title" (click)="toggleSort('name')">
           Name
           <span class="sort-icon" *ngIf="sortBy.name.bool">
-              <ion-icon *ngIf = "sortBy.name.ascending" name="ios-arrow-down" class="see-more"></ion-icon>
-              <ion-icon *ngIf = "sortBy.name.descending" name="ios-arrow-up" class="see-more"></ion-icon>
+            <ion-icon [name] = "sortBy.name.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
           </span>
         </div>
       </ion-col>
@@ -71,8 +68,7 @@
         <div class="header-title" (click)="toggleSort('inquiryDate')">
           Date
           <span class="sort-icon" *ngIf="sortBy.inquiryDate.bool">
-              <ion-icon *ngIf = "sortBy.inquiryDate.ascending" name="ios-arrow-down" class="see-more"></ion-icon>
-              <ion-icon *ngIf = "sortBy.inquiryDate.descending" name="ios-arrow-up" class="see-more"></ion-icon>
+            <ion-icon [name] = "sortBy.inquiryDate.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
           </span>
         </div>
       </ion-col>
@@ -80,8 +76,7 @@
         <div class="header-title" (click)="toggleSort('areaOfInterest')">
           Course Interested In
           <span class="sort-icon" *ngIf="sortBy.areaOfInterest.bool">
-              <ion-icon *ngIf = "sortBy.areaOfInterest.ascending" name="ios-arrow-down" class="see-more"></ion-icon>
-              <ion-icon *ngIf = "sortBy.areaOfInterest.descending" name="ios-arrow-up" class="see-more"></ion-icon>
+            <ion-icon [name] = "sortBy.areaOfInterest.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
           </span>
         </div>
       </ion-col>

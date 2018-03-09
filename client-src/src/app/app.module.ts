@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Ng2CompleterModule } from "ng2-completer";
 
@@ -67,6 +68,7 @@ import { SortProvider } from '../providers/sort/sort';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatePipe,
     InqProvider,
     NotificationProvider,
     LocalityProvider,

@@ -44,7 +44,7 @@ public class FollowUp extends BaseEntity implements Serializable {
         this.remark = followUpVo.getRemark();
         this.caseIndex = CaseIndex.stringToEnum(followUpVo.getCaseIndex());
         this.subStatus = FollowUpSubStatus.stringToEnum(followUpVo.getSubStatus());
-        this.inquiry=new Inquiry(followUpVo.getInquiryId(),true);
+        this.inquiry=new Inquiry(followUpVo.getInquiryId());
     }
 
     public Date getFollowUpDate() {
@@ -93,5 +93,13 @@ public class FollowUp extends BaseEntity implements Serializable {
 
     public void setCaseIndex(CaseIndex caseIndex) {
         this.caseIndex = caseIndex;
+    }
+
+    public Inquiry getInquiry() {
+        return inquiry;
+    }
+
+    public void setInquiry(Inquiry inquiry) {
+        this.inquiry = inquiry;
     }
 }

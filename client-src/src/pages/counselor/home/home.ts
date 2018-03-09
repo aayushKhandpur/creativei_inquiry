@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { HelperProvider } from '../../../providers/helper/helper';
 import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqProvider } from '../../../providers/inq/inq';
+import { ReminderProvider } from '../../../providers/reminder/reminder';
 
 @Component({
   selector: 'page-counselor-dashboard',
@@ -15,13 +16,15 @@ export class CounselorDashboardPage {
   private responseData;
   private unattendedInq;
   private inqStats;
+  private todos;
 
   today = Date.now();
 
-  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private helper: HelperProvider) {
+  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider) {
     this.helper.setActiveMenu(this.activeMenu);
     this.getUnattendedInq();
     this.getInqStats();
+    this.getTodo();
   }
 
   createInq(){
@@ -51,6 +54,18 @@ export class CounselorDashboardPage {
       error => {console.log("GET unsucessful, the server returned this error: ",error)},
       () => {
         this.inqStats = this.responseData.data;
+        console.log("GET complete");
+      }
+    )
+  }
+
+  getTodo(){
+    this.reminderProvider.getReminderForToday()
+    .subscribe(
+      data => {this.responseData = data},
+      error => {console.log("GET unsucessful, the server returned this error: ",error)},
+      () => {
+        this.todos = this.responseData.data;
         console.log("GET complete");
       }
     )

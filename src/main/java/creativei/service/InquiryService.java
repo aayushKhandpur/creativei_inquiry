@@ -27,5 +27,4 @@ public interface InquiryService {
     List<Inquiry> getUnattendedInquiry(String boolParam,String statusParam);
     ResponseObject getInquiryCount() throws ParseException;
     List<Inquiry> getAllByFilter(FilterVo filterVo);
-
 }

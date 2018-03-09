@@ -149,9 +149,16 @@ public class InquiryServiceImpl implements InquiryService {
 
     private Integer getWeeklyCount(Date date) throws ParseException {
         logger.info("getWeeklyCount method");
-        Date inquiryToDate=LocalizationUtil.getWeekStartingDate(date);
-        Date inquiryFromDate=date;
-        return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
+        Calendar givenDate = Calendar.getInstance();
+        givenDate.setTime(date);
+        givenDate.setFirstDayOfWeek(Calendar.MONDAY);
+        Calendar weekStartDate = (Calendar)givenDate.clone();
+        weekStartDate.add(Calendar.DAY_OF_WEEK,
+                weekStartDate.getFirstDayOfWeek() - weekStartDate.get(Calendar.DAY_OF_WEEK));
+        Calendar weekEndDate = (Calendar) weekStartDate.clone();
+        weekEndDate.add(Calendar.DAY_OF_YEAR, 6);
+        return inquiryCustomDao.findCountByInquiryDate(LocalizationUtil.setEodTime(weekEndDate)
+                ,weekStartDate.getTime());
     }
 
     private Integer getMonthlyCount(Date date) throws ParseException {

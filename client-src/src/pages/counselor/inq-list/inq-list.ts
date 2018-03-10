@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { InqProvider } from '../../../providers/inq/inq';
-import { NotificationProvider } from '../../../providers/notification/notification';
-import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { HelperProvider } from '../../../providers/helper/helper';
+import { SortProvider } from '../../../providers/sort/sort';
 import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqSummaryPage } from '../inq-summary/inq-summary';
 
@@ -14,11 +14,40 @@ import { InqSummaryPage } from '../inq-summary/inq-summary';
 export class InqListPage {
 
   private inquiries;
+  private sortedInquiries;
   private responseData;
+  private sortBy;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private helper: HelperProvider, private sort: SortProvider) {
 
     this.getAllInq();
+    this.sortBy = {
+      id : {
+        bool : false,
+        ascending : false,
+        descending : false
+      },
+      caseIndex : {
+        bool : false,
+        ascending : false,
+        descending : false
+      },
+      name : {
+        bool : false,
+        ascending : false,
+        descending : false
+      },
+      inquiryDate : {
+        bool : false,
+        ascending : false,
+        descending : false
+      },
+      areaOfInterest : {
+        bool : false,
+        ascending : false,
+        descending : false
+      }
+    }
 
   }
 
@@ -68,6 +97,34 @@ export class InqListPage {
 
   toggleSeeMore(i){
     this.inquiries[i].seeMore = !this.inquiries[i].seeMore;
+  }
+
+  defaultSortingCase(object){
+    Object.keys(object).forEach(key => {
+      object[key]['bool'] = false;
+      object[key]['ascending'] = false;
+      object[key]['descending'] = false;
+    })
+  }
+
+  toggleSort(sortByThis){
+    if(!this.sortBy[sortByThis]['bool']){
+      this.defaultSortingCase(this.sortBy);
+      this.sortBy[sortByThis]['bool'] = true;
+      this.sortBy[sortByThis]['ascending'] = true;
+      this.sortInqList(this.inquiries,sortByThis,'ascending');
+    }else{
+      if(this.sortBy[sortByThis]['ascending']) this.sortInqList(this.inquiries,sortByThis,'descending');
+      this.sortBy[sortByThis]['ascending'] = !this.sortBy[sortByThis]['ascending']
+      if(this.sortBy[sortByThis]['descending']) this.sortInqList(this.inquiries,sortByThis,'ascending');
+      this.sortBy[sortByThis]['descending'] = !this.sortBy[sortByThis]['descending']
+    }
+  }
+
+  sortInqList(data,field,order){
+    if(field != 'followUpDetails' && field != 'caseIndex'){
+      this.sortedInquiries = this.sort.byString(data,field,order);
+    }
   }
 
   filterInqByDate(from,to){

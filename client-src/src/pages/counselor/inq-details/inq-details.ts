@@ -11,6 +11,7 @@ import { NotificationProvider } from '../../../providers/notification/notificati
 import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
 import { LocalityProvider } from '../../../providers/locality/locality';
 import { HelperProvider } from '../../../providers/helper/helper';
+import { SortProvider } from '../../../providers/sort/sort';
 import { InqCloseModalPage } from '../inq-close-modal/inq-close-modal';
 
 @Component({
@@ -54,7 +55,7 @@ export class InqDetailsPage {
 
   today : string = new Date().toISOString();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private completerService: CompleterService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private inqProvider: InqProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private localityProvider: LocalityProvider, private helper: HelperProvider, private sort: SortProvider, private completerService: CompleterService) {
 
     this.updateInq();
     
@@ -198,9 +199,9 @@ export class InqDetailsPage {
             this.patchData(this.currentInq.data);
             this.getLocality(this.currentInq.data.address.pin);
             this.currentInqAddressId = this.currentInq.data.address.id;
-            this.currentInqEducationId = this.currentInq.data.education[0].id;
-            this.currentInqGuardianId = this.currentInq.data.guardian.id;
-            this.currentInqMarketingId = this.currentInq.data.marketing.id;
+            if(this.currentInq.data.education[0]) this.currentInqEducationId = this.currentInq.data.education[0].id;
+            if(this.currentInq.data.guardian) this.currentInqGuardianId = this.currentInq.data.guardian.id;
+            if(this.currentInq.data.marketing) this.currentInqMarketingId = this.currentInq.data.marketing.id;
             this.setClosingStatus(this.currentInq.data.closingStatus);
             this.setClosingSubStatus(this.currentInq.data.closingSubStatus);
             this.setClosingRemark(this.currentInq.data.closingRemark);
@@ -218,9 +219,7 @@ export class InqDetailsPage {
   }
 
   isInqOpen(status){
-    if(status.toLowerCase() == "open"){
-      return true;
-    }else return false;
+    return status == "open"?true:false;
   }
 
   changeInqStatus(e){
@@ -283,7 +282,7 @@ export class InqDetailsPage {
     this.city = locality.data.city;
     this.state = locality.data.state;
     this.country = locality.data.country;
-    this.areas = this.helper.sortLocalityByName(locality.data.locality);
+    this.areas = this.sort.byString(locality.data.locality,'name','ascending');
   }
 
   getLocality(pincode){

@@ -14,7 +14,7 @@
   <ion-toolbar class="filter-toolbar" color="light">
     <ion-row>
       <ion-col col-1 class="vertical-center-contents">
-        <ion-title>Filter</ion-title>
+        <ion-icon title="Filter" name="funnel"></ion-icon>
       </ion-col>
       <ion-col>
         <ion-row>
@@ -38,11 +38,62 @@
     </ion-row>
   </ion-toolbar>
 
-  <ion-card *ngFor = "let inq of inquiries; let i = index;">
+  <ion-card color="light">
+    <ion-row>
+      <ion-col col-1 class="vertical-center-contents">
+        <div class="header-title" (click)="toggleSort('id')">
+          ID
+          <span class="sort-icon" *ngIf="sortBy.id.bool">
+              <ion-icon [name] = "sortBy.id.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
+          </span>
+        </div>
+      </ion-col>
+      <ion-col col-1 class="vertical-center-contents">
+        <div class="header-title" (click)="toggleSort('caseIndex')">
+          Case index
+          <span class="sort-icon" *ngIf="sortBy.caseIndex.bool">
+            <ion-icon [name] = "sortBy.caseIndex.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
+          </span>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="header-title" (click)="toggleSort('name')">
+          Name
+          <span class="sort-icon" *ngIf="sortBy.name.bool">
+            <ion-icon [name] = "sortBy.name.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
+          </span>
+        </div>
+      </ion-col>
+      <ion-col col-1 class="vertical-center-contents">
+        <div class="header-title" (click)="toggleSort('inquiryDate')">
+          Date
+          <span class="sort-icon" *ngIf="sortBy.inquiryDate.bool">
+            <ion-icon [name] = "sortBy.inquiryDate.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
+          </span>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="vertical-center-contents">
+        <div class="header-title" (click)="toggleSort('areaOfInterest')">
+          Course Interested In
+          <span class="sort-icon" *ngIf="sortBy.areaOfInterest.bool">
+            <ion-icon [name] = "sortBy.areaOfInterest.ascending?'ios-arrow-down':'ios-arrow-up'" class="see-more"></ion-icon>
+          </span>
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <div>
+          Follow Up Details
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card *ngFor = "let inq of (sortedInquiries?sortedInquiries:inquiries); let i = index;">
     <ion-grid>
       <ion-row>
         <ion-col col-1 class="vertical-center-contents">
-          <p>{{i+1}}.</p>
+          <p>{{inq.id}}.</p>
         </ion-col>
         <ion-col col-1 class="vertical-center-contents">
           <div *ngIf = "inq.caseIndex">
@@ -65,18 +116,15 @@
         <ion-col col-2 class="vertical-center-contents">
           <p>{{inq.areaOfInterest}}</p>
         </ion-col>
-        <ion-col col-2 class="vertical-center-contents">
-          <p *ngIf = "inq.followUp">{{inq.followUp.followUpStatus}}</p>
+        <ion-col col-2>
+          <p *ngIf = "inq.inquiryStatus == 'Open' && inq.followUp" title="Follow Up Status">{{inq.followUp.followUpStatus}}</p>
+          <p *ngIf = "inq.inquiryStatus == 'Close'" title="Closing Status">{{inq.closingStatus}}</p>
         </ion-col>
         <ion-col col-1 class="vertical-center-contents">
-            <button ion-button icon-end clear small>
+            <button *ngIf="inq.inquiryStatus == 'Open'" ion-button icon-end clear small>
               Follow Up
               <ion-icon name="add"></ion-icon>
             </button>
-        </ion-col>
-        <ion-col (click)="toggleSeeMore(i)" col-1 class="vertical-center-contents">
-          <ion-icon *ngIf = "inq.seeMore" name="ios-arrow-down" class="see-more"></ion-icon>
-          <ion-icon *ngIf = "!inq.seeMore" name="ios-arrow-forward" class="see-more"></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="inq.seeMore">
@@ -86,11 +134,20 @@
           <p>Guardian: {{inq.guardian.name}}, {{inq.guardian.relation}}</p>
           <p>{{inq.guardian.phoneNumber}}</p>
         </ion-col>
-        <ion-col col-2 class="vertical-center-contents">
-          <p *ngIf = "inq.followUp">{{inq.followUp.subStatus}}</p>
+        <ion-col col-1></ion-col>
+        <ion-col col-2></ion-col>
+        <ion-col col-2>
+          <p *ngIf = "inq.inquiryStatus == 'Open' && inq.followUp" title="Follow Up Sub-Status">{{inq.followUp.subStatus}}</p>
+          <p *ngIf = "inq.inquiryStatus == 'Close'" title="Closing Sub-Status">{{inq.closingSubStatus}}</p>
+          <p *ngIf = "inq.inquiryStatus == 'Open' && inq.followUp" title="Follow Up Remark">{{inq.followUp.remark}}</p>
+          <p *ngIf = "inq.inquiryStatus == 'Close'" title="Closing Remark">{{inq.closingRemark}}</p>
         </ion-col>
-        <ion-col col-2 class="vertical-center-contents">
-          <p *ngIf = "inq.followUp">{{inq.followUp.remark}}</p>
+        <ion-col col-1></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col (click)="toggleSeeMore(i)" class="vertical-center-contents remove-padding">
+          <ion-icon *ngIf = "inq.seeMore" name="ios-arrow-up" class="see-more"></ion-icon>
+          <ion-icon *ngIf = "!inq.seeMore" name="ios-arrow-down" class="see-more"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>

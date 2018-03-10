@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { CounselorHomePage } from '../counselor/home/home';
+import { CounselorDashboardPage } from '../counselor/home/home';
 import { InqFormPersonalPage } from '../visitor/inq-form-personal/inq-form-personal';
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -29,11 +29,11 @@ export class HomePage {
   }
 
   goToCounselorDash(){
-    this.navCtrl.setRoot(CounselorHomePage);
+    this.navCtrl.setRoot(CounselorDashboardPage, {}, {animate: true, direction: 'forward'});
   }
   
   goToVisitorPage(){
-    this.navCtrl.setRoot(InqFormPersonalPage);
+    this.navCtrl.setRoot(InqFormPersonalPage, {}, {animate: true, direction: 'forward'});
   }
   
   toggleLogin(){

@@ -17,4 +17,14 @@ page-inq-list {
     .see-more{
         color: #222;
     }
+    .remove-padding{
+        padding: 0;
+    }
+    .header-title{
+        cursor: pointer;
+    }
+    .sort-icon{
+        margin-left: 3px;
+        font-size: 10px;
+    }
 }

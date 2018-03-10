@@ -5,6 +5,7 @@ import { HelperProvider } from '../../../providers/helper/helper';
 import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqProvider } from '../../../providers/inq/inq';
 import { ReminderProvider } from '../../../providers/reminder/reminder';
+import { InqSummaryPage } from '../inq-summary/inq-summary';
 
 @Component({
   selector: 'page-counselor-dashboard',
@@ -29,6 +30,10 @@ export class CounselorDashboardPage {
 
   createInq(){
     this.navCtrl.push(InqDetailsPage);
+  }
+
+  viewInq(id){
+    this.navCtrl.push(InqSummaryPage,id);
   }
 
   createTodo(){

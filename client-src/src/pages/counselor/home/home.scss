@@ -1,4 +1,4 @@
-page-counselor-home {
+page-counselor-dashboard {
     .no-padding{
         padding: 0;
     }
@@ -11,6 +11,11 @@ page-counselor-home {
         padding-left: 15px;
         border-left: 3px solid #ccc;
     } 
+    .secondary-header{
+        background-color: #d5d5d5;
+        color: unset;
+        text-decoration: underline;
+    }
     .inq-stats{
         font-size: 3rem;
     }

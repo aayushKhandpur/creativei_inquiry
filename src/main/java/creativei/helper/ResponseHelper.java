@@ -3,9 +3,11 @@ package creativei.helper;
 import creativei.entity.*;
 import creativei.enums.*;
 import creativei.vo.*;
+import org.springframework.util.CollectionUtils;
 import util.LocalizationUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,11 +28,21 @@ public class ResponseHelper {
     }
 
     public static InquiryVo getCreateInquiryResponseData(Inquiry inquiry) {
-        return new InquiryVo(inquiry);
+        InquiryVo vo = new InquiryVo(inquiry);
+        return vo;
     }
 
     public static InquiryVo getInquiryResponseById(Inquiry inquiry) {
-       return new InquiryVo(inquiry);
+        InquiryVo vo = new InquiryVo(inquiry);
+        //follow-up
+        if(!CollectionUtils.isEmpty(inquiry.getFollowUps())){
+            List<FollowUpVo> followUps = new ArrayList<>();
+            inquiry.getFollowUps().forEach(f ->{
+                followUps.add(new FollowUpVo(f));
+            });
+            vo.setFollowUps(followUps);
+        }
+        return vo;
     }
 
     public static List<InquiryVo> getAllInquiryResponse(List<Inquiry> inquiries) {
@@ -52,22 +64,19 @@ public class ResponseHelper {
 
     private static List<InquiryVo> getListOfInquiryVo(List<Inquiry> inquiries){
         List<InquiryVo> inquiryVos=new ArrayList<>();
-        for(Inquiry inquiry:inquiries){
-            InquiryVo inquiryVo=new InquiryVo(inquiry);
+        inquiries.forEach(i -> {
+            InquiryVo inquiryVo = new InquiryVo(i);
+            FollowUp lastFollowUp = i.getFollowUps().stream().max((f1, f2) -> f1.getFollowUpDate().compareTo(f2.getFollowUpDate())).get();
+            FollowUpVo followUpVo = new FollowUpVo(lastFollowUp);
+            FollowUpVo[] followUpVos = {followUpVo};
+            inquiryVo.setFollowUps(Arrays.asList(followUpVos));
             inquiryVos.add(inquiryVo);
-        }
+        });
         return inquiryVos;
     }
 
-    public static FollowUpVo getCreateFollowUpData(FollowUp followUp, FollowUpVo followUpVo) {
-        followUpVo.setId(followUp.getId());
-        followUpVo.setCaseIndex(CaseIndex.enumToString(followUp.getCaseIndex()));
-        followUpVo.setFollowUpDate(LocalizationUtil.getFormattedDate(followUp.getFollowUpDate()));
-        followUpVo.setFollowUpStatus(FollowUpStatus.enumToString(followUp.getStatus()));
-        followUpVo.setFollowUpType(FollowUpType.enumToString(followUp.getType()));
-        followUpVo.setRemark(followUp.getRemark());
-        followUpVo.setSubStatus(FollowUpSubStatus.enumToString(followUp.getSubStatus()));
-        return followUpVo;
+    public static FollowUpVo getCreateFollowUpData(FollowUp followUp) {
+        return new FollowUpVo(followUp);
     }
 
     public static ReminderVo getCreateReminderResponse(Reminder reminder) {

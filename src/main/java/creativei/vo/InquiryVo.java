@@ -3,6 +3,7 @@ package creativei.vo;
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryEducation;
 import creativei.enums.*;
+import org.springframework.util.CollectionUtils;
 import util.LocalizationUtil;
 
 import java.lang.*;
@@ -29,6 +30,68 @@ public class InquiryVo {
     private String closingSubStatus;
     private String closingRemark;
     private String occupation;
+    private Boolean isAttended;
+    private List<FollowUpVo> followUps;
+
+    public InquiryVo(){}
+
+    public InquiryVo(Inquiry inquiry){
+        this.setId(inquiry.getId());
+        this.setName(inquiry.getName());
+        this.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
+        this.setEmail(inquiry.getEmail());
+        this.setMobile(inquiry.getPhoneNumber());
+        this.isAttended = inquiry.getAttended();
+        this.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
+        this.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
+        this.setInquiryStatus(InquiryStatus.enumToString(inquiry.getInquiryStatus()));
+        this.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
+        this.setGender(Gender.enumToString(inquiry.getGender()));
+        this.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
+        // Closing details
+        this.setClosingStatus(FollowUpStatus.enumToString(inquiry.getClosingStatus()));
+        this.setClosingSubStatus(FollowUpSubStatus.enumToString(inquiry.getClosingSubStatus()));
+        this.setClosingRemark(inquiry.getRemark());
+        //address details
+        if(inquiry.getInquiryAddress()!=null)
+            this.setAddress(new AddressVo(inquiry.getInquiryAddress()));
+        //education
+        if (!CollectionUtils.isEmpty(inquiry.getInquiryEducations())){
+            for(InquiryEducation inquiryEducation:inquiry.getInquiryEducations()){
+                this.educations.add(new EducationVo(inquiryEducation));
+            }
+        }
+        //guardian
+        if (inquiry.getInquiryGuardian() != null)
+            this.setGuardian( new GuardianVo(inquiry.getInquiryGuardian()));
+        //marketing
+        if (inquiry.getInquiryMarketing() != null)
+            this.setMarketing(new MarketingVo(inquiry.getInquiryMarketing()));
+    }
+
+    public List<EducationVo> getEducations() {
+        return educations;
+    }
+
+    public void setEducations(List<EducationVo> educations) {
+        this.educations = educations;
+    }
+
+    public Boolean getAttended() {
+        return isAttended;
+    }
+
+    public void setAttended(Boolean attended) {
+        isAttended = attended;
+    }
+
+    public List<FollowUpVo> getFollowUps() {
+        return followUps;
+    }
+
+    public void setFollowUps(List<FollowUpVo> followUps) {
+        this.followUps = followUps;
+    }
 
     public String getOccupation() {
         return occupation;
@@ -36,36 +99,6 @@ public class InquiryVo {
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
-    }
-
-    public InquiryVo(){}
-
-    public InquiryVo(Inquiry inquiry){
-        this.setId(inquiry.getId());
-        this.setAreaOfInterest(AreaOfInterest.enumToString(inquiry.getAreaOfInterest()));
-        this.setName(inquiry.getName());
-        this.setDob(LocalizationUtil.getFormattedDate(inquiry.getDob()));
-        this.sethQualification(EducationQualification.enumToString(inquiry.getHighestEducation()));
-        this.setEmail(inquiry.getEmail());
-        this.setMobile(inquiry.getPhoneNumber());
-        this.setId(inquiry.getId());
-        this.setInquiryStatus(InquiryStatus.enumToString(inquiry.getInquiryStatus()));
-        this.setInquiryDate(LocalizationUtil.getFormattedDate(inquiry.getInquiryDate()));
-        this.setGender(Gender.enumToString(inquiry.getGender()));
-        this.setComputerKnowledge(ComputerKnowledge.enumToString(inquiry.getComputerKnowledge()));
-        this.setClosingStatus(FollowUpStatus.enumToString(inquiry.getClosingStatus()));
-        this.setClosingSubStatus(FollowUpSubStatus.enumToString(inquiry.getClosingSubStatus()));
-        this.setClosingRemark(inquiry.getRemark());
-        if(inquiry.getInquiryAddress()!=null)
-            this.setAddress(new AddressVo(inquiry.getInquiryAddress()));
-        if (inquiry.getInquiryEducations() != null)
-            for(InquiryEducation inquiryEducation:inquiry.getInquiryEducations()){
-                this.educations.add(new EducationVo(inquiryEducation));
-            }
-        if (inquiry.getInquiryGuardian() != null)
-            this.setGuardian( new GuardianVo(inquiry.getInquiryGuardian()));
-        if (inquiry.getInquiryMarketing() != null)
-            this.setMarketing(new MarketingVo(inquiry.getInquiryMarketing()));
     }
 
     public String getClosingStatus() {

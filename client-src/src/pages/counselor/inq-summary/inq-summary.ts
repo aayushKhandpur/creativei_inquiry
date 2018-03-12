@@ -4,6 +4,7 @@ import { TitleCasePipe } from '@angular/common';
 
 
 import { InqProvider } from '../../../providers/inq/inq';
+import { SortProvider } from '../../../providers/sort/sort';
 
 @Component({
   selector: 'page-inq-summary',
@@ -13,8 +14,9 @@ export class InqSummaryPage {
 
   private currentInq;
   private currentInqId;
+  private currentInqFollowUps;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private sort: SortProvider) {
     this.currentInqId = this.navParams.data;
     this.getCurrentInq();
   }
@@ -47,6 +49,7 @@ export class InqSummaryPage {
         let responseData;
         responseData = data;
         this.currentInq = responseData.data;
+        this.currentInqFollowUps = this.sort.byString(responseData.data.followUps,'followUpDate','descending');
         console.log("Inquiry to be viewed is: ",this.currentInq);
       },
       error => {
@@ -57,7 +60,6 @@ export class InqSummaryPage {
         console.log("complete")
         this.loading.dismissAll();
       }
-      
     );
   }
 

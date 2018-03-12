@@ -69,7 +69,7 @@
         <ion-row>
           <ion-col class="no-padding">
             <ion-item-group>
-              <ion-item-divider color="primary">Todo<span (click)="createTodo()" float-right><ion-icon name="add-circle"></ion-icon></span></ion-item-divider>
+              <ion-item-divider color="primary">Todo<span (click)="showAddReminderModal()" float-right><ion-icon name="add-circle"></ion-icon></span></ion-item-divider>
               <ion-item-group>
                 <ion-item *ngFor="let todo of todos; let i = index;">
                   <ion-grid>

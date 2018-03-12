@@ -7,7 +7,7 @@ import { InqProvider } from '../providers/inq/inq';
 import { FollowUpProvider } from '../providers/follow-up/follow-up';
 
 import { HomePage } from '../pages/home/home';
-import { CounselorHomePage } from '../pages/counselor/home/home';
+import { CounselorDashboardPage } from '../pages/counselor/home/home';
 import { InqListPage } from '../pages/counselor/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
 
@@ -22,6 +22,8 @@ export class MyApp {
   visitorPages: Array<{title: string, component: any}>;
   counselorPages: Array<{title: string, component: any}>;
 
+  user: String = "Admin"
+
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private inqProvider: InqProvider, private followUpProvider: FollowUpProvider) {
     this.initializeApp();
 
@@ -30,9 +32,8 @@ export class MyApp {
       { title: 'Home', component: HomePage },
     ];
     this.counselorPages = [
-      { title: 'Home', component: CounselorHomePage},
-      { title: 'View Inquiries', component: InqListPage},
-      { title: 'Reports', component: InqSummaryPage},
+      { title: 'Dashboard', component: CounselorDashboardPage},
+      { title: 'Inquiries', component: InqListPage},
       { title: 'Logout', component: HomePage}
     ];
 

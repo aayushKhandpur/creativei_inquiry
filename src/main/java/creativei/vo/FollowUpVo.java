@@ -1,5 +1,12 @@
 package creativei.vo;
 
+import creativei.entity.FollowUp;
+import creativei.enums.CaseIndex;
+import creativei.enums.FollowUpStatus;
+import creativei.enums.FollowUpSubStatus;
+import creativei.enums.FollowUpType;
+import util.LocalizationUtil;
+
 import java.util.Date;
 
 public class FollowUpVo {
@@ -11,6 +18,18 @@ public class FollowUpVo {
     private String caseIndex;
     private String subStatus;
     private Long inquiryId;
+
+    public FollowUpVo(){}
+
+    public FollowUpVo(FollowUp followUp){
+        this.setId(followUp.getId());
+        this.setCaseIndex(CaseIndex.enumToString(followUp.getCaseIndex()));
+        this.setFollowUpDate(LocalizationUtil.getFormattedDate(followUp.getFollowUpDate()));
+        this.setFollowUpStatus(FollowUpStatus.enumToString(followUp.getStatus()));
+        this.setFollowUpType(FollowUpType.enumToString(followUp.getType()));
+        this.setRemark(followUp.getRemark());
+        this.setSubStatus(FollowUpSubStatus.enumToString(followUp.getSubStatus()));
+    }
 
     public Long getId() {
         return id;

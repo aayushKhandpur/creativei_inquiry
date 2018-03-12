@@ -8,21 +8,26 @@ import { ReminderProvider } from '../../../providers/reminder/reminder';
 import { ReminderModalPage } from '../reminder-modal/reminder-modal';
 import { NotificationProvider } from '../../../providers/notification/notification';
 import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { InqSummaryPage } from '../inq-summary/inq-summary';
 
 @Component({
-  selector: 'page-counselor-home',
+  selector: 'page-counselor-dashboard',
   templateUrl: 'home.html'
 })
-export class CounselorHomePage {
+export class CounselorDashboardPage {
 
   private activeMenu: string = "counselor";
   private responseData;
   private unattendedInq;
+  private inqStats;
   private todos;
+  
+  today = Date.now();
 
   constructor(public navCtrl: NavController, private modalCtrl: ModalController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider, private notify: NotificationProvider, private message: NotificationMessageProvider) {
     this.helper.setActiveMenu(this.activeMenu);
     this.getUnattendedInq();
+    this.getInqStats();
     this.getTodo();
   }
 
@@ -47,6 +52,10 @@ export class CounselorHomePage {
       () => {console.log("COMPLETE");}
     );
   }
+  
+  viewInq(id){
+    this.navCtrl.push(InqSummaryPage,id);
+  }
 
   getUnattendedInq(){
     this.inqProvider.getUnattendedInquiries()
@@ -55,6 +64,18 @@ export class CounselorHomePage {
       error => {console.log("GET unsucessful, the server returned this error: ",error)},
       () => {
         this.unattendedInq = this.responseData.data;
+        console.log("GET complete");
+      }
+    )
+  }
+
+  getInqStats(){
+    this.inqProvider.getInquiryStats()
+    .subscribe(
+      data => {this.responseData = data},
+      error => {console.log("GET unsucessful, the server returned this error: ",error)},
+      () => {
+        this.inqStats = this.responseData.data;
         console.log("GET complete");
       }
     )

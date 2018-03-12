@@ -42,7 +42,7 @@ public class FollowUpManagerImpl implements FollowUpManager {
             //update inquiry isAttendedStatus
             updateInquiryAttendedStatus(followUp.getInquiry());
 
-            followUpVo = ResponseHelper.getCreateFollowUpData(followUp, followUpVo);
+            followUpVo = ResponseHelper.getCreateFollowUpData(followUp);
             return ResponseObject.getResponse(followUpVo);
         } catch (InvalidParamRequest e) {
             logger.error(e.getMessage(), e);
@@ -76,7 +76,7 @@ public class FollowUpManagerImpl implements FollowUpManager {
         try {
             FollowUp followUp = new FollowUp(followUpVo);
             followUp = followUpService.updateFollowUp(followUp);
-            followUpVo = ResponseHelper.getCreateFollowUpData(followUp, followUpVo);
+            followUpVo = ResponseHelper.getCreateFollowUpData(followUp);
             return ResponseObject.getResponse(followUpVo);
         } catch (InvalidParamRequest e) {
             logger.error(e.getMessage(), e);

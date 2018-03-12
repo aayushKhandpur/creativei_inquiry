@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Dashboard</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -20,10 +20,10 @@
         <ion-item-group>
           <ion-item-divider color="primary">Inquiries<span (click)="createInq()" float-right><ion-icon name="add-circle"></ion-icon></span></ion-item-divider>
           <ion-item-group>
-            <ion-item-divider color="light">Unattended Inquiries</ion-item-divider>
+            <ion-item-divider class="secondary-header">Unattended Inquiries</ion-item-divider>
             <ion-item *ngFor = "let inq of unattendedInq; let i = index;">
               <ion-grid>
-                <ion-row><ion-col col-1>{{i+1}}.</ion-col><ion-col>{{inq.name}}</ion-col><ion-col>{{inq.areaOfInterest}}</ion-col><ion-col>{{inq.inquiryDate | date: "dd/MM/yyyy"}}</ion-col></ion-row>
+                <ion-row><ion-col col-1>{{i+1}}.</ion-col><ion-col (click)="viewInq(inq.id)">{{inq.name}}</ion-col><ion-col>{{inq.areaOfInterest}}</ion-col><ion-col>{{inq.inquiryDate | date: "dd/MM/yyyy"}}</ion-col></ion-row>
               </ion-grid>
             </ion-item>
           </ion-item-group>
@@ -40,25 +40,25 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col align-self-center>Inquiries Today:</ion-col>
-                    <ion-col text-right class="inq-stats">12</ion-col>
+                    <ion-col text-right class="inq-stats">{{inqStats?.dailyCount}}</ion-col>
                     <div class="divider"></div>
                     <ion-col align-self-center>Inquiries This Week:</ion-col>
-                    <ion-col text-right class="inq-stats">40</ion-col>
+                    <ion-col text-right class="inq-stats">{{inqStats?.weekCount}}</ion-col>
                   </ion-row>
                 </ion-grid>
               </ion-item>
             </ion-item-group>
             <ion-item-group>
-              <ion-item-divider color="light">Monthly Summary</ion-item-divider>
+              <ion-item-divider class="secondary-header">{{ today | date : "MMMM"}} Summary</ion-item-divider>
               <ion-item>
                 <ion-grid>
                   <ion-row>
                     <ion-col align-self-center>Total Inquiries:</ion-col>
-                    <ion-col>100</ion-col>
+                    <ion-col>{{inqStats?.monthCount}}</ion-col>
                     <ion-col align-self-center>Hot Leads:</ion-col>
-                    <ion-col>40</ion-col>
+                    <ion-col>{{inqStats?.hotLeadCount}}</ion-col>
                     <ion-col align-self-center>Conversions:</ion-col>
-                    <ion-col>28</ion-col>
+                    <ion-col>{{inqStats?.enrolledCount}}</ion-col>
                   </ion-row>
                 </ion-grid>
               </ion-item>

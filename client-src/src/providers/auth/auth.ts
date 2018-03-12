@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { CounselorHomePage } from '../../pages/counselor/home/home';
+import { CounselorDashboardPage } from '../../pages/counselor/home/home';
 
 @Injectable()
 export class AuthProvider {

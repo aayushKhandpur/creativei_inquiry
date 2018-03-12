@@ -14,26 +14,6 @@ export class HelperProvider {
     this.menu.enable(true,menuID);
   }
 
-  sortLocalityByName(data){
-    return data.sort(function(a, b) {
-      var valueA = a.name.toUpperCase(); // ignore upper and lowercase
-      var valueB = b.name.toUpperCase(); // ignore upper and lowercase
-      if (valueA < valueB) {
-        return -1;
-      }
-      if (valueA > valueB) {
-        return 1;
-      }
-    
-      // values must be equal
-      return 0;
-    });
-  }
-
-  sortNumber(data){
-    return data.sort((a, b) => a - b);
-  }
-
   markInvalidFields(formGroup: FormGroup) {
     for(let control in formGroup.controls){
       formGroup.controls[control].markAsTouched();

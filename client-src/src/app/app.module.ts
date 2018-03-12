@@ -11,7 +11,7 @@ import { InqFormPersonalPage } from '../pages/visitor/inq-form-personal/inq-form
 import { InqFormEducationGuardianPage } from '../pages/visitor/inq-form-education-guardian/inq-form-education-guardian';
 import { InqFormMarketingPage } from '../pages/visitor/inq-form-marketing/inq-form-marketing';
 import { ThankyouPage } from '../pages/visitor/thankyou/thankyou';
-import { CounselorHomePage } from '../pages/counselor/home/home';
+import { CounselorDashboardPage } from '../pages/counselor/home/home';
 import { InqDetailsPage } from '../pages/counselor/inq-details/inq-details';
 import { InqListPage } from '../pages/counselor/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
@@ -29,6 +29,7 @@ import { HelperProvider } from '../providers/helper/helper';
 import { FollowUpProvider } from '../providers/follow-up/follow-up';
 import { AuthProvider } from '../providers/auth/auth';
 import { ReminderProvider } from '../providers/reminder/reminder';
+import { SortProvider } from '../providers/sort/sort';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ReminderProvider } from '../providers/reminder/reminder';
     InqSummaryPage,
     ThankyouPage,
     InqCloseModalPage,
-    CounselorHomePage,
+    CounselorDashboardPage,
+
     ReminderModalPage
   ],
   imports: [
@@ -63,7 +65,7 @@ import { ReminderProvider } from '../providers/reminder/reminder';
     InqSummaryPage,
     ThankyouPage,
     InqCloseModalPage,
-    CounselorHomePage,
+    CounselorDashboardPage,
     ReminderModalPage
   ],
   providers: [
@@ -78,7 +80,8 @@ import { ReminderProvider } from '../providers/reminder/reminder';
     HelperProvider,
     FollowUpProvider,
     AuthProvider,
-    ReminderProvider
+    ReminderProvider,
+    SortProvider
   ]
 })
 export class AppModule {}

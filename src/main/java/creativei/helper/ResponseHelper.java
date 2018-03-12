@@ -6,10 +6,7 @@ import creativei.vo.*;
 import org.springframework.util.CollectionUtils;
 import util.LocalizationUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Aayush on 12/24/2017.
@@ -66,10 +63,10 @@ public class ResponseHelper {
         List<InquiryVo> inquiryVos=new ArrayList<>();
         inquiries.forEach(i -> {
             InquiryVo inquiryVo = new InquiryVo(i);
-            FollowUp lastFollowUp = i.getFollowUps().stream().max((f1, f2) -> f1.getFollowUpDate().compareTo(f2.getFollowUpDate())).get();
-            FollowUpVo followUpVo = new FollowUpVo(lastFollowUp);
-            FollowUpVo[] followUpVos = {followUpVo};
-            inquiryVo.setFollowUps(Arrays.asList(followUpVos));
+            FollowUp lastFollowUp = i.getFollowUps().stream().max(Comparator.comparing(FollowUp::getFollowUpDate)).orElse(null);
+            List<FollowUpVo>followUpVos = new ArrayList<>(1);
+            if(lastFollowUp != null) followUpVos.add(new FollowUpVo(lastFollowUp));
+            inquiryVo.setFollowUps(followUpVos);
             inquiryVos.add(inquiryVo);
         });
         return inquiryVos;

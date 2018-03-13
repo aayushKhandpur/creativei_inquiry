@@ -6,6 +6,7 @@ import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqProvider } from '../../../providers/inq/inq';
 import { ReminderProvider } from '../../../providers/reminder/reminder';
 import { InqSummaryPage } from '../inq-summary/inq-summary';
+import { SortProvider } from '../../../providers/sort/sort';
 import { QuoteProvider } from '../../../providers/quote/quote';
 
 @Component({
@@ -23,7 +24,7 @@ export class CounselorDashboardPage {
 
   today = Date.now();
 
-  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider, private quoteProvider: QuoteProvider) {
+  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider, private sort: SortProvider, private quoteProvider: QuoteProvider) {
     this.helper.setActiveMenu(this.activeMenu);
     this.getUnattendedInq();
     this.getInqStats();
@@ -49,7 +50,7 @@ export class CounselorDashboardPage {
       data => {this.responseData = data},
       error => {console.log("GET unsucessful, the server returned this error: ",error)},
       () => {
-        this.unattendedInq = this.responseData.data;
+        this.unattendedInq = this.sort.byString(this.responseData.data,'inquiryDate','descending');
         console.log("GET complete");
       }
     )

@@ -9,7 +9,6 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
 import { HomePage } from '../pages/home/home';
 import { CounselorDashboardPage } from '../pages/counselor/home/home';
 import { InqListPage } from '../pages/counselor/inq-list/inq-list';
-import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
 
 @Component({
   templateUrl: 'app.html'

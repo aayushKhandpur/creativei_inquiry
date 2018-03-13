@@ -6,6 +6,7 @@ import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqProvider } from '../../../providers/inq/inq';
 import { ReminderProvider } from '../../../providers/reminder/reminder';
 import { InqSummaryPage } from '../inq-summary/inq-summary';
+import { QuoteProvider } from '../../../providers/quote/quote';
 
 @Component({
   selector: 'page-counselor-dashboard',
@@ -18,14 +19,16 @@ export class CounselorDashboardPage {
   private unattendedInq;
   private inqStats;
   private todos;
+  private quote;
 
   today = Date.now();
 
-  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider) {
+  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider, private quoteProvider: QuoteProvider) {
     this.helper.setActiveMenu(this.activeMenu);
     this.getUnattendedInq();
     this.getInqStats();
     this.getTodo();
+    this.getQuote();
   }
 
   createInq(){
@@ -74,6 +77,10 @@ export class CounselorDashboardPage {
         console.log("GET complete");
       }
     )
+  }
+
+  getQuote(){
+    this.quote = this.quoteProvider.getQuote();
   }
 
 }

@@ -29,6 +29,7 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
 import { AuthProvider } from '../providers/auth/auth';
 import { ReminderProvider } from '../providers/reminder/reminder';
 import { SortProvider } from '../providers/sort/sort';
+import { QuoteProvider } from '../providers/quote/quote';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { SortProvider } from '../providers/sort/sort';
     FollowUpProvider,
     AuthProvider,
     ReminderProvider,
-    SortProvider
+    SortProvider,
+    QuoteProvider
   ]
 })
 export class AppModule {}

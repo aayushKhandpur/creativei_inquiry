@@ -17,7 +17,8 @@ import java.util.Date;
 @Table(name = "Follow_Up")
 public class FollowUp extends BaseEntity implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
     @Column(name = "follow_up_date")
     private Date followUpDate;

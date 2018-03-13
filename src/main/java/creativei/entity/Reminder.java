@@ -7,6 +7,7 @@ import util.LocalizationUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.text.ParseException;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class Reminder extends BaseEntity {
     private Date reminderTime;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
 
     public Reminder() {

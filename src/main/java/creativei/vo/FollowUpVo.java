@@ -29,6 +29,8 @@ public class FollowUpVo {
         this.setFollowUpType(FollowUpType.enumToString(followUp.getType()));
         this.setRemark(followUp.getRemark());
         this.setSubStatus(FollowUpSubStatus.enumToString(followUp.getSubStatus()));
+        if(followUp.getInquiry() != null)
+            this.inquiryId = followUp.getInquiry().getId();
     }
 
     public Long getId() {

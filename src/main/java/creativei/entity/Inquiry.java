@@ -106,6 +106,17 @@ public class Inquiry extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "inquiry")
     @JsonIgnore
     private List<FollowUp> followUps=new ArrayList<>();
+    @OneToMany(mappedBy = "inquiry")
+    @JsonIgnore
+    private List<Reminder> reminders;
+
+    public List<Reminder> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(List<Reminder> reminders) {
+        this.reminders = reminders;
+    }
 
     public List<FollowUp> getFollowUps() {
         return followUps;

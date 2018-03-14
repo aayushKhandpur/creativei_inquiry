@@ -39,6 +39,14 @@ public class ResponseHelper {
             });
             vo.setFollowUps(followUps);
         }
+        //reminders
+        if(!CollectionUtils.isEmpty(inquiry.getReminders())){
+            List<ReminderVo> reminders = new ArrayList<>();
+            inquiry.getReminders().forEach(r -> {
+                reminders.add(new ReminderVo(r));
+            });
+            vo.setReminders(reminders);
+        }
         return vo;
     }
 

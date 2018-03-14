@@ -51,7 +51,7 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="currentInqReminders">
     <ion-card-content>
       <div class="reminder-container">
         <h2><b>Reminders </b></h2>
@@ -71,7 +71,8 @@
           </ion-col>
       </ion-row>
     </ion-item-divider>
-    <ion-card-content>
+    <ion-card-content *ngIf="!currentInqFollowUps"><br><h2 text-center>No follow ups available</h2></ion-card-content>
+    <ion-card-content *ngIf="currentInqFollowUps">
       <ion-card *ngFor="let followUp of currentInqFollowUps; let i = index;">
           <ion-item-divider color="light">
             <ion-row no-padding>

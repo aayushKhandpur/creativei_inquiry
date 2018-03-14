@@ -50,8 +50,8 @@ export class InqSummaryPage {
         let responseData;
         responseData = data;
         this.currentInq = responseData.data;
-        this.currentInqFollowUps = this.sort.byString(responseData.data.followUps,'followUpDate','descending');
-        this.currentInqReminders = this.sort.byString(responseData.data.reminders,'time','ascending');
+        if(responseData.data.followUps)this.currentInqFollowUps = this.sort.byString(responseData.data.followUps,'followUpDate','descending');
+        if(responseData.data.reminders)this.currentInqReminders = this.sort.byString(responseData.data.reminders,'time','ascending');
         console.log("Inquiry to be viewed is: ",this.currentInq);
       },
       error => {

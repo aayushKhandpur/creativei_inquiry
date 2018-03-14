@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class LocalizationUtil {
 
-    private static final String DATE_WITH_TIME = "yyyy-MM-dd hh:mm a";
+    private static final String DATE_WITH_TIME = "yyyy-mm-dd'T'hh:mm";
     private static final String DATE = "yyyy-MM-dd";
 
     public static final String getFormattedDate(Date date) {

@@ -2,7 +2,9 @@ package creativei.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import creativei.controller.InquiryController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,14 +22,18 @@ public enum CaseIndex {
 
     private static final Logger logger = LoggerFactory.getLogger(CaseIndex.class);
     private static Map<String, CaseIndex> lookup = new HashMap<>();
-    private static List<String> list = new ArrayList<>();
+    private static List<JsonNode> list = new ArrayList<>();
 
     static {
         ObjectMapper mapper = new ObjectMapper();
         for (CaseIndex caseIndex : CaseIndex.values()) {
             try {
-                list.add(mapper.writeValueAsString(caseIndex));
-            } catch (JsonProcessingException e) {
+
+                ObjectNode jNode = mapper.createObjectNode();
+                jNode.put("index", caseIndex.getIndex());
+                jNode.put("value", caseIndex.getValue());
+                list.add(jNode);
+            } catch (Exception e) {
                 logger.error(e.getMessage(), e);
             }
             lookup.put(caseIndex.getValue().toLowerCase(), caseIndex);
@@ -43,7 +49,7 @@ public enum CaseIndex {
         this.index = index;
     }
 
-    public static List<String> getAllEnum() {
+    public static List<JsonNode> getAllEnum() {
         return list;
     }
 

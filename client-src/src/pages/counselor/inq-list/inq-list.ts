@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 
 import { InqProvider } from '../../../providers/inq/inq';
 import { HelperProvider } from '../../../providers/helper/helper';
 import { SortProvider } from '../../../providers/sort/sort';
 import { InqDetailsPage } from '../inq-details/inq-details';
 import { InqSummaryPage } from '../inq-summary/inq-summary';
+import { FollowUpModalPage } from '../follow-up-modal/follow-up-modal';
 
 @Component({
   selector: 'page-inq-list',
@@ -18,7 +19,7 @@ export class InqListPage {
   private responseData;
   private sortBy;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private helper: HelperProvider, private sort: SortProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private helper: HelperProvider, private sort: SortProvider, private modalCtrl: ModalController) {
 
     this.getAllInq();
     this.sortBy = {
@@ -130,6 +131,18 @@ export class InqListPage {
   filterInqByDate(from,to){
     this.inquiries = this.inquiries.filter(inq => inq.inquiryDate >= from && inq.inquiryDate <= to);
     console.log(this.inquiries);
+  }
+
+  openFollowUpModal(id,name){
+    let modal = this.modalCtrl.create(
+      FollowUpModalPage
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+      }
+    });
   }
 
 }

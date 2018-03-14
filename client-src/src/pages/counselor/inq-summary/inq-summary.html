@@ -53,7 +53,10 @@
   </ion-card>
   <ion-card>
     <ion-card-content>
-      <h2><b>Reminders: </b></h2>
+      <div class="reminder-container">
+        <h2><b>Reminders </b></h2>
+        <p *ngFor="let reminder of currentInqReminders; let i = index">{{i+1}}. {{reminder.title}}</p>
+      </div>
     </ion-card-content>
   </ion-card>
   <ion-card>

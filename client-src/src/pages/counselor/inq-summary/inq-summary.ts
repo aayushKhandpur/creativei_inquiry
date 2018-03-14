@@ -15,6 +15,7 @@ export class InqSummaryPage {
   private currentInq;
   private currentInqId;
   private currentInqFollowUps;
+  private currentInqReminders;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private sort: SortProvider) {
     this.currentInqId = this.navParams.data;
@@ -50,6 +51,7 @@ export class InqSummaryPage {
         responseData = data;
         this.currentInq = responseData.data;
         this.currentInqFollowUps = this.sort.byString(responseData.data.followUps,'followUpDate','descending');
+        this.currentInqReminders = this.sort.byString(responseData.data.reminders,'time','ascending');
         console.log("Inquiry to be viewed is: ",this.currentInq);
       },
       error => {

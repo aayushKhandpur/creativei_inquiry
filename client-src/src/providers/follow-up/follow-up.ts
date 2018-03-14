@@ -28,4 +28,8 @@ export class FollowUpProvider {
     }
   }
 
+  create(data){
+    return this.http.post(this.baseUrl+'/create',data);
+  }
+
 }

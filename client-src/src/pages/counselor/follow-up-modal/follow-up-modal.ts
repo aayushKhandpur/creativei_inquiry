@@ -3,8 +3,11 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { FollowUpProvider } from '../../../providers/follow-up/follow-up'
+import { NotificationProvider } from '../../../providers/notification/notification';
+import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
 
 @Component({
   selector: 'page-follow-up-modal',
@@ -17,10 +20,12 @@ export class FollowUpModalPage {
   private subStatus;
   private followUpType;
   private caseIndex;
+  private inquiryId;
+  private inquiryName;
 
   private followUpForm: FormGroup
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController,private formBuilder: FormBuilder,private followUpProvider: FollowUpProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController,private formBuilder: FormBuilder,private followUpProvider: FollowUpProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private datePipe: DatePipe) {
 
     this.followUpForm = this.formBuilder.group({
       followUpType: ['', Validators.required],
@@ -29,6 +34,9 @@ export class FollowUpModalPage {
       caseIndex: ['', Validators.required],
       subStatus: ['', Validators.required]
     });
+
+    this.inquiryId = this.navParams.get('id');
+    this.inquiryName = this.navParams.get('name');
 
     this.setEnums();
     this.setFollowUpStatus();
@@ -42,15 +50,39 @@ export class FollowUpModalPage {
     console.log('ionViewDidLoad FollowUpModalPage');
   }
 
-  closeInquiry(){
+  createFollowUp(){
     if(this.followUpForm.valid){
-      console.log(this.followUpForm.value);
-      this.view.dismiss(this.followUpForm.value);
+      let request = this.followUpForm.value;
+      request.inquiryId = this.inquiryId;
+      request.followUpDate = this.getToday();
+      console.log(request);
+      this.followUpProvider.create(request)
+      .subscribe(
+        data => {
+          let response: any = data;
+          if(response.data){
+            this.notify.showInfo("Follow up created successfully");
+            console.log("Follow up creation successful, the response data is:", data);
+          }else if(response.exception){
+            this.notify.showError("Follow up creation failed");
+            console.log("Follow up creation failed, the response data is:", data);
+          }
+        },
+        error => {console.log("POST unsuccessful, the server returned this error:", error);},
+        () => {
+          console.log("Complete");
+          this.view.dismiss(this.followUpForm.value);
+        }
+      )
     }
   }
 
   closeModal(){
     this.view.dismiss(null);
+  }
+
+  getToday(){
+    return this.datePipe.transform(Date.now(),'yyyy-MM-dd');
   }
   
   setEnums(){
@@ -66,12 +98,6 @@ export class FollowUpModalPage {
     this.followUpType = this.enums.data.followUpType;
   }
   setCaseIndex(){
-    // this.caseIndex = this.enums.data.caseIndex;
-    this.caseIndex =  [
-			{"index":1,"value":"Unlikely"},
-			{"index":2,"value":"Intersted"},
-			{"index":3,"value":"Likely"},
-			{"index":4,"value":"Hot Lead"}
-		]
+    this.caseIndex = this.enums.data.caseIndex;
   }
 }

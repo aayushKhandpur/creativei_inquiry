@@ -135,7 +135,8 @@ export class InqListPage {
 
   openFollowUpModal(id,name){
     let modal = this.modalCtrl.create(
-      FollowUpModalPage
+      FollowUpModalPage,
+      {id: id, name: name}
     )
     modal.present();
     modal.onDidDismiss(data =>{

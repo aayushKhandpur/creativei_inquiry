@@ -19,12 +19,12 @@ public interface InquiryDao extends JpaRepository<Inquiry, Long>, JpaSpecificati
 
     List<Inquiry> findByInquiryStatusAndIsAttended(InquiryStatus inquiryStatus, Boolean isAttended);
 
-    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryToDate And :inquiryFromDate")
-    Integer findCountByInquiryDate(@Param("inquiryToDate") Date inquiryToDate, @Param("inquiryFromDate") Date inquiryFromDate);
+    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryFromDate And :inquiryToDate")
+    Integer findCountByInquiryDate(@Param("inquiryFromDate") Date inquiryFromDate, @Param("inquiryToDate") Date inquiryToDate);
 
-    @Query("select count(inq.id) from Inquiry inq join inq.followUps follUp  where inq.inquiryDate between :inquiryToDate And :inquiryFromDate and (follUp.caseIndex in (:caseIndex))")
-    Integer findCountByInquiryDateAndCaseIndex(@Param("inquiryToDate") Date inquiryToDate, @Param("inquiryFromDate") Date inquiryFromDate, @Param("caseIndex") List<CaseIndex> caseIndex);
+    @Query("select count(inq.id) from Inquiry inq join inq.followUps follUp  where inq.inquiryDate between :inquiryFromDate And :inquiryToDate and (follUp.caseIndex in (:caseIndex))")
+    Integer findCountByInquiryDateAndCaseIndex(@Param("inquiryFromDate") Date inquiryFromDate, @Param("inquiryToDate") Date inquiryToDate, @Param("caseIndex") List<CaseIndex> caseIndex);
 
-    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryToDate And :inquiryFromDate and inq.closingStatus=:closingStatus")
-    Integer findCountByInquiryDateAndClosingStaus(@Param("inquiryToDate") Date inquiryToDate, @Param("inquiryFromDate") Date inquiryFromDate, @Param("closingStatus")FollowUpStatus followUpStatus);
+    @Query("select count(inq.id) from Inquiry inq where inq.inquiryDate between :inquiryFromDate And :inquiryToDate and inq.closingStatus=:closingStatus")
+    Integer findCountByInquiryDateAndClosingStaus(@Param("inquiryFromDate") Date inquiryFromDate, @Param("inquiryToDate") Date inquiryToDate, @Param("closingStatus")FollowUpStatus followUpStatus);
 }

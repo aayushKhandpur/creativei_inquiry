@@ -144,7 +144,7 @@ public class InquiryServiceImpl implements InquiryService {
         logger.info("getDailyCount method");
         Date inquiryToDate=LocalizationUtil.getDateWithStartingTime(date);
         Date inquiryFromDate=new Date();
-        return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
+        return inquiryCustomDao.findCountByInquiryDate(inquiryFromDate, inquiryToDate);
     }
 
     private Integer getWeeklyCount(Date date) throws ParseException {
@@ -155,17 +155,19 @@ public class InquiryServiceImpl implements InquiryService {
         Calendar weekStartDate = (Calendar)givenDate.clone();
         weekStartDate.add(Calendar.DAY_OF_WEEK,
                 weekStartDate.getFirstDayOfWeek() - weekStartDate.get(Calendar.DAY_OF_WEEK));
+        weekStartDate.set(Calendar.HOUR_OF_DAY, 0);
+        weekStartDate.set(Calendar.MINUTE, 0);
         Calendar weekEndDate = (Calendar) weekStartDate.clone();
         weekEndDate.add(Calendar.DAY_OF_YEAR, 6);
-        return inquiryCustomDao.findCountByInquiryDate(LocalizationUtil.setEodTime(weekEndDate)
-                ,weekStartDate.getTime());
+        Integer weeklyCount = inquiryCustomDao.findCountByInquiryDate(weekStartDate.getTime(), LocalizationUtil.setEodTime(weekEndDate));
+        return weeklyCount;
     }
 
     private Integer getMonthlyCount(Date date) throws ParseException {
         logger.info("getMonthlyCount method");
         Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
         Date inquiryFromDate=date;
-        return inquiryCustomDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
+        return inquiryCustomDao.findCountByInquiryDate(inquiryFromDate, inquiryToDate);
     }
 
     private Integer getHotLeadCount(Date date) throws ParseException {
@@ -176,13 +178,13 @@ public class InquiryServiceImpl implements InquiryService {
             add(CaseIndex.LIKELY);
             add(CaseIndex.HOT_LEAD);
         }};
-        return inquiryCustomDao.findHotLeadsInAMonth(inquiryToDate,inquiryFromDate,caseIndices);
+        return inquiryCustomDao.findHotLeadsInAMonth(inquiryFromDate, inquiryToDate,caseIndices);
     }
 
     private Integer getEnrolledCount(Date date) throws ParseException {
         logger.info("getEnrolledCount method");
         Date inquiryToDate=LocalizationUtil.getMonthStartingDate(date);
         Date inquiryFromDate=date;
-        return inquiryCustomDao.findEnrollementInAMonth(inquiryToDate,inquiryFromDate, FollowUpStatus.ENROLLED);
+        return inquiryCustomDao.findEnrollementInAMonth(inquiryFromDate, inquiryToDate, FollowUpStatus.ENROLLED);
     }
 }

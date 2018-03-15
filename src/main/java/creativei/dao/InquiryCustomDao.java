@@ -19,9 +19,9 @@ public interface InquiryCustomDao {
 
     Inquiry findOne(Long aLong);
 
-    Integer findCountByInquiryDate(Date inquiryToDate, Date inquiryDateFrom);
+    Integer findCountByInquiryDate(Date inquiryDateFrom, Date inquiryToDate);
 
-    Integer findHotLeadsInAMonth(Date inquiryToDate, Date inquiryFromDate,List<CaseIndex> caseIndices);
+    Integer findHotLeadsInAMonth(Date inquiryDateFrom, Date inquiryToDate, List<CaseIndex> caseIndices);
 
-    Integer findEnrollementInAMonth(Date inquiryToDate, Date inquiryFromDate, FollowUpStatus closingStatus);
+    Integer findEnrollementInAMonth(Date inquiryDateFrom, Date inquiryToDate, FollowUpStatus closingStatus);
 }

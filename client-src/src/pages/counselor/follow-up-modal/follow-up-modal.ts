@@ -91,6 +91,7 @@ export class FollowUpModalPage {
   updateFollowUp(){
     if(this.followUpForm.valid){
       let request = this.followUpForm.value;
+      request.id = this.currentFollowUp.id;
       request.inquiryId = this.inquiryId;
       request.followUpDate = this.getToday();
       console.log(request);

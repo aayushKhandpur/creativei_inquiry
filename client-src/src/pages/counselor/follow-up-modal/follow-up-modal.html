@@ -17,7 +17,7 @@
     <ion-col><h6>Inquiry#: {{inquiryId}}</h6></ion-col>
     <ion-col><h6>Name: {{inquiryName}}</h6></ion-col>
   </ion-row>
-  <form [formGroup]="followUpForm" (ngSubmit)="createFollowUp()">
+  <form [formGroup]="followUpForm" (ngSubmit)="currentFollowUp?updateFollowUp():createFollowUp()">
     <ion-row>
       <ion-col>
         <ion-item>
@@ -53,6 +53,7 @@
       <ion-textarea formControlName="remark" class="remark-textarea"></ion-textarea>
     </ion-item>
     <br>
-    <button ion-button full type="submit">Create Follow Up</button>
+    <button *ngIf="!currentFollowUp" ion-button full type="submit">Create Follow Up</button>
+    <button *ngIf="currentFollowUp" ion-button full type="submit">Update Follow Up</button>
   </form>
 </ion-content>

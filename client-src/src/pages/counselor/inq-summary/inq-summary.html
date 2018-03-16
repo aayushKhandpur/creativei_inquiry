@@ -64,7 +64,7 @@
       <ion-row no-padding>
         <ion-col class="follow-up-heading"><h2><b>Follow Ups</b></h2></ion-col>
         <ion-col text-right>
-            <button ion-button clear small color="danger" icon-start>
+            <button (click)="addFollowUp()" ion-button clear small color="danger" icon-start>
               <ion-icon name='add'></ion-icon>
               Add Follow Up
             </button>
@@ -76,7 +76,7 @@
       <ion-card *ngFor="let followUp of currentInqFollowUps; let i = index;">
           <ion-item-divider color="light">
             <ion-row no-padding>
-              <ion-col><h3><b>Follow Up #{{currentInqFollowUps.length-i}}</b></h3></ion-col>
+              <ion-col><h3 (click)="updateFollowUp(followUp)"><b>Follow Up #{{currentInqFollowUps.length-i}}</b></h3></ion-col>
               <ion-col><h3><b>Done On: {{followUp?.followUpDate | date : "dd/MM/yyyy"}}</b></h3></ion-col>
               <ion-col><h3><b>Course Offered: N/A</b></h3></ion-col>
             </ion-row>

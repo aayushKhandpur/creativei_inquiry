@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { TitleCasePipe } from '@angular/common';
 
 
 import { InqProvider } from '../../../providers/inq/inq';
 import { SortProvider } from '../../../providers/sort/sort';
+import { FollowUpModalPage } from '../follow-up-modal/follow-up-modal';
 
 @Component({
   selector: 'page-inq-summary',
@@ -17,7 +18,7 @@ export class InqSummaryPage {
   private currentInqFollowUps;
   private currentInqReminders;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private sort: SortProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private sort: SortProvider, private modalCtrl: ModalController) {
     this.currentInqId = this.navParams.data;
     this.getCurrentInq();
   }
@@ -63,6 +64,32 @@ export class InqSummaryPage {
         this.loading.dismissAll();
       }
     );
+  }
+
+  addFollowUp(){
+    let modal = this.modalCtrl.create(
+      FollowUpModalPage,
+      {id: this.currentInq.id, name: this.currentInq.name}
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+      }
+    });
+  }
+
+  updateFollowUp(followUp){
+    let modal = this.modalCtrl.create(
+      FollowUpModalPage,
+      {id: this.currentInq.id, name: this.currentInq.name, followUp: followUp}
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+      }
+    });
   }
 
 }

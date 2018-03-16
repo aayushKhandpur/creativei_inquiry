@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { FollowUpProvider } from '../../../providers/follow-up/follow-up'
 import { NotificationProvider } from '../../../providers/notification/notification';
 import { NotificationMessageProvider } from '../../../providers/notification-message/notification-message';
+import { HelperProvider } from '../../../providers/helper/helper';
 
 @Component({
   selector: 'page-follow-up-modal',
@@ -22,10 +23,11 @@ export class FollowUpModalPage {
   private caseIndex;
   private inquiryId;
   private inquiryName;
+  private currentFollowUp;
 
   private followUpForm: FormGroup
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController,private formBuilder: FormBuilder,private followUpProvider: FollowUpProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private datePipe: DatePipe) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController,private formBuilder: FormBuilder,private followUpProvider: FollowUpProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private datePipe: DatePipe, private helper: HelperProvider) {
 
     this.followUpForm = this.formBuilder.group({
       followUpType: ['', Validators.required],
@@ -38,6 +40,7 @@ export class FollowUpModalPage {
     this.inquiryId = this.navParams.get('id');
     this.inquiryName = this.navParams.get('name');
 
+    this.patchForm();
     this.setEnums();
     this.setFollowUpStatus();
     this.setSubStatus();
@@ -66,6 +69,41 @@ export class FollowUpModalPage {
           }else if(response.exception){
             this.notify.showError("Follow up creation failed");
             console.log("Follow up creation failed, the response data is:", data);
+          }
+        },
+        error => {console.log("POST unsuccessful, the server returned this error:", error);},
+        () => {
+          console.log("Complete");
+          this.view.dismiss(this.followUpForm.value);
+        }
+      )
+    }
+  }
+
+  patchForm(){
+    if(this.navParams.get('followUp')){
+      this.currentFollowUp = this.navParams.get('followUp');
+      let patch = this.helper.removeEmptyFromObject(this.currentFollowUp);
+      this.followUpForm.patchValue(patch);
+    }
+  }
+
+  updateFollowUp(){
+    if(this.followUpForm.valid){
+      let request = this.followUpForm.value;
+      request.inquiryId = this.inquiryId;
+      request.followUpDate = this.getToday();
+      console.log(request);
+      this.followUpProvider.update(request)
+      .subscribe(
+        data => {
+          let response: any = data;
+          if(response.data){
+            this.notify.showInfo("Follow up updated successfully");
+            console.log("Follow up updation successful, the response data is:", data);
+          }else if(response.exception){
+            this.notify.showError("Follow up updation failed");
+            console.log("Follow up updation failed, the response data is:", data);
           }
         },
         error => {console.log("POST unsuccessful, the server returned this error:", error);},

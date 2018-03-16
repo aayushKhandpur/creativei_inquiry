@@ -61,18 +61,18 @@ public class InquiryCustomDaoImpl implements InquiryCustomDao {
     }
 
     @Override
-    public Integer findCountByInquiryDate(Date inquiryToDate, Date inquiryFromDate) {
-        return inquiryDao.findCountByInquiryDate(inquiryToDate,inquiryFromDate);
+    public Integer findCountByInquiryDate(Date inquiryFromDate, Date inquiryToDate) {
+        return inquiryDao.findCountByInquiryDate(inquiryFromDate, inquiryToDate);
     }
 
     @Override
-    public Integer findHotLeadsInAMonth(Date inquiryToDate, Date inquiryFromDate, List<CaseIndex>caseIndices) {
-        return inquiryDao.findCountByInquiryDateAndCaseIndex(inquiryToDate,inquiryFromDate,caseIndices);
+    public Integer findHotLeadsInAMonth(Date inquiryFromDate, Date inquiryToDate, List<CaseIndex>caseIndices) {
+        return inquiryDao.findCountByInquiryDateAndCaseIndex(inquiryFromDate, inquiryToDate, caseIndices);
     }
 
     @Override
-    public Integer findEnrollementInAMonth(Date inquiryToDate, Date inquiryFromDate, FollowUpStatus closingStatus) {
-       return inquiryDao.findCountByInquiryDateAndClosingStaus(inquiryToDate,inquiryFromDate,closingStatus);
+    public Integer findEnrollementInAMonth(Date inquiryFromDate, Date inquiryToDate, FollowUpStatus closingStatus) {
+        return inquiryDao.findCountByInquiryDateAndClosingStaus(inquiryFromDate, inquiryToDate, closingStatus);
     }
 
     @Override

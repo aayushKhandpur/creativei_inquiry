@@ -86,7 +86,9 @@ export class InqFormMarketingPage {
         );
     }else{
       this.notify.showError(this.message.FORM.INVALID);
+      console.log(this.inqForm);
       this.helper.markInvalidFields(this.inqForm);
+      this.helper.markInvalidSelect(this.inqForm.get('marketing'), 'source');
     }
   }
 

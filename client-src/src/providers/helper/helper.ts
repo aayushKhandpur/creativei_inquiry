@@ -54,4 +54,15 @@ export class HelperProvider {
     return control.value === '' ? null : Validators.email(control);
   }
 
+  markInvalidSelect(formGroup, ctrlName: string) {
+    let shadesEl = document.querySelector('[formControlName="' + ctrlName + '"]').parentElement.parentElement.parentElement;
+    const control = formGroup.get(ctrlName);
+    if (control.errors != null) {
+      shadesEl.classList.remove('ng-untouched');
+      shadesEl.classList.add('ng-invalid', 'ng-touched', 'ng-dirty');
+    } else {
+      shadesEl.classList.remove('ng-dirty', 'ng-invalid');
+    }
+  }
+
 }

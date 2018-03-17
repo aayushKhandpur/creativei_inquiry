@@ -121,7 +121,7 @@
           <p *ngIf = "inq.inquiryStatus == 'Close'" title="Closing Status">{{inq.closingStatus}}</p>
         </ion-col>
         <ion-col col-1 class="vertical-center-contents">
-            <button *ngIf="inq.inquiryStatus == 'Open'" ion-button icon-end clear small>
+            <button (click)="openFollowUpModal(inq.id,inq.name)" *ngIf="inq.inquiryStatus == 'Open'" ion-button icon-end clear small>
               Follow Up
               <ion-icon name="add"></ion-icon>
             </button>

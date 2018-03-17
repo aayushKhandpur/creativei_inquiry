@@ -116,7 +116,14 @@ export class InqFormPersonalPage {
         );
     }else{
       this.notify.showError(this.message.FORM.INVALID);
+      console.log(this.inqForm);
       this.helper.markInvalidFields(this.inqForm);
+      this.helper.markInvalidSelect(this.inqForm, 'gender');
+      this.helper.markInvalidSelect(this.inqForm, 'dob');
+      this.helper.markInvalidSelect(this.inqForm, 'hQualification');
+      this.helper.markInvalidSelect(this.inqForm, 'computerKnowledge');
+      this.helper.markInvalidSelect(this.inqForm, 'areaOfInterest');
+      if(this.areas && this.inqForm.value.address.pin.length == 6)this.helper.markInvalidSelect(this.inqForm.get('address'), 'locationId');
     }
   }
 

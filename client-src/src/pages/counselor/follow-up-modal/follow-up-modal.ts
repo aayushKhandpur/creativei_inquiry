@@ -53,30 +53,58 @@ export class FollowUpModalPage {
     console.log('ionViewDidLoad FollowUpModalPage');
   }
 
-  createFollowUp(){
-    if(this.followUpForm.valid){
-      let request = this.followUpForm.value;
-      request.inquiryId = this.inquiryId;
-      request.followUpDate = this.getToday();
-      console.log(request);
-      this.followUpProvider.create(request)
-      .subscribe(
-        data => {
-          let response: any = data;
-          if(response.data){
-            this.notify.showInfo("Follow up created successfully");
-            console.log("Follow up creation successful, the response data is:", data);
-          }else if(response.exception){
-            this.notify.showError("Follow up creation failed");
-            console.log("Follow up creation failed, the response data is:", data);
+  logForm(){
+    if(!this.currentFollowUp){
+      if(this.followUpForm.valid){
+        let request = this.followUpForm.value;
+        request.inquiryId = this.inquiryId;
+        request.followUpDate = this.getToday();
+        console.log(request);
+        this.followUpProvider.create(request)
+        .subscribe(
+          data => {
+            let response: any = data;
+            if(response.data){
+              this.notify.showInfo("Follow up created successfully");
+              console.log("Follow up creation successful, the response data is:", data);
+            }else if(response.exception){
+              this.notify.showError("Follow up creation failed");
+              console.log("Follow up creation failed, the response data is:", data);
+            }
+          },
+          error => {console.log("POST unsuccessful, the server returned this error:", error);},
+          () => {
+            console.log("Complete");
+            this.view.dismiss(this.followUpForm.value);
           }
-        },
-        error => {console.log("POST unsuccessful, the server returned this error:", error);},
-        () => {
-          console.log("Complete");
-          this.view.dismiss(this.followUpForm.value);
-        }
-      )
+        )
+      }
+    }else if(this.currentFollowUp){
+      if(this.followUpForm.valid){
+        let request = this.followUpForm.value;
+        request.id = this.currentFollowUp.id;
+        request.inquiryId = this.inquiryId;
+        request.followUpDate = this.getToday();
+        console.log(request);
+        this.followUpProvider.update(request)
+        .subscribe(
+          data => {
+            let response: any = data;
+            if(response.data){
+              this.notify.showInfo("Follow up updated successfully");
+              console.log("Follow up updation successful, the response data is:", data);
+            }else if(response.exception){
+              this.notify.showError("Follow up updation failed");
+              console.log("Follow up updation failed, the response data is:", data);
+            }
+          },
+          error => {console.log("POST unsuccessful, the server returned this error:", error);},
+          () => {
+            console.log("Complete");
+            this.view.dismiss(this.followUpForm.value);
+          }
+        )
+      }
     }
   }
 
@@ -85,34 +113,6 @@ export class FollowUpModalPage {
       this.currentFollowUp = this.navParams.get('followUp');
       let patch = this.helper.removeEmptyFromObject(this.currentFollowUp);
       this.followUpForm.patchValue(patch);
-    }
-  }
-
-  updateFollowUp(){
-    if(this.followUpForm.valid){
-      let request = this.followUpForm.value;
-      request.id = this.currentFollowUp.id;
-      request.inquiryId = this.inquiryId;
-      request.followUpDate = this.getToday();
-      console.log(request);
-      this.followUpProvider.update(request)
-      .subscribe(
-        data => {
-          let response: any = data;
-          if(response.data){
-            this.notify.showInfo("Follow up updated successfully");
-            console.log("Follow up updation successful, the response data is:", data);
-          }else if(response.exception){
-            this.notify.showError("Follow up updation failed");
-            console.log("Follow up updation failed, the response data is:", data);
-          }
-        },
-        error => {console.log("POST unsuccessful, the server returned this error:", error);},
-        () => {
-          console.log("Complete");
-          this.view.dismiss(this.followUpForm.value);
-        }
-      )
     }
   }
 

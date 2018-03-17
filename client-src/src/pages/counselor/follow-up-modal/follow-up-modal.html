@@ -17,7 +17,7 @@
     <ion-col><h6>Inquiry#: {{inquiryId}}</h6></ion-col>
     <ion-col><h6>Name: {{inquiryName}}</h6></ion-col>
   </ion-row>
-  <form [formGroup]="followUpForm" (ngSubmit)="currentFollowUp?updateFollowUp():createFollowUp()">
+  <form [formGroup]="followUpForm" (ngSubmit)="logForm()">
     <ion-row>
       <ion-col>
         <ion-item>

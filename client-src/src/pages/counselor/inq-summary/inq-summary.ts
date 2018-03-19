@@ -6,6 +6,7 @@ import { TitleCasePipe } from '@angular/common';
 import { InqProvider } from '../../../providers/inq/inq';
 import { SortProvider } from '../../../providers/sort/sort';
 import { FollowUpModalPage } from '../follow-up-modal/follow-up-modal';
+import { ReminderModalPage } from '../reminder-modal/reminder-modal';
 
 @Component({
   selector: 'page-inq-summary',
@@ -83,6 +84,19 @@ export class InqSummaryPage {
     let modal = this.modalCtrl.create(
       FollowUpModalPage,
       {id: this.currentInq.id, name: this.currentInq.name, followUp: followUp}
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+      }
+    });
+  }
+
+  showViewReminderModal(reminder){
+    let modal = this.modalCtrl.create(
+      ReminderModalPage,
+      {reminder: reminder,view: "true"}
     )
     modal.present();
     modal.onDidDismiss(data =>{

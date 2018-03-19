@@ -11,8 +11,12 @@ export class ReminderProvider {
     console.log('Hello ReminderProvider Provider');
   }
 
-  createReminder(data){
+  create(data){
     return this.http.post(this.baseUrl+'/create', data);
+  }
+
+  update(data){
+    return this.http.post(this.baseUrl+'/update', data);
   }
 
   getReminderForToday(){

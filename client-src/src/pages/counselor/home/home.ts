@@ -27,7 +27,7 @@ export class CounselorDashboardPage {
   
   today = Date.now();
 
-  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider, private sort: SortProvider, private quoteProvider: QuoteProvider, private notify: NotificationProvider, private message: NotificationMessageProvider) {
+  constructor(public navCtrl: NavController, private inqProvider: InqProvider, private reminderProvider: ReminderProvider, private helper: HelperProvider, private sort: SortProvider, private quoteProvider: QuoteProvider, private notify: NotificationProvider, private message: NotificationMessageProvider, private modalCtrl: ModalController) {
     this.helper.setActiveMenu(this.activeMenu);
     this.getUnattendedInq();
     this.getInqStats();
@@ -37,24 +37,6 @@ export class CounselorDashboardPage {
 
   createInq(){
     this.navCtrl.push(InqDetailsPage);
-  }
-
-  createTodo(data){
-    this.reminderProvider.createReminder(data)
-    .subscribe(
-      data => {
-        this.responseData = data;
-        if(this.responseData.data){
-          this.notify.showInfo("Reminder created successfully");
-          console.log("Successfully created reminder, the response data is: ", data);
-        }else if(this.responseData.exception){
-          this.notify.showError("Could not create reminder");
-          console.log("Error creating reminder, the response data is: ", data)
-        }
-      },
-      error => {console.log("POST unsuccessful, the server returned this error:", error);},
-      () => {console.log("COMPLETE");}
-    );
   }
   
   viewInq(id){
@@ -109,7 +91,19 @@ export class CounselorDashboardPage {
     modal.onDidDismiss(data =>{
       if(data){
         console.log(data);
-        this.createTodo(data);
+      }
+    });
+  }
+  
+  showViewReminderModal(reminder){
+    let modal = this.modalCtrl.create(
+      ReminderModalPage,
+      {reminder: reminder,view: "true"}
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
       }
     });
   }

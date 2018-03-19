@@ -13,7 +13,7 @@
 
 
 <ion-content padding>
-  <form [formGroup]="reminderForm" (ngSubmit) = "addReminder()">
+  <form *ngIf="canEdit" [formGroup]="reminderForm" (ngSubmit) = "logForm()">
     <ion-item>
       <ion-label stacked>Title</ion-label>
       <ion-input formControlName="title" type="text"></ion-input>
@@ -27,6 +27,16 @@
       <ion-input formControlName="time" type="datetime-local"></ion-input>
     </ion-item>
     <br>
-    <button ion-button full type="submit">Add Reminder</button>
+    <button ion-button full type="submit">Submit</button>
   </form>
+
+  <div *ngIf="!canEdit">
+    <p><b>Title</b> {{currentReminder?.title}}</p>
+    <p><b>Description</b> {{currentReminder?.description}}</p>
+    <p><b>Date</b> {{currentReminder?.time | date:"dd/MM/yyyy @ hh:mm a"}}</p>
+    <br>
+    <br>
+    <a (click)="toggleEdit()">Edit</a>
+  </div>
+
 </ion-content>

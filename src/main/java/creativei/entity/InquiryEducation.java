@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 public class InquiryEducation extends BaseEntity implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
     @Column(name = "education_qualificaton", nullable = false)

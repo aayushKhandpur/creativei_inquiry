@@ -51,9 +51,12 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="currentInqReminders">
     <ion-card-content>
-      <h2><b>Reminders: </b></h2>
+      <div class="reminder-container">
+        <h2><b>Reminders </b></h2>
+        <p *ngFor="let reminder of currentInqReminders; let i = index">{{i+1}}. {{reminder.title}}</p>
+      </div>
     </ion-card-content>
   </ion-card>
   <ion-card>
@@ -61,27 +64,29 @@
       <ion-row no-padding>
         <ion-col class="follow-up-heading"><h2><b>Follow Ups</b></h2></ion-col>
         <ion-col text-right>
-            <button ion-button clear small color="danger" icon-start>
+            <button (click)="addFollowUp()" ion-button clear small color="danger" icon-start>
               <ion-icon name='add'></ion-icon>
               Add Follow Up
             </button>
           </ion-col>
       </ion-row>
     </ion-item-divider>
-    <ion-card-content>
-      <ion-card>
+    <ion-card-content *ngIf="!currentInqFollowUps"><br><h2 text-center>No follow ups available</h2></ion-card-content>
+    <ion-card-content *ngIf="currentInqFollowUps">
+      <ion-card *ngFor="let followUp of currentInqFollowUps; let i = index;">
           <ion-item-divider color="light">
             <ion-row no-padding>
-              <ion-col><h3><b>Follow Up #1</b></h3></ion-col>
-              <ion-col><h3><b>Done On: 30/12/2017 @ 3 PM</b></h3></ion-col>
-              <ion-col><h3><b>Course Offered: AAIP</b></h3></ion-col>
+              <ion-col><h3 (click)="updateFollowUp(followUp)"><b>Follow Up #{{currentInqFollowUps.length-i}}</b></h3></ion-col>
+              <ion-col><h3><b>Done On: {{followUp?.followUpDate | date : "dd/MM/yyyy"}}</b></h3></ion-col>
+              <ion-col><h3><b>Course Offered: N/A</b></h3></ion-col>
             </ion-row>
           </ion-item-divider>
           <ion-card-content>
             <br>
-            <p><b>State:</b>&nbsp;Lorem ipsum dolor sit amet</p>
-            <p><b>Remark:</b>&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p><b>Next Follow Up On:</b>&nbsp;10/01/2018 @ 3 PM</p>
+            <p><b>Status:</b>&nbsp;{{followUp?.followUpStatus}}</p>
+            <p><b>Sub Status:</b>&nbsp;{{followUp?.subStatus}}</p>
+            <p><b>Remark:</b>&nbsp;{{followUp?.remark}}</p>
+            <!-- <p><b>Next Follow Up On:</b>&nbsp;10/01/2018 @ 3 PM</p> -->
           </ion-card-content>
       </ion-card>
     </ion-card-content>

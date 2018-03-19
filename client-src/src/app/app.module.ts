@@ -16,6 +16,7 @@ import { InqDetailsPage } from '../pages/counselor/inq-details/inq-details';
 import { InqListPage } from '../pages/counselor/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
 import { InqCloseModalPage } from '../pages/counselor/inq-close-modal/inq-close-modal';
+import { FollowUpModalPage } from '../pages/counselor/follow-up-modal/follow-up-modal';
 import { ReminderModalPage } from '../pages/counselor/reminder-modal/reminder-modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -30,6 +31,7 @@ import { FollowUpProvider } from '../providers/follow-up/follow-up';
 import { AuthProvider } from '../providers/auth/auth';
 import { ReminderProvider } from '../providers/reminder/reminder';
 import { SortProvider } from '../providers/sort/sort';
+import { QuoteProvider } from '../providers/quote/quote';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { SortProvider } from '../providers/sort/sort';
     ThankyouPage,
     InqCloseModalPage,
     CounselorDashboardPage,
+    FollowUpModalPage,
 
     ReminderModalPage
   ],
@@ -66,6 +69,7 @@ import { SortProvider } from '../providers/sort/sort';
     ThankyouPage,
     InqCloseModalPage,
     CounselorDashboardPage,
+    FollowUpModalPage,
     ReminderModalPage
   ],
   providers: [
@@ -81,7 +85,8 @@ import { SortProvider } from '../providers/sort/sort';
     FollowUpProvider,
     AuthProvider,
     ReminderProvider,
-    SortProvider
+    SortProvider,
+    QuoteProvider
   ]
 })
 export class AppModule {}

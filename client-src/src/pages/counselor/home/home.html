@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
       <ion-col text-center>
-        <div class="blockquote">I didn't think; I experimented.</div>
+        <div class="blockquote" [title]="quote?.name">{{quote?.quote}}</div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -23,7 +23,7 @@
             <ion-item-divider class="secondary-header">Unattended Inquiries</ion-item-divider>
             <ion-item *ngFor = "let inq of unattendedInq; let i = index;">
               <ion-grid>
-                <ion-row><ion-col col-1>{{i+1}}.</ion-col><ion-col (click)="viewInq(inq.id)">{{inq.name}}</ion-col><ion-col>{{inq.areaOfInterest}}</ion-col><ion-col>{{inq.inquiryDate | date: "dd/MM/yyyy"}}</ion-col></ion-row>
+                <ion-row><ion-col col-1 (click)="viewInq(inq.id)">{{inq.id}}</ion-col><ion-col (click)="viewInq(inq.id)">{{inq.name}}</ion-col><ion-col>{{inq.areaOfInterest}}</ion-col><ion-col>{{inq.inquiryDate | date: "dd/MM/yyyy"}}</ion-col></ion-row>
               </ion-grid>
             </ion-item>
           </ion-item-group>

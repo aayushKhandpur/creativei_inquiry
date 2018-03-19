@@ -2,6 +2,7 @@ package creativei.vo;
 
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryEducation;
+import creativei.entity.Reminder;
 import creativei.enums.*;
 import org.springframework.util.CollectionUtils;
 import util.LocalizationUtil;
@@ -32,6 +33,7 @@ public class InquiryVo {
     private String occupation;
     private Boolean isAttended;
     private List<FollowUpVo> followUps;
+    private List<ReminderVo> reminders;
 
     public InquiryVo(){}
 
@@ -228,4 +230,12 @@ public class InquiryVo {
     public List<EducationVo> getEducation() {    return educations;    }
 
     public void setEducation(List<EducationVo> education) {  this.educations = education;}
+
+    public List<ReminderVo> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(List<ReminderVo> reminders) {
+        this.reminders = reminders;
+    }
 }

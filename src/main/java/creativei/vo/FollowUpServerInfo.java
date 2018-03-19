@@ -1,5 +1,6 @@
 package creativei.vo;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import creativei.enums.CaseIndex;
 import creativei.enums.FollowUpStatus;
 import creativei.enums.FollowUpSubStatus;
@@ -9,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FollowUpServerInfo {
-    private List<String> followUpType,followUpStatus,followUpSubStatus,caseIndex;
+    private List<String> followUpType,followUpStatus,followUpSubStatus;
+    private List<JsonNode> caseIndex;
     public FollowUpServerInfo(){
         this.followUpType= FollowUpType.getEnumValue();
         this.followUpStatus= FollowUpStatus.getEnumValue();
@@ -25,7 +27,7 @@ public class FollowUpServerInfo {
         return followUpStatus;
     }
 
-    public List<String>  getCaseIndex() {
+    public List<JsonNode>  getCaseIndex() {
         return caseIndex;
     }
 

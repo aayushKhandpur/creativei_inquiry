@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { TitleCasePipe } from '@angular/common';
 
 
 import { InqProvider } from '../../../providers/inq/inq';
+import { SortProvider } from '../../../providers/sort/sort';
+import { FollowUpModalPage } from '../follow-up-modal/follow-up-modal';
 
 @Component({
   selector: 'page-inq-summary',
@@ -13,8 +15,10 @@ export class InqSummaryPage {
 
   private currentInq;
   private currentInqId;
+  private currentInqFollowUps;
+  private currentInqReminders;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private sort: SortProvider, private modalCtrl: ModalController) {
     this.currentInqId = this.navParams.data;
     this.getCurrentInq();
   }
@@ -47,6 +51,8 @@ export class InqSummaryPage {
         let responseData;
         responseData = data;
         this.currentInq = responseData.data;
+        if(responseData.data.followUps)this.currentInqFollowUps = this.sort.byString(responseData.data.followUps,'followUpDate','descending');
+        if(responseData.data.reminders)this.currentInqReminders = this.sort.byString(responseData.data.reminders,'time','ascending');
         console.log("Inquiry to be viewed is: ",this.currentInq);
       },
       error => {
@@ -57,8 +63,33 @@ export class InqSummaryPage {
         console.log("complete")
         this.loading.dismissAll();
       }
-      
     );
+  }
+
+  addFollowUp(){
+    let modal = this.modalCtrl.create(
+      FollowUpModalPage,
+      {id: this.currentInq.id, name: this.currentInq.name}
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+      }
+    });
+  }
+
+  updateFollowUp(followUp){
+    let modal = this.modalCtrl.create(
+      FollowUpModalPage,
+      {id: this.currentInq.id, name: this.currentInq.name, followUp: followUp}
+    )
+    modal.present();
+    modal.onDidDismiss(data =>{
+      if(data){
+        console.log(data);
+      }
+    });
   }
 
 }

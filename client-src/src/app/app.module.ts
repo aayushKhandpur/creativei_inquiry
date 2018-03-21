@@ -17,6 +17,7 @@ import { InqListPage } from '../pages/counselor/inq-list/inq-list';
 import { InqSummaryPage } from '../pages/counselor/inq-summary/inq-summary';
 import { InqCloseModalPage } from '../pages/counselor/inq-close-modal/inq-close-modal';
 import { FollowUpModalPage } from '../pages/counselor/follow-up-modal/follow-up-modal';
+import { ReminderModalPage } from '../pages/counselor/reminder-modal/reminder-modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -45,7 +46,9 @@ import { QuoteProvider } from '../providers/quote/quote';
     ThankyouPage,
     InqCloseModalPage,
     CounselorDashboardPage,
-    FollowUpModalPage
+    FollowUpModalPage,
+
+    ReminderModalPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ import { QuoteProvider } from '../providers/quote/quote';
     ThankyouPage,
     InqCloseModalPage,
     CounselorDashboardPage,
-    FollowUpModalPage
+    FollowUpModalPage,
+    ReminderModalPage
   ],
   providers: [
     StatusBar,

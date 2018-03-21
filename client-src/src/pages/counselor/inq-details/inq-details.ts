@@ -176,7 +176,7 @@ export class InqDetailsPage {
           console.log("complete");
           this.loading.dismissAll();
         }
-        );
+      );
     }else{
       this.notify.showError(this.message.FORM.INVALID);
       console.log(this.inqForm);

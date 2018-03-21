@@ -69,11 +69,11 @@
         <ion-row>
           <ion-col class="no-padding">
             <ion-item-group>
-              <ion-item-divider color="primary">Todo<span (click)="createTodo()" float-right><ion-icon name="add-circle"></ion-icon></span></ion-item-divider>
+              <ion-item-divider color="primary">Todo<span (click)="showAddReminderModal()" float-right><ion-icon name="add-circle"></ion-icon></span></ion-item-divider>
               <ion-item-group>
                 <ion-item *ngFor="let todo of todos; let i = index;">
                   <ion-grid>
-                    <ion-row><ion-col col-1>{{i+1}}.</ion-col><ion-col>{{todo.title}}</ion-col><ion-col text-right>{{todo.time | date:"dd/MM/yyyy @ hh:mm a"}}</ion-col></ion-row>
+                    <ion-row><ion-col col-1 (click)="showViewReminderModal(todo)">{{i+1}}.</ion-col><ion-col (click)="showViewReminderModal(todo)">{{todo.title}}</ion-col><ion-col text-right>{{todo.time | date:"dd/MM/yyyy @ hh:mm a"}}</ion-col></ion-row>
                   </ion-grid>
                 </ion-item>
               </ion-item-group>

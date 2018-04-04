@@ -1,0 +1,1 @@
+web: java -jar target/creativei_lms-1.0-SNAPSHOT.jar -Xms256m

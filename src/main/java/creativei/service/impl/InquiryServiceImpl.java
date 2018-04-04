@@ -1,7 +1,6 @@
 package creativei.service.impl;
 
 import creativei.dao.InquiryCustomDao;
-import creativei.entity.FollowUp;
 import creativei.entity.Inquiry;
 import creativei.enums.*;
 import creativei.exception.DataIntegrityException;
@@ -17,11 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import util.LocalizationUtil;
+import creativei.util.LocalizationUtil;
 
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

@@ -20,4 +20,8 @@ client-src/plugins/
 client-src/plugins/android.json
 client-src/plugins/ios.json
 client-src/www/
-client-src/$RECYCLE.BIN/
+client-src/$RECYCLE.BIN/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

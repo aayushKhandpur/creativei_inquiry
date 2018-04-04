@@ -8,8 +8,8 @@ import creativei.enums.*;
 import creativei.vo.EducationVo;
 import creativei.vo.InquiryVo;
 import org.hibernate.validator.constraints.Email;
-import util.LocalizationUtil;
-import util.StringUtil;
+import creativei.util.LocalizationUtil;
+import creativei.util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;

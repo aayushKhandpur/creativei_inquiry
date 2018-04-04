@@ -6,7 +6,6 @@ import creativei.exception.InvalidParamRequest;
 import creativei.helper.ResponseHelper;
 import creativei.manager.ReminderManager;
 import creativei.service.ReminderService;
-import creativei.vo.ReminderDateVo;
 import creativei.vo.ReminderVo;
 import creativei.vo.ResponseObject;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import util.LocalizationUtil;
+import creativei.util.LocalizationUtil;
 
 import java.text.ParseException;
 import java.util.Date;

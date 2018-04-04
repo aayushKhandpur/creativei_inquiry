@@ -1,7 +1,7 @@
 package creativei.vo;
 
 import creativei.entity.Reminder;
-import util.LocalizationUtil;
+import creativei.util.LocalizationUtil;
 
 public class ReminderVo {
 

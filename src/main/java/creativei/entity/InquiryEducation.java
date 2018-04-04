@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import creativei.enums.*;
 import creativei.vo.EducationVo;
-import util.StringUtil;
+import creativei.util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;

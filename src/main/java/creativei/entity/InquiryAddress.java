@@ -1,7 +1,7 @@
 package creativei.entity;
 
 import creativei.vo.AddressVo;
-import util.StringUtil;
+import creativei.util.StringUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;

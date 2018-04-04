@@ -3,7 +3,7 @@ package creativei.entity;
 import creativei.enums.Occupation;
 import creativei.enums.Relation;
 import creativei.vo.GuardianVo;
-import util.StringUtil;
+import creativei.util.StringUtil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

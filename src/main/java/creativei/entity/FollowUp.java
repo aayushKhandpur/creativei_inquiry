@@ -1,12 +1,12 @@
 package creativei.entity;
 
 import creativei.enums.CaseIndex;
+import creativei.enums.FollowUpStatus;
 import creativei.enums.FollowUpSubStatus;
 import creativei.enums.FollowUpType;
-import creativei.enums.FollowUpStatus;
 import creativei.exception.NoDataAvailable;
+import creativei.util.LocalizationUtil;
 import creativei.vo.FollowUpVo;
-import util.LocalizationUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;

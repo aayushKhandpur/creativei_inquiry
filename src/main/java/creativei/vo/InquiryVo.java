@@ -2,10 +2,9 @@ package creativei.vo;
 
 import creativei.entity.Inquiry;
 import creativei.entity.InquiryEducation;
-import creativei.entity.Reminder;
 import creativei.enums.*;
 import org.springframework.util.CollectionUtils;
-import util.LocalizationUtil;
+import creativei.util.LocalizationUtil;
 
 import java.lang.*;
 import java.util.ArrayList;

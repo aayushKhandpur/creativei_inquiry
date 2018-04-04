@@ -2,7 +2,7 @@ package creativei.entity;
 
 import creativei.enums.MarketingSource;
 import creativei.vo.MarketingVo;
-import util.StringUtil;
+import creativei.util.StringUtil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

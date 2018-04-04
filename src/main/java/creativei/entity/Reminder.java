@@ -3,7 +3,7 @@ package creativei.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import creativei.vo.ReminderVo;
-import util.LocalizationUtil;
+import creativei.util.LocalizationUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

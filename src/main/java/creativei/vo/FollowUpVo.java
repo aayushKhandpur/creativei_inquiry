@@ -5,9 +5,7 @@ import creativei.enums.CaseIndex;
 import creativei.enums.FollowUpStatus;
 import creativei.enums.FollowUpSubStatus;
 import creativei.enums.FollowUpType;
-import util.LocalizationUtil;
-
-import java.util.Date;
+import creativei.util.LocalizationUtil;
 
 public class FollowUpVo {
     private Long id;

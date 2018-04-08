@@ -28,8 +28,6 @@ public class MainController {
 
     @RequestMapping("/")
     public String index() {
-        String path = MainController.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        System.out.println(path);
         return "Greetings from Creative-I Inquiry.";
     }
 

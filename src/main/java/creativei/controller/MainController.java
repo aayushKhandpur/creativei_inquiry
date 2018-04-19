@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 public class MainController {
 

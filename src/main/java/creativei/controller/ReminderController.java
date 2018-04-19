@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
 
-@CrossOrigin(origins = "http://localhost:8100")
 @RestController
 
 public class ReminderController {

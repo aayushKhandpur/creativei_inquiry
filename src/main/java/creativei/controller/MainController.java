@@ -61,4 +61,6 @@ public class MainController {
         ResponseObject responseObject=localityManager.getLocalityDataByPincode(pincode);
         return responseObject;
     }
+
+
 }
